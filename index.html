@@ -1,0 +1,2411 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ตรวจความสะอาด ศูนย์กีฬาสิรินธร มศว<!-- @dev:start --> (Mockup)<!-- @dev:end --></title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://sport.swu.ac.th">
+<link rel="preconnect" href="https://vxfozsxudrkxrjphttxm.supabase.co">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ==========================================================
+     SWU Design System — tokens (Tier A)
+     Source: .swu/design-system/ · see /Design.md for the
+     project-level mapping notes.
+     ========================================================== */
+  :root{
+    /* L1 primitives — SWU Design System v1.0, copied verbatim from .swu/design-system/dist/tokens.css */
+    --neutral-50:#F7F7F7; --neutral-100:#EDEDED; --neutral-200:#D9D9D9; --neutral-300:#BDBDBD; --neutral-400:#8F8F8F; --neutral-600:#616161; --neutral-700:#4D4D4D; --neutral-800:#383838; --neutral-900:#262626; --neutral-950:#171717; --swu-purple-50:#F8F5FF; --swu-purple-100:#EFE6FF; --swu-purple-200:#E1CFFF; --swu-purple-500:#A16AE7; --swu-purple-600:#814DC0; --swu-purple-700:#6B3DA1; --swu-purple-800:#542F80; --swu-purple-900:#3F2261; --swu-red-50:#FFF4F3; --swu-red-100:#FFE4E1; --swu-red-600:#BC1723; --swu-red-700:#9D0517; --swu-red-800:#800311; --green-50:#F0FAF6; --green-100:#CCF5E5; --green-600:#00CE7C; --green-700:#00B56D; --green-800:#009157; --green-900:#006E42; --teal-50:#F4FBFB; --teal-100:#EAF7F8; --teal-200:#D2EFEF; --teal-800:#5F9294; --teal-900:#497072; --blue-50:#E8F0FC; --blue-100:#D1E1F9; --blue-600:#1E60D0; --blue-700:#1850AB; --blue-800:#143F85; --yellow-50:#FFFBF0; --yellow-100:#FFF7D6; --yellow-400:#FFDB5C; --yellow-600:#FFD340; --yellow-700:#D9B336; --yellow-900:#8C7423; --yellow-950:#66551A;
+
+    --font-thai:"Noto Sans Thai", sans-serif;
+    --focus-ring: rgba(129,77,192,.18);
+    --focus-ring-red: rgba(188,23,35,.18);
+
+    /* radius scale (03-spacing-shadows-radius.md Part 3) */
+    --r-sm:4px; --r-md:8px; --r-lg:14px; --r-xl:18px; --r-2xl:24px; --r-pill:999px;
+    /* spacing scale (4px base) */
+    --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px;
+    /* shadow scale */
+    --shadow-lg:0 8px 24px rgba(38,41,44,.08);
+    --shadow-xl:0 16px 40px rgba(38,41,44,.10);
+
+    /* L2 semantic aliases — app-level names kept stable for the JS layer,
+       values resolve to DS primitives only (no raw hex below this line) */
+    --bg: var(--neutral-50);
+    --card: #fff;
+    --line: var(--neutral-100);
+    --text: var(--neutral-900);
+    --muted: var(--neutral-600);
+    --brand: var(--swu-purple-600);
+    --brand-2: var(--swu-purple-50);
+    --gray-bg: var(--neutral-100);
+    --green: var(--green-800);   /* success */
+    --violet: var(--teal-800);
+    --blue: var(--blue-600);           /* info */
+    --red: var(--swu-red-600);             /* danger */
+    --amber: var(--yellow-600);        /* warn / rating */
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font-thai);background:var(--bg);color:var(--text);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  button,input,textarea,select{font:inherit;color:inherit}
+  button{cursor:pointer;border:0;background:none}
+  .wrap{max-width:none;width:100%;margin:0 auto;padding:16px}
+  @media(min-width:1024px){.wrap{padding:20px 40px}}
+  @media(min-width:1600px){.wrap{padding:24px 64px}}
+  .muted{color:var(--muted)} .sm{font-size:13px} .xs{font-size:12px} .b{font-weight:700}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .stack>*+*{margin-top:12px}
+  .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
+  @media(min-width:1024px){.grid{gap:16px}}
+  h1{font-size:17px;font-weight:700} h2{font-size:20px;font-weight:700} h3{font-size:15px;font-weight:700}
+
+  /* mockup banner — DS Toast Warning tokens (yellow-50 / yellow-950 text) */
+  /* @dev:start */.devrole{position:fixed;z-index:60;right:12px;bottom:84px;width:190px;background:var(--white);border:1px solid var(--swu-purple-700);border-radius:var(--r-lg);box-shadow:0 8px 24px rgb(0 0 0/.22);font-size:13px;user-select:none;touch-action:none}.devrole .dh{cursor:grab;background:var(--swu-purple-700);color:#fff;padding:6px 10px;border-radius:calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px) 0 0;font-weight:700;display:flex;justify-content:space-between;gap:8px}.devrole.drag .dh{cursor:grabbing}.devrole .db{display:grid;gap:6px;padding:8px}.devrole .db button{padding:8px;border-radius:var(--r-md);border:1px solid var(--gray-300,#ccc);font-weight:700;text-align:left}.devrole .db button.on{background:var(--swu-purple-700);color:#fff}.devrole.min .db{display:none}/* @dev:end */
+/* @dev:start */.mock-banner{background:var(--yellow-50);color:var(--yellow-950);font-size:12px;font-weight:400;text-align:center;padding:7px 10px;border-bottom:1px solid var(--yellow-100)}/* @dev:end */
+
+  /* top bar — brand surface (swu-purple-600), text-on-brand per DS-#052/#054 */
+  .top{background:var(--brand);border-bottom:1px solid var(--swu-purple-700);position:sticky;top:0;z-index:10}
+  .top .wrap{padding-top:14px;padding-bottom:14px}
+  .top h1{color:var(--neutral-50)}
+  .top #subtitle{color:var(--swu-purple-100);display:flex;align-items:center;gap:5px}
+  .top #subtitle .spark{color:var(--yellow-400)}
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo i{width:36px;height:36px;border-radius:var(--r-md);background:var(--swu-purple-700);display:grid;place-items:center;color:var(--neutral-50);font-style:normal;font-weight:700}
+  .logo-mark{width:132px;height:52px;flex:none;background:url(https://vxfozsxudrkxrjphttxm.supabase.co/storage/v1/object/public/Photo/Thai_White01_0.png) -1.5px -5.4px/136px 61.7px no-repeat}
+  .top h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .logo{min-width:0}
+  .actions{display:flex;gap:6px;align-items:center}
+  .top .btn.sm.ghost{background:var(--swu-purple-700);color:var(--neutral-50)}
+  .top .btn.sm.ghost:hover{background:var(--swu-purple-800)}
+
+  /* ── buttons — fkt-button.md · base = Secondary(Outline), M 40px / S 32px, no shadow ── */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:40px;padding:0 var(--s4);border-radius:var(--r-md);font-weight:700;font-size:14px;background:#fff;border:1px solid var(--swu-purple-600);color:var(--swu-purple-600);transition:150ms cubic-bezier(.2,.7,.2,1)}
+  .btn:hover{background:var(--swu-purple-50);border-color:var(--swu-purple-700);color:var(--swu-purple-700)}
+  .btn:active{background:var(--swu-purple-100);border-color:var(--swu-purple-800);color:var(--swu-purple-800)}
+  .btn:disabled{background:var(--neutral-50);border-color:var(--neutral-200);color:var(--neutral-300);pointer-events:none}
+  .btn:focus-visible{outline:none;box-shadow:0 0 0 4px var(--focus-ring)}
+
+  .btn.primary{background:var(--swu-purple-600);border-color:var(--swu-purple-600);color:var(--neutral-50)}
+  .btn.primary:hover{background:var(--swu-purple-700);border-color:var(--swu-purple-700)}
+  .btn.primary:active{background:var(--swu-purple-800);border-color:var(--swu-purple-800)}
+  .btn.primary:disabled{background:var(--neutral-50);border-color:var(--neutral-200);color:var(--neutral-300)}
+
+  .btn.danger{background:var(--swu-red-600);border-color:var(--swu-red-600);color:var(--neutral-50)}
+  .btn.danger:hover{background:var(--swu-red-700);border-color:var(--swu-red-700)}
+  .btn.danger:active{background:var(--swu-red-800);border-color:var(--swu-red-800)}
+  .btn.danger:focus-visible{box-shadow:0 0 0 4px var(--focus-ring-red)}
+
+  .btn.ghost{background:var(--swu-purple-50);border-color:transparent;color:var(--swu-purple-600)}
+  .btn.ghost:hover{background:var(--swu-purple-100);color:var(--swu-purple-700)}
+  .btn.ghost:active{background:var(--swu-purple-200);color:var(--swu-purple-800)}
+  .btn.ghost.danger{background:var(--swu-red-50);color:var(--swu-red-700)}
+  .btn.ghost.danger:hover{background:var(--swu-red-100)}
+
+  .btn.sm{height:32px;padding:0 var(--s3);font-size:12px;border-radius:var(--r-sm)}
+  .btn.block{width:100%}
+
+  /* ── cards — fkt-card.md · r-xl 18px, no shadow at rest, border family-100@60% ── */
+  .card{background:var(--card);border:1px solid rgba(230,233,235,.6);border-radius:var(--r-xl);padding:var(--s4);text-align:left;width:100%;display:block;transition:150ms cubic-bezier(.2,.7,.2,1)}
+  button.card{cursor:pointer}
+  button.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+  .role{display:flex;gap:14px;align-items:flex-start;padding:var(--s5)}
+  .role .n{width:40px;height:40px;border-radius:var(--r-md);background:var(--brand-2);color:var(--brand);display:grid;place-items:center;font-weight:700;flex:none}
+
+  /* home / role picker — 2-col grid, per-role tinted tile + border (screenshot ref) */
+  .role-grid{display:grid;gap:var(--s5);grid-template-columns:1fr;text-align:left;margin-top:var(--s2)}
+  @media(min-width:640px){.role-grid{grid-template-columns:1fr 1fr}}
+  .role-card{display:flex;gap:16px;align-items:flex-start;padding:var(--s5);border-width:1.5px}
+  .role-card-icon{width:52px;height:52px;border-radius:var(--r-lg);display:grid;place-items:center;flex:none;transition:150ms cubic-bezier(.2,.7,.2,1)}
+  .role-card-icon svg{width:26px;height:26px}
+  .role-card h3{font-size:18px;margin-bottom:4px}
+
+  .role-card--cleaner{border-color:var(--swu-purple-100)}
+  .role-card--cleaner .role-card-icon{background:var(--swu-purple-50);color:var(--swu-purple-600)}
+  .role-card--cleaner:hover{border-color:var(--swu-purple-600)}
+  .role-card--cleaner:hover .role-card-icon{background:var(--swu-purple-600);color:var(--neutral-50)}
+
+  .role-card--supervisor{border-color:var(--teal-200)}
+  .role-card--supervisor .role-card-icon{background:var(--teal-100);color:var(--teal-800)}
+  .role-card--supervisor:hover{border-color:var(--teal-800)}
+  .role-card--supervisor:hover .role-card-icon{background:var(--teal-800);color:var(--neutral-50)}
+
+  .role-card--manager{border-color:var(--blue-100)}
+  .role-card--manager .role-card-icon{background:var(--blue-50);color:var(--blue-600)}
+  .role-card--manager:hover{border-color:var(--blue-600)}
+  .role-card--manager:hover .role-card-icon{background:var(--blue-600);color:var(--neutral-50)}
+
+  .role-card--admin{background:var(--neutral-900);border-color:var(--neutral-700)}
+  .role-card--admin .role-card-icon{background:var(--neutral-800);color:var(--yellow-400)}
+  .role-card--admin:hover{border-color:var(--yellow-400)}
+  .role-card--admin h3{color:var(--neutral-50)}
+  .role-card--admin .muted{color:var(--neutral-400)}
+
+  /* ── badges/chips — fkt-badge-chip.md · Light variant, M 24px, pill radius ── */
+  .chip{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:var(--r-pill);font-size:12px;font-weight:700;white-space:nowrap}
+  .c-gray{background:var(--neutral-100);color:var(--neutral-900)}
+  .c-blue{background:var(--blue-50);color:var(--blue-800)}
+  .c-violet{background:var(--teal-100);color:var(--teal-900)}
+  .c-green{background:var(--green-50);color:var(--green-900)}
+  .c-red{background:var(--swu-red-50);color:var(--swu-red-800)}
+
+  .bar{height:6px;background:var(--neutral-100);border-radius:var(--r-pill);overflow:hidden;margin:12px 0 8px}
+  .bar i{display:block;height:100%;background:var(--yellow-600);border-radius:var(--r-pill)}
+  .bar i.full{background:var(--green-600)}
+  /* semantic alert box — DS-#096: red-50 bg + red-700 text */
+  .alert{background:var(--swu-red-50);color:var(--swu-red-700);border-radius:var(--r-md);padding:8px 12px;margin-top:10px;font-size:13px}
+  .note{background:var(--neutral-50);border-radius:var(--r-md);padding:8px 12px}
+
+  /* ── tabs — nav item = Regular 400 at every state (DS-#118), state via bg+color only ── */
+  .tabs{display:inline-flex;background:var(--neutral-100);border-radius:var(--r-md);padding:3px}
+  .tabs button{padding:7px 14px;border-radius:var(--r-sm);font-size:14px;font-weight:400;color:var(--muted)}
+  .tabs button.on{background:#fff;color:var(--text);font-weight:400;box-shadow:0 1px 2px rgba(38,41,44,.06)}
+
+  /* ── inputs — fkt-input-field.md · r-md 8px, focus = border only, no glow ── */
+  input[type=text],input[type=password],input[type=tel],textarea,select{width:100%;height:40px;border:1px solid var(--neutral-100);border-radius:var(--r-md);padding:0 var(--s3);background:#fff;outline:none;font-size:14px;transition:150ms cubic-bezier(.2,.7,.2,1)}
+  textarea{height:auto;min-height:80px;padding:10px var(--s3);line-height:1.6}
+  input::placeholder,textarea::placeholder{color:var(--neutral-400)}
+  input:focus,textarea:focus,select:focus{border:1.5px solid var(--swu-purple-600)}
+  label.lbl{display:block;font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+
+  /* checklist — checkbox radius r-sm, checked = brand (selectable state) */
+  .check{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--neutral-100);border-radius:var(--r-md);width:100%;text-align:left;background:#fff;transition:150ms cubic-bezier(.2,.7,.2,1)}
+  .check+.check{margin-top:6px}
+  .box{width:20px;height:20px;border-radius:var(--r-sm);border:1.5px solid var(--neutral-200);flex:none;display:grid;place-items:center;color:var(--neutral-50)}
+  .check.on .box{background:var(--swu-purple-600);border-color:var(--swu-purple-600)}
+  .check.on span{color:var(--muted);text-decoration:line-through}
+  .check.ro{cursor:default}
+  .check.ro.off .box{border-color:var(--swu-red-600)}
+
+  /* photos */
+  .photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
+  .ph{position:relative;aspect-ratio:1;border-radius:var(--r-md);overflow:hidden;background:var(--neutral-100);display:block}
+  .ph img{width:100%;height:100%;object-fit:cover;display:block}
+  .ph .tag{position:absolute;left:4px;bottom:4px;font-size:10px;font-weight:700;padding:1px 6px;border-radius:var(--r-sm);background:rgba(22,23,25,.6);color:var(--neutral-50)}
+  .ph .x{position:absolute;right:4px;top:4px;width:22px;height:22px;border-radius:var(--r-pill);background:rgba(22,23,25,.65);color:var(--neutral-50);display:grid;place-items:center}
+  .add{border:1.5px dashed var(--neutral-200);display:grid;place-items:center;color:var(--muted);font-size:12px;text-align:center;cursor:pointer}
+  .add input{display:none}
+
+  .stars button{font-size:28px;color:var(--neutral-200);padding:0 2px;line-height:1}
+  .stars button.on{color:var(--yellow-600)}
+
+  /* ── modal — fkt-modal.md · r-2xl 24px, shadow-xl, backdrop neutral-950@45% ── */
+  .ov{position:fixed;inset:0;background:rgba(22,23,25,.45);z-index:400;display:flex;align-items:flex-end;justify-content:center}
+  .sheet{background:#fff;width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:var(--r-2xl) var(--r-2xl) 0 0;padding:var(--s5) var(--s6);box-shadow:var(--shadow-xl);z-index:500;padding-bottom:calc(var(--s5) + env(safe-area-inset-bottom))}
+  @media(min-width:640px){.ov{align-items:center}.sheet{border-radius:var(--r-2xl)}}
+  /* การ์ดลงทะเบียน: เด้งขึ้นตอนเปิด · เปลี่ยนขั้นเลื่อนซ้าย/ขวา · ลงทะเบียนเสร็จสไลด์ขึ้นแล้วหายไป */
+  .ov.pop{animation:ovIn .25s ease-out}
+  .sheet.pop{animation:sheetUp .38s cubic-bezier(.2,.8,.2,1)}
+  .rg-step.fwd{animation:stepFwd .3s cubic-bezier(.2,.8,.2,1)}
+  .rg-step.back{animation:stepBack .3s cubic-bezier(.2,.8,.2,1)}
+  .ov.leave{animation:ovOut .45s ease-in forwards;pointer-events:none}
+  .sheet.leave{animation:sheetAway .45s cubic-bezier(.5,0,.9,.4) forwards;pointer-events:none}
+  @keyframes ovIn{from{opacity:0}}
+  @keyframes sheetUp{from{opacity:0;transform:translateY(48px)}}
+  @keyframes stepFwd{from{opacity:0;transform:translateX(28px)}}
+  @keyframes stepBack{from{opacity:0;transform:translateX(-28px)}}
+  @keyframes ovOut{to{opacity:0}}
+  @keyframes sheetAway{to{opacity:0;transform:translateY(-100vh)}}
+  @media(prefers-reduced-motion:reduce){.ov.pop,.sheet.pop,.rg-step,.ov.leave,.sheet.leave{animation:none!important}}
+  .sec{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+  .x-close{width:32px;height:32px;border-radius:var(--r-pill);background:var(--neutral-100);color:var(--neutral-600);display:grid;place-items:center;flex:none;transition:150ms}
+  .x-close:hover{color:var(--neutral-900)}
+  .timeline div{display:flex;gap:10px;font-size:13px;padding:4px 0}
+  .timeline time{color:var(--muted);width:44px;flex:none}
+
+  /* dashboard */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:var(--s3)}
+  .stat .v{font-size:26px;font-weight:700;line-height:1.2}
+  .stack-bar{display:flex;height:12px;border-radius:var(--r-pill);overflow:hidden;background:var(--neutral-100)}
+  table{width:100%;min-width:560px;border-collapse:collapse;font-size:14px}
+  td,th{white-space:nowrap}
+  th{text-align:left;font-weight:700;color:var(--muted);font-size:12px;padding:8px;border-bottom:1px solid var(--line)}
+  td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+  .tbl{overflow-x:auto}
+  tr[data-act="open"]{cursor:pointer;transition:150ms cubic-bezier(.2,.7,.2,1)}
+  tr[data-act="open"]:hover{background:var(--neutral-50)}
+  .cols{display:flex;align-items:flex-end;gap:6px;height:120px}
+  .cols div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%}
+  .cols i{display:block;width:100%;max-width:28px;background:var(--swu-purple-600);border-radius:6px 6px 0 0;min-height:2px}
+  .cols span{font-size:10px;color:var(--muted)}
+
+  /* ── โหมดตัวอักษรใหญ่ (พอร์ทัลแม่บ้าน — รองรับผู้สูงอายุ) ── */
+  .big{font-size:20px;line-height:1.6}
+  .big .sm{font-size:18px} .big .xs{font-size:16px}
+  .big h2{font-size:28px} .big h3{font-size:22px}
+  .big .chip{height:32px;padding:0 14px;font-size:16px}
+  .big .btn{height:60px;font-size:20px;padding:0 24px}
+  .big label.lbl{font-size:19px;margin-bottom:6px}
+  .big select,.big textarea{font-size:20px}
+  .big select{height:56px}
+  .big textarea{min-height:110px}
+  .big .check{padding:16px;gap:14px;min-height:64px;font-size:20px}
+  .big .box{width:32px;height:32px}
+  .big .box svg{width:22px;height:22px}
+  .big .bar{height:10px}
+  .big .alert{font-size:18px;padding:12px 14px}
+  .big .ph{min-height:96px}
+  .big .add{font-size:16px}
+  .tiles{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .tile{padding:0;border-width:2px;overflow:hidden}
+  .tile-img{position:relative;aspect-ratio:16/9;background:var(--swu-purple-700)}
+  .tile-photo{width:100%;height:100%;object-fit:cover;display:block}
+  .is-logo{object-fit:contain;background:var(--swu-purple-700);padding:6% 14%;box-sizing:border-box}
+  .tile-n{position:absolute;left:12px;top:12px;z-index:1;width:44px;height:44px;border-radius:var(--r-pill);background:#fff;color:var(--swu-purple-700);display:grid;place-items:center;font-size:22px;font-weight:700;box-shadow:var(--shadow-lg)}
+  .tile-chip{position:absolute;right:12px;top:12px;z-index:1}
+  .tile-chip .chip{background:#fff;box-shadow:var(--shadow-lg)}
+  .tile-body{padding:16px 20px 20px}
+  .tile-name{font-size:24px;font-weight:700;line-height:1.3;margin:0 0 4px}
+  .cc-photo{width:calc(100% + 2*var(--s4));margin:calc(-1*var(--s4)) calc(-1*var(--s4)) var(--s3);aspect-ratio:21/9;object-fit:cover;display:block;border-radius:var(--r-xl) var(--r-xl) 0 0;width:calc(100% + 2*var(--s4))}
+  .tile-go{color:var(--swu-purple-700);font-weight:700}
+  .tile--pending{border-color:var(--neutral-200)}
+  .tile--rejected{border-color:var(--swu-red-600);background:var(--swu-red-50)}
+  .tile--approved{border-color:var(--green-600);background:var(--green-50)}
+  .tile--cleaner_done{border-color:var(--blue-100)}
+  .back{justify-content:flex-start}
+
+  .c-purple{background:var(--swu-purple-50);color:var(--swu-purple-900)}
+  /* password field with show/hide eye */
+  .pwf{position:relative}
+  .pwf input{padding-right:46px}
+  .pw-eye{position:absolute;right:4px;top:4px;width:32px;height:32px;display:grid;place-items:center;border-radius:var(--r-sm);color:var(--muted);transition:150ms cubic-bezier(.2,.7,.2,1)}
+  .pw-eye:hover{background:var(--neutral-100);color:var(--text)}
+  .pw-eye:focus-visible{outline:none;box-shadow:0 0 0 4px var(--focus-ring)}
+  .pw-eye[aria-pressed=true]{color:var(--swu-purple-600)}
+  /* register: 2-step indicator */
+  .steps{display:flex;align-items:center;gap:8px;margin:10px 0 14px;font-size:13px;color:var(--muted)}
+  .steps span{display:flex;align-items:center;gap:6px}
+  .steps b{display:grid;place-items:center;width:22px;height:22px;border-radius:var(--r-pill);background:var(--neutral-100);color:var(--muted);font-size:12px}
+  .steps span.on{color:var(--text);font-weight:700}.steps span.on b{background:var(--swu-purple-600);color:var(--neutral-50)}
+  .steps span.done b{background:var(--green-100);color:var(--green-900)}
+  .steps i{flex:1;height:2px;background:var(--neutral-100);min-width:16px}
+  .big .tabs button{font-size:18px;padding:12px 20px}
+  .fbn{background:var(--blue-50);color:var(--blue-800)}
+  .card.fix{display:block;width:100%;text-align:left}
+  .fixit{display:grid;gap:6px}
+  .fixq{margin:0}.fixq.fbq{background:var(--blue-50);color:var(--blue-800)}
+  .fixit.done .fixq{background:var(--neutral-50);color:var(--muted)}
+  .fixr{background:var(--green-50);color:var(--green-900);border-radius:var(--r-md);padding:8px 12px}
+  .rm{display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:14px}
+  .rm input{width:20px;height:20px;margin-top:2px;accent-color:var(--swu-purple-600);flex:none}
+  /* login page */
+  .login-wrap{max-width:460px;margin:32px auto;display:grid;gap:16px}
+  .login-or{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:13px}
+  .login-or::before,.login-or::after{content:"";flex:1;height:1px;background:var(--line)}
+  /* @dev:start */.demo-hint{background:var(--gray-bg);border-radius:var(--r-md);padding:8px 10px;font-size:12px}
+  .demo-hint button{font-weight:700;color:var(--swu-purple-700);text-decoration:underline;margin-right:10px}/* @dev:end */
+  /* dashboard filters + charts */
+  .df{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+  .df .nav{display:flex;align-items:center;gap:8px}
+  .df .nav b{min-width:170px;text-align:center}
+  .df select{width:auto;min-width:230px}
+  .grid2{display:grid;gap:16px;grid-template-columns:1fr}
+  @media(min-width:1000px){.grid2{grid-template-columns:1fr 1fr}}
+  .cc{display:flex;align-items:flex-end;gap:4px;margin-top:12px;border-bottom:1px solid var(--line)}
+  .cc>div{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center}
+  .cc .cs{height:120px;width:100%;display:flex;flex-direction:column-reverse;gap:2px;align-items:center}
+  .cc .cs i{display:block;width:100%;max-width:30px;border-radius:3px 3px 0 0;min-height:2px}
+  .cc .cv{font-size:11px;color:var(--muted);height:16px}
+  .cc .cl{font-size:10px;color:var(--muted);height:16px;line-height:16px}
+  .cc.many .cv{display:none}
+  .pick{display:flex;gap:10px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:var(--r-md);cursor:pointer}
+  .pick input{width:20px;height:20px;accent-color:var(--swu-purple-600);flex:none}
+  .pick.is-full{opacity:.5;cursor:not-allowed}
+  /* permission switches (Admin > จัดการสิทธิ์) */
+  .sw{position:relative;width:46px;height:26px;border-radius:var(--r-pill);background:var(--neutral-200);flex:none;transition:150ms cubic-bezier(.2,.7,.2,1)}
+  .sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:var(--r-pill);background:#fff;transition:150ms cubic-bezier(.2,.7,.2,1)}
+  .sw.on{background:var(--swu-purple-600)} .sw.on::after{transform:translateX(20px)}
+  .sw:focus-visible{outline:none;box-shadow:0 0 0 4px var(--focus-ring)}
+  .pm td:not(:first-child),.pm th:not(:first-child){text-align:center}
+  .pm td:not(:first-child) .sw{margin:0 auto;display:block}
+  .role-off{opacity:.55}
+  .role-card.is-closed{pointer-events:none;background:var(--neutral-50)}
+  /* reject-rate viz */
+  .rv-row{display:grid;grid-template-columns:minmax(120px,240px) 1fr 84px;gap:10px;align-items:center;padding:5px 0}
+  .rv-name{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .rv-track{height:16px;background:var(--neutral-50);border-radius:var(--r-sm)}
+  .rv-fill{display:flex;height:100%;gap:2px;min-width:2px}
+  .rv-fill i{display:block;height:100%;border-radius:0 4px 4px 0}
+  .rv-fill i:first-child{border-radius:0}
+  .rv-val{font-size:14px;font-weight:700;text-align:right}
+  .hm{min-width:520px}
+  .hm-row{display:grid;grid-template-columns:minmax(120px,240px) 1fr;gap:10px;align-items:center;padding:2px 0}
+  .hm-cells,.hm-head{display:grid;grid-template-columns:repeat(14,1fr);gap:2px}
+  .hm-head span{font-size:10px;color:var(--muted);text-align:center}
+  .hm-c{display:block;height:20px;border-radius:3px}
+  .hm-0{background:var(--neutral-100)} .hm-1{background:var(--swu-red-600);opacity:.55} .hm-2{background:var(--swu-red-800)}
+  @media(max-width:560px){.rv-row{grid-template-columns:1fr 60px}.rv-name{grid-column:1/-1}.rv-val{grid-column:2;grid-row:2}.rv-track{grid-row:2;grid-column:1}}
+
+  /* account tables / temp password */
+  .mono{letter-spacing:.5px}
+  .pw-box{font-size:28px;font-weight:700;letter-spacing:2px;text-align:center;background:var(--neutral-50);border-radius:var(--r-lg);padding:16px;margin:8px 0 14px;user-select:all}
+  .acts{display:flex;gap:6px;flex-wrap:wrap}
+
+  /* ── confirm card (sweet-alert style) — กันกดซ้ำ/กดพลาด ── */
+  .sa-ov{position:fixed;inset:0;background:rgba(22,23,25,.5);z-index:700;display:grid;place-items:center;padding:16px;animation:saF .15s ease-out}
+  .sa-card{background:#fff;border-radius:var(--r-2xl);box-shadow:var(--shadow-xl);width:100%;max-width:420px;padding:28px 24px 22px;text-align:center;animation:saP .18s cubic-bezier(.2,.7,.2,1)}
+  .sa-icon{width:64px;height:64px;border-radius:var(--r-pill);display:grid;place-items:center;margin:0 auto 14px;font-size:32px;font-weight:700}
+  .sa-icon.ask{background:var(--swu-purple-50);color:var(--swu-purple-600)}
+  .sa-icon.warn{background:var(--yellow-100);color:var(--yellow-900)}
+  .sa-icon.ok{background:var(--green-50);color:var(--green-800);animation:saTick .35s cubic-bezier(.2,.7,.2,1)}
+  @keyframes saTick{from{transform:scale(.4);opacity:0}}
+  .sa-icon.danger{background:var(--swu-red-50);color:var(--swu-red-700)}
+  .sa-card h2{font-size:22px;margin-bottom:6px}
+  .sa-card p{color:var(--muted);font-size:15px;white-space:pre-line;margin-bottom:20px}
+  .sa-btns{display:flex;gap:10px}.sa-btns .btn{flex:1;height:48px;font-size:16px}
+  @keyframes saF{from{opacity:0}} @keyframes saP{from{opacity:0;transform:scale(.92)}}
+
+  /* ── toast — fkt-toast.md · Variant B tinted-50, r-xl 18px, shadow-lg ── */
+  #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:600;pointer-events:none;display:flex;flex-direction:column;gap:8px;align-items:center}
+  #toast div{background:var(--green-50);color:var(--green-900);border:0.5px solid var(--green-100);padding:10px 18px;border-radius:var(--r-xl);font-size:14px;font-weight:400;box-shadow:var(--shadow-lg)}
+  #toast div.err{background:var(--swu-red-50);color:var(--swu-red-800);border-color:var(--swu-red-100)}
+  .spin{display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:var(--r-pill);animation:sp .7s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .empty{text-align:center;padding:40px 16px;color:var(--muted)}
+
+  /* ── รายงาน PDF (ปุ่ม "ดาวน์โหลดรายงาน" ในหน้า Admin) — เค้าโครงสำหรับพิมพ์โดยเฉพาะ ไม่กระทบหน้าจอระบบ ── */
+  #report{display:none}
+  .rp{font-size:12px;line-height:1.45;color:var(--text)}
+  .rp-head{display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--brand);color:var(--neutral-50);border-radius:var(--r-lg);padding:12px 16px}
+  .rp-head h1{font-size:19px;color:var(--neutral-50)}
+  .rp-head .rp-meta{font-size:11px;color:var(--swu-purple-100);text-align:right}
+  .rp-kpi{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:10px 0 4px}
+  .rp-kpi>div{border:1px solid var(--neutral-200);border-radius:var(--r-md);padding:6px 10px;break-inside:avoid}
+  .rp-kpi span{display:block;font-size:11px;color:var(--muted)}
+  .rp-kpi b{display:block;font-size:22px;line-height:1.2}
+  .rp-kpi small{font-size:10px;color:var(--muted)}
+  .rp h2{font-size:13px;margin:10px 0 5px;padding-bottom:2px;border-bottom:2px solid var(--swu-purple-600)}
+  .rp-sum{background:var(--neutral-50);border-radius:var(--r-md);padding:8px 12px;margin-top:10px}
+  .rp-sum li{margin-left:16px}
+  .rp-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .rp .cc{margin-top:4px}.rp .cc .cs{height:48px}
+  .rp table{min-width:0;font-size:11px}
+  .rp th,.rp td{padding:2px 6px;white-space:normal}
+  .rp td.n,.rp th.n{text-align:right}
+  .rp tr{break-inside:avoid}
+  .rp-bar{display:flex;height:8px;min-width:60px;background:var(--neutral-100);border-radius:var(--r-pill);overflow:hidden}
+  .rp-bar i{display:block;height:100%}
+  .rp-leg{display:flex;gap:12px;font-size:10px;color:var(--muted);margin-top:4px}
+  .rp-fb li{margin:0 0 3px 16px}
+  .rp-sign{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:22px;text-align:center;font-size:11px;break-inside:avoid}
+  .rp-sign div{border-top:1px solid var(--neutral-600);padding-top:4px}
+  .rp-foot{margin-top:8px;font-size:10px;color:var(--muted);text-align:center}
+
+  @media print{
+    @page{size:A4;margin:10mm}
+    body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    body>*:not(#report){display:none!important}
+    #report{display:block}
+    .card{break-inside:avoid;border-color:var(--neutral-200)}
+  }
+</style>
+</head>
+<body>
+<!-- @dev:start --><div class="mock-banner">โหมดทดลอง (Mockup) · ข้อมูลจำลองในเครื่องนี้เท่านั้น ไม่เชื่อมต่อ Apps Script จริง</div><!-- @dev:end -->
+<header class="top">
+  <div class="wrap row">
+    <div class="logo" data-act="home" style="cursor:pointer">
+      <span class="logo-mark" role="img" aria-label="ศูนย์กีฬาสิรินธร มหาวิทยาลัยศรีนครินทรวิโรฒ"></span>
+      <div><h1>ศูนย์กีฬาสิรินธร มศว</h1><div class="xs" id="subtitle"><span class="spark">★</span> ระบบบริหารจัดการและตรวจความสะอาด</div></div>
+    </div>
+    <div class="actions" id="topActions"></div>
+  </div>
+</header>
+<main class="wrap" id="app"><div class="empty"><span class="spin"></span> กำลังโหลด...</div></main>
+<div id="modal"></div>
+<div id="toast"></div>
+<div id="report" class="rp" aria-hidden="true"></div>
+
+<script>
+/* ---------- แคตตาล็อกสิทธิ์ (ใช้ทั้งหน้าเว็บและ mockup backend) ---------- */
+const PERM_ROLES = ['cleaner', 'supervisor', 'manager'];
+const PERM_DEFS = [   // รวม 8 สิทธิ์ = 8 สวิตช์ในตาราง
+  { key: 'portal',   label: 'เข้าใช้พอร์ทัล',            desc: 'ปิด = ผู้ใช้ตำแหน่งนี้เข้าระบบไม่ได้', roles: ['cleaner', 'supervisor', 'manager'] },
+  { key: 'submit',   label: 'ติ๊กเช็คลิสต์และส่งรายงาน', desc: 'ปิด = ดูงานได้อย่างเดียว ส่งรายงานไม่ได้',   roles: ['cleaner'] },
+  { key: 'photo',    label: 'แนบรูปภาพ',                 desc: 'ปิด = ไม่มีช่องแนบรูป และไม่บังคับรูปตอนส่งรายงาน', roles: ['cleaner'] },
+  { key: 'approve',  label: 'ตรวจผ่าน',                  desc: 'ตรวจผ่านแล้วงานสิ้นสุดทันที ไม่ต้องตรวจซ้ำ',  roles: ['supervisor'] },
+  { key: 'reject',   label: 'ตีกลับให้แก้ไข',            desc: 'ตีกลับงานให้แม่บ้านทำใหม่ พร้อมเหตุผล',      roles: ['supervisor'] },
+  { key: 'feedback', label: 'แจ้งจุดปรับปรุง',           desc: 'บันทึกข้อเสนอแนะ แนบรูป และให้คะแนน (ไม่กระทบสถานะงาน)', roles: ['manager'] },
+];
+
+/* @dev:start */
+/* =========================================================
+   MOCK BACKEND — ข้อมูลจำลองทั้งหมดทำงานในเบราว์เซอร์เครื่องนี้
+   (แทนที่ google.script.run ของ Apps Script จริง)
+   ========================================================= */
+const DEMO_PASSWORD = 'demo1234';
+const CREDENTIALS = {
+  admin:      { username: 'admin',      password: DEMO_PASSWORD },   // Super Admin เท่านั้นเป็นบัญชีคงที่ — ที่เหลือลงทะเบียนแล้วรอ Admin อนุมัติ
+};
+const ROLE_LABEL = { cleaner: 'แม่บ้าน', supervisor: 'หัวหน้าแม่บ้าน', manager: 'คณะกรรมการตรวจความสะอาด', admin: 'ผู้ดูแลระบบ', system: 'ระบบ' };
+
+// ข้อมูลตั้งต้น: [พื้นที่, หมวด, แม่บ้าน, หัวหน้า, [จุดย่อย...]]  · แม่บ้าน/หัวหน้าเว้นว่าง = ระบบเติมชื่อจากบัญชีที่ Admin อนุมัติและมอบหมาย  (ชุดเดียวกับ Code.js)
+const MASTER = [
+  ['อาคารกีฬา 1', 'อาคารในร่ม', '', '',
+    ['ห้องประชุม', 'ห้องเปลี่ยนเครื่องแต่งกาย 101–104', 'ห้องแลป', 'ห้องน้ำ ชั้น 1', 'ห้องน้ำ ชั้น 2', 'อัฒจรรย์', 'สนามแข่งขัน']],
+  ['อาคารกีฬา 2', 'อาคารในร่ม', '', '',
+    ['ห้องสำนักงาน ศูนย์กีฬา', 'ห้องงานกายภาพและสิ่งแวดล้อม', 'ห้องเปลี่ยนเครื่องแต่งกาย 201–204', 'ห้องอเนกประสงค์', 'ห้องน้ำ ชั้น 1', 'ห้องน้ำ ชั้น 2', 'อัฒจรรย์', 'สนามแบดมินตัน']],
+  ['ศูนย์ออกกำลัง มศว (อาคารกีฬา 2)', 'อาคารในร่ม', '', '',
+    ['โซนรับรอง', 'ตู้น้ำ', 'เคาน์เตอร์', 'ห้องสำนักงาน', 'ห้องน้ำ', 'โซนคาร์ดิโอ', 'โซนแมชชีนเวท', 'โซนดัมเบล', 'โซนเวทลิฟติ้ง', 'ห้อง GX', 'ห้องน้ำเจ้าหน้าที่']],
+  ['อาคารกีฬา 3', 'อาคารในร่ม', '', '',
+    ['สนาม 1 (ฟุตซอล)', 'สนาม 2 (บาสเกตบอล)', 'สนาม 3 (วอลเลย์บอล)', 'สนามตะกร้อ', 'สนามแบดมินตัน', 'โซนยิมนาสติก', 'โซนกีฬาต่อสู้', 'เวทีมวย', 'ห้องน้ำ', 'อาคารประกอบ']],
+  ['สนามกีฬากลาง', 'สนามภายนอก', '', '',
+    ['โถงทางเข้าสนาม', 'ลู่ยางสังเคราะห์', 'สนามฟุตบอล', 'ห้องรับรอง', 'ห้องน้ำผู้ชม', 'อัฒจรรย์', 'ห้องประกอบ']],
+  ['อาคารฝึกปฏิบัติการกีฬาทางน้ำ', 'ทางน้ำ', '', '',
+    ['โถงทางเข้าอาคาร', 'ห้องสำนักงาน', 'ห้องประกอบ', 'ห้องน้ำ', 'ห้องเปลี่ยนเครื่องแต่งกาย', 'อัฒจรรย์', 'พื้นที่รอบสระว่ายน้ำ']],
+  ['สนามแข่งขันซอฟท์บอล', 'สนามภายนอก', '', '',
+    ['ห้องน้ำ', 'ห้องประกอบ', 'อัฒจรรย์', 'สนามยิงธนู']],
+  ['สนามฟุตซอล', 'สนามภายนอก', '', '',
+    ['สนาม', 'อัฒจรรย์']],
+  ['สนามกีฬากลางแจ้ง', 'สนามภายนอก', '', '',
+    ['สนามบาสเกตบอล', 'สนามวอลเลย์บอล', 'สนามชายหาด']],
+  ['สนามเทนนิส', 'สนามภายนอก', '', '',
+    ['ห้องน้ำ', 'อัฒจรรย์', 'สนาม 1–2', 'สนาม 3–7']],
+  ['อาคารศูนย์กีฬาสิรินธร', 'อาคารในร่ม', '', '',
+    ['โถงทางเข้าอาคาร', 'ห้องงานบริหารธุรการ', 'ห้องงานวิชาการ', 'ห้องการเงิน', 'ห้องพัสดุ', 'ห้องเทคโนโลยีและวิเทศสัมพันธ์', 'ห้องแลป', 'ห้องพิพิธภัณฑ์', 'ห้องอาคาร', 'ห้องเรียน ชั้น 1', 'ห้องเรียน ชั้น 2', 'ห้องเรียน ชั้น 3', 'ห้องน้ำ ชั้น 1', 'ห้องน้ำ ชั้น 2', 'ห้องน้ำ ชั้น 3']],
+  ['อาคารนวัตกรรมกีฬาและการออกกำลังกาย', 'อาคารในร่ม', '', '',
+    ['โถงทางเข้าอาคาร', 'ห้องปฏิบัติการทางสรีรวิทยา', 'ห้องปฏิบัติการทางชีวกลศาสตร์', 'ห้องน้ำ ชั้น 1', 'ห้องน้ำ ชั้น 2', 'ห้องน้ำ ชั้น 3']],
+];
+
+function today_() { const d = new Date(), p = n => String(n).padStart(2, '0'); return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`; }
+function timeNow_() { const d = new Date(), p = n => String(n).padStart(2, '0'); return `${p(d.getHours())}:${p(d.getMinutes())}`; }
+function uid_() { return 'm' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10); }
+function clone_(x) { return JSON.parse(JSON.stringify(x)); }
+
+function placeholderPhoto_(kind) {
+  const theme = {
+    report:  ['#814DC0', '#6B3DA1', 'รูปหลังทำความสะอาด'],
+    approve: ['#1E60D0', '#814DC0', 'รูปตรวจสอบ'],
+    reject:  ['#BC1723', '#FFD340', 'รูปจุดบกพร่อง'],
+  }[kind] || ['#616161', '#4D4D4D', 'รูปตัวอย่าง'];
+  const c = document.createElement('canvas'); c.width = 320; c.height = 320;
+  const ctx = c.getContext('2d');
+  const g = ctx.createLinearGradient(0, 0, 320, 320);
+  g.addColorStop(0, theme[0]); g.addColorStop(1, theme[1]);
+  ctx.fillStyle = g; ctx.fillRect(0, 0, 320, 320);
+  ctx.fillStyle = 'rgba(255,255,255,.94)';
+  ctx.font = '600 18px Prompt, sans-serif';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText(theme[2], 160, 160);
+  return c.toDataURL('image/jpeg', 0.72);
+}
+
+/* ---------- store: DB จำลองแบบ Sheets (คงอยู่ระหว่างแท็บเปิด, รีเฟรชแล้วไม่หาย) ---------- */
+const DB_KEY = 'mockDB_v4';
+let DB = loadDB_();
+if (!DB) buildSeed_();
+/* ---------- บัญชีผู้ใช้จำลอง: พนักงานทำความสะอาด / หัวหน้าแม่บ้าน / คณะกรรมการตรวจความสะอาด (สมัคร → Admin อนุมัติ) ---------- */
+const ROLE_LIMIT = { cleaner: 19, supervisor: 1, manager: 13 };   // จำนวนสูงสุดต่อตำแหน่ง (นับที่รออนุมัติ/ใช้งาน/ระงับ — ที่ไม่อนุมัติไม่นับ)
+function seedUsers_() {
+  const at = `${today_()} ${timeNow_()}`, u = (username, displayName, phone, role, status, password, by) => ({ username, displayName, phone, role, password, status, mustChange: false, areas: [], createdAt: at, createdBy: by, reviewedAt: status === 'approved' ? at : '', reviewedBy: status === 'approved' ? 'system' : '', lastLogin: '' });
+  return [
+    u('supervisor', 'หัวหน้าแม่บ้าน (ตัวอย่าง)', '081-000-0001', 'supervisor', 'approved', DEMO_PASSWORD, 'system'),
+    u('manager', 'กรรมการตรวจความสะอาด (ตัวอย่าง)', '081-000-0000', 'manager', 'approved', DEMO_PASSWORD, 'system'),
+    u('somchai.m', 'สมชาย ใจดี', '089-111-2222', 'manager', 'pending', 'demo12345', 'self-register'),
+  ];
+}
+DB.users = DB.users || seedUsers_();
+const usedSlots_ = role => DB.users.filter(u => u.role === role && u.status !== 'rejected').length;/* ประวัติการเข้าสู่ระบบของผู้ใช้ทุกตำแหน่ง (โปรดักชัน = ชีต User_Login_Logs) — บันทึกทั้งสำเร็จ/ล้มเหลว/ออกจากระบบ */
+function logLogin_(username, displayName, result, ip, role) {
+  DB.loginLogs.unshift({ time: `${today_()} ${new Date().toTimeString().slice(0, 8)}`, username, displayName: displayName || '', role: role || '', result, ip: ip || '203.0.113.10' });
+  DB.loginLogs.length = Math.min(DB.loginLogs.length, 500);
+  saveDB_();
+}
+/* สิทธิ์ของแต่ละบทบาท (Admin จัดการได้) — Super Admin ไม่ถูกจำกัดโดยตารางนี้ */
+const defaultPerms_ = () => Object.fromEntries(PERM_ROLES.map(r => [r, Object.fromEntries(PERM_DEFS.filter(p => p.roles.includes(r)).map(p => [p.key, true]))]));
+DB.perms = DB.perms || defaultPerms_(); DB.permLog = DB.permLog || [];
+const can_ = (role, key) => role === 'admin' || (DB.perms[role] || {})[key] !== false;
+if (!DB.loginLogs) {
+  DB.loginLogs = [];
+  const at = (d, hm) => { const x = new Date(); x.setDate(x.getDate() - d); const p = n => String(n).padStart(2, '0'); return `${x.getFullYear()}-${p(x.getMonth() + 1)}-${p(x.getDate())} ${hm}`; };
+  [[2, '08:02:11', 'manager', 'ok', '10.0.4.21'], [2, '11:40:03', 'manager', 'logout', '10.0.4.21'], [1, '08:15:47', 'manager', 'badpw', '10.0.4.33'],
+   [1, '08:16:20', 'manager', 'ok', '10.0.4.33'], [1, '16:58:09', 'manager', 'logout', '10.0.4.33'], [0, '07:59:30', 'somchai.m', 'pending', '10.0.4.57']]
+    .reverse().forEach(([d, hm, u, r, ip]) => DB.loginLogs.push({ time: at(d, hm), username: u, displayName: u === 'manager' ? 'กรรมการตรวจความสะอาด (ตัวอย่าง)' : 'สมชาย ใจดี', role: 'manager', result: r, ip }));
+}
+saveDB_();
+const MGR_ID_RX = /^[a-z0-9._-]{4,30}$/;
+function findUser_(u) { const m = DB.users.find(x => x.username === String(u || '').trim().toLowerCase()); if (!m) throw new Error('ไม่พบบัญชีผู้ใช้'); return m; }
+function checkSlot_(role) { if (!ROLE_LIMIT[role]) throw new Error('กรุณาเลือกตำแหน่ง'); if (usedSlots_(role) >= ROLE_LIMIT[role]) throw new Error(`ตำแหน่ง${ROLES[role].name}เต็มแล้ว (สูงสุด ${ROLE_LIMIT[role]} คน)`); }
+function tempPw_() { const c = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789'; let s = ''; for (let i = 0; i < 10; i++) s += c[Math.floor(Math.random() * c.length)]; return s; }
+function phoneNorm_(v, required) {   // กฎเดียวกับเซิร์ฟเวอร์ (gas/06_Users.js phone_)
+  const s = String(v == null ? '' : v).trim();
+  if (!s) { if (required) throw new Error('กรุณากรอกเบอร์โทร (ตัวเลข 10 หลัก)'); return ''; }
+  const d = s.replace(/[\s-]/g, '');
+  if (!/^\d{10}$/.test(d)) throw new Error('เบอร์โทรต้องเป็นตัวเลข 10 หลัก รูปแบบ 000-000-0000');
+  return `${d.slice(0, 3)}-${d.slice(3, 6)}-${d.slice(6)}`;
+}
+const COMMON_PW = 'password passw0rd password1 password123 qwertyui qwerty123 qwertyuiop asdfghjk asdfghjkl zxcvbnm1 abcd1234 abcdefgh abc12345 iloveyou letmein1 welcome1 admin123 swu12345 swucenter cleaner123 manager123 changeme 1q2w3e4r'.split(' ');
+function chkPw_(pw, u, extras) {   // กฎเดียวกับเซิร์ฟเวอร์ (gas/06_Users.js checkPassword_)
+  pw = String(pw || ''); const low = pw.toLowerCase();
+  if (pw.length < 8) throw new Error('รหัสผ่านต้องยาวอย่างน้อย 8 ตัวอักษร');
+  if (low === u) throw new Error('รหัสผ่านต้องไม่เหมือน ID');
+  if (/^\d+$/.test(pw) || /^(.)\1+$/.test(pw)) throw new Error('รหัสผ่านต้องไม่ใช่ตัวเลขล้วนหรือตัวอักษรซ้ำ ๆ — ผสมตัวอักษรและตัวเลข');
+  if (COMMON_PW.includes(low)) throw new Error('รหัสผ่านนี้เดาง่ายเกินไป กรุณาตั้งใหม่');
+  if ((extras || []).some(x => x && String(x).trim().toLowerCase() === low)) throw new Error('รหัสผ่านต้องไม่เหมือนชื่อหรือเบอร์โทรของคุณ');
+}
+
+function loadDB_() { try { const raw = sessionStorage.getItem(DB_KEY); return raw ? JSON.parse(raw) : null; } catch (e) { return null; } }
+function saveDB_() { try { sessionStorage.setItem(DB_KEY, JSON.stringify(DB)); } catch (e) {} }
+
+function addUpload_(kind) { const id = uid_(); DB.uploads[id] = placeholderPhoto_(kind); return id; }
+function photoRec_(id, kind, by, role, time) { return { id, url: DB.uploads[id], kind, by, role, time }; }
+function addHist_(locId, time, user, role, action) { (DB.history[locId] = DB.history[locId] || []).push({ time, user, role, action }); }
+function markAll_(zones) { zones.forEach(z => z.completed = true); }
+function markPartial_(zones, ratio) { zones.forEach((z, k) => z.completed = k < Math.round(zones.length * ratio)); }
+
+function applyScenario_(loc, sc) {
+  const zones = loc.subZones, digit = loc.id % 6;
+  if (sc.status === 'pending') { if (sc.partial) markPartial_(zones, 0.4); return; }
+
+  markAll_(zones);
+  const tReport = `07:5${digit}`;
+  loc.photos.push(photoRec_(addUpload_('report'), 'report', loc.assignedTo || ROLE_LABEL.cleaner, 'cleaner', tReport));
+  loc.cleanerNote = 'ทำความสะอาดครบทุกจุดแล้ว';
+  loc.lastUpdated = tReport;
+  addHist_(loc.id, tReport, loc.assignedTo || ROLE_LABEL.cleaner, 'cleaner', `ส่งรายงาน (${zones.length}/${zones.length} จุด, รูป 1)`);
+  if (sc.status === 'cleaner_done') { loc.status = 'cleaner_done'; return; }
+
+  const tSup = `08:3${digit}`;
+  if (sc.status === 'rejected' && sc.by === 'supervisor') {
+    loc.photos.push(photoRec_(addUpload_('reject'), 'reject', loc.supervisor || ROLE_LABEL.supervisor, 'supervisor', tSup));
+    loc.rejectNote = 'พบคราบสกปรกบริเวณห้องน้ำ กรุณาทำซ้ำ';
+    loc.rejectCount = sc.count || 1;
+    loc.status = 'rejected'; loc.supervisorNote = loc.rejectNote; loc.lastUpdated = tSup;
+    addHist_(loc.id, tSup, loc.supervisor || ROLE_LABEL.supervisor, 'supervisor', `ตีกลับ: ${loc.rejectNote} [รูป 1]`);
+    return;
+  }
+  loc.photos.push(photoRec_(addUpload_('approve'), 'approve', loc.supervisor || ROLE_LABEL.supervisor, 'supervisor', tSup));
+  loc.status = 'approved'; loc.lastUpdated = tSup;
+  addHist_(loc.id, tSup, loc.supervisor || ROLE_LABEL.supervisor, 'supervisor', 'ตรวจผ่าน [รูป 1]');
+  if (!sc.feedback) return;
+
+  const tCom = `09:1${digit}`;   // คณะกรรมการแจ้งจุดปรับปรุง — ไม่เปลี่ยนสถานะงาน
+  loc.photos.push(photoRec_(addUpload_('reject'), 'feedback', ROLE_LABEL.manager, 'manager', tCom));
+  loc.managerNote = sc.feedback; loc.rating = sc.rating || 0; loc.lastUpdated = tCom;
+  addHist_(loc.id, tCom, ROLE_LABEL.manager, 'manager', `แจ้งปรับปรุง: ${sc.feedback}${loc.rating ? ` (${loc.rating} ดาว)` : ''} [รูป 1]`);
+}
+function buildSeed_() {
+  DB = { workDate: today_(), locations: [], history: {}, uploads: {} };
+  const scenarios = [
+    { status: 'approved', feedback: 'ชั้นวางของด้านหลังยังมีฝุ่น ควรเช็ดเพิ่ม', rating: 4 },
+    { status: 'approved' },
+    { status: 'cleaner_done' },
+    { status: 'rejected', by: 'supervisor' },
+    { status: 'pending', partial: true },
+    { status: 'pending' },
+    { status: 'approved', feedback: 'สะอาดดี ขอให้ตรวจถังขยะรอบสนามบ่อยขึ้น', rating: 5 },
+    { status: 'cleaner_done' },
+    { status: 'pending' },
+    { status: 'approved' },
+    { status: 'approved', rating: 0 },
+    { status: 'rejected', by: 'supervisor', count: 2 },
+  ];
+  MASTER.forEach((m, i) => {
+    const id = i + 1, [area, category, assignedTo, supervisor, zoneNames] = m;
+    const loc = {
+      id, area, category, assignedTo, supervisor,
+      status: 'pending', lastUpdated: '', cleanerNote: '', supervisorNote: '', managerNote: '',
+      rejectNote: '', rating: 0, rejectCount: 0, photos: [],
+      subZones: zoneNames.map((name, j) => ({ id: `${id}-${j + 1}`, name, completed: false })),
+    };
+    DB.history[id] = [];
+    applyScenario_(loc, scenarios[i] || { status: 'pending' });
+    DB.locations.push(loc);
+  });
+  saveDB_();
+}
+
+/* ---------- sessions จำลอง (คงอยู่ตามอายุแท็บ เหมือน CacheService ฝั่งจริง) ---------- */
+const Sessions = {
+  key: 'mockSessions_v4',
+  /* token สั้น (6 ชม.) อยู่ใน sessionStorage · token "จดจำฉัน" (14 วัน) อยู่ใน localStorage — เหมือนเซิร์ฟเวอร์จริงที่ token ยาวไม่พึ่งแคช */
+  load() { try { return Object.assign({}, JSON.parse(localStorage.getItem(this.key)) || {}, JSON.parse(sessionStorage.getItem(this.key)) || {}); } catch (e) { return {}; } },
+  save(m) {
+    const long = {}, short = {}; Object.keys(m).forEach(k => (m[k].long ? long : short)[k] = m[k]);
+    try { sessionStorage.setItem(this.key, JSON.stringify(short)); localStorage.setItem(this.key, JSON.stringify(long)); } catch (e) {}
+  },
+  create(role, user, long) {
+    const token = uid_(), m = this.load();
+    m[token] = { role, user, exp: Date.now() + (long ? 14 * 86400 : 6 * 3600) * 1000, long: !!long };
+    this.save(m); return token;
+  },
+  remove(token) { const m = this.load(); delete m[token]; this.save(m); },
+  auth(token, roles) {
+    const s = token && this.load()[token];
+    if (!s || s.exp < Date.now()) throw new Error('SESSION_EXPIRED');
+    if (s.role !== 'admin' && roles.indexOf(s.role) < 0) throw new Error('ไม่มีสิทธิ์ทำรายการนี้');
+    return s;
+  },
+};
+
+function findLoc_(id) { const l = DB.locations.find(x => x.id === Number(id)); if (!l) throw new Error('ไม่พบพื้นที่'); return l; }
+function assertCleanerEditable_(l) { if (l.status !== 'pending' && l.status !== 'rejected') throw new Error('งานนี้ส่งแล้ว อยู่ระหว่างตรวจ'); }
+function cleanPhotos_(photos, kind, by, role) {
+  const t = timeNow_();
+  return (Array.isArray(photos) ? photos : []).slice(0, 10)
+    .map(p => String(p && p.id || ''))
+    .filter(id => DB.uploads[id])
+    .map(id => ({ id, url: DB.uploads[id], kind, by, role, time: t }));
+}
+function withHistory_(l) { return Object.assign({}, l, { history: DB.history[l.id] || [] }); }
+
+/* ประวัติย้อนหลัง 90 วัน × 12 พื้นที่ (ข้อมูลจำลองคงที่) — โปรดักชัน = คำนวณจากชีต DailyArchive / *_Reviews */
+let histCache_ = null;
+const ymd_ = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+function mulberry32_(seed) {
+  return function () {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function buildHistory_() {
+  if (histCache_) return histCache_;
+  const rnd = mulberry32_(20260930), rows = [], base = new Date();
+  const prone = MASTER.map(() => 0.03 + rnd() * 0.3);
+  for (let i = 90; i >= 1; i--) {
+    const d = new Date(base); d.setDate(d.getDate() - i);
+    MASTER.forEach((m, k) => {
+      let sup = 0, fb = 0;
+      if (rnd() < prone[k]) sup = rnd() < 0.25 ? 2 : 1;
+      if (rnd() < 0.1) fb = 1;
+      const approved = rnd() < 0.9;
+      rows.push({ date: ymd_(d), area: m[0], category: m[1], sup, fb, approved, rating: fb ? 3 + Math.round(rnd() * 2) : 0 });
+    });
+  }
+  return (histCache_ = rows);
+}
+
+/* ชื่อผู้รับผิดชอบในแต่ละพื้นที่ มาจากบัญชีที่ Admin อนุมัติ: แม่บ้าน = ผู้ที่ถูกมอบหมายพื้นที่นั้น · หัวหน้า = หัวหน้าแม่บ้านคนเดียวของระบบ */
+function syncAssign_() {
+  const sup = DB.users.find(u => u.role === 'supervisor' && u.status === 'approved');
+  DB.locations.forEach(l => {
+    const c = DB.users.find(u => u.role === 'cleaner' && u.status === 'approved' && (u.areas || []).includes(l.id));
+    l.assignedTo = c ? c.displayName : ''; l.supervisor = sup ? sup.displayName : '';
+  });
+  saveDB_();
+}
+syncAssign_();
+const actor_ = s => s.role === 'admin' ? 'ผู้ดูแลระบบ' : ((DB.users.find(u => u.username === s.user) || {}).displayName || ROLE_LABEL[s.role]);
+const MOCK = {
+  apiGetData(token) { Sessions.auth(token, ['cleaner', 'supervisor', 'manager']); return { workDate: DB.workDate, locations: DB.locations.map(withHistory_), perms: DB.perms }; },
+
+  apiListPerms(token) { Sessions.auth(token, ['admin']); return { perms: DB.perms, log: DB.permLog.slice(0, 15) }; },
+  apiSetPermission(token, role, key, value) {
+    const s = Sessions.auth(token, ['admin']);
+    const def = PERM_DEFS.find(p => p.key === key);
+    if (!PERM_ROLES.includes(role) || !def || !def.roles.includes(role)) throw new Error('ไม่มีสิทธิ์นี้ในบทบาทที่เลือก');
+    DB.perms[role][key] = !!value;
+    DB.permLog.unshift({ time: `${today_()} ${new Date().toTimeString().slice(0, 8)}`, by: s.user, role, key, value: !!value });
+    saveDB_(); return { perms: DB.perms };
+  },
+  apiResetPerms(token) {
+    const s = Sessions.auth(token, ['admin']);
+    DB.perms = defaultPerms_();
+    DB.permLog.unshift({ time: `${today_()} ${new Date().toTimeString().slice(0, 8)}`, by: s.user, role: 'all', key: 'reset', value: true });
+    saveDB_(); return { perms: DB.perms };
+  },
+
+  /* เข้าสู่ระบบด้วยฟอร์มเดียว: Super Admin (บัญชีคงที่) หรือผู้ใช้ที่ Admin อนุมัติแล้ว · บทบาทมาจากบัญชี ไม่ใช่จากที่ผู้ใช้เลือก */
+  apiLoginAuto(username, password, ip, remember) {
+    const uname = String(username || '').trim().toLowerCase(), adm = CREDENTIALS.admin;
+    if (uname === adm.username.toLowerCase()) {
+      if (String(password) !== adm.password) throw new Error('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
+      return { token: Sessions.create('admin', adm.username), role: 'admin', user: adm.username, displayName: 'ผู้ดูแลระบบ' };
+    }
+    const m = DB.users.find(x => x.username === uname);
+    const fail = (result, msg) => { logLogin_(uname, m ? m.displayName : '', result, ip, m ? m.role : ''); throw new Error(msg); };
+    const recent = DB.loginLogs.filter(x => x.username === uname && Date.now() - new Date(x.time.replace(' ', 'T')).getTime() < 15 * 60000);
+    const streak = []; for (const x of recent) { if (x.result === 'ok') break; if (x.result === 'badpw') streak.push(x); }
+    if (streak.length >= 5) fail('locked', 'ลองผิดหลายครั้ง กรุณารอ 15 นาทีแล้วลองใหม่');
+    if (!m) fail('unknown', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
+    if (m.password !== String(password)) fail('badpw', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
+    if (m.status === 'pending') fail('pending', 'บัญชียังรอผู้ดูแลระบบอนุมัติ');
+    if (m.status === 'rejected') fail('rejected', 'คำขอลงทะเบียนไม่ได้รับอนุมัติ');
+    if (m.status !== 'approved') fail('disabled', 'บัญชีนี้ถูกระงับ กรุณาติดต่อผู้ดูแลระบบ');
+    if (!can_(m.role, 'portal')) fail('closed', `พอร์ทัล${ROLES[m.role].name}ถูกปิดใช้งานโดยผู้ดูแลระบบ`);
+    m.lastLogin = `${today_()} ${timeNow_()}`; logLogin_(m.username, m.displayName, 'ok', ip, m.role);
+    const long = remember === true && !m.mustChange;   // Super Admin และบัญชีรหัสชั่วคราวไม่ได้ token ยาว (เหมือนเซิร์ฟเวอร์)
+    return { token: Sessions.create(m.role, m.username, long), role: m.role, user: m.username, displayName: m.displayName, mustChange: m.mustChange, remember: long };
+  },
+
+  /* ที่นั่งคงเหลือของแต่ละตำแหน่ง (เปิดสาธารณะ — ใช้แสดงในฟอร์มลงทะเบียน) */
+  apiRegInfo() { return Object.fromEntries(Object.keys(ROLE_LIMIT).map(r => [r, { used: usedSlots_(r), max: ROLE_LIMIT[r] }])); },
+
+  /* ลงทะเบียนเอง (ไม่ต้อง login) ได้ 3 ตำแหน่ง → สถานะ "รออนุมัติ" */
+  apiRegister(p) {
+    p = p || {}; const u = String(p.username || '').trim().toLowerCase(), role = String(p.role || '');
+    if (!ROLE_LIMIT[role]) throw new Error('กรุณาเลือกตำแหน่ง');
+    if (!MGR_ID_RX.test(u)) throw new Error('ID ต้องเป็นตัวอักษรอังกฤษ/ตัวเลข/. _ - ยาว 4–30 ตัว');
+    if (!String(p.displayName || '').trim()) throw new Error('กรุณากรอกชื่อ-นามสกุล');
+    chkPw_(p.password, u, [p.displayName, p.phone]);
+    if (u === CREDENTIALS.admin.username.toLowerCase() || DB.users.some(m => m.username === u)) throw new Error('ID นี้ถูกใช้แล้ว');
+    checkSlot_(role);
+    DB.users.push({ username: u, displayName: p.displayName.trim(), phone: phoneNorm_(p.phone, true), role, password: String(p.password), status: 'pending', mustChange: false, areas: [], createdAt: `${today_()} ${timeNow_()}`, createdBy: 'self-register', reviewedAt: '', reviewedBy: '', lastLogin: '' });
+    saveDB_(); return true;
+  },
+  apiListUsers(token) {
+    Sessions.auth(token, ['admin']);
+    return { users: DB.users.map(m => { const r = Object.assign({}, m); delete r.password; return r; }), limits: Object.fromEntries(Object.keys(ROLE_LIMIT).map(r => [r, { used: usedSlots_(r), max: ROLE_LIMIT[r] }])) };
+  },
+  apiCreateUser(token, p) {
+    const s = Sessions.auth(token, ['admin']); p = p || {}; const u = String(p.username || '').trim().toLowerCase(), role = String(p.role || '');
+    if (!ROLE_LIMIT[role]) throw new Error('กรุณาเลือกตำแหน่ง');
+    if (!MGR_ID_RX.test(u)) throw new Error('ID ต้องเป็นตัวอักษรอังกฤษ/ตัวเลข/. _ - ยาว 4–30 ตัว');
+    if (!String(p.displayName || '').trim()) throw new Error('กรุณากรอกชื่อ-นามสกุล');
+    if (u === CREDENTIALS.admin.username.toLowerCase() || DB.users.some(m => m.username === u)) throw new Error('ID นี้ถูกใช้แล้ว');
+    checkSlot_(role);
+    const pw = tempPw_(), at = `${today_()} ${timeNow_()}`;
+    DB.users.push({ username: u, displayName: p.displayName.trim(), phone: phoneNorm_(p.phone, false), role, password: pw, status: 'approved', mustChange: true, areas: [], createdAt: at, createdBy: s.user, reviewedAt: at, reviewedBy: s.user, lastLogin: '' });
+    syncAssign_(); return { username: u, tempPassword: pw };
+  },
+  apiReviewUser(token, u, decision) {
+    const s = Sessions.auth(token, ['admin']); const m = findUser_(u);
+    if (m.status !== 'pending' && m.status !== 'rejected') throw new Error('บัญชีนี้ไม่ได้อยู่ในสถานะรออนุมัติ');
+    if (decision === 'approve' && m.status === 'rejected') checkSlot_(m.role);   // เคยไม่อนุมัติ → กลับมาใช้ที่นั่งอีกครั้ง
+    m.status = decision === 'approve' ? 'approved' : 'rejected'; m.reviewedAt = `${today_()} ${timeNow_()}`; m.reviewedBy = s.user; syncAssign_(); return true;
+  },
+  apiSetUserStatus(token, u, status) {
+    const s = Sessions.auth(token, ['admin']); const m = findUser_(u);
+    if (status === 'disabled' && m.status === 'approved') m.status = 'disabled';
+    else if (status === 'approved' && m.status === 'disabled') m.status = 'approved';
+    else throw new Error('เปลี่ยนสถานะไม่ได้');
+    m.reviewedAt = `${today_()} ${timeNow_()}`; m.reviewedBy = s.user; syncAssign_(); return true;
+  },
+  apiResetUserPassword(token, u) {
+    Sessions.auth(token, ['admin']); const m = findUser_(u); const pw = tempPw_();
+    m.password = pw; m.mustChange = true; saveDB_(); return { username: m.username, tempPassword: pw };
+  },
+  apiDeleteUser(token, u) {
+    Sessions.auth(token, ['admin']); const m = findUser_(u);
+    if (m.status === 'approved') throw new Error('ต้องระงับบัญชีก่อนจึงจะลบได้');
+    DB.users = DB.users.filter(x => x !== m); syncAssign_(); return true;
+  },
+  /* Admin แก้ชื่อ/เบอร์ และมอบหมายพื้นที่ให้พนักงานทำความสะอาด (1 พื้นที่ต่อ 1 คน) */
+  apiSaveUser(token, p) {
+    Sessions.auth(token, ['admin']); p = p || {}; const m = findUser_(p.username);
+    const name = String(p.displayName || '').trim().slice(0, 80); if (!name) throw new Error('กรุณากรอกชื่อ-นามสกุล');
+    m.displayName = name; m.phone = phoneNorm_(p.phone, false);
+    if (m.role === 'cleaner') {
+      m.areas = (Array.isArray(p.areas) ? p.areas : []).map(Number).filter(id => DB.locations.some(l => l.id === id));
+      DB.users.forEach(o => { if (o !== m && o.role === 'cleaner') o.areas = (o.areas || []).filter(id => !m.areas.includes(id)); });
+    }
+    syncAssign_(); return true;
+  },
+  apiChangePassword(token, oldPw, newPw, wantRemember) {
+    const s = Sessions.auth(token, ['cleaner', 'supervisor', 'manager']);
+    const wasLong = !!Sessions.load()[token]?.long || wantRemember === true;
+    if (s.role === 'admin') throw new Error('บัญชี Super Admin เปลี่ยนรหัสผ่านที่นี่ไม่ได้');
+    const m = findUser_(s.user);
+    if (m.password !== String(oldPw)) throw new Error('รหัสผ่านเดิมไม่ถูกต้อง');
+    chkPw_(newPw, m.username, [m.displayName, m.phone]);
+    if (String(newPw) === String(oldPw)) throw new Error('รหัสผ่านใหม่ต้องต่างจากรหัสเดิม');
+    m.password = String(newPw); m.mustChange = false; saveDB_();
+    const all = Sessions.load(); Object.keys(all).forEach(k => { if (all[k].user === m.username) delete all[k]; }); Sessions.save(all);
+    return { token: Sessions.create(m.role, m.username, wasLong), remember: wasLong };
+  },
+
+  apiLogout(token) {
+    const s = token && Sessions.load()[token];
+    if (s && s.role !== 'admin') { const m = DB.users.find(x => x.username === s.user); logLogin_(s.user, m ? m.displayName : '', 'logout', '', s.role); }
+    Sessions.remove(token); return true;
+  },  apiListLoginLogs(token) { Sessions.auth(token, ['admin']); return DB.loginLogs.slice(0, 200); },
+
+  apiUploadPhoto(token, p) {
+    Sessions.auth(token, ['cleaner', 'supervisor', 'manager']);
+    const m = String(p && p.dataUrl || '').match(/^data:(image\/(?:jpeg|png|webp));base64,(.+)$/);
+    if (!m) throw new Error('ไฟล์รูปไม่ถูกต้อง');
+    const id = uid_();
+    DB.uploads[id] = p.dataUrl; saveDB_();
+    return { id, url: p.dataUrl };
+  },
+
+  apiToggleZone(token, locationId, zoneId, completed) {
+    const s = Sessions.auth(token, ['cleaner']);
+    if (s.role !== 'admin' && !can_('cleaner', 'submit')) throw new Error('บทบาทแม่บ้านถูกปิดสิทธิ์การส่งรายงาน');
+    const l = findLoc_(locationId);
+    assertCleanerEditable_(l);
+    const z = l.subZones.find(s => s.id === zoneId);
+    if (!z) throw new Error('ไม่พบจุดย่อย');
+    z.completed = !!completed;
+    l.lastUpdated = timeNow_();
+    saveDB_();
+    return withHistory_(l);
+  },
+
+  apiCleanerSubmit(token, locationId, note, photos) {
+    const s = Sessions.auth(token, ['cleaner']), me = actor_(s);
+    if (s.role !== 'admin' && !can_('cleaner', 'submit')) throw new Error('บทบาทแม่บ้านถูกปิดสิทธิ์การส่งรายงาน');
+    const l = findLoc_(locationId);
+    assertCleanerEditable_(l);
+    const added = can_('cleaner', 'photo') ? cleanPhotos_(photos, 'report', me, 'cleaner') : [];
+    if (!added.length && can_('cleaner', 'photo') && !l.photos.some(p => p.kind === 'report')) throw new Error('กรุณาแนบรูปอย่างน้อย 1 รูป');
+    const wasRejected = l.status === 'rejected';
+    l.status = 'cleaner_done';
+    l.cleanerNote = String(note || '').trim();
+    l.photos = l.photos.concat(added);
+    l.lastUpdated = timeNow_();
+    const done = l.subZones.filter(s => s.completed).length;
+    addHist_(l.id, timeNow_(), me, 'cleaner',
+      `${wasRejected ? 'ส่งงานแก้ไขแล้ว' : 'ส่งรายงาน'} (${done}/${l.subZones.length} จุด${added.length ? `, รูป ${added.length}` : ''})`);
+    saveDB_();
+    return withHistory_(l);
+  },
+
+  /* หัวหน้าแม่บ้านตรวจผ่าน = งานสิ้นสุด (ไม่มีขั้นอนุมัติต่อ) · หรือตีกลับ */
+  apiReview(token, locationId, decision, note, photos) {
+    const s = Sessions.auth(token, ['supervisor']);
+    if (decision !== 'approve' && decision !== 'reject') throw new Error('คำสั่งไม่ถูกต้อง');
+    if (s.role !== 'admin' && !can_(s.role, decision)) throw new Error('บทบาทนี้ถูกปิดสิทธิ์การ' + (decision === 'reject' ? 'ตีกลับ' : 'ตรวจผ่าน'));
+    const l = findLoc_(locationId);
+    if (l.status !== 'cleaner_done') throw new Error('สถานะงานเปลี่ยนไปแล้ว กรุณารีเฟรช');
+    note = String(note || '').trim();
+    const who = actor_(s);
+    const added = cleanPhotos_(photos, decision === 'reject' ? 'reject' : 'approve', who, 'supervisor');
+    if (decision === 'reject') {
+      if (!note) throw new Error('กรุณาระบุจุดที่ต้องแก้ไข');
+      l.status = 'rejected'; l.rejectNote = note; l.rejectCount = (l.rejectCount || 0) + 1;
+    } else l.status = 'approved';
+    l.supervisorNote = note;
+    l.photos = l.photos.concat(added);
+    l.lastUpdated = timeNow_();
+    addHist_(l.id, timeNow_(), who, 'supervisor', (decision === 'reject' ? `ตีกลับ: ${note}` : 'ตรวจผ่าน') + (added.length ? ` [รูป ${added.length}]` : ''));
+    saveDB_();
+    return withHistory_(l);
+  },
+
+  /* ตอบกลับ "แจ้งแก้ไข" (ข้อความ+รูป) หลังดำเนินการ — แม่บ้าน: ส่งต่อหัวหน้าตรวจซ้ำ (cleaner_done) · หัวหน้า: รับทราบ/ดำเนินการแล้ว ต่อข้อเสนอแนะกรรมการ (ไม่ตรวจซ้ำ) — กฎเดียวกับ gas/10_Api_Workflow.js */
+  apiFixReply(token, locationId, note, photos) {
+    const s = Sessions.auth(token, ['cleaner', 'supervisor']);
+    const role = s.role === 'admin' ? 'supervisor' : s.role, who = actor_(s);
+    if (s.role !== 'admin') {
+      if (role === 'cleaner' && !can_(role, 'submit')) throw new Error('บทบาทแม่บ้านถูกปิดสิทธิ์การส่งรายงาน');
+      if (role === 'supervisor' && !can_(role, 'approve') && !can_(role, 'reject')) throw new Error('บทบาทนี้ถูกปิดสิทธิ์การตรวจงาน');
+    }
+    const l = findLoc_(locationId), hasFb = (DB.history[l.id] || []).some(h => h.role === 'manager' && /^แจ้งปรับปรุง/.test(h.action));
+    note = String(note || '').trim().slice(0, 500);
+    if (!note) throw new Error('กรุณาพิมพ์ข้อความตอบกลับ');
+    let added;
+    if (role === 'cleaner') {
+      if (l.status === 'pending') throw new Error('ยังไม่ได้ทำความสะอาดพื้นที่นี้ — ทำเช็คลิสต์และส่งรายงานก่อน');
+      if (l.status !== 'rejected' && !hasFb) throw new Error('ไม่มีรายการแจ้งแก้ไขในพื้นที่นี้');
+      added = can_(role, 'photo') ? cleanPhotos_(photos, 'fix', who, 'cleaner') : [];
+      if (can_(role, 'photo') && !added.length) throw new Error('กรุณาแนบรูปหลังแก้ไขอย่างน้อย 1 รูป');
+      l.status = 'cleaner_done'; l.cleanerNote = note;   // ส่งต่อหัวหน้าแม่บ้านตรวจซ้ำ
+    } else {
+      if (!hasFb) throw new Error('ไม่มีข้อเสนอแนะจากคณะกรรมการที่ต้องตอบ');
+      added = cleanPhotos_(photos, 'fix', who, 'supervisor'); l.supervisorNote = note;
+    }
+    l.photos = l.photos.concat(added); l.lastUpdated = timeNow_();
+    addHist_(l.id, timeNow_(), who, role, `ตอบกลับแจ้งแก้ไข: ${note}${added.length ? ` [รูป ${added.length}]` : ''}`);
+    saveDB_();
+    return withHistory_(l);
+  },
+
+  /* คณะกรรมการตรวจความสะอาด: แจ้งจุดปรับปรุง (+รูป +คะแนนไม่บังคับ) — ไม่ใช่การอนุมัติ ไม่เปลี่ยนสถานะงาน ตรวจเยี่ยมได้ทุกเวลา */
+  apiFeedback(token, locationId, note, rating, photos) {
+    const s = Sessions.auth(token, ['manager']);
+    if (s.role !== 'admin' && !can_(s.role, 'feedback')) throw new Error('บทบาทนี้ถูกปิดสิทธิ์การแจ้งจุดปรับปรุง');
+    const l = findLoc_(locationId);
+    note = String(note || '').trim().slice(0, 500);
+    if (!note) throw new Error('กรุณาระบุจุดที่ควรปรับปรุง');
+    const stars = Math.max(0, Math.min(5, Math.round(Number(rating) || 0))), who = actor_(s);
+    const added = cleanPhotos_(photos, 'feedback', who, 'manager');
+    l.managerNote = note; if (stars) l.rating = stars;
+    l.photos = l.photos.concat(added);
+    l.lastUpdated = timeNow_();
+    addHist_(l.id, timeNow_(), who, 'manager', `แจ้งปรับปรุง: ${note}${stars ? ` (${stars} ดาว)` : ''}${added.length ? ` [รูป ${added.length}]` : ''}`);
+    saveDB_();
+    return withHistory_(l);
+  },
+
+  apiGetDashboard(token) { Sessions.auth(token, ['manager']); return { hist: buildHistory_() }; },
+
+  apiRepairLocations(token) {
+    Sessions.auth(token, ['admin']);
+    let n = 0;
+    DB.locations.forEach(l => {
+      if (Array.isArray(l.subZones) && l.subZones.length) return;
+      const m = MASTER[l.id - 1];
+      Object.assign(l, { status: 'pending', lastUpdated: '', cleanerNote: '', supervisorNote: '', managerNote: '', rejectNote: '', rating: 0, rejectCount: 0, photos: [],
+        subZones: m[4].map((name, j) => ({ id: `${l.id}-${j + 1}`, name, completed: false })) });
+      n++;
+    });
+    saveDB_();
+    return n;
+  },
+
+  apiResetToday(token) {
+    Sessions.auth(token, ['admin']);
+    DB.locations.forEach(l => {
+      Object.assign(l, { status: 'pending', lastUpdated: '', cleanerNote: '', supervisorNote: '', managerNote: '', rejectNote: '', rating: 0, rejectCount: 0, photos: [] });
+      l.subZones.forEach(s => { s.completed = false; });
+    });
+    DB.history = {};
+    saveDB_();
+    return true;
+  },
+};
+
+/* @dev:end */
+/* @prod:start
+const ROLE_LABEL = { cleaner: 'แม่บ้าน', supervisor: 'หัวหน้าแม่บ้าน', manager: 'คณะกรรมการตรวจความสะอาด', admin: 'ผู้ดูแลระบบ', system: 'ระบบ' };
+@prod:end */
+
+/* =========================================================
+   ค่าคงที่ฝั่งหน้าเว็บ
+   ========================================================= */
+/* ---------- สิทธิ์ตามบทบาท (ตั้งค่าที่ Admin > จัดการสิทธิ์) — ค่าจริงมากับ apiGetData().perms · Super Admin ไม่ถูกจำกัด ---------- */
+const can = (role, key) => S.auth?.role === 'admin' || ((S.perms || {})[role] || {})[key] !== false;
+const ROLES = {
+  cleaner:    { name: 'พนักงานทำความสะอาด', desc: 'เช็คลิสต์ ถ่ายรูป และส่งรายงาน', login: true },
+  supervisor: { name: 'หัวหน้าแม่บ้าน',     desc: 'ตรวจงาน ส่งผ่าน หรือตีกลับพร้อมรูป', login: true },
+  manager:    { name: 'คณะกรรมการตรวจความสะอาด', desc: 'ตรวจเยี่ยม แจ้งจุดปรับปรุง ให้คะแนน', login: true },
+  admin:      { name: 'แดชบอร์ด / ผู้ดูแล', desc: 'สรุปผล สถิติย้อนหลัง พิมพ์รายงาน', login: true },
+};
+const STATUS = {
+  pending:             { t: 'รอทำความสะอาด',   c: 'gray' },
+  cleaner_done:        { t: 'รอหัวหน้าตรวจ',    c: 'blue' },
+  approved:            { t: 'ตรวจผ่านแล้ว',       c: 'green' },
+  rejected:            { t: 'ต้องแก้ไข',        c: 'red' },
+};
+// งานที่ "รอฉัน" ของแต่ละบทบาท
+const QUEUE = { cleaner: ['pending', 'rejected'], supervisor: ['cleaner_done'] };   // ตรวจผ่านโดยหัวหน้า = จบ · คณะกรรมการไม่มีคิวอนุมัติ
+const PHOTO_KIND = { report: 'รายงาน', reject: 'ตีกลับ', approve: 'ตรวจ', feedback: 'แจ้งปรับปรุง', fix: 'แก้ไขแล้ว' };
+const MAX_PENDING_PHOTOS = 6;
+
+const store = {
+  get(k) { try { return JSON.parse(sessionStorage.getItem(k) ?? localStorage.getItem(k)); } catch (e) { return null; } },
+  set(k, v, session) { try { (session ? sessionStorage : localStorage).setItem(k, JSON.stringify(v)); } catch (e) {} },
+  del(k) { try { sessionStorage.removeItem(k); localStorage.removeItem(k); } catch (e) {} },
+};
+
+/* =========================================================
+   State
+   ========================================================= */
+const S = {
+  view: 'home', perms: null, adminTab: 'dash', permLog: null, hist: null, users: null, limits: null, userEdit: null, regInfo: null, pplRole: 'all', dfPeriod: 'week', dfOffset: 0, dfArea: '', locs: [], workDate: '', loaded: false,
+  auth: store.get('auth'),          // {token, role, user}
+  tab: 'todo', q: '',
+  modal: null,                      // 'login' | 'detail'
+  openId: null,
+  form: freshForm(),                // reviewer (supervisor/manager) modal form
+  cleanerForms: {},                 // locationId -> form — cleaner cards are inline, one form each
+  dash: null, busy: false, replyOpen: {},
+};
+function freshForm() { return { note: '', rating: 0, photos: [], uploading: 0 }; }
+/* ฟอร์มของแม่บ้านต่อพื้นที่ (การ์ดแบบเปิดค้างในหน้ารายการ ไม่ต้องเปิดโมดัล) */
+function cfForm(id) {
+  const reply = /^r\d+$/.test(id);   // 'r<id>' = ฟอร์มตอบกลับแจ้งแก้ไข (แยกจากฟอร์มส่งรายงาน)
+  id = reply ? id : Number(id);
+  if (!S.cleanerForms[id]) {
+    const l = loc(reply ? id.slice(1) : id);
+    S.cleanerForms[id] = { note: reply ? '' : (l ? l.cleanerNote : ''), photos: [], uploading: 0, busy: false };
+  }
+  return S.cleanerForms[id];
+}
+
+/* =========================================================
+   Icons — Lucide paths, strokeWidth 1 (Portal UI rule, fkt-icon.md DS-#083)
+   ========================================================= */
+const ICONS = {
+  x:       '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>',
+  refresh: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 3v6h-6"/></svg>',
+  check:   '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+  plus:    '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>',
+  user:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+  users:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  shield:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>',
+  lock:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+  eye:     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0"/><circle cx="12" cy="12" r="3"/></svg>',
+  eyeOff:  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c4.5 0 8.3 2.8 9.94 6.65a1 1 0 0 1 0 .7 10.8 10.8 0 0 1-1.44 2.5M6.61 6.61A10.75 10.75 0 0 0 2.06 11.65a1 1 0 0 0 0 .7C3.7 16.2 7.5 19 12 19a10.4 10.4 0 0 0 5.39-1.61M14.12 14.12a3 3 0 1 1-4.24-4.24M2 2l20 20"/></svg>',
+};
+const ROLE_ICON = { cleaner: ICONS.user, supervisor: ICONS.users, manager: ICONS.shield, admin: ICONS.lock };
+
+/* =========================================================
+   Helpers
+   ========================================================= */
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>\x22\x27]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const chip = st => { const s = STATUS[st] || STATUS.pending; return `<span class="chip c-${s.c}">${s.t}</span>`; };
+const prog = l => { const d = l.subZones.filter(z => z.completed).length, t = l.subZones.length; return { d, t, p: t ? Math.round(d / t * 100) : 0 }; };
+const loc = id => S.locs.find(l => l.id === Number(id));
+const who = l => l.assignedTo || 'ยังไม่มอบหมายพนักงาน';
+const thDate = d => d ? new Date(d + 'T00:00:00').toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: '2-digit' }) : '';
+
+/* @dev:start */
+/* เรียก MOCK แทน google.script.run โดยจำลองดีเลย์เครือข่ายเล็กน้อย */
+function api(fn, ...args) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try { resolve(clone_(MOCK[fn](...args))); }
+      catch (e) {
+        if (e.message === 'SESSION_EXPIRED') { logout(true); return reject(new Error('หมดเวลาเข้าสู่ระบบ กรุณาเข้าใหม่')); }
+        reject(e);
+      }
+    }, 180 + Math.random() * 220);
+  });
+}
+/* @dev:end */
+/* @prod:start
+function api(fn, ...args) {
+  return new Promise((resolve, reject) => {
+    if (!window.google || !google.script) return reject(new Error('ต้องเปิดผ่านลิงก์เว็บแอปของ Apps Script'));
+    google.script.run
+      .withSuccessHandler(r => {
+        if (r && r.ok) return resolve(r.data);
+        const msg = r ? r.error : 'ไม่มีการตอบกลับจากเซิร์ฟเวอร์';
+        if (msg === 'SESSION_EXPIRED') { logout(true); return reject(new Error('หมดเวลาเข้าสู่ระบบ กรุณาเข้าใหม่')); }
+        if (msg === 'MUST_CHANGE_PASSWORD') { if (S.auth) { S.auth.mustChange = true; openModal('chpw'); } return reject(new Error('กรุณาตั้งรหัสผ่านใหม่ก่อนเริ่มใช้งาน')); }
+        reject(new Error(msg));
+      })
+      .withFailureHandler(reject)[fn](...args);
+  });
+}
+@prod:end */
+let toastT;
+function toast(msg, err) {
+  $('#toast').innerHTML = `<div class="${err ? 'err' : ''}">${esc(msg)}</div>`;
+  clearTimeout(toastT); toastT = setTimeout(() => $('#toast').innerHTML = '', 3000);
+}
+
+function upsert(l) { const i = S.locs.findIndex(x => x.id === l.id); if (i >= 0) S.locs[i] = l; }
+
+/* ย่อรูปในเครื่องก่อนอัปโหลด (ยาวสุด 1280px, JPEG) */
+function compress(file, max = 1280, q = 0.72) {
+  return new Promise((res, rej) => {
+    const url = URL.createObjectURL(file), img = new Image();
+    img.onload = () => {
+      const s = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', q));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('อ่านไฟล์รูปไม่ได้')); };
+    img.src = url;
+  });
+}
+
+/* =========================================================
+   Data
+   ========================================================= */
+/* ข้อมูลทุกอย่างต้องเข้าสู่ระบบก่อน · สำเนาในเครื่องเก็บใน sessionStorage (หายเมื่อปิดแท็บ/ออกจากระบบ) ไม่ใช้ localStorage
+   เพื่อไม่ให้คนที่ใช้เครื่องต่อเห็นข้อมูลพื้นที่ รูป และชื่อพนักงาน */
+const SNAP_KEY = 'locsSnap_v2';
+async function load(silent) {
+  if (!S.auth) { S.locs = []; S.loaded = true; render(); return; }
+  if (!S.locs.length) {
+    try { const snap = JSON.parse(sessionStorage.getItem(SNAP_KEY)); if (snap && snap.user === S.auth.user && snap.workDate === new Date().toLocaleDateString('sv-SE') && Date.now() - snap.t < 12 * 3600e3) { S.locs = snap.locations; S.workDate = snap.workDate; S.perms = snap.perms || S.perms; S.loaded = true; render(); } } catch (e) {}
+  }
+  try {
+    const d = await api('apiGetData', S.auth.token);
+    if (!S.auth) return;   // ออกจากระบบระหว่างรอ
+    S.locs = d.locations; S.workDate = d.workDate; S.perms = d.perms || S.perms; S.loaded = true;
+    try { sessionStorage.setItem(SNAP_KEY, JSON.stringify({ t: Date.now(), user: S.auth.user, workDate: d.workDate, locations: d.locations, perms: d.perms })); } catch (e) {}
+    render();
+    if (!silent) toast('อัปเดตข้อมูลล่าสุดแล้ว');
+  } catch (e) {
+    if (!S.auth) return;
+    if (!S.locs.length) $('#app').innerHTML = `<div class="empty">โหลดข้อมูลไม่สำเร็จ<br><span class="sm">${esc(e.message)}</span><br><br><button class="btn" onclick="load()">ลองใหม่</button></div>`;
+    else if (!silent) toast(e.message, true);
+  }
+}
+// งานของแม่บ้านต่อคิวกัน (กันกดติ๊กแล้วส่งก่อนติ๊กบันทึกเสร็จ)
+let chain = Promise.resolve();
+const queue = job => (chain = chain.then(job, job));
+
+/* =========================================================
+   Views
+   ========================================================= */
+function render() {
+  /* @dev:start */devRoleCard();/* @dev:end */
+  $('#subtitle').innerHTML = S.view === 'home'
+    ? '<span class="spark">★</span> ระบบบริหารจัดการและตรวจความสะอาด'
+    : esc(`${ROLES[S.view].name}${S.workDate ? ' · ' + thDate(S.workDate) : ''}`);
+  $('#topActions').innerHTML = S.view === 'home' && !S.auth ? '' : `
+    <button class="btn sm ghost" data-act="refresh" title="รีเฟรช">${ICONS.refresh}</button>
+    ${S.auth && S.auth.role !== 'admin' ? '<button class="btn sm ghost" data-act="chpw">เปลี่ยนรหัสผ่าน</button>' : ''}<button class="btn sm ghost" data-act="logout">ออก</button>`;
+  if (!S.loaded) return;
+  $('#app').innerHTML = ({ home: vHome, cleaner: vCleaner, supervisor: vReview, manager: vReview, admin: vAdmin })[S.view]();
+}
+
+/* หน้าแรก = เข้าสู่ระบบ · พนักงานทำความสะอาดไม่ต้องล็อกอิน (ปุ่มด้านล่าง) · Super Admin ที่เข้าแล้วจะเห็นตัวเลือกพอร์ทัล */
+function vHome() {
+  if (S.auth?.role === 'admin') return vPicker();
+  let ru = ''; try { ru = localStorage.getItem('rememberUser') || ''; } catch (e) {}   // เก็บเฉพาะชื่อผู้ใช้ — ไม่เก็บรหัสผ่านในเครื่อง
+  let demo = '';
+  /* @dev:start */demo = `<div class="demo-hint no-print">บัญชีทดลอง (คลิกเพื่อกรอก):
+      <button type="button" data-act="fillLogin" data-u="${CREDENTIALS.admin.username}" data-p="${CREDENTIALS.admin.password}">admin</button><button type="button" data-act="fillLogin" data-u="supervisor" data-p="${DEMO_PASSWORD}">supervisor</button><button type="button" data-act="fillLogin" data-u="manager" data-p="${DEMO_PASSWORD}">manager</button></div>`;/* @dev:end */
+  return `
+  <div class="login-wrap">
+    <div class="card" style="padding:var(--s6)">
+      <h2 style="font-size:24px">เข้าสู่ระบบ</h2>
+      <p class="sm muted" style="margin:4px 0 16px">พนักงานทำความสะอาด หัวหน้าแม่บ้าน คณะกรรมการตรวจความสะอาด และผู้ดูแลระบบ</p>
+      <form id="loginForm" class="stack">
+        <div><label class="lbl">ชื่อผู้ใช้ / ID</label><input type="text" name="u" autocomplete="username" required ${ru ? '' : 'autofocus'} value="${esc(ru)}"></div>
+        <div><label class="lbl">รหัสผ่าน</label>${pwField('p', 'current-password', ru ? 'required autofocus' : 'required')}</div>
+        <label class="rm"><input type="checkbox" name="rm" ${ru ? 'checked' : ''}><span><b>จดจำฉันไว้ในเครื่องนี้</b><br><span class="xs muted">จำชื่อผู้ใช้ และเข้าสู่ระบบอัตโนมัติ 14 วัน — เลือกเฉพาะเครื่องส่วนตัว (กด “ออก” เพื่อยกเลิกการเข้าอัตโนมัติ)</span></span></label>
+        <div id="loginErr" class="alert sm" style="display:none"></div>
+        <button class="btn primary block" type="submit">เข้าสู่ระบบ</button>
+      </form>
+      <div class="sec sm muted" style="text-align:center">ยังไม่มีบัญชี? ลงทะเบียนแล้วรอผู้ดูแลระบบอนุมัติ<br><button class="btn sm ghost" type="button" data-act="register" style="margin-top:8px">ลงทะเบียนใช้งานระบบ</button></div>
+      ${demo}
+    </div>
+  </div>`;
+}
+function vPicker() {
+  return `
+  <div class="stack" style="max-width:900px;margin:40px auto;text-align:center">
+    <div>
+      <h2 style="font-size:28px">เลือกพอร์ทัลสำหรับเข้าใช้งาน</h2>
+      <p class="muted sm" style="margin-top:6px">ระบบตรวจสอบความสะอาดศูนย์กีฬาสิรินธร ${S.locs.length} พื้นที่หลัก${S.workDate ? ' · ประจำวัน' + thDate(S.workDate) : ''}</p>
+      <p class="sm" style="margin-top:8px"><span class="chip c-green">Super Admin</span> เข้าได้ทุกบทบาทโดยไม่ต้องเข้าสู่ระบบซ้ำ</p>
+    </div>
+    <div class="role-grid">
+      ${Object.entries(ROLES).map(([k, r]) => `
+        <button class="card role-card role-card--${k}" data-act="role" data-role="${k}">
+          <span class="role-card-icon">${ROLE_ICON[k]}</span>
+          <span><h3>${r.name}</h3><span class="muted sm">${r.desc}</span></span>
+        </button>`).join('')}
+    </div>
+  </div>`;
+}
+
+function locCard(l) {
+  const p = prog(l);
+  const ph = l.photos.length ? ` · รูป ${l.photos.length}` : '';
+  return `
+  <button class="card" data-act="open" data-id="${l.id}">
+    <div class="row" style="align-items:flex-start">
+      <div><h3>${esc(l.area)}</h3><div class="xs muted">${esc(who(l))}</div></div>
+      ${chip(l.status)}
+    </div>
+    <div class="bar"><i class="${p.p === 100 ? 'full' : ''}" style="width:${p.p}%"></i></div>
+    <div class="row xs muted">
+      <span>${p.d}/${p.t} จุด${ph}</span>
+      <span>${l.rating ? '★ ' + l.rating + ' · ' : ''}${l.lastUpdated ? 'อัปเดต ' + esc(l.lastUpdated) : ''}</span>
+    </div>
+    ${l.status === 'rejected' && l.rejectNote ? `<div class="alert sm">ตีกลับ: ${esc(l.rejectNote)}</div>` : ''}
+    ${S.view === 'manager' && l.managerNote ? `<div class="note sm" style="margin-top:8px"><b class="b">แจ้งล่าสุด:</b> ${esc(l.managerNote)}</div>` : ''}
+  </button>`;
+}
+
+/* การ์ดของแม่บ้าน — แสดงเช็คลิสต์ + แนบรูป + หมายเหตุ + ปุ่มส่งรายงาน อยู่ในการ์ดเลย ไม่ต้องเปิดโมดัล */
+function cleanerCard(l) {
+  const p = prog(l);
+  const needsWork = QUEUE.cleaner.includes(l.status), canClean = needsWork && can('cleaner', 'submit');
+  const f = cfForm(l.id);
+
+  const zones = l.subZones.map(z => canClean
+    ? `<button class="check ${z.completed ? 'on' : ''}" data-act="zone" data-id="${l.id}" data-zone="${z.id}"><span class="box">${z.completed ? ICONS.check : ''}</span><span>${esc(z.name)}</span></button>`
+    : `<div class="check ro ${z.completed ? 'on' : 'off'}"><span class="box">${z.completed ? ICONS.check : ''}</span><span>${esc(z.name)}</span></div>`
+  ).join('');
+
+  return `
+  <div class="card">
+    ${areaImg(l, 'cc-photo')}
+    <div class="row" style="align-items:flex-start">
+      <div><h3>${esc(l.area)}</h3><div class="xs muted">${esc(who(l))}</div></div>
+      ${chip(l.status)}
+    </div>
+    <div class="bar"><i class="${p.p === 100 ? 'full' : ''}" style="width:${p.p}%"></i></div>
+    <div class="row xs muted">
+      <span>${p.d}/${p.t} จุด${l.photos.length ? ' · รูป ' + l.photos.length : ''}</span>
+      <span>${l.lastUpdated ? 'อัปเดต ' + esc(l.lastUpdated) : ''}</span>
+    </div>
+    ${l.status === 'rejected' && l.rejectNote ? `<div class="alert sm">ตีกลับ: ${esc(l.rejectNote)}</div>` : ''}
+
+    <div class="sec"><h3 style="margin-bottom:8px">รายการจุดทำความสะอาด</h3>${zones}</div>
+
+    ${canClean ? `
+    <div class="sec stack">
+      ${can('cleaner', 'photo') ? `<div><label class="lbl">รูปหลังทำความสะอาด (อย่างน้อย 1 รูป)</label>${photoPicker(l.id)}</div>` : ''}
+      <div><label class="lbl">หมายเหตุ (ถ้ามี)</label><textarea rows="2" data-act="note" data-id="${l.id}" placeholder="เช่น น้ำยาหมด, ก๊อกน้ำรั่ว">${esc(f.note)}</textarea></div>
+      <button class="btn primary block" data-act="submit" data-id="${l.id}" ${f.busy ? 'disabled' : ''}>${f.busy ? 'กำลังส่ง...' : 'ส่งรายงาน'}</button>
+    </div>` : `
+    <div class="sec sm muted">${needsWork ? 'บทบาทนี้ถูกปิดสิทธิ์การส่งรายงาน — ติดต่อผู้ดูแลระบบ' : `ส่งรายงานแล้ว รอ${l.status === 'cleaner_done' ? 'หัวหน้าแม่บ้านตรวจ' : (STATUS[l.status] ? STATUS[l.status].t : '')}`}</div>`}
+  </div>`;
+}
+
+/* ปุ่มพื้นที่ใหญ่ ๆ ให้แม่บ้านกดเข้าไปทำทีละพื้นที่ */
+/* รูปพื้นที่ (Supabase Storage) — แก้/เพิ่มรูปที่นี่ที่เดียว · ไฟล์ .png = โลโก้ขาว แสดงแบบพอดีกรอบบนพื้นม่วง */
+const PHOTO_BASE = 'https://vxfozsxudrkxrjphttxm.supabase.co/storage/v1/object/public/Photo/';
+const AREA_IMG = {
+  'อาคารกีฬา 1': PHOTO_BASE + 'gym%201.jpg',
+  'อาคารกีฬา 2': PHOTO_BASE + 'gym%202.jpg',
+  'ศูนย์ออกกำลัง มศว (อาคารกีฬา 2)': PHOTO_BASE + 'Fitness.jpg',
+  'อาคารกีฬา 3': PHOTO_BASE + 'gym%203.jpg',
+  'สนามกีฬากลาง': PHOTO_BASE + 'main.jpg',
+  'อาคารฝึกปฏิบัติการกีฬาทางน้ำ': PHOTO_BASE + 'Aquatic.jpg',
+  'สนามแข่งขันซอฟท์บอล': PHOTO_BASE + 'softball.jpg',
+  'สนามฟุตซอล': PHOTO_BASE + 'futsal.jpg',
+  'สนามกีฬากลางแจ้ง': PHOTO_BASE + 'Outdoor.jpg',
+  'สนามเทนนิส': PHOTO_BASE + 'tennis.jpg',
+  'อาคารศูนย์กีฬาสิรินธร': PHOTO_BASE + 'Thai_White01_0.png',
+  'อาคารนวัตกรรมกีฬาและการออกกำลังกาย': PHOTO_BASE + 'Thai_White01_0.png',
+};
+const areaImg = (l, cls) => {
+  const src = AREA_IMG[l.area];
+  return src ? `<img class="${cls}${/\.png$/i.test(src) ? ' is-logo' : ''}" src="${src}" alt="${esc(l.area)}" loading="lazy" onerror="this.remove()">` : '';
+};
+
+function areaTile(l, i) {
+  const p = prog(l), todo = QUEUE.cleaner.includes(l.status);
+  return `
+  <button class="card tile tile--${l.status}" data-act="area" data-id="${l.id}">
+    <div class="tile-img">${areaImg(l, 'tile-photo')}
+      <span class="tile-n">${i + 1}</span><span class="tile-chip">${chip(l.status)}</span>
+    </div>
+    <div class="tile-body">
+      <div class="tile-name">${esc(l.area)}</div>
+      <div class="bar"><i class="${p.p === 100 ? 'full' : ''}" style="width:${p.p}%"></i></div>
+      <div class="row"><span class="muted">${p.d}/${p.t} จุด</span><span class="tile-go">${todo ? 'กดเพื่อทำงาน ›' : 'ดูรายละเอียด ›'}</span></div>
+      ${l.status === 'rejected' ? `<div class="alert">ต้องแก้ไข: ${esc(l.rejectNote)}</div>` : ''}
+    </div>
+  </button>`;
+}
+
+function vCleaner() {
+  const l = S.area && loc(S.area);
+  if (l) return `
+  <div class="big stack" style="max-width:820px;margin:0 auto">
+    <button class="btn block back" data-act="back">‹ กลับไปเลือกพื้นที่</button>
+    ${cleanerCard(l)}
+  </div>`;
+
+  const all = S.locs, fix = fixLocs(true), need = fixCount(true);
+  const todo = all.filter(x => QUEUE.cleaner.includes(x.status));
+  const onFix = S.tab === 'fix';
+  return `
+  <div class="big stack">
+    <div class="tabs">
+      <button class="${onFix ? '' : 'on'}" data-act="tab" data-tab="all">ทุกพื้นที่ (${all.length})</button>
+      <button class="${onFix ? 'on' : ''}" data-act="tab" data-tab="fix">แจ้งแก้ไข (${need})</button>
+    </div>
+    ${onFix ? `
+    <div><h2>รายการแจ้งแก้ไข</h2><div class="muted">หัวหน้าแม่บ้านตีกลับ และข้อเสนอแนะจากคณะกรรมการ ของวันนี้</div></div>
+    ${fix.length ? `<div class="grid">${fix.map(l => fixCard(l, true)).join('')}</div>` : `<div class="empty">ไม่มีรายการแจ้งแก้ไข เยี่ยมมาก</div>`}` : `
+    <div class="row" style="flex-wrap:wrap;align-items:flex-end">
+      <h2>เลือกพื้นที่ที่จะทำความสะอาด</h2>
+      <div>ส่งแล้ว <b style="font-size:28px">${all.length - todo.length}/${all.length}</b> พื้นที่</div>
+    </div>
+    <div class="tiles">${all.map((x, i) => areaTile(x, i)).join('')}</div>`}
+  </div>`;
+}
+
+/* รายการ "แจ้งแก้ไข" ของวันนี้ ต่อพื้นที่ — สร้างจากประวัติของวัน (เรียงตามเวลา):
+     หัวหน้าตีกลับ / กรรมการแจ้งปรับปรุง → เปิด (open) · แม่บ้านตอบกลับ/ส่งงานแก้ไข → แก้แล้วรอตรวจ (replied)
+     หัวหน้าตรวจผ่าน → เสร็จสิ้น (done) · หัวหน้าตอบรับทราบข้อเสนอแนะกรรมการ → เสร็จสิ้น (done) · ตีกลับซ้ำ → รายการที่แก้แล้วกลับมาเปิด */
+function fixItems(l) {
+  const items = [], parse = a => { const m = a.match(/^ตอบกลับแจ้งแก้ไข:\s?([\s\S]*?)(?:\s?\[รูป (\d+)\])?$/); return { note: m ? m[1] : '', photos: m && m[2] ? +m[2] : 0 }; };
+  (l.history || []).forEach(h => {
+    const a = h.action;
+    if (h.role === 'supervisor' && /^ตีกลับ/.test(a)) {
+      items.forEach(x => { if (x.state === 'replied') x.state = 'open'; });
+      items.push({ kind: 'reject', state: 'open', by: h.user, time: h.time, note: a.replace(/^ตีกลับ:\s?/, '').replace(/\s?\[รูป \d+\]$/, '') });
+    } else if (h.role === 'manager' && /^แจ้งปรับปรุง/.test(a)) {
+      items.push({ kind: 'fb', state: 'open', by: h.user, time: h.time, stars: +(a.match(/\((\d) ดาว\)/) || [])[1] || 0, note: a.replace(/^แจ้งปรับปรุง:\s?/, '').replace(/\s?\[รูป \d+\]$/, '').replace(/\s?\(\d ดาว\)$/, '') });
+    } else if (h.role === 'cleaner' && /^(ตอบกลับแจ้งแก้ไข|ส่งงานแก้ไขแล้ว)/.test(a)) {
+      const r = /^ตอบกลับ/.test(a) ? parse(a) : { note: '', photos: 0 };
+      items.forEach(x => { if (x.state === 'open') { x.state = 'replied'; x.reply = Object.assign({ by: h.user, time: h.time }, r); } });
+    } else if (h.role === 'supervisor' && /^ตอบกลับแจ้งแก้ไข/.test(a)) {
+      const r = parse(a);
+      items.forEach(x => { if (x.state === 'open' && x.kind === 'fb') { x.state = 'done'; x.reply = Object.assign({ by: h.user, time: h.time }, r); } });
+    } else if (h.role === 'supervisor' && /^ตรวจผ่าน/.test(a)) {
+      items.forEach(x => { if (x.state === 'replied') x.state = 'done'; });
+    }
+  });
+  return items;
+}
+/* ต้องทำอะไรต่อ: แม่บ้าน = มีรายการเปิดอยู่ · หัวหน้า = มีข้อเสนอแนะกรรมการที่ยังไม่ตอบ หรือมีงานที่แม่บ้านแก้แล้วรอตรวจ */
+const fixNeeds = (l, cleaner) => fixItems(l).some(x => cleaner ? x.state === 'open' : (x.state === 'replied' || (x.state === 'open' && x.kind === 'fb')));
+const fixLocs = cleaner => S.locs.filter(l => fixItems(l).length).sort((a, b) => fixNeeds(b, cleaner) - fixNeeds(a, cleaner));
+const fixCount = cleaner => S.locs.filter(l => fixNeeds(l, cleaner)).length;
+const FIX_STATE = { open: ['รอแก้ไข', 'red'], replied: ['แก้ไขแล้ว · รอหัวหน้าตรวจ', 'violet'], done: ['เสร็จสิ้น', 'green'] };
+function fixCard(l, cleaner) {
+  const items = fixItems(l), open = items.some(x => x.state === 'open'), replied = items.some(x => x.state === 'replied');
+  const fbOpen = items.some(x => x.state === 'open' && x.kind === 'fb');
+  const canReply = cleaner ? open && l.status !== 'pending' : fbOpen;
+  const showForm = canReply && S.replyOpen[l.id];
+  const f = showForm ? cfForm('r' + l.id) : null;
+  const photoReq = cleaner && can('cleaner', 'photo');
+  return `
+  <div class="card fix">
+    <div class="row" style="align-items:flex-start"><div><h3>${esc(l.area)}</h3><div class="xs muted">${esc(who(l))}</div></div>${chip(l.status)}</div>
+    <div class="stack" style="margin-top:10px">${items.map(x => `
+      <div class="fixit ${x.state}">
+        <div class="alert sm fixq ${x.kind === 'fb' ? 'fbq' : ''}"><b>${x.kind === 'reject' ? 'หัวหน้าแม่บ้านตีกลับ' : `คณะกรรมการแจ้งปรับปรุง · ${esc(x.by)}`}${x.time ? ' · ' + esc(x.time) : ''}${x.stars ? ' · ★ ' + x.stars : ''}</b><br>${esc(x.note)}</div>
+        ${x.reply ? `<div class="fixr sm"><b>${esc(x.reply.by)} ตอบกลับ${x.reply.time ? ' · ' + esc(x.reply.time) : ''}</b>${x.reply.photos ? ` · 📷 ${x.reply.photos} รูป` : ''}${x.reply.note ? `<br>${esc(x.reply.note)}` : ''}</div>` : ''}
+        <div class="xs"><span class="chip c-${FIX_STATE[x.state][1]}">${FIX_STATE[x.state][0]}</span></div>
+      </div>`).join('')}</div>
+    ${canReply && !showForm ? `<button class="btn ghost block" style="margin-top:10px" data-act="replyToggle" data-id="${l.id}">${cleaner ? 'ตอบกลับ / แนบรูป — แจ้งว่าแก้ไขแล้ว' : 'ตอบกลับ / รับทราบ (ดำเนินการแล้ว)'}</button>` : ''}
+    ${cleaner && open && l.status === 'pending' ? `<div class="note sm" style="margin-top:10px">ยังไม่ได้ทำความสะอาดพื้นที่นี้ — ทำเช็คลิสต์และส่งรายงานก่อน แล้วจึงตอบกลับได้</div>` : ''}
+    ${showForm ? `
+    <div class="sec stack">
+      <div><label class="lbl">${cleaner ? 'แก้ไขอะไรไปแล้ว' : 'ดำเนินการอย่างไร'}</label><textarea rows="2" data-act="note" data-id="r${l.id}" placeholder="${cleaner ? 'เช่น เช็ดกระจกและเก็บขยะแล้ว' : 'เช่น แจ้งแม่บ้านให้แก้ไขแล้ว'}">${esc(f.note)}</textarea></div>
+      <div><label class="lbl">${photoReq ? 'รูปหลังแก้ไข (อย่างน้อย 1 รูป)' : 'แนบรูป (ไม่บังคับ)'}</label>${photoPicker('r' + l.id)}</div>
+      <div class="row"><button class="btn block" data-act="replyToggle" data-id="${l.id}">ยกเลิก</button>
+        <button class="btn primary block" data-act="replySend" data-id="${l.id}" ${f.busy ? 'disabled' : ''}>${f.busy ? 'กำลังส่ง...' : cleaner ? 'ส่งแจ้งการแก้ไข' : 'ส่งการตอบกลับ'}</button></div>
+      ${cleaner ? '<div class="xs muted">เมื่อส่งแล้ว งานจะกลับไปที่หัวหน้าแม่บ้านเพื่อตรวจซ้ำอีกครั้ง</div>' : ''}
+    </div>` : ''}
+    <div class="row xs" style="margin-top:10px"><span class="muted">${items.length} รายการ${replied ? ' · มีงานแก้ไขแล้วรอตรวจ' : ''}</span>
+      ${!cleaner && QUEUE.supervisor.includes(l.status) ? `<button class="btn sm primary" data-act="open" data-id="${l.id}">ตรวจงาน ›</button>` : `<button class="btn sm ghost" data-act="${cleaner ? 'area' : 'open'}" data-id="${l.id}">รายละเอียด ›</button>`}</div>
+  </div>`;
+}
+
+/* ตอบกลับแจ้งแก้ไข: แม่บ้าน → ส่งต่อหัวหน้าตรวจซ้ำ · หัวหน้า → รับทราบ/ดำเนินการแล้ว */
+async function submitReply(locId) {
+  const l = loc(locId), f = cfForm('r' + locId), cleaner = S.view === 'cleaner';
+  if (f.busy || $('#sa')) return;
+  if (f.uploading) return toast('รอให้อัปโหลดรูปเสร็จก่อน', true);
+  if (!f.note.trim()) return toast('กรุณาพิมพ์ข้อความตอบกลับ', true);
+  if (cleaner && can('cleaner', 'photo') && !f.photos.length) return toast('กรุณาแนบรูปหลังแก้ไขอย่างน้อย 1 รูป', true);
+  if (!await askConfirm({ tone: 'ask', title: cleaner ? 'ยืนยันแจ้งว่าแก้ไขแล้ว?' : 'ยืนยันส่งการตอบกลับ?', text: `${l.area}\n` + (cleaner ? 'ส่งให้หัวหน้าแม่บ้านตรวจซ้ำอีกครั้ง' : 'บันทึกการดำเนินการ (ไม่ต้องตรวจซ้ำ)'), ok: 'ส่ง' })) return;
+  if (f.busy) return;
+  f.busy = true; render();
+  try {
+    const updated = await queue(() => api('apiFixReply', S.auth.token, l.id, f.note, f.photos.map(x => ({ id: x.id }))));
+    upsert(updated); delete S.cleanerForms['r' + locId]; S.replyOpen[locId] = false; render();
+    await askDone({ title: cleaner ? 'ส่งแจ้งการแก้ไขแล้ว' : 'ส่งการตอบกลับแล้ว', text: cleaner ? `${l.area}\nส่งให้หัวหน้าแม่บ้านตรวจซ้ำแล้ว` : l.area });
+  } catch (e) {
+    f.busy = false; toast(e.message, true); render();
+    if (/สถานะงานเปลี่ยน/.test(e.message)) load(true);
+  }
+}
+function vReview() {
+  const com = S.view === 'manager';   // คณะกรรมการเห็นทุกพื้นที่ (ตรวจเยี่ยมได้ทุกเวลา) · หัวหน้าเห็นคิวรอตรวจ
+  const todo = com ? S.locs.filter(l => l.managerNote) : S.locs.filter(l => QUEUE.supervisor.includes(l.status));
+  const q = S.q.trim().toLowerCase();
+  const fix = com ? null : fixLocs(false), onFix = !com && S.tab === 'fix';
+  let list = onFix ? fix : S.tab === 'todo' ? todo : S.locs;
+  if (q) list = list.filter(l => (l.area + l.assignedTo).toLowerCase().includes(q));
+  const emptyMsg = onFix ? 'ไม่มีรายการแจ้งแก้ไขวันนี้' : S.tab === 'todo' ? (com ? 'ยังไม่มีการแจ้งจุดปรับปรุงวันนี้' : 'ไม่มีงานรอตรวจ') : 'ไม่พบข้อมูล';
+  return `
+  <div class="stack">
+    <div class="row" style="flex-wrap:wrap">
+      ${tabs(todo.length, com ? 'แจ้งปรับปรุงแล้ว' : 'รอตรวจ', S.locs.length, com ? null : fixCount(false))}
+      <input type="text" data-act="search" placeholder="ค้นหาพื้นที่ / ชื่อ" value="${esc(S.q)}" style="max-width:260px">
+    </div>
+    ${list.length ? `<div class="grid">${list.map(l => onFix ? fixCard(l, false) : locCard(l)).join('')}</div>` : `<div class="empty">${emptyMsg}</div>`}
+  </div>`;
+}
+
+function tabs(n, label, total, fixN) {   // fixN ระบุ = แสดงแท็บ "แจ้งแก้ไข" (หัวหน้าแม่บ้าน)
+  return `<div class="tabs">
+    <button class="${S.tab === 'todo' ? 'on' : ''}" data-act="tab" data-tab="todo">${label} (${n})</button>
+    <button class="${S.tab === 'all' ? 'on' : ''}" data-act="tab" data-tab="all">ทั้งหมด (${total})</button>
+    ${fixN == null ? '' : `<button class="${S.tab === 'fix' ? 'on' : ''}" data-act="tab" data-tab="fix">แจ้งแก้ไข (${fixN})</button>`}
+  </div>`;
+}
+
+function vAdmin() {
+  const tab = (k, label) => `<button class="${S.adminTab === k ? 'on' : ''}" data-act="adminTab" data-tab="${k}">${label}</button>`;
+  return `<div class="stack">
+    <div class="tabs no-print">${tab('dash', 'แดชบอร์ด')}${tab('perms', 'จัดการสิทธิ์')}</div>
+    ${S.adminTab === 'perms' && S.auth?.role === 'admin' ? vPerms() : vDash()}
+  </div>`;
+}
+
+/* =========================================================
+   แท็บ: แดชบอร์ด — ตัวกรอง (สัปดาห์/เดือน/อาคาร) + กราฟ
+   ========================================================= */
+const ymd = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+const thShort = d => d.toLocaleDateString('th-TH', { day: 'numeric', month: 'short' });
+
+/* ช่วงวันที่ตามตัวกรอง: สัปดาห์ (จันทร์–อาทิตย์) หรือเดือนปฏิทิน · offset 0 = ปัจจุบัน, -1 = ก่อนหน้า */
+function dfRange() {
+  const now = new Date(); now.setHours(0, 0, 0, 0);
+  let s, e;
+  if (S.dfPeriod === 'month') { s = new Date(now.getFullYear(), now.getMonth() + S.dfOffset, 1); e = new Date(s.getFullYear(), s.getMonth() + 1, 0); }
+  else { s = new Date(now); s.setDate(now.getDate() - ((now.getDay() + 6) % 7) + S.dfOffset * 7); e = new Date(s); e.setDate(s.getDate() + 6); }
+  const label = S.dfPeriod === 'month' ? s.toLocaleDateString('th-TH', { month: 'long', year: 'numeric' }) : `${thShort(s)} – ${thShort(e)} ${e.getFullYear() + 543}`;
+  const last = e > now ? now : e, days = [];
+  for (const d = new Date(s); d <= last; d.setDate(d.getDate() + 1)) days.push(ymd(d));
+  const oldest = S.hist && S.hist.length ? S.hist[0].date : ymd(now);
+  return { label, days, canPrev: ymd(s) > oldest, canNext: S.dfOffset < 0 };
+}
+const areaMatch = (area, cat) => !S.dfArea || (S.dfArea.startsWith('cat:') ? cat === S.dfArea.slice(4) : area === S.dfArea);
+
+/* แถวข้อมูล = ประวัติ + วันนี้ (จากสถานะสดของพื้นที่ที่ตัดสินแล้ว) */
+function dfRows(days) {
+  const set = new Set(days), rows = (S.hist || []).filter(r => set.has(r.date) && areaMatch(r.area, r.category));
+  const today = ymd(new Date());
+  if (set.has(today)) S.locs.forEach(l => {
+    if (!areaMatch(l.area, l.category)) return;
+    const rej = l.history.filter(h => /^ตีกลับ/.test(h.action));
+    const sup = rej.filter(h => h.role === 'supervisor').length, fb = l.history.filter(h => h.role === 'manager' && /^แจ้งปรับปรุง/.test(h.action)).length;
+    if (l.status === 'approved' || sup + fb) rows.push({ date: today, area: l.area, category: l.category, sup, fb, approved: l.status === 'approved', rating: fb ? (l.rating || 0) : 0 });
+  });
+  return rows;
+}
+function dfAgg(rows, days) {
+  const byDay = Object.fromEntries(days.map(d => [d, { n: 0, ok: 0, sup: 0, fb: 0 }]));
+  const byArea = {};
+  S.locs.filter(l => areaMatch(l.area, l.category)).forEach(l => { byArea[l.area] = { area: l.area, n: 0, ok: 0, sup: 0, fb: 0, rs: 0, rn: 0, heat: days.map(() => 0) }; });
+  rows.forEach(r => {
+    const d = byDay[r.date], a = byArea[r.area]; if (!d || !a) return;
+    d.n++; d.ok += r.approved ? 1 : 0; d.sup += r.sup; d.fb += r.fb;
+    a.n++; a.ok += r.approved ? 1 : 0; a.sup += r.sup; a.fb += r.fb; if (r.rating) { a.rs += r.rating; a.rn++; }
+    a.heat[days.indexOf(r.date)] += r.sup;
+  });
+  // ตีกลับ = หัวหน้าตีกลับ (ทำให้ต้องส่งซ้ำ) · แจ้งปรับปรุง = ข้อเสนอแนะจากคณะกรรมการ (ไม่ทำให้ส่งซ้ำ) แสดงต่อท้ายแท่งเดียวกัน
+  const areas = Object.values(byArea).map(a => { const rejects = a.sup, submits = a.n + rejects; return Object.assign(a, { rejects, submits, rate: submits ? rejects / submits : 0, rateAll: submits ? (a.sup + a.fb) / submits : 0 }); })
+    .sort((a, b) => b.rateAll - a.rateAll || a.area.localeCompare(b.area, 'th'));
+  const t = areas.reduce((s, a) => ({ n: s.n + a.n, ok: s.ok + a.ok, sup: s.sup + a.sup, fb: s.fb + a.fb, rs: s.rs + a.rs, rn: s.rn + a.rn }), { n: 0, ok: 0, sup: 0, fb: 0, rs: 0, rn: 0 });
+  t.rejects = t.sup; t.submits = t.n + t.rejects; t.rate = t.submits ? t.rejects / t.submits : 0;
+  return { byDay, areas, t };
+}
+
+/* กราฟแท่ง (ซ้อนชั้นได้) — cols[i] = { segs:[{v,c}], title } */
+function colChart(days, cols, max, fmt) {
+  const many = days.length > 16;
+  return `<div class="cc${many ? ' many' : ''}">${cols.map((c, i) => {
+    const tot = c.segs.reduce((s, x) => s + x.v, 0);
+    return `<div title="${esc(c.title)}"><span class="cv">${tot ? fmt(tot) : ''}</span>
+      <div class="cs">${c.segs.filter(x => x.v).map(x => `<i style="height:${Math.max(x.v / max * 100, 1.5)}%;background:${x.c}"></i>`).join('')}</div>
+      <span class="cl">${many && i % 5 !== 0 ? '' : days[i].slice(8)}</span></div>`;
+  }).join('')}</div>`;
+}
+
+function dfBar(R) {
+  const cats = [...new Set(S.locs.map(l => l.category))];
+  const btn = (p, label) => `<button class="${S.dfPeriod === p ? 'on' : ''}" data-act="dfPeriod" data-p="${p}">${label}</button>`;
+  return `
+  <div class="card df no-print">
+    <div class="tabs">${btn('week', 'รายสัปดาห์')}${btn('month', 'รายเดือน')}</div>
+    <div class="nav">
+      <button class="btn sm ghost" data-act="dfPrev" ${R.canPrev ? '' : 'disabled'} aria-label="ก่อนหน้า">‹</button>
+      <b>${esc(R.label)}</b>
+      <button class="btn sm ghost" data-act="dfNext" ${R.canNext ? '' : 'disabled'} aria-label="ถัดไป">›</button>
+      ${S.dfOffset ? `<button class="btn sm" data-act="dfNow">ปัจจุบัน</button>` : ''}
+    </div>
+    <select data-act="dfArea" aria-label="เลือกอาคาร / พื้นที่">
+      <option value="">ทุกอาคาร / พื้นที่ (${S.locs.length})</option>
+      ${cats.map(c => `<optgroup label="${esc(c)}"><option value="cat:${esc(c)}" ${S.dfArea === 'cat:' + c ? 'selected' : ''}>ทั้งหมวด ${esc(c)}</option>
+        ${S.locs.filter(l => l.category === c).map(l => `<option value="${esc(l.area)}" ${S.dfArea === l.area ? 'selected' : ''}>${esc(l.area)}</option>`).join('')}</optgroup>`).join('')}
+    </select>
+  </div>`;
+}
+
+function vDash() {
+  if (!S.hist) return `<div class="empty"><span class="spin"></span></div>`;
+  const R = dfRange(), rows = dfRows(R.days), A = dfAgg(rows, R.days), T = A.t;
+  const scope = S.dfArea ? (S.dfArea.startsWith('cat:') ? 'หมวด ' + S.dfArea.slice(4) : S.dfArea) : 'ทุกอาคาร / พื้นที่';
+  const okPct = T.n ? Math.round(T.ok / T.n * 100) : 0;
+  const avg = T.rn ? (T.rs / T.rn).toFixed(1) : '–';
+  const empty = !T.n && !T.rejects && !T.fb;
+
+  const apprCols = R.days.map(d => { const x = A.byDay[d]; return { segs: x.n ? [{ v: x.ok / x.n * 100, c: 'var(--green)' }] : [], title: `${thDate(d)}: ตรวจผ่านแล้ว ${x.ok}/${x.n} พื้นที่` }; });
+  const rejCols = R.days.map(d => { const x = A.byDay[d]; return { segs: [{ v: x.sup, c: 'var(--teal-800)' }, { v: x.fb, c: 'var(--blue-600)' }], title: `${thDate(d)}: ตีกลับ ${x.sup} ครั้ง · กรรมการแจ้งปรับปรุง ${x.fb} ครั้ง` }; });
+  const rejMax = Math.max(1, ...R.days.map(d => A.byDay[d].sup + A.byDay[d].fb));
+
+  const maxRate = Math.max(...A.areas.map(a => a.rateAll), 0.01);
+  const bars = A.areas.map(a => {
+    const sp = (a.sup + a.fb) ? a.sup / (a.sup + a.fb) * 100 : 0;
+    return `<div class="rv-row" title="${esc(a.area)}: ตีกลับ ${a.rejects} จาก ${a.submits} ครั้ง · กรรมการแจ้งปรับปรุง ${a.fb} ครั้ง">
+      <div class="rv-name">${esc(a.area)}</div>
+      <div class="rv-track"><div class="rv-fill" style="width:${a.rateAll / maxRate * 100}%">${a.sup ? `<i style="width:${sp}%;background:var(--teal-800)"></i>` : ''}${a.fb ? `<i style="width:${100 - sp}%;background:var(--blue-600)"></i>` : ''}</div></div>
+      <div class="rv-val">${(a.rate * 100).toFixed(0)}% <span class="xs muted">${a.rejects}/${a.submits}${a.fb ? ` · แจ้ง ${a.fb}` : ''}</span></div></div>`;
+  }).join('');
+  const cols = `grid-template-columns:repeat(${R.days.length},1fr)`;
+  const heat = A.areas.map(a => `<div class="hm-row"><div class="rv-name">${esc(a.area)}</div>
+    <div class="hm-cells" style="${cols}">${a.heat.map((c, i) => `<b class="hm-c hm-${Math.min(c, 2)}" title="${esc(a.area)} · ${thDate(R.days[i])}: ตีกลับ ${c} ครั้ง"></b>`).join('')}</div></div>`).join('');
+  const legend = `<div class="xs" style="display:flex;gap:14px;flex-wrap:wrap"><span><b style="color:var(--teal-800)">●</b> หัวหน้าแม่บ้านตีกลับ</span><span><b style="color:var(--blue-600)">●</b> คณะกรรมการแจ้งปรับปรุง</span></div>`;
+
+  return `
+  <div class="stack">
+    <div class="row" style="flex-wrap:wrap">
+      <div><h2>แดชบอร์ด</h2><div class="sm muted">${esc(scope)} · ${esc(R.label)} · ข้อมูลวันนี้อัปเดตอัตโนมัติทุก 1 นาที</div></div>
+      <div class="actions no-print">
+        <button class="btn sm primary" data-act="report">ดาวน์โหลดรายงาน (PDF)</button>
+        <button class="btn sm ghost" data-act="repairLocs">ซ่อมข้อมูลพื้นที่</button><button class="btn sm ghost danger" data-act="resetToday">รีเซ็ตวันนี้</button>
+      </div>
+    </div>
+    ${dfBar(R)}
+
+    <div class="stats">
+      ${stat('รายงานที่ส่งทั้งหมด', T.submits, `${T.n} พื้นที่-วัน + ส่งซ้ำ ${T.rejects}`, 'gray')}
+      ${stat('ตรวจผ่านแล้ว', okPct + '%', `${T.ok} จาก ${T.n} พื้นที่-วัน`, 'green')}
+      ${stat('ตีกลับ', T.rejects + ' ครั้ง', `อัตรา ${(T.rate * 100).toFixed(0)}% (หัวหน้าแม่บ้าน)`, 'red')}
+      ${stat('แจ้งปรับปรุง', T.fb + ' ครั้ง', 'จากคณะกรรมการ', 'blue')}
+      ${stat('คะแนนเฉลี่ย', avg, `จากกรรมการ ${T.rn} ครั้ง`, 'amber')}
+    </div>
+
+    ${empty ? `<div class="card empty">ไม่มีข้อมูลในช่วงที่เลือก</div>` : `
+    <div class="grid2">
+      <div class="card"><h3>อัตราตรวจผ่านรายวัน</h3><div class="xs muted">% ของพื้นที่ที่หัวหน้าแม่บ้านตรวจผ่านแล้ว</div>${colChart(R.days, apprCols, 100, v => Math.round(v) + '%')}</div>
+      <div class="card"><div class="row" style="flex-wrap:wrap;align-items:flex-start"><div><h3>ตีกลับ / แจ้งปรับปรุงรายวัน</h3><div class="xs muted">หัวหน้าแม่บ้านตีกลับ และคณะกรรมการแจ้งปรับปรุง</div></div>${legend}</div>${colChart(R.days, rejCols, rejMax, v => v)}</div>
+    </div>
+
+    <div class="card">
+      <div class="row" style="flex-wrap:wrap;align-items:flex-start">
+        <div><h3>อัตราการตีกลับ / แก้ไขงาน แยกรายพื้นที่</h3><div class="xs muted">อัตรา = ครั้งที่ถูกตีกลับ ÷ รายงานที่ส่งทั้งหมด · ส่วนสีน้ำเงิน = คณะกรรมการแจ้งปรับปรุง · เรียงจากมากไปน้อย</div></div>${legend}
+      </div>
+      <div class="rv" style="margin-top:12px">${bars}</div>
+    </div>
+
+    <div class="card">
+      <h3>รูปแบบการตีกลับรายวัน แยกรายพื้นที่</h3>
+      <div class="xs muted" style="margin-bottom:10px">แต่ละช่อง = 1 วัน · สีเข้มขึ้น = ถูกตีกลับหลายครั้ง</div>
+      <div class="tbl"><div class="hm">
+        <div class="hm-row"><div class="rv-name"></div><div class="hm-head" style="${cols}">${R.days.map((d, i) => `<span>${R.days.length > 16 && i % 5 ? '' : d.slice(8)}</span>`).join('')}</div></div>${heat}
+      </div></div>
+      <div class="xs muted" style="margin-top:10px;display:flex;gap:14px;align-items:center"><span class="hm-c hm-0" style="display:inline-block;width:14px;height:14px"></span> ไม่ตีกลับ <span class="hm-c hm-1" style="display:inline-block;width:14px;height:14px"></span> 1 ครั้ง <span class="hm-c hm-2" style="display:inline-block;width:14px;height:14px"></span> 2 ครั้งขึ้นไป</div>
+    </div>`}
+
+    ${todayPanel()}
+    ${staffPerf(A.areas)}
+  </div>`;
+}
+
+/* =========================================================
+   รายงาน PDF — ใช้ตัวกรองเดียวกับแดชบอร์ด (สัปดาห์/เดือน/อาคาร) แต่จัดเค้าโครงใหม่ให้กระชับ อ่านจบใน 1 หน้า A4
+   ========================================================= */
+function reportHtml() {
+  const R = dfRange(), A = dfAgg(dfRows(R.days), R.days), T = A.t;
+  const scope = S.dfArea ? (S.dfArea.startsWith('cat:') ? 'หมวด ' + S.dfArea.slice(4) : S.dfArea) : 'ทุกอาคาร / พื้นที่';
+  const okPct = T.n ? Math.round(T.ok / T.n * 100) : 0, avg = T.rn ? (T.rs / T.rn).toFixed(1) : '–';
+  const kpi = (t, v, s) => `<div><span>${t}</span><b>${v}</b><small>${s}</small></div>`;
+
+  const cols = R.days.map(d => { const x = A.byDay[d]; return { segs: [{ v: x.sup, c: 'var(--teal-800)' }, { v: x.fb, c: 'var(--blue-600)' }], title: `${thDate(d)}: ตีกลับ ${x.sup} · แจ้งปรับปรุง ${x.fb}` }; });
+  const max = Math.max(1, ...R.days.map(d => A.byDay[d].sup + A.byDay[d].fb));
+  const okCols = R.days.map(d => { const x = A.byDay[d]; return { segs: x.n ? [{ v: x.ok / x.n * 100, c: 'var(--green)' }] : [], title: `${thDate(d)}: ตรวจผ่าน ${x.ok}/${x.n}` }; });
+
+  const watch = A.areas.filter(a => a.sup || a.fb).slice(0, 3);
+  const insights = [
+    T.submits ? `ช่วงนี้มีรายงาน ${T.submits} ฉบับ หัวหน้าแม่บ้านตรวจผ่านแล้ว ${okPct}% (${T.ok}/${T.n} พื้นที่-วัน)` : 'ยังไม่มีข้อมูลรายงานในช่วงที่เลือก',
+    T.rejects ? `ถูกตีกลับ ${T.rejects} ครั้ง (${(T.rate * 100).toFixed(0)}% ของรายงานทั้งหมด)` : 'ไม่มีการตีกลับ',
+    T.fb ? `คณะกรรมการแจ้งจุดปรับปรุง ${T.fb} ครั้ง${T.rn ? ` คะแนนเฉลี่ย ${avg}/5` : ''}` : 'คณะกรรมการยังไม่ได้แจ้งจุดปรับปรุง',
+    watch.length ? `พื้นที่ที่ควรติดตาม: ${watch.map(a => `${a.area} (ตีกลับ ${a.sup}${a.fb ? `, แจ้งปรับปรุง ${a.fb}` : ''})`).join(' · ')}` : 'ไม่พบพื้นที่ที่ต้องติดตามเป็นพิเศษ',
+  ].filter(Boolean);
+
+  const maxRate = Math.max(...A.areas.map(a => a.rateAll), 0.01);
+  const trs = A.areas.map(a => {
+    const sp = (a.sup + a.fb) ? a.sup / (a.sup + a.fb) * 100 : 0, w = a.rateAll / maxRate * 100;
+    return `<tr><td>${esc(a.area)}</td><td class="n">${a.submits}</td><td class="n">${a.ok}/${a.n}</td><td class="n">${a.sup}</td><td class="n">${a.fb}</td><td class="n">${a.rn ? (a.rs / a.rn).toFixed(1) : '–'}</td>
+      <td style="width:22%"><div class="rp-bar"><div style="display:flex;width:${w}%">${a.sup ? `<i style="width:${sp}%;background:var(--teal-800)"></i>` : ''}${a.fb ? `<i style="width:${100 - sp}%;background:var(--blue-600)"></i>` : ''}</div></div></td></tr>`;
+  }).join('');
+
+  const fbs = S.locs.filter(l => l.managerNote && areaMatch(l.area, l.category)).slice(0, 4);   // จำกัด 4 รายการให้รายงานอยู่ในหน้าเดียว
+  const leg = `<div class="rp-leg"><span><b style="color:var(--teal-800)">●</b> หัวหน้าแม่บ้านตีกลับ</span><span><b style="color:var(--blue-600)">●</b> คณะกรรมการแจ้งปรับปรุง</span></div>`;
+  return `
+    <div class="rp-head">
+      <span class="logo-mark" role="img" aria-label="ศูนย์กีฬาสิรินธร"></span>
+      <div style="flex:1"><h1>รายงานผลการตรวจความสะอาด</h1><div class="rp-meta" style="text-align:left">ศูนย์กีฬาสิรินธร มหาวิทยาลัยศรีนครินทรวิโรฒ</div></div>
+      <div class="rp-meta"><b>${esc(R.label)}</b><br>${esc(scope)}<br>${R.days.length} วัน · จัดทำ ${new Date().toLocaleString('th-TH', { dateStyle: 'medium', timeStyle: 'short' })}</div>
+    </div>
+    <div class="rp-kpi">
+      ${kpi('รายงานที่ส่ง', T.submits, `${T.n} พื้นที่-วัน`)}${kpi('ตรวจผ่านแล้ว', okPct + '%', `${T.ok}/${T.n}`)}${kpi('ตีกลับ', T.rejects, `อัตรา ${(T.rate * 100).toFixed(0)}%`)}${kpi('แจ้งปรับปรุง', T.fb, 'จากคณะกรรมการ')}${kpi('คะแนนเฉลี่ย', avg, 'เต็ม 5')}
+    </div>
+    <ul class="rp-sum">${insights.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+    <div class="rp-2">
+      <div><h2>อัตราตรวจผ่านรายวัน (%)</h2>${colChart(R.days, okCols, 100, v => Math.round(v))}</div>
+      <div><h2>ตีกลับ / แจ้งปรับปรุงรายวัน (ครั้ง)</h2>${colChart(R.days, cols, max, v => v)}${leg}</div>
+    </div>
+    <h2>สรุปรายพื้นที่ (เรียงจากต้องติดตามมากไปน้อย)</h2>
+    <table>
+      <tr><th>พื้นที่</th><th class="n">รายงาน</th><th class="n">ตรวจผ่าน</th><th class="n">ตีกลับ</th><th class="n">แจ้งปรับปรุง</th><th class="n">คะแนน</th><th>สัดส่วน</th></tr>
+      ${trs || '<tr><td colspan="7">ไม่มีข้อมูล</td></tr>'}
+    </table>
+    ${leg}
+    ${fbs.length ? `<h2>ข้อเสนอแนะล่าสุดจากคณะกรรมการ (วันนี้)</h2><ul class="rp-fb">${fbs.map(l => `<li><b>${esc(l.area)}</b> — ${esc(l.managerNote)}${l.rating ? ` (★ ${l.rating})` : ''}</li>`).join('')}</ul>` : ''}
+    <div class="rp-sign"><div>ผู้จัดทำรายงาน<br>(ผู้ดูแลระบบ)</div><div>หัวหน้าแม่บ้าน</div><div>ประธานคณะกรรมการตรวจความสะอาด</div></div>
+    <div class="rp-foot">รายงานนี้สร้างจากระบบตรวจความสะอาด ศูนย์กีฬาสิรินธร มศว</div>`;
+}
+
+/* ดาวน์โหลดรายงาน = เปิดหน้าต่างพิมพ์เฉพาะรายงาน (เลือก "บันทึกเป็น PDF") · หน้าแดชบอร์ดบนจอไม่เปลี่ยน */
+function downloadReport() {
+  const box = $('#report'), old = document.title;
+  box.innerHTML = reportHtml();
+  document.title = `รายงานตรวจความสะอาด ${dfRange().label}`;
+  const done = () => { box.innerHTML = ''; document.title = old; window.removeEventListener('afterprint', done); };
+  window.addEventListener('afterprint', done);
+  window.print();
+}
+
+/* สถานะสดของวันนี้ (ตามตัวกรองอาคาร) */
+function todayPanel() {
+  const L = S.locs.filter(l => areaMatch(l.area, l.category)), n = L.length || 1;
+  const cnt = st => L.filter(l => l.status === st).length;
+  const approved = cnt('approved'), rejected = cnt('rejected'), inReview = cnt('cleaner_done'), pending = cnt('pending');
+  const seg = (v, c) => v ? `<i style="width:${v / n * 100}%;background:${c}"></i>` : '';
+  return `
+    <div class="card">
+      <div class="row" style="flex-wrap:wrap"><h3>สถานะวันนี้ (${thDate(S.workDate)})</h3>
+        <div class="xs muted" style="display:flex;gap:14px;flex-wrap:wrap"><span><b style="color:var(--green)">●</b> ตรวจผ่านแล้ว ${approved}</span><span><b style="color:var(--violet)">●</b> รอหัวหน้าตรวจ ${inReview}</span><span><b style="color:var(--neutral-200)">●</b> ยังไม่ส่ง ${pending}</span><span><b style="color:var(--red)">●</b> ต้องแก้ไข ${rejected}</span></div></div>
+      <div class="stack-bar" style="margin-top:10px">${seg(approved, 'var(--green)')}${seg(inReview, 'var(--violet)')}${seg(pending, 'var(--neutral-200)')}${seg(rejected, 'var(--red)')}</div>
+    </div>
+    <div class="card tbl">
+      <h3 style="margin-bottom:6px">สถานะรายพื้นที่วันนี้</h3>
+      <table>
+        <tr><th>พื้นที่</th><th>แม่บ้าน</th><th>ความคืบหน้า</th><th>สถานะ</th><th>คะแนน</th><th>ตีกลับ</th></tr>
+        ${L.map(l => { const p = prog(l); return `
+          <tr data-act="open" data-id="${l.id}" style="cursor:pointer">
+            <td>${esc(l.area)}</td><td class="sm">${esc(who(l))}</td>
+            <td class="sm">${p.d}/${p.t}</td><td>${chip(l.status)}</td>
+            <td>${l.rating ? '★ ' + l.rating : '–'}</td><td>${l.rejectCount || '–'}</td>
+          </tr>`; }).join('')}
+      </table>
+    </div>`;
+}
+
+/* ผลงานรายพนักงาน — รวมจากพื้นที่ที่รับผิดชอบ ตามตัวกรองที่เลือก */
+function staffPerf(areas) {
+  if (!S.users) return '';
+  const st = S.users.filter(s => s.role === 'cleaner' && s.status === 'approved');
+  if (!st.length) return `<div class="card"><h3>ผลงานรายพนักงาน</h3><div class="empty sm">ยังไม่มีพนักงานทำความสะอาดที่อนุมัติแล้ว — อนุมัติผู้ลงทะเบียนได้ที่แท็บ “จัดการสิทธิ์”</div></div>`;
+  const rows = st.map(s => {
+    const names = s.areas.map(id => loc(id)?.area).filter(Boolean), as = areas.filter(a => names.includes(a.area));
+    const sum = k => as.reduce((x, a) => x + a[k], 0), rn = sum('rn');
+    return { name: s.displayName, areas: names.length, n: sum('n'), ok: sum('ok'), rejects: sum('rejects'), avg: rn ? (sum('rs') / rn).toFixed(1) : '–' };
+  });
+  return `
+    <div class="card tbl">
+      <h3 style="margin-bottom:6px">ผลงานรายพนักงาน</h3>
+      <table>
+        <tr><th>พนักงาน</th><th>พื้นที่ที่ดูแล</th><th>พื้นที่-วัน</th><th>ตรวจผ่านแล้ว</th><th>ถูกตีกลับ</th><th>คะแนนเฉลี่ย</th></tr>
+        ${rows.map(r => `<tr><td>${esc(r.name)}</td><td>${r.areas}</td><td>${r.n}</td><td>${r.ok} <span class="xs muted">(${r.n ? Math.round(r.ok / r.n * 100) : 0}%)</span></td><td>${r.rejects}</td><td>${r.avg === '–' ? '–' : '★ ' + r.avg}</td></tr>`).join('')}
+      </table>
+    </div>`;
+}
+
+/* =========================================================
+   แท็บ: จัดการสิทธิ์ — บุคลากรทุกตำแหน่ง + สถานะ + ตารางสิทธิ์ของแต่ละบทบาท
+   ========================================================= */
+const PERM_LABEL = Object.fromEntries(PERM_DEFS.map(p => [p.key, p.label]));
+/* ป้ายเหตุการณ์ในประวัติเข้าสู่ระบบ (ผลลัพธ์จากเซิร์ฟเวอร์) — ต้องอยู่นอกบล็อก @dev เพราะหน้า Admin ใช้ในโปรดักชันด้วย */
+const LOGIN_RESULT = { ok: ['เข้าสู่ระบบ', 'green'], logout: ['ออกจากระบบ', 'gray'], badpw: ['รหัสผ่านผิด', 'red'], unknown: ['ไม่พบ ID', 'red'],
+  closed: ['พอร์ทัลถูกปิด', 'red'], pending: ['รออนุมัติ', 'blue'], rejected: ['ไม่อนุมัติ', 'red'], disabled: ['บัญชีถูกระงับ', 'red'], locked: ['ถูกล็อกชั่วคราว', 'red'] };
+const POS = { cleaner: ['พนักงานทำความสะอาด', 'purple'], supervisor: ['หัวหน้าแม่บ้าน', 'violet'], manager: ['คณะกรรมการตรวจความสะอาด', 'blue'], admin: ['ผู้ดูแลระบบ (Super Admin)', 'gray'] };
+const portalOff = r => (S.perms || {})[r]?.portal === false;
+
+function peopleRows() {
+  const areaName = id => loc(id)?.area, last = u => `เข้าล่าสุด ${(u.lastLogin || '–').slice(0, 16)}`;
+  const rows = (S.users || []).map(u => {
+    const cl = u.role === 'cleaner';
+    const status = { pending: ['รออนุมัติ', 'blue'], rejected: ['ไม่อนุมัติ', 'red'], disabled: [cl ? 'พักงาน' : 'ระงับ', 'gray'],
+      approved: portalOff(u.role) ? ['พอร์ทัลถูกปิด', 'red'] : [cl ? 'ปฏิบัติงาน' : 'ใช้งานได้', 'green'] }[u.status] || ['–', 'gray'];
+    let info = `ลงทะเบียน ${(u.createdAt || '').slice(0, 10)} · ${last(u)}`;
+    if (cl) { const names = (u.areas || []).map(areaName).filter(Boolean); info = `${names.length ? `ดูแล ${names.length} พื้นที่: ${names.slice(0, 2).join(', ')}${names.length > 2 ? ` +${names.length - 2}` : ''}` : 'ยังไม่ได้มอบหมายพื้นที่'} · ${last(u)}`; }
+    if (u.role === 'supervisor') info = `ตรวจงานทุกพื้นที่ (${S.locs.length}) · ${last(u)}`;
+    return { role: u.role, name: u.displayName, sub: `ID ${u.username}${u.phone ? ' · ' + u.phone : ''}`, status, mustChange: u.mustChange, info, user: u };
+  });
+  rows.push({ role: 'admin', name: S.auth?.displayName || 'ผู้ดูแลระบบ', sub: S.auth?.user ? 'ID ' + S.auth.user : '', status: ['ใช้งานได้', 'green'], info: 'เข้าได้ทุกพอร์ทัล ไม่ถูกจำกัดสิทธิ์' });
+  const rank = r => (r.user && r.user.status === 'pending' ? 0 : { admin: 1, manager: 2, supervisor: 3, cleaner: 4 }[r.role]);
+  return rows.sort((a, b) => rank(a) - rank(b) || a.name.localeCompare(b.name, 'th'));
+}
+
+function vPerms() {
+  const P = S.perms;
+  if (!P || !S.users) return `<div class="empty"><span class="spin"></span></div>`;
+  const all = peopleRows(), f = S.pplRole || 'all', rows = all.filter(r => f === 'all' || r.role === f);
+  const b = (act, id, label, cls) => `<button class="btn sm ${cls || ''}" data-act="${act}" data-u="${esc(id)}">${label}</button>`;
+  const acts = r => {
+    const u = r.user; if (!u) return '<span class="muted">–</span>';
+    const off = u.role === 'cleaner' ? 'พักงาน' : 'ระงับ', k = u.username;
+    return ({ pending: b('userApprove', k, 'อนุมัติ') + b('userReject', k, 'ไม่อนุมัติ', 'ghost danger'),
+      rejected: b('userApprove', k, 'อนุมัติ', 'ghost') + b('userDel', k, 'ลบ', 'ghost danger'),
+      approved: b('userEdit', k, u.role === 'cleaner' ? 'มอบหมายพื้นที่' : 'แก้ไข', 'ghost') + b('userReset', k, 'รีเซ็ตรหัสผ่าน', 'ghost') + b('userDisable', k, off, 'ghost danger'),
+      disabled: b('userEnable', k, 'เปิดใช้งาน') + b('userReset', k, 'รีเซ็ตรหัสผ่าน', 'ghost') + b('userDel', k, 'ลบ', 'ghost danger') })[u.status] || '';
+  };
+  const count = Object.fromEntries(['cleaner', 'supervisor', 'manager', 'admin'].map(r => [r, all.filter(x => x.role === r)]));
+  const flt = (k, label, n) => `<button class="${f === k ? 'on' : ''}" data-act="pplRole" data-r="${k}">${label} (${n})</button>`;
+  const sw = (r, p) => `<button type="button" class="sw ${P[r]?.[p.key] !== false ? 'on' : ''}" role="switch" aria-checked="${P[r]?.[p.key] !== false}" aria-label="${esc(ROLES[r].name)}: ${esc(p.label)}" data-act="perm" data-role="${r}" data-key="${p.key}" ${S.permBusy ? 'disabled' : ''}></button>`;
+  const card = r => {
+    const L = count[r], lim = (S.limits || {})[r] || { used: L.length, max: 0 }, full = lim.used >= lim.max;
+    const n = st => L.filter(x => x.user && x.user.status === st).length, pend = n('pending');
+    return `<div class="card stat ${portalOff(r) ? 'role-off' : ''}">
+      <div class="row"><span class="chip c-${POS[r][1]}">${POS[r][0]}</span><span class="chip c-${portalOff(r) ? 'red' : 'green'}">${portalOff(r) ? 'ปิดพอร์ทัล' : 'เปิดพอร์ทัล'}</span></div>
+      <div class="v">${lim.used}<span class="sm muted"> / ${lim.max} คน</span>${full ? ' <span class="chip c-red">เต็ม</span>' : ''}</div>
+      <div class="bar" style="margin:6px 0"><i class="${full ? 'full' : ''}" style="width:${lim.max ? Math.min(100, lim.used / lim.max * 100) : 0}%"></i></div>
+      <div class="xs muted">ใช้งานได้ ${n('approved')}${n('disabled') ? ` · ${r === 'cleaner' ? 'พักงาน' : 'ระงับ'} ${n('disabled')}` : ''}${pend ? ` · <b style="color:var(--red)">รออนุมัติ ${pend}</b>` : ''} · ว่าง ${Math.max(0, lim.max - lim.used)}</div></div>`;
+  };
+
+  return `
+  <div class="stack">
+    <div class="row" style="flex-wrap:wrap">
+      <div><h2>จัดการสิทธิ์การใช้งาน</h2><div class="sm muted">ดูตำแหน่งและสถานะของทุกคน · อนุมัติผู้ลงทะเบียน · กำหนดสิทธิ์ของแต่ละบทบาท (มีผลทันที) · Super Admin ไม่ถูกจำกัด</div></div>
+      <button class="btn sm ghost danger no-print" data-act="permReset">คืนค่าเริ่มต้นสิทธิ์ทั้งหมด</button>
+    </div>
+
+    <div class="stats">${['cleaner', 'supervisor', 'manager'].map(card).join('')}</div>
+
+    <div class="card tbl">
+      <div class="row no-print" style="flex-wrap:wrap;margin-bottom:8px">
+        <div class="tabs">${flt('all', 'ทั้งหมด', all.length)}${flt('cleaner', 'แม่บ้าน', count.cleaner.length)}${flt('supervisor', 'หัวหน้า', count.supervisor.length)}${flt('manager', 'กรรมการ', count.manager.length)}</div>
+        <button class="btn sm primary" data-act="userCreate">+ สร้างบัญชี</button>
+      </div>
+      ${!rows.length ? `<div class="empty sm">ยังไม่มีผู้ใช้ในตำแหน่งนี้ — ผู้ใช้ลงทะเบียนเองจากหน้าเข้าสู่ระบบ หรือกด “+ สร้างบัญชี”</div>` : `
+      <table>
+        <tr><th>ชื่อ</th><th>ตำแหน่ง</th><th>สถานะ</th><th>รายละเอียด</th><th>จัดการ</th></tr>
+        ${rows.map(r => `<tr>
+          <td><div class="b">${esc(r.name)}</div><div class="xs muted">${esc(r.sub)}</div></td>
+          <td><span class="chip c-${POS[r.role][1]}">${POS[r.role][0]}</span></td>
+          <td><span class="chip c-${r.status[1]}">${r.status[0]}</span>${r.mustChange ? ' <span class="xs muted">รอเปลี่ยนรหัส</span>' : ''}</td>
+          <td class="sm muted">${esc(r.info)}</td><td><div class="acts">${acts(r)}</div></td></tr>`).join('')}
+      </table>`}
+    </div>
+
+    <div class="card tbl">
+      <h3 style="margin-bottom:2px">สิทธิ์ของแต่ละบทบาท</h3><div class="xs muted" style="margin-bottom:6px">ใช้กับทุกคนในบทบาทนั้นเท่ากัน</div>
+      <table class="pm">
+        <tr><th>สิทธิ์</th>${PERM_ROLES.map(r => `<th>${ROLES[r].name}</th>`).join('')}</tr>
+        ${PERM_DEFS.map(p => `<tr><td><div class="b">${p.label}</div><div class="xs muted" style="white-space:normal;max-width:360px">${p.desc}</div></td>
+          ${PERM_ROLES.map(r => `<td>${p.roles.includes(r) ? sw(r, p) : '<span class="muted">–</span>'}</td>`).join('')}</tr>`).join('')}
+      </table>
+    </div>
+
+    ${logCard()}
+
+    <div class="card">
+      <h3 style="margin-bottom:6px">การเปลี่ยนแปลงสิทธิ์ล่าสุด</h3>
+      ${!S.permLog ? `<div class="empty"><span class="spin"></span></div>` : !S.permLog.length ? `<div class="empty sm">ยังไม่มีการเปลี่ยนแปลง</div>` : `
+      <div class="timeline">${S.permLog.map(x => `<div><time style="width:150px">${esc(x.time)}</time><span><b class="b">${esc(x.by)}</b> ${x.key === 'reset' ? 'คืนค่าเริ่มต้นทุกสิทธิ์' : `${x.value ? 'เปิด' : 'ปิด'}สิทธิ์ “${esc(PERM_LABEL[x.key] || x.key)}” ของ${esc(ROLES[x.role]?.name || x.role)}`}</span></div>`).join('')}</div>`}
+    </div>
+  </div>`;
+}
+
+async function setPerm(role, key, value) {
+  if (S.permBusy) return;
+  if (key === 'portal' && !value && !await askConfirm({ tone: 'danger', title: `ปิดพอร์ทัล${ROLES[role].name}?`, text: 'ผู้ใช้บทบาทนี้จะเข้าระบบไม่ได้ทันทีจนกว่าจะเปิดกลับ', ok: 'ปิดพอร์ทัล' })) return;
+  S.permBusy = true; render();
+  try { await api('apiSetPermission', S.auth.token, role, key, value); S.permBusy = false; await loadAdmin(); toast(`${value ? 'เปิด' : 'ปิด'}สิทธิ์แล้ว`); }
+  catch (e) { S.permBusy = false; render(); toast(e.message, true); }
+}
+
+/* ---------- บัญชีผู้ใช้ (Admin): แก้ไข / มอบหมายพื้นที่ ---------- */
+function mUserEdit() {
+  const u = S.userEdit || {}, sel = new Set(u.areas || []), cl = u.role === 'cleaner';
+  return `
+  <div class="ov" data-act="closeOv"><div class="sheet" style="max-width:480px">
+    <div class="row"><h2>${cl ? 'มอบหมายพื้นที่' : 'แก้ไขข้อมูลผู้ใช้'}</h2><button class="x-close" data-act="close">${ICONS.x}</button></div>
+    <p class="sm muted" style="margin-bottom:14px"><span class="chip c-${POS[u.role]?.[1] || 'gray'}">${POS[u.role]?.[0] || ''}</span> ID <b class="mono" style="color:var(--text)">${esc(u.username)}</b>${cl ? ' · พื้นที่ที่เลือกจะแสดงชื่อคนนี้เป็นผู้รับผิดชอบ (1 พื้นที่ต่อ 1 คน)' : ''}</p>
+    <form id="userEditForm" class="stack" autocomplete="off">
+      <div><label class="lbl">ชื่อ-นามสกุล</label><input type="text" name="n" required maxlength="80" value="${esc(u.displayName || '')}"></div>
+      <div><label class="lbl">เบอร์โทร</label>${phoneField(u.phone, false)}</div>
+      ${cl ? `<div><label class="lbl">พื้นที่ที่รับผิดชอบ</label>
+        <div class="stack" style="max-height:260px;overflow:auto">${S.locs.map(l => `<label class="pick"><input type="checkbox" name="a" value="${l.id}" ${sel.has(l.id) ? 'checked' : ''}><span>${esc(l.area)}${l.assignedTo && l.assignedTo !== u.displayName ? ` <span class="xs muted">(ปัจจุบัน: ${esc(l.assignedTo)})</span>` : ''}</span></label>`).join('')}</div></div>` : ''}
+      <div id="ueErr" class="alert sm" style="display:none"></div>
+      <button class="btn primary block" type="submit">บันทึก</button>
+    </form>
+  </div></div>`;
+}
+async function submitUserEdit(form) {
+  if (!phoneOk(form.ph.value, false)) { formErr('#ueErr', PHONE_MSG); return form.ph.focus(); }
+  const btn = $('button[type=submit]', form); btn.disabled = true;
+  const p = { username: S.userEdit.username, displayName: form.n.value, phone: form.ph.value, areas: [...form.querySelectorAll('[name=a]:checked')].map(x => Number(x.value)) };
+  try { await api('apiSaveUser', S.auth.token, p); closeModal(); await Promise.all([loadAdmin(), load(true)]); await askDone({ title: 'บันทึกข้อมูลแล้ว', text: p.displayName }); }
+  catch (e) { btn.disabled = false; formErr('#ueErr', e.message); }
+}
+
+async function loadAdmin() {
+  if (S.auth?.role !== 'admin' || S.view !== 'admin') return;
+  try {
+    const t = S.auth.token;
+    const [d, ul, logs, pm] = await Promise.all([api('apiGetDashboard', t), api('apiListUsers', t), api('apiListLoginLogs', t), api('apiListPerms', t)]);
+    S.hist = d.hist; S.users = ul.users; S.limits = ul.limits; S.logs = logs; S.perms = pm.perms; S.permLog = pm.log;
+    if (S.view === 'admin') render();
+  } catch (e) { toast(e.message, true); }
+}
+
+const stat = (t, v, sub, c) => `<div class="card stat"><div class="sm muted">${t}</div><div class="v" style="color:var(--${c === 'gray' ? 'text' : c})">${v}</div><div class="xs muted">${sub}</div></div>`;
+
+/* ---------- Modal: ลงทะเบียน / เปลี่ยนรหัสผ่าน / สร้าง ID / รหัสชั่วคราว ---------- */
+/* ช่องเบอร์โทร: ตัวเลขล้วน 10 หลัก จัดรูปแบบ 000-000-0000 ให้อัตโนมัติ (data-act="phone") */
+const phoneField = (val, required) => `<input type="tel" name="ph" inputmode="numeric" autocomplete="tel-national" maxlength="12" data-act="phone" placeholder="081-234-5678"
+  pattern="${required ? '' : '(?:'}\\d{3}-\\d{3}-\\d{4}${required ? '' : ')?'}" title="ตัวเลข 10 หลัก รูปแบบ 000-000-0000" ${required ? 'required' : ''} value="${esc(val || '')}">`;
+const fmtPhone = v => { const d = String(v).replace(/\D/g, '').slice(0, 10); return d.length > 6 ? `${d.slice(0, 3)}-${d.slice(3, 6)}-${d.slice(6)}` : d.length > 3 ? `${d.slice(0, 3)}-${d.slice(3)}` : d; };
+const phoneOk = (v, required) => (!v && !required) || /^\d{3}-\d{3}-\d{4}$/.test(v);
+const PHONE_MSG = 'เบอร์โทรต้องเป็นตัวเลข 10 หลัก รูปแบบ 000-000-0000';
+
+/* ช่องรหัสผ่านพร้อมไอคอนดู/ซ่อน (ตา) */
+const pwField = (name, ac, extra = '') => `<div class="pwf"><input type="password" name="${name}" autocomplete="${ac}" ${extra}>
+  <button type="button" class="pw-eye" data-act="pwToggle" aria-label="แสดงรหัสผ่าน" aria-pressed="false" tabindex="0">${ICONS.eye}</button></div>`;
+
+/* ลงทะเบียนแบบ 2 ขั้น: 1) เลือกตำแหน่ง → 2) กรอกข้อมูล */
+function mRegister() {
+  const info = S.regInfo || {}, role = S.regRole, d = S.regDraft || {};
+  const dots = `<div class="steps" aria-label="ขั้นตอน"><span class="${role ? 'done' : 'on'}"><b>1</b> เลือกตำแหน่ง</span><i></i><span class="${role ? 'on' : ''}"><b>2</b> กรอกข้อมูล</span></div>`;
+  const head = `<div class="row"><h2>ลงทะเบียนใช้งานระบบ</h2><button class="x-close" data-act="close">${ICONS.x}</button></div>${dots}`;
+  const cls = S.regFresh ? ' pop' : '', dir = S.regDir || '';
+  if (!role) return `
+  <div class="ov${cls}" data-act="closeOv"><div class="sheet${cls}" style="max-width:460px">
+    ${head}
+    <div class="rg-step ${dir}">
+    <p class="sm muted" style="margin-bottom:12px">คุณคือใคร? เลือกตำแหน่งของคุณ — ผู้ดูแลระบบจะอนุมัติก่อนจึงเข้าสู่ระบบได้</p>
+    <div class="stack">${['cleaner', 'supervisor', 'manager'].map(r => { const i = info[r] || { used: 0, max: 0 }, full = i.used >= i.max; return `
+      <button type="button" class="card role-card role-card--${r}${full ? ' is-closed' : ''}" data-act="regRole" data-role="${r}" ${full ? 'disabled' : ''} style="padding:var(--s4)">
+        <span class="role-card-icon">${ROLE_ICON[r]}</span>
+        <span><h3 style="font-size:16px">${ROLES[r].name}</h3><span class="muted sm">${ROLES[r].desc}</span><br>
+          <span class="chip ${full ? 'c-red' : 'c-green'}" style="margin-top:6px">${full ? `เต็มแล้ว (${i.max}/${i.max} คน)` : `เหลือ ${i.max - i.used} จาก ${i.max} ที่นั่ง`}</span></span>
+      </button>`; }).join('')}</div>
+    </div>
+  </div></div>`;
+  return `
+  <div class="ov${cls}" data-act="closeOv"><div class="sheet${cls}" style="max-width:460px">
+    ${head}
+    <div class="rg-step ${dir}">
+    <div class="row" style="margin:4px 0 14px"><span class="chip c-${POS[role][1]}">${ROLES[role].name}</span><button type="button" class="btn sm ghost" data-act="regBack">‹ เปลี่ยนตำแหน่ง</button></div>
+    <form id="registerForm" class="stack" autocomplete="off">
+      ${info.codeRequired ? `<div><label class="lbl">รหัสลงทะเบียน (ขอจากผู้ดูแลระบบ)</label><input type="text" name="code" required maxlength="40" autocomplete="off" value="${esc(d.code || '')}"></div>` : ''}
+      <div><label class="lbl">ชื่อ-นามสกุล</label><input type="text" name="n" required maxlength="80" value="${esc(d.n || '')}"></div>
+      <div><label class="lbl">เบอร์โทร</label>${phoneField(d.ph, true)}<div class="xs muted">ตัวเลข 10 หลัก เช่น 081-234-5678</div></div>
+      <div><label class="lbl">ID สำหรับเข้าสู่ระบบ</label><input type="text" name="u" required minlength="4" maxlength="30" pattern="[A-Za-z0-9._-]{4,30}" placeholder="ตั้งชื่อ ID ของคุณ" value="${esc(d.u || '')}"><div class="xs muted">ตัวอักษรอังกฤษ ตัวเลข . _ - ยาว 4–30 ตัว</div></div>
+      <div><label class="lbl">รหัสผ่าน (อย่างน้อย 8 ตัว)</label>${pwField('pw', 'new-password', 'required minlength="8" maxlength="64"')}</div>
+      <div><label class="lbl">ยืนยันรหัสผ่าน</label>${pwField('pw2', 'new-password', 'required')}</div>
+      <div id="regErr" class="alert sm" style="display:none"></div>
+      <button class="btn primary block" type="submit">ส่งคำขอลงทะเบียน</button>
+    </form>
+    </div>
+  </div></div>`;
+}
+function mChpw() {
+  const forced = !!S.auth?.mustChange;
+  return `
+  <div class="ov" ${forced ? '' : 'data-act="closeOv"'}><div class="sheet" style="max-width:420px">
+    <div class="row"><h2>เปลี่ยนรหัสผ่าน</h2>${forced ? '' : `<button class="x-close" data-act="close">${ICONS.x}</button>`}</div>
+    <p class="sm muted" style="margin-bottom:14px">${forced ? 'ก่อนเริ่มใช้งาน กรุณาตั้งรหัสผ่านใหม่ของคุณเอง' : 'ตั้งรหัสผ่านใหม่อย่างน้อย 8 ตัวอักษร'}</p>
+    <form id="chpwForm" class="stack" autocomplete="off">
+      <div><label class="lbl">รหัสผ่านเดิม${forced ? ' (รหัสชั่วคราวที่ได้รับ)' : ''}</label>${pwField('o', 'current-password', 'required')}</div>
+      <div><label class="lbl">รหัสผ่านใหม่</label>${pwField('pw', 'new-password', 'required minlength="8" maxlength="64"')}</div>
+      <div><label class="lbl">ยืนยันรหัสผ่านใหม่</label>${pwField('pw2', 'new-password', 'required')}</div>
+      <div id="chErr" class="alert sm" style="display:none"></div>
+      <button class="btn primary block" type="submit">บันทึกรหัสผ่านใหม่</button>
+    </form>
+  </div></div>`;
+}
+function mUserCreate() {
+  const lim = S.limits || {};
+  return `
+  <div class="ov" data-act="closeOv"><div class="sheet" style="max-width:420px">
+    <div class="row"><h2>สร้างบัญชีผู้ใช้</h2><button class="x-close" data-act="close">${ICONS.x}</button></div>
+    <p class="sm muted" style="margin-bottom:14px">ระบบจะออกรหัสผ่านชั่วคราวให้ ผู้ใช้ต้องเปลี่ยนรหัสเองตอนเข้าครั้งแรก · บัญชีที่ Admin สร้างใช้งานได้ทันที</p>
+    <form id="userForm" class="stack" autocomplete="off">
+      <div><label class="lbl">ตำแหน่ง</label><select name="role" required>
+        ${['cleaner', 'supervisor', 'manager'].map(r => { const i = lim[r] || { used: 0, max: 0 }, full = i.used >= i.max; return `<option value="${r}" ${full ? 'disabled' : ''}>${ROLES[r].name} — ${full ? 'เต็มแล้ว' : `ว่าง ${i.max - i.used}/${i.max}`}</option>`; }).join('')}</select></div>
+      <div><label class="lbl">ID</label><input type="text" name="u" required minlength="4" maxlength="30" pattern="[A-Za-z0-9._-]{4,30}" placeholder="ตั้งชื่อ ID ของคุณ"></div>
+      <div><label class="lbl">ชื่อ-นามสกุล</label><input type="text" name="n" required maxlength="80"></div>
+      <div><label class="lbl">เบอร์โทร</label>${phoneField('', false)}</div>
+      <div id="mgErr" class="alert sm" style="display:none"></div>
+      <button class="btn primary block" type="submit">สร้างบัญชี</button>
+    </form>
+  </div></div>`;
+}function mTempPw() {
+  const t = S.tempPw || {};
+  return `
+  <div class="ov" data-act="closeOv"><div class="sheet" style="max-width:420px">
+    <div class="row"><h2>${esc(t.title || 'รหัสผ่านชั่วคราว')}</h2><button class="x-close" data-act="close">${ICONS.x}</button></div>
+    <p class="sm muted">ID: <b class="mono" style="color:var(--text)">${esc(t.username)}</b></p>
+    <div class="pw-box mono">${esc(t.password)}</div>
+    <div class="alert sm" style="margin:0 0 14px">แสดงครั้งเดียวเท่านั้น — ส่งให้ผู้ใช้ทางช่องทางส่วนตัว ผู้ใช้จะต้องเปลี่ยนรหัสตอนเข้าครั้งแรก</div>
+    <div class="row"><button class="btn block" data-act="copyPw">คัดลอกรหัสผ่าน</button><button class="btn primary block" data-act="close">เสร็จสิ้น</button></div>
+  </div></div>`;
+}
+
+/* ---------- Modal: รายละเอียด + ดำเนินการ ---------- */
+function mDetail() {
+  const l = loc(S.openId); if (!l) return '';
+  const p = prog(l);
+  const role = S.view;
+  const canClean = role === 'cleaner' && QUEUE.cleaner.includes(l.status);
+  const canReview = role === 'supervisor' && QUEUE.supervisor.includes(l.status) && (can('supervisor', 'approve') || can('supervisor', 'reject'));
+  const canFeedback = role === 'manager' && can('manager', 'feedback');
+
+  const zones = l.subZones.map(z => canClean
+    ? `<button class="check ${z.completed ? 'on' : ''}" data-act="zone" data-zone="${z.id}"><span class="box">${z.completed ? ICONS.check : ''}</span><span>${esc(z.name)}</span></button>`
+    : `<div class="check ro ${z.completed ? 'on' : 'off'}"><span class="box">${z.completed ? ICONS.check : ''}</span><span>${esc(z.name)}</span></div>`
+  ).join('');
+
+  const notes = [
+    ['แม่บ้าน', l.cleanerNote], ['หัวหน้าแม่บ้าน', l.supervisorNote], ['คณะกรรมการ (แจ้งปรับปรุงล่าสุด)', l.managerNote],
+  ].filter(n => n[1]).map(n => `<div class="note sm"><b class="b">${n[0]}:</b> ${esc(n[1])}</div>`).join('');
+
+  const photos = l.photos.length ? `
+    <div class="sec"><h3 style="margin-bottom:8px">รูปภาพ (${l.photos.length})</h3>
+      <div class="photos">${l.photos.map(ph => `
+        <a class="ph" href="${esc(ph.url)}" target="_blank" title="${esc(ph.by)} ${esc(ph.time)}">
+          <img src="${esc(ph.url)}" loading="lazy" alt="">
+          <span class="tag">${PHOTO_KIND[ph.kind] || ''} ${esc(ph.time)}</span></a>`).join('')}
+      </div></div>` : '';
+
+  const history = l.history.length ? `
+    <div class="sec"><h3 style="margin-bottom:6px">ประวัติวันนี้</h3>
+      <div class="timeline">${l.history.slice().reverse().map(h => `<div><time>${esc(h.time)}</time><span><b class="b">${esc(h.user)}</b> ${esc(h.action)}</span></div>`).join('')}</div>
+    </div>` : '';
+
+  let action = '';
+  if (canClean) action = `
+    <div class="sec stack">
+      ${l.status === 'rejected' ? `<div class="alert sm" style="margin:0">ต้องแก้ไข: ${esc(l.rejectNote)}</div>` : ''}
+      <div><label class="lbl">รูปหลังทำความสะอาด (อย่างน้อย 1 รูป)</label>${photoPicker()}</div>
+      <div><label class="lbl">หมายเหตุ (ถ้ามี)</label><textarea rows="2" data-act="note" placeholder="เช่น น้ำยาหมด, ก๊อกน้ำรั่ว">${esc(S.form.note || l.cleanerNote)}</textarea></div>
+      <button class="btn primary block" data-act="submit" ${S.busy ? 'disabled' : ''}>ส่งรายงาน</button>
+    </div>`;
+  else if (canReview) action = `
+    <div class="sec stack">
+      <div><label class="lbl">แนบรูป (จำเป็นเมื่อพบจุดบกพร่อง)</label>${photoPicker()}</div>
+      <div><label class="lbl">หมายเหตุ / จุดที่ต้องแก้ไข</label><textarea rows="2" data-act="note" placeholder="ระบุตำแหน่งและสิ่งที่ต้องแก้">${esc(S.form.note)}</textarea></div>
+      <div class="row">
+        ${can('supervisor', 'reject') ? `<button class="btn danger block" data-act="reject" ${S.busy ? 'disabled' : ''}>ตีกลับให้แก้ไข</button>` : ''}
+        ${can('supervisor', 'approve') ? `<button class="btn primary block" data-act="approve" ${S.busy ? 'disabled' : ''}>ตรวจผ่าน (สิ้นสุดงาน)</button>` : ''}
+      </div>
+    </div>`;
+  else if (canFeedback) action = `
+    <div class="sec stack">
+      <div class="note sm">คณะกรรมการไม่ต้องอนุมัติ — แจ้งจุดปรับปรุงได้ทุกเวลา งานไม่เปลี่ยนสถานะ หัวหน้าแม่บ้านและ Admin จะเห็นข้อเสนอแนะ</div>
+      <div><label class="lbl">จุดที่ควรปรับปรุง</label><textarea rows="3" data-act="note" placeholder="ระบุตำแหน่งและสิ่งที่ควรปรับปรุง">${esc(S.form.note)}</textarea></div>
+      <div><label class="lbl">แนบรูป (ไม่บังคับ)</label>${photoPicker()}</div>
+      <div><label class="lbl">คะแนนความสะอาด (ไม่บังคับ · กดดาวเดิมซ้ำเพื่อล้าง)</label><div class="stars" id="stars">${starsHtml()}</div></div>
+      <button class="btn primary block" data-act="feedback" ${S.busy ? 'disabled' : ''}>แจ้งจุดปรับปรุง</button>
+    </div>`;
+  else if (role !== 'admin') action = `<div class="sec sm muted">${role === 'manager' ? 'บทบาทนี้ถูกปิดสิทธิ์การแจ้งจุดปรับปรุง' : `ขั้นตอนนี้ไม่ต้องดำเนินการโดย${ROLES[role].name} (${STATUS[l.status].t})`}</div>`;
+
+  return `
+  <div class="ov" data-act="closeOv"><div class="sheet">
+    <div class="row" style="align-items:flex-start">
+      <div><h2>${esc(l.area)}</h2><div class="xs muted">${esc(l.category)} · ${esc(who(l))}</div></div>
+      <button class="x-close" data-act="close">${ICONS.x}</button>
+    </div>
+    <div class="row" style="margin-top:10px">${chip(l.status)}<span class="sm muted">${p.d}/${p.t} จุด (${p.p}%)${l.rating ? ' · ★ ' + l.rating : ''}</span></div>
+    ${l.status === 'rejected' && !canClean && l.rejectNote ? `<div class="alert sm">ตีกลับ: ${esc(l.rejectNote)}</div>` : ''}
+    <div class="sec"><h3 style="margin-bottom:8px">รายการจุดทำความสะอาด</h3>${zones}</div>
+    ${notes ? `<div class="sec stack">${notes}</div>` : ''}
+    ${photos}
+    ${action}
+    ${history}
+  </div></div>`;
+}
+
+/* id ระบุแล้ว = การ์ดแม่บ้าน (ต่อพื้นที่) · ไม่ระบุ = ฟอร์มตรวจสอบในโมดัล (หัวหน้า/ผู้จัดการ) */
+function photoPicker(id) {
+  return `<div class="photos" id="${id ? 'pending-' + id : 'pending'}">${pendingHtml(id)}</div>`;
+}
+function pendingHtml(id) {
+  const f = id ? cfForm(id) : S.form;
+  const idAttr = id ? ` data-id="${id}"` : '';
+  return f.photos.map((ph, i) => `
+    <div class="ph"><img src="${ph.preview}" alt=""><button class="x" data-act="rmPhoto"${idAttr} data-i="${i}">${ICONS.x}</button></div>`).join('')
+    + (f.uploading ? `<div class="ph add"><span><span class="spin"></span><br>${f.uploading} รูป</span></div>` : '')
+    + (f.photos.length + f.uploading < MAX_PENDING_PHOTOS
+      ? `<label class="ph add"><span>${ICONS.plus}<br>ถ่าย/เลือกรูป</span><input type="file" accept="image/*" multiple data-act="pick"${idAttr}></label>` : '');
+}
+function starsHtml() {
+  return [1, 2, 3, 4, 5].map(i => `<button type="button" class="${i <= S.form.rating ? 'on' : ''}" data-act="star" data-v="${i}">★</button>`).join('');
+}
+
+function renderModal() {
+  $('#modal').innerHTML = ({ detail: mDetail, register: mRegister, chpw: mChpw, userCreate: mUserCreate, tempPw: mTempPw, userEdit: mUserEdit })[S.modal]?.() ?? '';
+  document.body.style.overflow = S.modal ? 'hidden' : '';
+  const ff = { register: '#registerForm [name=u]', chpw: '#chpwForm [name=o]', userCreate: '#userForm [name=u]', userEdit: '#userEditForm [name=n]' }[S.modal];
+  if (ff) setTimeout(() => $(ff)?.focus(), 50);
+}
+function openModal(m) { S.modal = m; renderModal(); }
+function closeModal() {
+  if (S.modal === 'chpw' && S.auth?.mustChange) return toast('กรุณาตั้งรหัสผ่านใหม่ก่อนเริ่มใช้งาน', true);
+  if (S.form.uploading) return toast('รอให้อัปโหลดรูปเสร็จก่อน', true);
+  S.modal = null; S.openId = null; S.form = freshForm(); renderModal();
+}
+
+/* =========================================================
+   Actions
+   ========================================================= */
+/* @dev:start */
+/* mockup: หน้าแรกคือหน้าเข้าสู่ระบบ · เปิดด้วย ?auto=1 (เช่น mockup.html?auto=1) เพื่อเข้าเป็น Super Admin อัตโนมัติ */
+const IS_LOCAL = (['localhost', '127.0.0.1', '[::1]', ''].includes(location.hostname) || location.protocol === 'file:') && /[?&]auto\b/.test(location.search);
+function ensureLocalAuth() {
+  if (!IS_LOCAL) return;
+  const s = S.auth && Sessions.load()[S.auth.token];
+  if (s && s.exp > Date.now()) return;
+  S.auth = MOCK.apiLoginAuto('admin', DEMO_PASSWORD);
+  store.set('auth', S.auth, true);
+}
+/* การ์ดสลับ Role (mockup เท่านั้น): ลากย้ายได้ · สลับโดยไม่ต้องล็อกอิน — สร้าง session ทดลองของ Role นั้น */
+const DEV_ROLES = [['cleaner', 'แม่บ้าน'], ['supervisor', 'หัวหน้าแม่บ้าน'], ['manager', 'คณะกรรมการ'], ['admin', 'Super Admin']];
+const devPos = (() => { try { return JSON.parse(localStorage.getItem('devRolePos')) || {}; } catch (e) { return {}; } })();
+function devRoleCard() {
+  let el = document.getElementById('devRole');
+  if (!el) {
+    el = document.createElement('div'); el.id = 'devRole'; el.className = 'devrole no-print'; document.body.appendChild(el);
+    let sx, sy, ox, oy, moved;
+    el.addEventListener('pointerdown', e => {
+      const h = e.target.closest('.dh'); if (!h) return;
+      const r = el.getBoundingClientRect(); sx = e.clientX; sy = e.clientY; ox = r.left; oy = r.top; moved = false; el.setPointerCapture(e.pointerId); el.classList.add('drag');
+    });
+    el.addEventListener('pointermove', e => {
+      if (!el.classList.contains('drag')) return;
+      if (Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) > 3) moved = true;
+      const x = Math.min(Math.max(0, ox + e.clientX - sx), innerWidth - el.offsetWidth), y = Math.min(Math.max(0, oy + e.clientY - sy), innerHeight - 36);
+      el.style.left = x + 'px'; el.style.top = y + 'px'; el.style.right = 'auto'; el.style.bottom = 'auto';
+    });
+    el.addEventListener('pointerup', e => {
+      if (!el.classList.contains('drag')) return; el.classList.remove('drag');
+      if (!moved && e.target.closest('[data-min]')) { el.classList.toggle('min'); devPos.min = el.classList.contains('min'); }
+      else { devPos.x = parseInt(el.style.left, 10); devPos.y = parseInt(el.style.top, 10); }
+      try { localStorage.setItem('devRolePos', JSON.stringify(devPos)); } catch (er) {}
+    });
+    el.addEventListener('click', e => { const b = e.target.closest('[data-devrole]'); if (b) devSwitchRole(b.dataset.devrole); });
+    if (devPos.x != null) { el.style.left = Math.min(devPos.x, innerWidth - 190) + 'px'; el.style.top = Math.min(devPos.y, innerHeight - 40) + 'px'; el.style.right = 'auto'; el.style.bottom = 'auto'; }
+    if (devPos.min) el.classList.add('min');
+  }
+  const cur = S.auth ? S.auth.role : '';
+  el.innerHTML = `<div class="dh"><span>Role (ทดลอง)</span><span data-min title="ย่อ/ขยาย">▾</span></div><div class="db">${DEV_ROLES.map(([r, n]) => `<button type="button" data-devrole="${r}" class="${cur === r ? 'on' : ''}">${n}</button>`).join('')}</div>`;
+}
+async function devSwitchRole(role) {
+  if (role === 'admin') S.auth = MOCK.apiLoginAuto('admin', DEMO_PASSWORD);
+  else { const u = { cleaner: 'พนักงานทดลอง', supervisor: 'หัวหน้าทดลอง', manager: 'กรรมการทดลอง' }[role]; S.auth = { token: Sessions.create(role, 'dev-' + role), role, user: 'dev-' + role, displayName: u }; }
+  store.set('auth', S.auth, true);
+  await load(true); goRole(role); devRoleCard();
+}
+/* @dev:end */
+/* @prod:start
+function ensureLocalAuth() {}
+// Super Admin ตามอีเมล Google (Script Property SUPER_ADMIN_EMAILS) — ได้ token อัตโนมัติ ไม่ต้อง login
+async function autoLogin() {
+  if (S.auth) return;
+  try { const r = await api('apiAutoLogin'); if (r && r.token) { S.auth = r; store.set('auth', r, true); await load(true); goRole('admin'); } } catch (e) {}
+}
+@prod:end */
+/* การ์ดยืนยัน (สไตล์ SweetAlert) — คืน Promise<boolean> · ระหว่างเปิดกดอย่างอื่นไม่ได้ จึงกันกดซ้ำ */
+let saResolve = null;
+/* การ์ดแจ้งสำเร็จ (ปุ่มเดียว) — ต้องกดตกลงเอง เพื่อให้แน่ใจว่าผู้ใช้เห็นผล */
+const askDone = o => askConfirm(Object.assign({ tone: 'ok', ok: 'ตกลง', single: true }, o));
+function askConfirm(o) {
+  return new Promise(res => {
+    closeAsk(false); saResolve = res;
+    const d = document.createElement('div'); d.id = 'sa'; d.className = 'sa-ov';
+    d.innerHTML = `<div class="sa-card" role="alertdialog" aria-modal="true">
+      <div class="sa-icon ${o.tone || 'ask'}">${o.tone === 'ok' ? ICONS.check.replace('width="13" height="13"', 'width="34" height="34"') : o.tone === 'danger' || o.tone === 'warn' ? '!' : '?'}</div>
+      <h2>${esc(o.title)}</h2><p>${esc(o.text || '')}</p>
+      <div class="sa-btns">${o.single ? '' : `<button class="btn" data-sa="0">${esc(o.cancel || 'ยกเลิก')}</button>`}
+      <button class="btn ${o.tone === 'danger' ? 'danger' : 'primary'}" data-sa="1">${esc(o.ok || 'ยืนยัน')}</button></div></div>`;
+    document.body.appendChild(d); $('[data-sa="1"]', d).focus();
+  });
+}
+function closeAsk(v) { const d = $('#sa'); if (d) d.remove(); if (saResolve) { const r = saResolve; saResolve = null; r(v); } }
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-sa]');
+  if (b) closeAsk(b.dataset.sa === '1'); else if (e.target.id === 'sa') closeAsk(false);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#sa')) { e.stopImmediatePropagation(); closeAsk(false); } }, true);
+
+async function goRole(role) {
+  ensureLocalAuth();
+  if (role !== 'admin' && !can(role, 'portal')) return toast('พอร์ทัลนี้ปิดใช้งานชั่วคราวโดยผู้ดูแลระบบ', true);
+  if (ROLES[role].login && S.auth?.role !== role && S.auth?.role !== 'admin') { S.view = 'home'; render(); return toast('กรุณาเข้าสู่ระบบ', true); }
+  S.view = role; S.tab = role === 'manager' ? 'all' : 'todo'; S.q = ''; S.area = null;
+  render();
+  if (S.auth?.mustChange && S.auth.role !== 'admin') openModal('chpw');
+  if (role === 'admin' || role === 'manager') loadAdmin();
+}
+
+/* ---------- บัญชีผู้จัดการสนาม (Admin) ---------- */
+/* ---------- ประวัติการเข้าสู่ระบบ (Admin) ---------- */
+function logCard() {
+  if (S.auth?.role !== 'admin') return '';
+  const L = S.logs, f = S.logFilter || '';
+  const ids = L ? [...new Set(L.map(x => x.username))].sort() : [];
+  const rows = L ? L.filter(x => !f || x.username === f).slice(0, 100) : [];
+  const nOk = rows.filter(x => x.result === 'ok').length, nBad = rows.filter(x => !['ok', 'logout'].includes(x.result)).length;
+  return `
+  <div class="card tbl no-print">
+    <div class="row" style="flex-wrap:wrap;margin-bottom:6px">
+      <div><h3>ประวัติการเข้าสู่ระบบ</h3><div class="xs muted">ทุกตำแหน่ง · บันทึกทุกครั้งที่เข้า/ออก และที่เข้าไม่สำเร็จ · เข้าสำเร็จ ${nOk} · ผิดปกติ <b style="color:${nBad ? 'var(--red)' : 'inherit'}">${nBad}</b> · เก็บในชีต <span class="mono">User_Login_Logs</span></div></div>
+      <select data-act="logFilter" style="max-width:220px"><option value="">ผู้ใช้ทุกคน</option>${ids.map(i => `<option ${i === f ? 'selected' : ''}>${esc(i)}</option>`).join('')}</select>
+    </div>
+    ${!L ? `<div class="empty"><span class="spin"></span></div>` : !rows.length ? `<div class="empty sm">ยังไม่มีประวัติ</div>` : `
+    <table>
+      <tr><th>เวลา</th><th>ID</th><th>ชื่อ</th><th>ตำแหน่ง</th><th>เหตุการณ์</th><th>IP</th></tr>
+      ${rows.map(x => { const r = LOGIN_RESULT[x.result] || [x.result, 'gray']; return `
+        <tr><td class="sm">${esc(x.time)}</td><td class="mono">${esc(x.username)}</td><td>${esc(x.displayName) || '–'}</td><td>${POS[x.role] ? `<span class="chip c-${POS[x.role][1]}">${POS[x.role][0]}</span>` : '–'}</td>
+        <td><span class="chip c-${r[1]}">${r[0]}</span></td><td class="xs muted mono">${esc(x.ip)}</td></tr>`; }).join('')}
+    </table>`}
+  </div>`;
+}
+async function refreshUsers() {
+  if (S.auth?.role !== 'admin') return;
+  const r = await api('apiListUsers', S.auth.token); S.users = r.users; S.limits = r.limits;
+  if (S.view === 'admin') render();
+}
+async function userAct(fn, okMsg) {
+  if (S.mgrBusy) return;
+  S.mgrBusy = true;
+  try { const r = await fn(); await Promise.all([refreshUsers(), load(true)]); if (r && r.tempPassword) { S.tempPw = { title: 'รหัสผ่านชั่วคราวใหม่', username: r.username, password: r.tempPassword }; openModal('tempPw'); } else toast(okMsg); }
+  catch (e) { toast(e.message, true); }
+  finally { S.mgrBusy = false; }
+}const formErr = (id, m) => { const el = $(id); el.style.display = 'block'; el.textContent = m; };
+function pwCheck(form, errId) {
+  if (form.pw.value !== form.pw2.value) { formErr(errId, 'รหัสผ่านทั้งสองช่องไม่ตรงกัน'); return false; }
+  if (form.pw.value.length < 8) { formErr(errId, 'รหัสผ่านต้องยาวอย่างน้อย 8 ตัวอักษร'); return false; }
+  return true;
+}
+/* สไลด์การ์ดที่เปิดอยู่ขึ้นด้านบนแล้วรอให้จบ (ข้ามถ้าผู้ใช้ตั้งค่าลดการเคลื่อนไหว) */
+async function slideAway() {
+  const sh = $('.sheet'), ov = $('.ov');
+  if (!sh || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  sh.classList.add('leave'); ov?.classList.add('leave');
+  await new Promise(r => setTimeout(r, 460));
+}
+async function submitRegister(form) {
+  if (!S.regRole) return formErr('#regErr', 'กรุณาเลือกตำแหน่ง');
+  if (!phoneOk(form.ph.value, true)) { formErr('#regErr', PHONE_MSG); return form.ph.focus(); }
+  if (!pwCheck(form, '#regErr')) return;
+  const btn = $('button[type=submit]', form); btn.disabled = true; btn.innerHTML = '<span class="spin"></span>';
+  try {
+    await api('apiRegister', { role: S.regRole, username: form.u.value.trim(), displayName: form.n.value.trim(), phone: form.ph.value.trim(), password: form.pw.value, code: form.code ? form.code.value : '' });
+    await slideAway();   // การ์ดสไลด์ขึ้นแล้วหายไป ก่อนขึ้นการ์ดแจ้งผล
+    S.modal = null; renderModal();
+    await askDone({ title: 'ส่งคำขอลงทะเบียนแล้ว', text: 'รอผู้ดูแลระบบอนุมัติ แล้วจึงเข้าสู่ระบบด้วย ID และรหัสผ่านที่ตั้งไว้' });
+  } catch (e) { formErr('#regErr', e.message); btn.disabled = false; btn.textContent = 'ส่งคำขอลงทะเบียน'; }
+}async function submitChpw(form) {
+  if (!pwCheck(form, '#chErr')) return;
+  const btn = $('button[type=submit]', form); btn.disabled = true; btn.innerHTML = '<span class="spin"></span>';
+  try {
+    const wantRemember = (() => { try { return !!localStorage.getItem('rememberUser'); } catch (e) { return false; } })();   // ติ๊ก "จดจำฉัน" ไว้ตอนเข้าสู่ระบบ
+    const r = await api('apiChangePassword', S.auth.token, form.o.value, form.pw.value, wantRemember);
+    if (r && r.token) { S.auth.token = r.token; S.auth.remember = !!r.remember; }   // เซิร์ฟเวอร์ยกเลิก token เก่าทั้งหมดของบัญชีนี้
+    S.auth.mustChange = false; store.del('auth'); store.set('auth', S.auth, !S.auth.remember); load(true);
+    S.modal = null; renderModal(); toast('เปลี่ยนรหัสผ่านแล้ว');
+  } catch (e) { formErr('#chErr', e.message); btn.disabled = false; btn.textContent = 'บันทึกรหัสผ่านใหม่'; }
+}
+async function submitUserCreate(form) {
+  if (!phoneOk(form.ph.value, false)) { formErr('#mgErr', PHONE_MSG); return form.ph.focus(); }
+  const btn = $('button[type=submit]', form); btn.disabled = true; btn.innerHTML = '<span class="spin"></span>';
+  try {
+    const r = await api('apiCreateUser', S.auth.token, { role: form.role.value, username: form.u.value.trim(), displayName: form.n.value.trim(), phone: form.ph.value.trim() });
+    await Promise.all([refreshUsers(), load(true)]);
+    S.tempPw = { title: 'สร้างบัญชีแล้ว', username: r.username, password: r.tempPassword }; openModal('tempPw');
+  } catch (e) { formErr('#mgErr', e.message); btn.disabled = false; btn.textContent = 'สร้างบัญชี'; }
+}
+const userAsk = (act, o, call, okMsg) => async u => { if (await askConfirm(Object.assign({ text: `ID: ${u}` }, o))) userAct(() => api(call, S.auth.token, u, ...(act || [])), okMsg); };
+const USER_ACTIONS = {
+  userApprove: userAsk(['approve'], { title: 'อนุมัติผู้ใช้นี้?', text: 'ผู้ใช้จะเข้าสู่ระบบได้ทันที', ok: 'อนุมัติ' }, 'apiReviewUser', 'อนุมัติแล้ว'),
+  userReject:  userAsk(['reject'], { tone: 'danger', title: 'ไม่อนุมัติคำขอนี้?', ok: 'ไม่อนุมัติ' }, 'apiReviewUser', 'บันทึกแล้ว'),
+  userDisable: userAsk(['disabled'], { tone: 'danger', title: 'ระงับบัญชีนี้?', text: 'ผู้ใช้จะเข้าสู่ระบบไม่ได้จนกว่าจะเปิดใช้งานอีกครั้ง (ยังนับเป็น 1 ที่นั่ง)', ok: 'ระงับ' }, 'apiSetUserStatus', 'ระงับแล้ว'),
+  userEnable:  userAsk(['approved'], { title: 'เปิดใช้งานบัญชีนี้?', ok: 'เปิดใช้งาน' }, 'apiSetUserStatus', 'เปิดใช้งานแล้ว'),
+  userReset:   userAsk([], { tone: 'warn', title: 'ออกรหัสผ่านชั่วคราวใหม่?', text: 'รหัสเดิมจะใช้ไม่ได้ทันที', ok: 'ออกรหัสใหม่' }, 'apiResetUserPassword', ''),
+  userDel:     userAsk([], { tone: 'danger', title: 'ลบบัญชีนี้ถาวร?', text: 'ลบแล้วกู้คืนไม่ได้ และที่นั่งจะว่างให้คนอื่น', ok: 'ลบ' }, 'apiDeleteUser', 'ลบแล้ว'),
+};
+async function doLogin(form) {
+  const btn = $('button[type=submit]', form), err = $('#loginErr');
+  btn.disabled = true; btn.innerHTML = '<span class="spin"></span>';
+  /* @dev:start */const ip = '203.0.113.10';/* @dev:end */
+  /* @prod:start
+  let ip = '';
+  try { ip = (await Promise.race([fetch('https://api.ipify.org?format=json').then(r => r.json()), new Promise((_, r) => setTimeout(r, 1500))])).ip; } catch (e) {}
+  @prod:end */
+  try {
+    const remember = !!form.rm.checked;
+    S.auth = await api('apiLoginAuto', form.u.value.trim(), form.p.value, ip, remember);
+    // "จดจำฉัน": จำชื่อผู้ใช้ + เก็บ session ไว้ในเครื่อง (localStorage) · ไม่เลือก = เก็บเฉพาะแท็บนี้ (sessionStorage) และลบชื่อที่จำไว้
+    S.auth.remember = remember && !!S.auth.remember;
+    store.del('auth'); store.set('auth', S.auth, !S.auth.remember);
+    try { if (remember) localStorage.setItem('rememberUser', form.u.value.trim()); else localStorage.removeItem('rememberUser'); } catch (e) {}
+    await load(true);
+    goRole(S.auth.role);
+  } catch (e) {
+    err.style.display = 'block'; err.textContent = e.message;
+    btn.disabled = false; btn.textContent = 'เข้าสู่ระบบ';
+  }
+}
+
+function logout(silent) {
+  if (S.auth && !silent) api('apiLogout', S.auth.token).catch(() => {});
+  S.auth = null; store.del('auth');
+  // ล้างข้อมูลของผู้ใช้เดิมออกจากหน่วยความจำ/เครื่อง
+  try { sessionStorage.removeItem(SNAP_KEY); localStorage.removeItem('locsSnap'); } catch (e) {}
+  Object.assign(S, { locs: [], hist: null, users: null, limits: null, logs: null, permLog: null, area: null, cleanerForms: {} });
+  ensureLocalAuth();
+  S.view = 'home'; S.modal = null; S.form = freshForm(); renderModal(); render();
+}
+
+/* locId ระบุ = อัปโหลดจากการ์ดแม่บ้าน (เก็บใน cfForm) · ไม่ระบุ = อัปโหลดจากโมดัลตรวจสอบ (เก็บใน S.form) */
+async function addPhotos(locId, files) {
+  const reply = /^r\d+$/.test(locId);
+  const l = loc(reply ? locId.slice(1) : locId) || loc(S.openId);
+  const f = locId ? cfForm(locId) : S.form;
+  const room = MAX_PENDING_PHOTOS - f.photos.length - f.uploading;
+  const list = [...files].slice(0, room);
+  const kind = reply ? 'fix' : locId ? 'report' : 'review';
+  f.uploading += list.length; refreshPending(locId);
+  await Promise.all(list.map(async file => {
+    try {
+      const dataUrl = await compress(file);
+      const up = await api('apiUploadPhoto', S.auth?.token, { dataUrl, locationId: l.id, kind });
+      f.photos.push({ id: up.id, preview: dataUrl });
+    } catch (e) { toast('อัปโหลดไม่สำเร็จ: ' + e.message, true); }
+    finally { f.uploading--; refreshPending(locId); }
+  }));
+}
+function refreshPending(locId) {
+  const el = $(locId ? '#pending-' + locId : '#pending');
+  if (el) el.innerHTML = pendingHtml(locId);
+}
+
+function toggleZone(locId, zoneId) {
+  const l = loc(locId), z = l.subZones.find(x => x.id === zoneId);
+  z.completed = !z.completed;                     // อัปเดตทันที แล้วค่อยบันทึก
+  const el = $(`[data-zone="${zoneId}"]`);
+  el.classList.toggle('on', z.completed); $('.box', el).innerHTML = z.completed ? ICONS.check : '';
+  render();
+  const want = z.completed;
+  // เซิร์ฟเวอร์ตอบตามลำดับที่ส่ง — ห้ามเอาคำตอบมาทับ subZones ในเครื่อง ไม่งั้นข้อที่ติ๊กต่อกันเร็ว ๆ จะหลุด
+  queue(() => api('apiToggleZone', S.auth?.token, l.id, zoneId, want).then(r => { l.lastUpdated = r.lastUpdated; }).catch(e => {
+    z.completed = !want; toast(e.message, true); render();
+    if (/สถานะงานเปลี่ยน|ส่งแล้ว/.test(e.message)) load(true);
+  }));
+}
+
+async function submitCleaner(locId) {
+  const l = loc(locId), p = prog(l), f = cfForm(locId);
+  if (f.busy || $('#sa')) return;
+  if (f.uploading) return toast('รอให้อัปโหลดรูปเสร็จก่อน', true);
+  if (can('cleaner', 'photo') && !f.photos.length && !l.photos.some(x => x.kind === 'report')) return toast('กรุณาแนบรูปอย่างน้อย 1 รูป', true);
+  const miss = p.t - p.d;
+  if (!await askConfirm({ tone: miss ? 'warn' : 'ask', title: 'ยืนยันส่งรายงาน?', text: `${l.area}\n` + (miss ? `ยังไม่ได้ติ๊ก ${miss} จุด ต้องการส่งเลยหรือไม่?` : 'ทำครบทุกจุดแล้ว ส่งให้หัวหน้าตรวจ'), ok: 'ส่งรายงาน' })) return;
+  if (f.busy) return;
+  f.busy = true; render();
+  try {
+    const updated = await queue(() => api('apiCleanerSubmit', S.auth?.token, l.id, f.note || l.cleanerNote, f.photos.map(x => ({ id: x.id }))));
+    upsert(updated);
+    delete S.cleanerForms[Number(locId)];
+    S.area = null; render(); window.scrollTo(0, 0);
+    await askDone({ title: 'ส่งรายงานสำเร็จ', text: `${l.area}\nส่งให้หัวหน้าแม่บ้านตรวจแล้ว` });
+  } catch (e) {
+    f.busy = false; toast(e.message, true); render();
+    if (/สถานะงานเปลี่ยน/.test(e.message)) load(true);
+  }
+}
+
+async function review(decision) {
+  const l = loc(S.openId), f = S.form;
+  if (S.busy || $('#sa')) return;
+  if (f.uploading) return toast('รอให้อัปโหลดรูปเสร็จก่อน', true);
+  if (decision === 'reject' && !f.note.trim()) { toast('กรุณาระบุจุดที่ต้องแก้ไข', true); return $('textarea[data-act=note]')?.focus(); }
+  const rej = decision === 'reject';
+  if (!await askConfirm({ tone: rej ? 'danger' : 'ask', title: rej ? 'ยืนยันตีกลับให้แก้ไข?' : 'ยืนยันตรวจผ่าน?',
+    text: `${l.area}\n` + (rej ? (f.photos.length ? 'แม่บ้านจะต้องแก้ไขและส่งใหม่' : 'ยังไม่ได้แนบรูปจุดบกพร่อง — แม่บ้านจะต้องแก้ไขและส่งใหม่') : 'ตรวจผ่านแล้วงานนี้สิ้นสุด ไม่ต้องตรวจซ้ำ'),
+    ok: rej ? 'ตีกลับ' : 'ตรวจผ่าน' })) return;
+  await act(() => api('apiReview', S.auth.token, l.id, decision, f.note, f.photos.map(x => ({ id: x.id }))),
+    rej ? 'ตีกลับให้แก้ไขแล้ว' : 'ตรวจผ่านสำเร็จ');
+}
+
+/* คณะกรรมการ: แจ้งจุดปรับปรุง (ไม่ใช่การอนุมัติ — ไม่เปลี่ยนสถานะงาน) */
+async function submitFeedback() {
+  const l = loc(S.openId), f = S.form;
+  if (S.busy || $('#sa')) return;
+  if (f.uploading) return toast('รอให้อัปโหลดรูปเสร็จก่อน', true);
+  if (!f.note.trim()) { toast('กรุณาระบุจุดที่ควรปรับปรุง', true); return $('textarea[data-act=note]')?.focus(); }
+  if (!await askConfirm({ tone: 'ask', title: 'ยืนยันแจ้งจุดปรับปรุง?', text: `${l.area}\nบันทึกข้อเสนอแนะ${f.rating ? ` · ให้ ${f.rating} ดาว` : ''} (ไม่กระทบสถานะงาน)`, ok: 'แจ้งปรับปรุง' })) return;
+  await act(() => api('apiFeedback', S.auth.token, l.id, f.note, f.rating, f.photos.map(x => ({ id: x.id }))), 'แจ้งจุดปรับปรุงแล้ว');
+}
+
+async function act(fn, okMsg) {
+  if (S.busy) return;
+  S.busy = true; renderModal();
+  try {
+    const updated = await fn();
+    upsert(updated); S.busy = false; closeModal(); render();
+    await askDone({ title: okMsg, text: updated.area });
+  } catch (e) {
+    S.busy = false; renderModal(); toast(e.message, true);
+    if (/สถานะงานเปลี่ยน/.test(e.message)) load(true);
+  }
+}
+
+/* =========================================================
+   Event delegation
+   ========================================================= */
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-act]'); if (!t) return;
+  const a = t.dataset.act;
+  if (a === 'closeOv') { if (e.target === t) closeModal(); return; }
+  if (t.tagName === 'SELECT' || t.tagName === 'TEXTAREA' || (t.tagName === 'INPUT')) return;
+  ({
+    home: () => { if (S.auth && S.auth.role !== 'admin') goRole(S.auth.role); else { S.view = 'home'; render(); } },
+    role: () => goRole(t.dataset.role),
+    refresh: () => { load(); if (S.view === 'admin') loadAdmin(); },
+    logout: () => logout(),
+    tab: () => { S.tab = t.dataset.tab; render(); },
+    area: () => { S.area = Number(t.dataset.id); render(); window.scrollTo(0, 0); },
+    back: () => { S.area = null; render(); window.scrollTo(0, 0); },
+    open: () => { S.openId = Number(t.dataset.id); S.form = freshForm(); openModal('detail'); },
+    close: closeModal,
+    zone: () => toggleZone(t.dataset.id, t.dataset.zone),
+    rmPhoto: () => { const id = t.dataset.id; const f = id ? cfForm(id) : S.form; f.photos.splice(Number(t.dataset.i), 1); refreshPending(id); },
+    star: () => { const v = Number(t.dataset.v); S.form.rating = S.form.rating === v ? 0 : v; $('#stars').innerHTML = starsHtml(); },
+    feedback: () => submitFeedback(),
+    replyToggle: () => { S.replyOpen[t.dataset.id] = !S.replyOpen[t.dataset.id]; render(); },
+    replySend: () => submitReply(t.dataset.id),
+    report: () => downloadReport(),
+    submit: () => submitCleaner(t.dataset.id),
+    approve: () => review('approve'),
+    reject: () => review('reject'),
+    register: async () => { try { S.regInfo = await api('apiRegInfo'); } catch (e) { S.regInfo = null; } S.regRole = null; S.regDraft = {}; S.regDir = ''; S.regFresh = true; openModal('register'); S.regFresh = false; },
+    regRole: () => { S.regRole = t.dataset.role; S.regDir = 'fwd'; renderModal(); },
+    regBack: () => { const fm = $('#registerForm'); if (fm) S.regDraft = { code: fm.code?.value, n: fm.n.value, ph: fm.ph.value, u: fm.u.value }; S.regRole = null; S.regDir = 'back'; renderModal(); },
+    pwToggle: () => {
+      const inp = t.parentElement.querySelector('input'), show = inp.type === 'password';
+      inp.type = show ? 'text' : 'password'; t.innerHTML = show ? ICONS.eyeOff : ICONS.eye;
+      t.setAttribute('aria-pressed', show); t.setAttribute('aria-label', show ? 'ซ่อนรหัสผ่าน' : 'แสดงรหัสผ่าน');
+    },
+    chpw: () => openModal('chpw'),
+    userCreate: () => openModal('userCreate'),
+    copyPw: () => { navigator.clipboard?.writeText(S.tempPw.password).then(() => toast('คัดลอกแล้ว')).catch(() => toast('คัดลอกไม่ได้ กรุณาจดรหัสเอง', true)); },
+    ...Object.fromEntries(Object.entries(USER_ACTIONS).map(([k, f]) => [k, () => f(t.dataset.u)])),
+    adminTab: () => { S.adminTab = t.dataset.tab; render(); loadAdmin(); },
+    dfPeriod: () => { S.dfPeriod = t.dataset.p; S.dfOffset = 0; render(); },
+    dfPrev: () => { S.dfOffset--; render(); },
+    dfNext: () => { if (S.dfOffset < 0) { S.dfOffset++; render(); } },
+    dfNow: () => { S.dfOffset = 0; render(); },
+    pplRole: () => { S.pplRole = t.dataset.r; render(); },
+    fillLogin: () => { const fm = $('#loginForm'); fm.u.value = t.dataset.u; fm.p.value = t.dataset.p; fm.p.focus(); },
+    userEdit: () => { S.userEdit = (S.users || []).find(x => x.username === t.dataset.u) || null; if (S.userEdit) openModal('userEdit'); },
+    perm: () => setPerm(t.dataset.role, t.dataset.key, !(((S.perms || {})[t.dataset.role] || {})[t.dataset.key] !== false)),
+    permReset: async () => {
+      if (!await askConfirm({ tone: 'warn', title: 'คืนค่าเริ่มต้นทุกสิทธิ์?', text: 'ทุกบทบาทจะกลับมาทำได้ทุกอย่างตามค่าเริ่มต้น', ok: 'คืนค่าเริ่มต้น' })) return;
+      try { await api('apiResetPerms', S.auth.token); await loadAdmin(); toast('คืนค่าเริ่มต้นแล้ว'); } catch (err) { toast(err.message, true); }
+    },
+    resetToday: async () => {
+      if (!await askConfirm({ tone: 'danger', title: 'รีเซ็ตสถานะวันนี้?', text: 'ล้างสถานะทุกพื้นที่กลับเป็น "รอทำความสะอาด"\nการกระทำนี้ย้อนกลับไม่ได้', ok: 'รีเซ็ต' })) return;
+      try { await api('apiResetToday', S.auth.token); await load(true); toast('รีเซ็ตแล้ว'); } catch (err) { toast(err.message, true); }
+    },
+    repairLocs: async () => {
+      if (!await askConfirm({ title: 'ซ่อมข้อมูลพื้นที่?', text: 'ตรวจทุกพื้นที่ แถวที่ข้อมูลเสีย (เช่น ไม่มีรายการจุดย่อย) จะถูกตั้งใหม่เป็น "รอทำความสะอาด"\nพื้นที่ที่ปกติจะไม่ถูกแตะ', ok: 'ตรวจและซ่อม' })) return;
+      try { const n = await api('apiRepairLocations', S.auth.token); await load(true); toast(n ? `ซ่อมแล้ว ${n} พื้นที่` : 'ข้อมูลทุกพื้นที่ปกติ ไม่ต้องซ่อม'); } catch (err) { toast(err.message, true); }
+    },
+  })[a]?.();
+});
+document.addEventListener('input', e => {
+  const a = e.target.dataset.act;
+  if (a === 'note') { const id = e.target.dataset.id; if (id) cfForm(id).note = e.target.value; else S.form.note = e.target.value; }
+  if (a === 'phone') e.target.value = fmtPhone(e.target.value);   // ตัวเลขเท่านั้น จัดเป็น 000-000-0000
+  if (a === 'logFilter') { S.logFilter = e.target.value; render(); }
+  if (a === 'dfArea') { S.dfArea = e.target.value; render(); }
+  if (a === 'search') { S.q = e.target.value; const pos = e.target.selectionStart; render(); const i = $('[data-act=search]'); i.focus(); i.setSelectionRange(pos, pos); }
+});
+document.addEventListener('change', e => {
+  const a = e.target.dataset.act;
+  if (a === 'pick' && e.target.files.length) { addPhotos(e.target.dataset.id, e.target.files); e.target.value = ''; }
+});
+document.addEventListener('submit', e => {
+  const h = { loginForm: doLogin, registerForm: submitRegister, chpwForm: submitChpw, userForm: submitUserCreate, userEditForm: submitUserEdit }[e.target.id];
+  if (h) { e.preventDefault(); h(e.target); }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && S.modal) closeModal(); });
+
+// รีเฟรชอัตโนมัติทุก 60 วินาที (เมื่อไม่ได้เปิดหน้าต่างรายละเอียดอยู่)
+setInterval(() => {
+  if (S.auth && S.view !== 'home' && !S.modal && !document.hidden) { load(true); if (S.view === 'admin') loadAdmin(); }
+}, 60000);
+
+try { localStorage.removeItem('locsSnap'); } catch (e) {}   // สำเนาแบบเก่า (localStorage) จากเวอร์ชันก่อน
+/* @dev:start */ensureLocalAuth();
+load(true).then(() => S.auth && goRole(S.auth.role));/* @dev:end */
+/* @prod:start
+load(true).then(() => (S.auth ? goRole(S.auth.role) : autoLogin()));
+@prod:end */
+</script>
+</body>
+</html>

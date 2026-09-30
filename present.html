@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>นำเสนอระบบตรวจความสะอาด ศูนย์กีฬาสิรินธร มศว</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--p700:#5b1a7a;--p600:#6f2a91;--p100:#efe4f5;--p50:#f8f3fb;--ink:#1f1a24;--mute:#5f5868;--line:#ddd3e4;--bg:#ffffff;--red:#b3261e;--green:#1e7a3c;--blue:#1d5fa8;--amber:#8a5a00}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:'Noto Sans Thai',system-ui,sans-serif;font-weight:400;color:var(--ink);background:var(--p50);overflow:hidden}
+.deck{height:100vh;position:relative}
+.slide{position:absolute;inset:0;padding:6vh 7vw 9vh;display:none;flex-direction:column;justify-content:center;gap:2.4vh;background:var(--bg)}
+.slide.on{display:flex;animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.slide.on{animation:none}}
+h1{font-size:clamp(30px,5vw,58px);font-weight:700;color:var(--p700);line-height:1.25}
+h2{font-size:clamp(24px,3.4vw,40px);font-weight:700;color:var(--p700);line-height:1.3}
+h3{font-size:clamp(17px,1.9vw,22px);font-weight:700;color:var(--p700)}
+p,li{font-size:clamp(16px,1.9vw,23px);line-height:1.65}
+.mute{color:var(--mute)}
+.tag{display:inline-block;background:var(--p100);color:var(--p700);font-weight:700;border-radius:99px;padding:4px 14px;font-size:clamp(13px,1.4vw,17px);width:max-content}
+.cover{background:var(--p700);color:#fff}
+.cover h1,.cover p{color:#fff}
+.cover .tag{background:#fff;color:var(--p700)}
+ul{padding-left:1.3em;display:grid;gap:1vh}
+.grid{display:grid;gap:2vh 1.6vw}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.card{border:1px solid var(--line);border-radius:14px;padding:2vh 1.6vw;background:var(--bg)}
+.card p,.card li{font-size:clamp(14px,1.6vw,19px);line-height:1.55}
+.card.hl{background:var(--p50);border-color:var(--p600)}
+.step{display:flex;gap:14px;align-items:flex-start}
+.n{flex:none;width:2.2em;height:2.2em;border-radius:50%;background:var(--p700);color:#fff;font-weight:700;display:grid;place-items:center;font-size:clamp(14px,1.6vw,19px)}
+.steps{display:grid;gap:1.6vh}
+.steps p{font-size:clamp(15px,1.75vw,21px)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.st{border-radius:12px;padding:10px 16px;font-weight:700;font-size:clamp(14px,1.7vw,20px);border:2px solid}
+.s-pend{color:var(--amber);border-color:var(--amber)}.s-done{color:var(--blue);border-color:var(--blue)}.s-ok{color:var(--green);border-color:var(--green)}.s-rej{color:var(--red);border-color:var(--red)}
+.arrow{font-size:clamp(20px,2.4vw,30px);color:var(--mute)}
+.big{font-size:clamp(34px,5vw,60px);font-weight:700;color:var(--p700)}
+.nav{position:fixed;left:0;right:0;bottom:0;height:7vh;min-height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 3vw;background:var(--bg);border-top:1px solid var(--line);z-index:5}
+.nav button{font:inherit;font-weight:700;border:1px solid var(--p700);background:var(--bg);color:var(--p700);border-radius:10px;padding:8px 18px;cursor:pointer;min-height:40px}
+.nav button:hover{background:var(--p100)}
+.nav button:focus-visible{outline:3px solid var(--p600);outline-offset:2px}
+.bar{position:fixed;top:0;left:0;height:5px;background:var(--p600);transition:width .3s;z-index:6}
+.pg{color:var(--mute);font-size:15px}
+@media (max-width:820px){.g2,.g3,.g4{grid-template-columns:1fr}.slide{overflow:auto;justify-content:flex-start;padding-top:5vh}body{overflow:auto}}
+@media print{.nav,.bar{display:none}.slide{position:static;display:flex!important;page-break-after:always;height:100vh}body{overflow:visible}}
+</style>
+</head>
+<body>
+<div class="bar" id="bar"></div>
+<div class="deck" id="deck">
+
+<section class="slide cover">
+  <span class="tag">ศูนย์กีฬาสิรินธร มหาวิทยาลัยศรีนครินทรวิโรฒ</span>
+  <h1>ระบบตรวจความสะอาด<br>ยกระดับการให้บริการสถานที่</h1>
+  <p>จากการตรวจด้วยกระดาษและการสื่อสารกระจัดกระจาย สู่ระบบเดียวที่ทุกฝ่ายเห็นตรงกัน — ตั้งแต่พนักงานทำความสะอาดจนถึงผู้บริหาร</p>
+  <p style="font-size:16px;opacity:.85">กด → หรือ Space เพื่อเปลี่ยนหน้า · F เพื่อเต็มจอ</p>
+</section>
+
+<section class="slide">
+  <span class="tag">ที่มา</span>
+  <h2>ทำไมต้องมีระบบนี้</h2>
+  <div class="grid g3">
+    <div class="card"><h3>พื้นที่กว้าง หลายจุด</h3><p>12 พื้นที่ ทั้งอาคารในร่ม สนามภายนอก และอาคารกีฬาทางน้ำ แต่ละแห่งมีจุดตรวจย่อยจำนวนมาก</p></div>
+    <div class="card"><h3>ติดตามงานยาก</h3><p>ไม่แน่ชัดว่าพื้นที่ใดทำแล้ว ใครตรวจแล้ว และมีจุดที่ต้องแก้ไขค้างอยู่หรือไม่</p></div>
+    <div class="card"><h3>ไม่มีหลักฐานย้อนหลัง</h3><p>ข้อเสนอแนะจากคณะกรรมการและผลการแก้ไขไม่ถูกบันทึกเป็นระบบ ทำให้วัดผลและปรับปรุงต่อเนื่องได้ยาก</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <span class="tag">จุดประสงค์</span>
+  <h2>สิ่งที่ระบบต้องทำให้ได้</h2>
+  <ul>
+    <li><b>ตรวจได้ครบทุกจุด</b> — เช็คลิสต์รายพื้นที่พร้อมรูปถ่ายเป็นหลักฐาน</li>
+    <li><b>ชัดเจนว่าใครรับผิดชอบอะไร</b> — 4 บทบาท มีขั้นตอนและสิทธิ์แยกกัน</li>
+    <li><b>ปิดวงจรการแก้ไข</b> — แจ้งแก้ไข → แก้ไข → ตอบกลับพร้อมรูป → ตรวจซ้ำ</li>
+    <li><b>มองภาพรวมได้ทันที</b> — แดชบอร์ดอัตราการตีกลับ รายสัปดาห์ รายเดือน รายอาคาร และรายงาน PDF</li>
+    <li><b>ใช้งานง่ายสำหรับทุกวัย</b> — ปุ่มใหญ่ ตัวอักษรใหญ่ ใช้บนมือถือได้</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <span class="tag">ภาพรวม</span>
+  <h2>4 บทบาท 1 กระบวนการ</h2>
+  <div class="grid g4">
+    <div class="card hl"><div class="big">1</div><h3>พนักงานทำความสะอาด</h3><p>ทำเช็คลิสต์ แนบรูป ส่งรายงาน</p></div>
+    <div class="card hl"><div class="big">2</div><h3>หัวหน้าแม่บ้าน</h3><p>ตรวจผ่าน (จบงาน) หรือตีกลับให้แก้</p></div>
+    <div class="card hl"><div class="big">3</div><h3>คณะกรรมการ</h3><p>แจ้งจุดที่ควรปรับปรุง พร้อมรูปและคะแนน</p></div>
+    <div class="card hl"><div class="big">4</div><h3>ผู้ดูแลระบบ</h3><p>จัดการบัญชี สิทธิ์ ดูแดชบอร์ดและรายงาน</p></div>
+  </div>
+  <p class="mute">ผู้ใช้ทุกคนลงทะเบียนแล้วผู้ดูแลระบบอนุมัติ บทบาทมาจากบัญชี ไม่ใช่ที่ผู้ใช้เลือกเอง</p>
+</section>
+
+<section class="slide">
+  <span class="tag">สถานะงาน</span>
+  <h2>เส้นทางของงานหนึ่งพื้นที่ต่อวัน</h2>
+  <div class="flow">
+    <span class="st s-pend">รอทำความสะอาด</span><span class="arrow">→</span>
+    <span class="st s-done">แม่บ้านส่งแล้ว รอตรวจ</span><span class="arrow">→</span>
+    <span class="st s-ok">ตรวจผ่าน (จบ)</span>
+  </div>
+  <div class="flow">
+    <span class="st s-done">รอตรวจ</span><span class="arrow">→</span>
+    <span class="st s-rej">ตีกลับ</span><span class="arrow">→</span>
+    <span class="st s-pend">แม่บ้านแก้ไข</span><span class="arrow">→</span>
+    <span class="st s-done">ส่งตรวจซ้ำ</span>
+  </div>
+  <p class="mute">หัวหน้าตรวจผ่านแล้วงานสิ้นสุด คณะกรรมการให้ข้อเสนอแนะได้โดยไม่เปลี่ยนสถานะงาน และทุกการกระทำถูกบันทึกประวัติ ใคร เมื่อไร ทำอะไร</p>
+</section>
+
+<section class="slide">
+  <span class="tag">ขั้นตอนตามบทบาท 1/4</span>
+  <h2>พนักงานทำความสะอาด</h2>
+  <div class="steps">
+    <div class="step"><span class="n">1</span><p>เข้าสู่ระบบ เลือกพื้นที่ (ปุ่มใหญ่ 12 พื้นที่ พร้อมรูปอาคาร)</p></div>
+    <div class="step"><span class="n">2</span><p>ติ๊กเช็คลิสต์ทีละจุดย่อย เช่น ห้องน้ำ อัฒจรรย์ สนามแข่งขัน</p></div>
+    <div class="step"><span class="n">3</span><p>ถ่าย/แนบรูปหลักฐาน พิมพ์หมายเหตุ แล้วกดส่งรายงาน (มีหน้าต่างยืนยัน กันกดซ้ำ)</p></div>
+    <div class="step"><span class="n">4</span><p>เปิดแท็บ <b>แจ้งแก้ไข</b> เมื่อถูกตีกลับหรือมีข้อเสนอแนะ → กด “ตอบกลับ / แนบรูป” หลังแก้ไข ระบบส่งให้หัวหน้าตรวจซ้ำ</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <span class="tag">ขั้นตอนตามบทบาท 2/4</span>
+  <h2>หัวหน้าแม่บ้าน</h2>
+  <div class="steps">
+    <div class="step"><span class="n">1</span><p>แท็บ <b>รอตรวจ</b> เห็นพื้นที่ที่แม่บ้านส่งแล้ว เปิดดูเช็คลิสต์ รูป และหมายเหตุ</p></div>
+    <div class="step"><span class="n">2</span><p><b>ตรวจผ่าน</b> → งานสิ้นสุด ไม่ต้องตรวจซ้ำ &nbsp;|&nbsp; <b>ตีกลับ</b> → ระบุเหตุผล งานกลับไปหาแม่บ้าน</p></div>
+    <div class="step"><span class="n">3</span><p>แท็บ <b>แจ้งแก้ไข</b> ดูรายการที่แม่บ้านแก้แล้วรอตรวจ และรับทราบข้อเสนอแนะของกรรมการพร้อมตอบกลับ/แนบรูป</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <span class="tag">ขั้นตอนตามบทบาท 3/4</span>
+  <h2>คณะกรรมการตรวจความสะอาด</h2>
+  <div class="steps">
+    <div class="step"><span class="n">1</span><p>เข้าดูสถานะทุกพื้นที่และประวัติของวัน (ไม่ต้องอนุมัติงาน)</p></div>
+    <div class="step"><span class="n">2</span><p>เลือกพื้นที่ที่ตรวจพบจุดควรปรับปรุง → พิมพ์ข้อเสนอแนะ แนบรูป ให้คะแนน 1–5 (ไม่บังคับ)</p></div>
+    <div class="step"><span class="n">3</span><p>ข้อเสนอแนะไปปรากฏในแท็บแจ้งแก้ไขของแม่บ้านและหัวหน้า และดูภาพรวมจากแดชบอร์ด</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <span class="tag">ขั้นตอนตามบทบาท 4/4</span>
+  <h2>ผู้ดูแลระบบ (Super Admin)</h2>
+  <div class="grid g2">
+    <div class="card"><h3>แดชบอร์ด</h3><p>กรองรายสัปดาห์ รายเดือน อาคาร หมวด ดูอัตราตีกลับต่อพื้นที่ และพิมพ์รายงาน PDF ขนาด A4</p></div>
+    <div class="card"><h3>จัดการบัญชี</h3><p>อนุมัติผู้ลงทะเบียน สร้าง/ระงับบัญชี มอบหมายพื้นที่ รีเซ็ตรหัสผ่าน จำกัดจำนวน 19 / 1 / 13 ตามตำแหน่ง</p></div>
+    <div class="card"><h3>จัดการสิทธิ์ 8 สวิตช์</h3><p>เปิด–ปิดการเข้าพอร์ทัล ส่งรายงาน ถ่ายรูป อนุมัติ ตีกลับ แจ้งปรับปรุง ฯลฯ พร้อมบันทึกการเปลี่ยนแปลง</p></div>
+    <div class="card"><h3>ประวัติการเข้าสู่ระบบ</h3><p>เห็นทุกครั้งที่เข้า/ออก และที่เข้าไม่สำเร็จ เพื่อความโปร่งใสและตรวจสอบย้อนหลัง</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <span class="tag">ปิดวงจร</span>
+  <h2>แท็บ “แจ้งแก้ไข” — ไม่มีเรื่องค้างเงียบ ๆ</h2>
+  <div class="flow">
+    <span class="st s-rej">รอแก้ไข</span><span class="arrow">→</span>
+    <span class="st s-done">แก้ไขแล้ว · รอหัวหน้าตรวจ</span><span class="arrow">→</span>
+    <span class="st s-ok">เสร็จสิ้น</span>
+  </div>
+  <ul>
+    <li>แม่บ้านตอบกลับพร้อมรูปหลังแก้ไข → งานส่งต่อหัวหน้าอัตโนมัติ</li>
+    <li>ทุกรายการมีผู้ตอบ เวลา และจำนวนรูป ตรวจสอบย้อนหลังได้</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <span class="tag">ความน่าเชื่อถือ</span>
+  <h2>ปลอดภัยและตรวจสอบได้</h2>
+  <div class="grid g3">
+    <div class="card"><h3>บัญชีและรหัสผ่าน</h3><p>รหัสผ่านเข้ารหัสแบบ salted hash ล็อกอินผิด 5 ครั้งล็อก 15 นาที ตั้งค่าจดจำการเข้าใช้ได้ 14 วัน</p></div>
+    <div class="card"><h3>ข้อมูลและรูป</h3><p>เก็บใน Google Sheets และ Drive ของมหาวิทยาลัย ตรวจชนิดไฟล์รูป จำกัดปริมาณอัปโหลด ตั้งชื่อไฟล์ตามวัน เวลา สถานที่</p></div>
+    <div class="card"><h3>สิทธิ์ตามบทบาท</h3><p>ทุกคำสั่งฝั่งเซิร์ฟเวอร์ตรวจสิทธิ์ซ้ำ ทดสอบสวมบทบาทโจมตีทุกบทบาทก่อนขึ้นใช้งานจริง</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <span class="tag">คุณค่า</span>
+  <h2>ยกระดับการให้บริการอย่างไร</h2>
+  <div class="grid g2">
+    <div class="card hl"><h3>เห็นภาพเดียวกัน</h3><p>ทุกฝ่ายเห็นสถานะพื้นที่ล่าสุดแบบเรียลไทม์ ลดการสอบถามและการประสานซ้ำ</p></div>
+    <div class="card hl"><h3>คุณภาพสม่ำเสมอ</h3><p>เช็คลิสต์มาตรฐานเดียวกันทุกพื้นที่ ทุกวัน</p></div>
+    <div class="card hl"><h3>ปรับปรุงด้วยข้อมูล</h3><p>รู้ว่าพื้นที่ใดถูกตีกลับบ่อย เพื่อจัดคน อบรม หรือปรับวิธีทำงานตรงจุด</p></div>
+    <div class="card hl"><h3>ผู้ใช้บริการมั่นใจ</h3><p>สนามและอาคารพร้อมใช้งาน สะอาด ปลอดภัย มีหลักฐานการตรวจย้อนหลัง</p></div>
+  </div>
+</section>
+
+<section class="slide cover">
+  <span class="tag">ขอบคุณ</span>
+  <h1>ขอบคุณครับ / ค่ะ</h1>
+  <p>ระบบตรวจความสะอาด ศูนย์กีฬาสิรินธร มศว</p>
+  <p style="font-size:16px;opacity:.85">ตัวอย่างการใช้งาน (โหมดทดลอง): เปิด mockup.html แล้วใช้การ์ดสลับ Role มุมขวาล่างเพื่อสาธิตทุกบทบาทโดยไม่ต้องล็อกอิน</p>
+</section>
+
+</div>
+<div class="nav no-print">
+  <button id="prev" type="button" aria-label="ก่อนหน้า">← ก่อนหน้า</button>
+  <span class="pg" id="pg"></span>
+  <button id="next" type="button" aria-label="ถัดไป">ถัดไป →</button>
+</div>
+<script>
+const S=[...document.querySelectorAll('.slide')];let i=0;
+const go=n=>{i=Math.max(0,Math.min(S.length-1,n));S.forEach((s,k)=>s.classList.toggle('on',k===i));document.getElementById('pg').textContent=(i+1)+' / '+S.length;document.getElementById('bar').style.width=((i+1)/S.length*100)+'%';try{history.replaceState(null,'','#'+(i+1))}catch(e){}};
+document.getElementById('next').onclick=()=>go(i+1);document.getElementById('prev').onclick=()=>go(i-1);
+addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();go(i+1)}else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)){e.preventDefault();go(i-1)}else if(e.key==='Home')go(0);else if(e.key==='End')go(S.length-1);else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}});
+let x0=null;addEventListener('touchstart',e=>x0=e.touches[0].clientX);addEventListener('touchend',e=>{if(x0==null)return;const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>50)go(i+(d<0?1:-1));x0=null});
+go((parseInt(location.hash.slice(1),10)||1)-1);
+</script>
+</body>
+</html>
