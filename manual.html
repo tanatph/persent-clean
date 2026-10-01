@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>คู่มือการใช้งานระบบตรวจความสะอาด ศูนย์กีฬาสิรินธร มศว</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--p700:#5b1a7a;--p600:#6f2a91;--p100:#efe4f5;--p50:#f8f3fb;--ink:#1f1a24;--mute:#5f5868;--line:#ddd3e4;--bg:#fff;--red:#e11d48;--red-t:#fbe9e7;--green:#1e7a3c;--green-t:#e4f4e9;--blue:#1d5fa8;--blue-t:#e3eefa;--amber:#9a5b00;--amber-t:#fff1d6;--teal:#0f7c86;--teal-t:#dff3f4;--pink:#b0246b;--pink-t:#fbe6f1}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:'Noto Sans Thai',system-ui,sans-serif;font-weight:400;color:var(--ink);background:var(--p50);line-height:1.65;font-size:17px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header.top{background:var(--p700);color:#fff;padding:26px 0 30px}
+header.top .lg{background:#fff;border-radius:14px;padding:8px 16px;width:max-content;max-width:100%;margin-bottom:16px}
+header.top .lg img{height:54px;display:block}
+header.top h1{font-size:clamp(26px,4.2vw,40px);font-weight:700;line-height:1.3}
+header.top p{opacity:.92;margin-top:6px}
+nav.toc{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:8px;padding-bottom:8px}
+nav.toc a{flex:none;text-decoration:none;color:var(--p700);font-weight:700;border-radius:99px;padding:6px 14px;font-size:15px;border:1px solid var(--line);background:#fff;white-space:nowrap}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--p100);outline:none}
+section.part{padding:34px 0 8px}
+.ph{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.ph .no{flex:none;width:46px;height:46px;border-radius:14px;background:var(--p700);color:#fff;font-weight:700;font-size:22px;display:grid;place-items:center}
+.ph h2{font-size:clamp(22px,3vw,30px);font-weight:700;color:var(--p700);line-height:1.3}
+.ph p{color:var(--mute);font-size:15px}
+h3{font-size:19px;font-weight:700;color:var(--p700);margin:0 0 6px}
+.box{border:1px solid var(--line);background:#fff;border-radius:16px;padding:16px 18px;margin-bottom:16px}
+.box.info{background:var(--blue-t);border-color:var(--blue)}.box.tip{background:var(--green-t);border-color:var(--green)}.box.warn{background:var(--amber-t);border-color:var(--amber)}
+.box ul,.box ol{padding-left:1.3em;display:grid;gap:4px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-bottom:16px}
+.role{border-radius:16px;padding:14px 16px;border:1px solid}
+.role b{display:block;font-size:18px;margin-bottom:2px}
+.role.r1{background:var(--teal-t);border-color:var(--teal);color:#0b5e66}.role.r2{background:var(--blue-t);border-color:var(--blue);color:#154a85}.role.r3{background:var(--pink-t);border-color:var(--pink);color:#8a1c54}.role.r4{background:var(--p100);border-color:var(--p600);color:var(--p700)}
+.role p{color:var(--ink);font-size:15px;line-height:1.5}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:6px 0 10px}
+.st{border-radius:12px;padding:6px 14px;font-weight:700;font-size:15px;border:2px solid}
+.s-pend{color:var(--amber);border-color:var(--amber);background:var(--amber-t)}.s-done{color:var(--blue);border-color:var(--blue);background:var(--blue-t)}.s-ok{color:var(--green);border-color:var(--green);background:var(--green-t)}.s-rej{color:#b3261e;border-color:#b3261e;background:var(--red-t)}
+.arrow{color:var(--mute);font-size:20px}
+.legend{display:flex;gap:10px;align-items:center;font-size:15px;color:var(--mute);margin-bottom:14px}
+.mk{display:inline-grid;place-items:center;width:1.5em;height:1.5em;border-radius:50%;background:var(--red);color:#fff;font-weight:700;font-size:.85em;vertical-align:.05em;line-height:1}
+.steps{display:grid;grid-template-columns:1fr;gap:16px}
+.step{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;grid-template-columns:260px 1fr;gap:22px;align-items:start;break-inside:avoid}
+.step figure{margin:0}
+.step img{width:100%;display:block;border-radius:14px;border:2px solid var(--p600);cursor:zoom-in;box-shadow:0 6px 18px #5b1a7a22;background:var(--p100)}
+.step .t{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px}
+.step .n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--p700);color:#fff;font-weight:700;display:grid;place-items:center}
+.step h3{margin:0;line-height:1.35;padding-top:3px}
+.step p{font-size:16px;margin-bottom:6px}
+.step ul{padding-left:1.2em;font-size:16px;display:grid;gap:3px;margin-bottom:6px}
+.note{font-size:14.5px;border-radius:12px;padding:8px 12px;margin-top:6px}
+.note.tip{background:var(--green-t);color:#14562a}.note.warn{background:var(--amber-t);color:#7a4a00}
+table.t{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:15.5px;margin-bottom:16px}
+table.t th,table.t td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+table.t th{background:var(--p100);color:var(--p700)}
+details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 16px;margin-bottom:10px}
+summary{font-weight:700;color:var(--p700);cursor:pointer}
+details p{margin-top:6px;font-size:16px}
+footer{padding:30px 0 50px;color:var(--mute);font-size:14px;text-align:center}
+.lb{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;z-index:50;padding:16px;cursor:zoom-out}
+.lb.on{display:flex}.lb img{max-height:94vh;max-width:min(94vw,520px);border-radius:14px;background:#fff}
+@media (max-width:560px){.step{grid-template-columns:1fr}.step figure{max-width:260px}}
+@media print{nav.toc,.lb{display:none}body{background:#fff;font-size:15px}.step{page-break-inside:avoid}section.part{page-break-before:always}header.top{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="lg"><img src="https://vxfozsxudrkxrjphttxm.supabase.co/storage/v1/object/public/Photo/Thai_color01_0_0.png" alt="ศูนย์กีฬาสิรินธร มหาวิทยาลัยศรีนครินทรวิโรฒ"></div>
+  <h1>คู่มือการใช้งานระบบตรวจความสะอาด</h1>
+  <p>ศูนย์กีฬาสิรินธร มหาวิทยาลัยศรีนครินทรวิโรฒ · ทำตามทีละขั้น พร้อมภาพหน้าจอจริงของระบบ</p>
+</div></header>
+<nav class="toc" aria-label="สารบัญ"><div class="wrap">
+  <a href="#overview">1. ภาพรวมและลงทะเบียน</a>
+  <a href="#cleaner">2. พนักงานทำความสะอาด</a>
+  <a href="#supervisor">3. หัวหน้าแม่บ้าน</a>
+  <a href="#committee">4. คณะกรรมการ</a>
+  <a href="#faq">คำถามที่พบบ่อย</a>
+</div></nav>
+
+<main class="wrap">
+
+<!-- ===================== 1. ภาพรวม + ลงทะเบียน ===================== -->
+<section class="part" id="overview">
+  <div class="ph"><span class="no">1</span><div><h2>ภาพรวมของระบบ และขั้นตอนการลงทะเบียน</h2><p>ใช้ได้ทั้งบนมือถือและคอมพิวเตอร์ ผ่านเว็บเบราว์เซอร์</p></div></div>
+
+  <div class="box info">
+    <h3>ระบบนี้ใช้ทำอะไร</h3>
+    <p>ใช้ตรวจความสะอาดของ <b>12 พื้นที่</b> ในศูนย์กีฬาสิรินธร ทุกวัน — พนักงานทำความสะอาดติ๊กรายการและถ่ายรูปส่งรายงาน หัวหน้าแม่บ้านตรวจผ่านหรือตีกลับให้แก้ไข และคณะกรรมการแจ้งจุดที่ควรปรับปรุง ทุกขั้นตอนมีประวัติและรูปเป็นหลักฐาน</p>
+  </div>
+
+  <h3>ใครทำอะไรในระบบ</h3>
+  <div class="cols">
+    <div class="role r1"><b>พนักงานทำความสะอาด</b><p>ทำเช็คลิสต์ แนบรูป ส่งรายงาน และตอบกลับเมื่อถูกแจ้งแก้ไข</p></div>
+    <div class="role r2"><b>หัวหน้าแม่บ้าน</b><p>ตรวจงาน — ผ่าน (จบงาน) หรือตีกลับให้แก้ไข</p></div>
+    <div class="role r3"><b>คณะกรรมการตรวจความสะอาด</b><p>แจ้งจุดที่ควรปรับปรุง พร้อมรูปและคะแนนดาว</p></div>
+    <div class="role r4"><b>ผู้ดูแลระบบ</b><p>อนุมัติบัญชี จัดการสิทธิ์ ดูแดชบอร์ดและรายงาน (ไม่อยู่ในคู่มือนี้)</p></div>
+  </div>
+
+  <h3>สถานะของงานแต่ละพื้นที่</h3>
+  <div class="flow">
+    <span class="st s-pend">รอทำความสะอาด</span><span class="arrow">→</span>
+    <span class="st s-done">รอหัวหน้าตรวจ</span><span class="arrow">→</span>
+    <span class="st s-ok">ตรวจผ่านแล้ว (จบงาน)</span>
+  </div>
+  <div class="flow">
+    <span class="st s-done">รอหัวหน้าตรวจ</span><span class="arrow">→</span>
+    <span class="st s-rej">ต้องแก้ไข (ตีกลับ)</span><span class="arrow">→</span>
+    <span class="st s-pend">แม่บ้านแก้ไข</span><span class="arrow">→</span>
+    <span class="st s-done">ส่งตรวจอีกครั้ง</span>
+  </div>
+  <p style="color:var(--mute);font-size:15px;margin-bottom:18px">เมื่อหัวหน้าตรวจผ่าน งานของพื้นที่นั้นสิ้นสุดทันที · งานเริ่มใหม่ทุกวัน</p>
+
+  <h3 style="margin-top:8px">ขั้นตอนการลงทะเบียน</h3>
+  <div class="legend"><span class="mk">1</span> วงกลมแดงในภาพ = จุดที่ต้องกดหรือกรอก เรียงตามเลขลำดับ</div>
+  <div class="steps">
+    <article class="step"><figure><img src="manual-img/reg-login.jpg" alt="หน้าเข้าสู่ระบบ" loading="lazy"></figure>
+      <div><div class="t"><span class="n">1</span><h3>เปิดหน้าเข้าสู่ระบบ</h3></div>
+        <p>เปิดเว็บของระบบ จะเจอหน้า <b>เข้าสู่ระบบ</b> ผู้ที่ยังไม่มีบัญชีให้กดปุ่ม <span class="mk">4</span> <b>ลงทะเบียนใช้งานระบบ</b></p>
+        <div class="note tip">มีบัญชีแล้ว? กรอก ID <span class="mk">1</span> และรหัสผ่าน <span class="mk">2</span> แล้วกด <span class="mk">3</span> เข้าสู่ระบบ</div></div></article>
+    <article class="step"><figure><img src="manual-img/reg-role.jpg" alt="เลือกตำแหน่ง" loading="lazy"></figure>
+      <div><div class="t"><span class="n">2</span><h3>เลือกตำแหน่งของคุณ</h3></div>
+        <p>ระบบมี 3 ตำแหน่งให้เลือก แต่ละตำแหน่งแสดง<b>จำนวนที่นั่งที่เหลือ</b></p>
+        <ul><li><span class="mk">1</span> พนักงานทำความสะอาด</li><li><span class="mk">2</span> หัวหน้าแม่บ้าน</li><li><span class="mk">3</span> คณะกรรมการตรวจความสะอาด</li></ul>
+        <div class="note warn">ตำแหน่งที่ขึ้นว่า “เต็มแล้ว” จะกดไม่ได้ ให้ติดต่อผู้ดูแลระบบ</div></div></article>
+    <article class="step"><figure><img src="manual-img/reg-form.jpg" alt="กรอกข้อมูลลงทะเบียน" loading="lazy"></figure>
+      <div><div class="t"><span class="n">3</span><h3>กรอกข้อมูลให้ครบ</h3></div>
+        <ul><li><span class="mk">1</span> ชื่อ-นามสกุล</li><li><span class="mk">2</span> เบอร์โทร 10 หลัก (ระบบใส่ขีดให้เอง)</li><li><span class="mk">3</span> ID สำหรับเข้าสู่ระบบ — ตัวอักษรอังกฤษ ตัวเลข . _ - ยาว 4–30 ตัว</li><li><span class="mk">4</span> รหัสผ่าน อย่างน้อย 8 ตัว แล้วพิมพ์ซ้ำในช่องยืนยัน</li></ul>
+        <p>จากนั้นกด <span class="mk">5</span> <b>ส่งคำขอลงทะเบียน</b></p>
+        <div class="note tip">กดรูปดวงตาเพื่อดูรหัสผ่านที่พิมพ์ · รหัสผ่านต้องไม่ใช่ตัวเลขล้วนหรือรหัสที่เดาง่าย</div></div></article>
+    <article class="step"><figure><img src="manual-img/reg-done.jpg" alt="ส่งคำขอสำเร็จ" loading="lazy"></figure>
+      <div><div class="t"><span class="n">4</span><h3>รอผู้ดูแลระบบอนุมัติ</h3></div>
+        <p>เมื่อเห็นข้อความ <b>“ส่งคำขอลงทะเบียนแล้ว”</b> ให้กด <b>ตกลง</b> แล้วรอผู้ดูแลระบบอนุมัติบัญชี</p>
+        <p>เมื่ออนุมัติแล้ว กลับมาเข้าสู่ระบบด้วย ID และรหัสผ่านที่ตั้งไว้ ระบบจะพาเข้าหน้าของตำแหน่งคุณโดยอัตโนมัติ</p>
+        <div class="note warn">ยังเข้าไม่ได้ = บัญชียังรออนุมัติ ติดต่อผู้ดูแลระบบ</div></div></article>
+  </div>
+  <div class="box" style="margin-top:16px"><h3>ทราบไว้ก่อนใช้งาน</h3>
+    <ul><li>ติ๊ก <b>“จดจำฉันไว้ในเครื่องนี้”</b> จะจำชื่อผู้ใช้และเข้าระบบอัตโนมัติ 14 วัน — เลือกเฉพาะเครื่องส่วนตัว กดปุ่ม <b>ออก</b> เพื่อยกเลิก</li>
+    <li>เปลี่ยนรหัสผ่านได้ที่ปุ่ม <b>เปลี่ยนรหัสผ่าน</b> มุมขวาบน · ลืมรหัสผ่านให้ติดต่อผู้ดูแลระบบ</li>
+    <li>ล็อกอินผิดติดกัน 5 ครั้ง ระบบจะล็อก 15 นาที</li></ul></div>
+</section>
+
+<!-- ===================== 2. พนักงานทำความสะอาด ===================== -->
+<section class="part" id="cleaner">
+  <div class="ph"><span class="no">2</span><div><h2>การใช้งาน — พนักงานทำความสะอาด</h2><p>ทำเช็คลิสต์ แนบรูป ส่งรายงานให้หัวหน้าตรวจ</p></div></div>
+  <div class="steps">
+    <article class="step"><figure><img src="manual-img/cl-list.jpg" alt="เลือกพื้นที่" loading="lazy"></figure>
+      <div><div class="t"><span class="n">1</span><h3>เลือกพื้นที่ที่จะทำ</h3></div>
+        <p>หลังเข้าสู่ระบบจะเห็นการ์ดพื้นที่ทั้ง 12 แห่ง ดูป้ายสถานะมุมการ์ด</p>
+        <ul><li><span class="mk">1</span> สลับแท็บ <b>ทุกพื้นที่</b> / <b>แจ้งแก้ไข</b></li><li><span class="mk">2</span> พื้นที่ <b>รอทำความสะอาด</b> — กดเพื่อเริ่มทำงาน</li><li><span class="mk">3</span> พื้นที่ <b>ต้องแก้ไข</b> (กรอบแดง) — หัวหน้าตีกลับ มีข้อความบอกสิ่งที่ต้องแก้</li></ul></div></article>
+    <article class="step"><figure><img src="manual-img/cl-open.jpg" alt="หน้าพื้นที่" loading="lazy"></figure>
+      <div><div class="t"><span class="n">2</span><h3>ดูรายการจุดทำความสะอาด</h3></div>
+        <p>หน้าพื้นที่แสดง <span class="mk">1</span> แถบความคืบหน้า (เช่น 2/7 จุด) และ <span class="mk">2</span> รายการจุดที่ต้องทำความสะอาด</p>
+        <p>กดปุ่ม <b>‹ กลับไปเลือกพื้นที่</b> ได้ทุกเมื่อ ข้อมูลที่ติ๊กไว้ไม่หาย</p></div></article>
+    <article class="step"><figure><img src="manual-img/cl-tick.jpg" alt="ติ๊กเช็คลิสต์" loading="lazy"></figure>
+      <div><div class="t"><span class="n">3</span><h3>ติ๊กเมื่อทำเสร็จทีละจุด</h3></div>
+        <p>ทำความสะอาดแต่ละจุดเสร็จแล้ว กดที่รายการนั้น <span class="mk">1</span> จะขึ้นเครื่องหมายถูกและขีดฆ่าข้อความ</p>
+        <div class="note tip">ติ๊กผิด? กดซ้ำที่รายการเดิมเพื่อยกเลิก</div></div></article>
+    <article class="step"><figure><img src="manual-img/cl-send.jpg" alt="แนบรูปและหมายเหตุ" loading="lazy"></figure>
+      <div><div class="t"><span class="n">4</span><h3>แนบรูป พิมพ์หมายเหตุ</h3></div>
+        <ul><li><span class="mk">1</span> กด <b>ถ่าย/เลือกรูป</b> เพื่อถ่ายหรือเลือกรูปหลังทำความสะอาด <b>อย่างน้อย 1 รูป</b></li><li><span class="mk">2</span> พิมพ์หมายเหตุ (ถ้ามี) เช่น น้ำยาหมด ก๊อกน้ำรั่ว</li><li><span class="mk">3</span> กด <b>ส่งรายงาน</b></li></ul>
+        <div class="note tip">กดเครื่องหมาย × บนรูปเพื่อลบรูปที่ไม่ต้องการ</div></div></article>
+    <article class="step"><figure><img src="manual-img/cl-confirm.jpg" alt="ยืนยันส่งรายงาน" loading="lazy"></figure>
+      <div><div class="t"><span class="n">5</span><h3>ยืนยันการส่ง</h3></div>
+        <p>ระบบถามยืนยัน — กด <span class="mk">1</span> <b>ส่งรายงาน</b> เพื่อส่ง หรือ <b>ยกเลิก</b> เพื่อกลับไปแก้</p>
+        <div class="note warn">ถ้ายังติ๊กไม่ครบ ระบบจะบอกจำนวนจุดที่เหลือก่อนให้ยืนยัน</div></div></article>
+    <article class="step"><figure><img src="manual-img/cl-sent.jpg" alt="ส่งรายงานสำเร็จ" loading="lazy"></figure>
+      <div><div class="t"><span class="n">6</span><h3>ส่งสำเร็จ รอหัวหน้าตรวจ</h3></div>
+        <p>เมื่อขึ้น <b>“ส่งรายงานสำเร็จ”</b> กด <b>ตกลง</b> พื้นที่นั้นจะเปลี่ยนเป็น <b>รอหัวหน้าตรวจ</b> แล้วเลือกพื้นที่ถัดไปทำต่อได้เลย</p></div></article>
+    <article class="step"><figure><img src="manual-img/cl-fix.jpg" alt="แท็บแจ้งแก้ไข" loading="lazy"></figure>
+      <div><div class="t"><span class="n">7</span><h3>มีเรื่องให้แก้ไข? ดูที่แท็บ “แจ้งแก้ไข”</h3></div>
+        <p>แท็บ <span class="mk">1</span> <b>แจ้งแก้ไข (n)</b> รวมงานที่ต้องแก้ไข</p>
+        <ul><li><span class="mk">2</span> กล่องสีฟ้า = ข้อเสนอแนะจากคณะกรรมการ · กล่องสีแดง = หัวหน้าตีกลับ พร้อมเหตุผล</li><li><span class="mk">3</span> กด <b>ตอบกลับ / แนบรูป</b> หลังแก้ไขเสร็จ</li></ul></div></article>
+    <article class="step"><figure><img src="manual-img/cl-reply.jpg" alt="ตอบกลับพร้อมรูป" loading="lazy"></figure>
+      <div><div class="t"><span class="n">8</span><h3>ตอบกลับพร้อมรูปหลังแก้ไข</h3></div>
+        <ul><li><span class="mk">1</span> พิมพ์ว่าแก้ไขอะไรไปแล้ว</li><li><span class="mk">2</span> แนบรูปหลังแก้ไข (อย่างน้อย 1 รูป)</li><li><span class="mk">3</span> กด <b>ส่งแจ้งการแก้ไข</b></li></ul>
+        <div class="note tip">ส่งแล้วงานกลับไปที่หัวหน้าแม่บ้านเพื่อ<b>ตรวจอีกครั้ง</b> สถานะเปลี่ยนเป็น “รอหัวหน้าตรวจ”</div></div></article>
+  </div>
+</section>
+
+<!-- ===================== 3. หัวหน้าแม่บ้าน ===================== -->
+<section class="part" id="supervisor">
+  <div class="ph"><span class="no">3</span><div><h2>การใช้งาน — หัวหน้าแม่บ้าน</h2><p>ตรวจงานที่พนักงานส่ง — ผ่านหรือตีกลับ</p></div></div>
+  <div class="steps">
+    <article class="step"><figure><img src="manual-img/sv-list.jpg" alt="รายการรอตรวจ" loading="lazy"></figure>
+      <div><div class="t"><span class="n">1</span><h3>ดูรายการที่รอตรวจ</h3></div>
+        <p>เข้าสู่ระบบแล้วจะอยู่ที่แท็บ <span class="mk">1</span> <b>รอตรวจ</b> (ตัวเลขคือจำนวนงานที่รอ)</p>
+        <ul><li><b>ทั้งหมด</b> — ดูทุกพื้นที่และสถานะ</li><li><b>แจ้งแก้ไข</b> — เรื่องที่รอแม่บ้านแก้หรือรอตรวจซ้ำ</li></ul>
+        <p>กดการ์ดพื้นที่ <span class="mk">2</span> เพื่อเปิดดูรายละเอียด</p></div></article>
+    <article class="step"><figure><img src="manual-img/sv-open.jpg" alt="ดูรายงานของแม่บ้าน" loading="lazy"></figure>
+      <div><div class="t"><span class="n">2</span><h3>ตรวจรายงานของพนักงาน</h3></div>
+        <p>หน้าต่างรายละเอียดแสดง <span class="mk">1</span> รายการที่ติ๊กครบหรือไม่ หมายเหตุของพนักงาน <span class="mk">2</span> รูปที่ถ่ายส่ง และประวัติวันนี้ — เลื่อนลงเพื่อดูให้ครบก่อนตัดสิน</p></div></article>
+    <article class="step"><figure><img src="manual-img/sv-act.jpg" alt="ปุ่มตรวจผ่านและตีกลับ" loading="lazy"></figure>
+      <div><div class="t"><span class="n">3</span><h3>เลือก “ตรวจผ่าน” หรือ “ตีกลับ”</h3></div>
+        <p>ด้านล่างของหน้าต่างมีช่องบันทึกและปุ่มตัดสิน</p>
+        <ul><li><span class="mk">1</span> หมายเหตุ / จุดที่ต้องแก้ไข</li><li><span class="mk">4</span> แนบรูป (จำเป็นเมื่อพบจุดบกพร่อง)</li><li><span class="mk">3</span> <b>ตรวจผ่าน (สิ้นสุดงาน)</b> — งานจบ ไม่ต้องตรวจซ้ำ</li><li><span class="mk">2</span> <b>ตีกลับให้แก้ไข</b> — งานกลับไปหาพนักงาน</li></ul></div></article>
+    <article class="step"><figure><img src="manual-img/sv-confirm.jpg" alt="ยืนยันตรวจผ่าน" loading="lazy"></figure>
+      <div><div class="t"><span class="n">4</span><h3>ยืนยัน “ตรวจผ่าน”</h3></div>
+        <p>กด <b>ตรวจผ่าน</b> เพื่อยืนยัน พื้นที่จะขึ้นสถานะ <b>ตรวจผ่านแล้ว</b> และงานของพื้นที่นั้นสิ้นสุดทันที</p></div></article>
+    <article class="step"><figure><img src="manual-img/sv-reject.jpg" alt="ยืนยันตีกลับ" loading="lazy"></figure>
+      <div><div class="t"><span class="n">5</span><h3>ตีกลับให้แก้ไข</h3></div>
+        <p>พิมพ์สิ่งที่ต้องแก้ แนบรูปจุดบกพร่อง แล้วกด <b>ตีกลับให้แก้ไข</b> → ยืนยัน พนักงานจะเห็นข้อความของคุณในแท็บแจ้งแก้ไข</p>
+        <div class="note warn">ควรระบุตำแหน่งและสิ่งที่ต้องแก้ให้ชัดเจน พนักงานจะได้แก้ได้ถูกจุด</div></div></article>
+    <article class="step"><figure><img src="manual-img/sv-fix.jpg" alt="แท็บแจ้งแก้ไข" loading="lazy"></figure>
+      <div><div class="t"><span class="n">6</span><h3>ติดตามและตรวจซ้ำที่แท็บ “แจ้งแก้ไข”</h3></div>
+        <p>แท็บ <span class="mk">1</span> รวมเรื่องที่ตีกลับและข้อเสนอแนะของคณะกรรมการ ในการ์ด <span class="mk">2</span></p>
+        <ul><li>พนักงานตอบกลับแล้ว → ขึ้น <b>รอหัวหน้าตรวจ</b> กดเข้าไป <b>ตรวจงาน</b> ซ้ำ</li><li>ข้อเสนอแนะของกรรมการ → กด <b>ตอบกลับ / รับทราบ</b> แจ้งสิ่งที่ดำเนินการ (แนบรูปได้)</li></ul></div></article>
+  </div>
+</section>
+
+<!-- ===================== 4. คณะกรรมการ ===================== -->
+<section class="part" id="committee">
+  <div class="ph"><span class="no">4</span><div><h2>การใช้งาน — คณะกรรมการตรวจความสะอาด</h2><p>แจ้งจุดที่ควรปรับปรุง ไม่ต้องอนุมัติงาน</p></div></div>
+  <div class="box info"><b>จุดสำคัญ:</b> คณะกรรมการ<b>ไม่อนุมัติและไม่เปลี่ยนสถานะงาน</b> — ทำหน้าที่แจ้งข้อเสนอแนะ แล้วหัวหน้าแม่บ้านและพนักงานจะเห็นในแท็บ “แจ้งแก้ไข”</div>
+  <div class="steps">
+    <article class="step"><figure><img src="manual-img/mg-list.jpg" alt="รายการพื้นที่" loading="lazy"></figure>
+      <div><div class="t"><span class="n">1</span><h3>เลือกพื้นที่ที่ตรวจพบ</h3></div>
+        <p>เข้าสู่ระบบแล้วจะเห็นทุกพื้นที่พร้อมสถานะของวัน กดการ์ดพื้นที่ <span class="mk">1</span> ที่ต้องการแจ้งปรับปรุง</p>
+        <p>การ์ดที่เคยมีข้อเสนอแนะ จะแสดงคะแนนดาวและข้อความล่าสุดไว้ด้วย</p></div></article>
+    <article class="step"><figure><img src="manual-img/mg-form.jpg" alt="ฟอร์มแจ้งจุดปรับปรุง" loading="lazy"></figure>
+      <div><div class="t"><span class="n">2</span><h3>กรอกจุดที่ควรปรับปรุง</h3></div>
+        <ul><li><span class="mk">1</span> พิมพ์ตำแหน่งและสิ่งที่ควรปรับปรุง (จำเป็น)</li><li><span class="mk">2</span> แนบรูป (ไม่บังคับ)</li><li><span class="mk">3</span> ให้คะแนนความสะอาด 1–5 ดาว (ไม่บังคับ กดดาวเดิมซ้ำเพื่อล้าง)</li><li><span class="mk">4</span> กด <b>แจ้งจุดปรับปรุง</b></li></ul></div></article>
+    <article class="step"><figure><img src="manual-img/mg-confirm.jpg" alt="ยืนยันแจ้งจุดปรับปรุง" loading="lazy"></figure>
+      <div><div class="t"><span class="n">3</span><h3>ยืนยันการแจ้ง</h3></div>
+        <p>ระบบแสดงสรุปข้อความและคะแนน กด <b>แจ้งปรับปรุง</b> เพื่อยืนยัน</p>
+        <div class="note tip">แจ้งได้ทุกเวลา ไม่จำกัดจำนวนครั้ง</div></div></article>
+    <article class="step"><figure><img src="manual-img/mg-sent.jpg" alt="แจ้งสำเร็จ" loading="lazy"></figure>
+      <div><div class="t"><span class="n">4</span><h3>แจ้งสำเร็จ</h3></div>
+        <p>เมื่อขึ้น <b>“แจ้งจุดปรับปรุงแล้ว”</b> ข้อเสนอแนะของคุณจะถูกส่งไปที่แท็บ <b>แจ้งแก้ไข</b> ของพนักงานและหัวหน้าแม่บ้านทันที พร้อมบันทึกประวัติ</p></div></article>
+  </div>
+</section>
+
+<!-- ===================== คำถามที่พบบ่อย ===================== -->
+<section class="part" id="faq">
+  <div class="ph"><span class="no">?</span><div><h2>คำถามที่พบบ่อย</h2></div></div>
+  <details><summary>เข้าสู่ระบบไม่ได้ ขึ้นว่ารออนุมัติ</summary><p>บัญชีที่ลงทะเบียนใหม่ต้องให้ผู้ดูแลระบบอนุมัติก่อน ติดต่อผู้ดูแลระบบให้ตรวจรายการลงทะเบียน</p></details>
+  <details><summary>ลืมรหัสผ่าน</summary><p>ติดต่อผู้ดูแลระบบเพื่อรีเซ็ต ระบบจะให้รหัสชั่วคราว และบังคับให้ตั้งรหัสใหม่ของคุณเองตอนเข้าครั้งแรก</p></details>
+  <details><summary>ส่งรายงานไม่ได้ ขึ้นให้แนบรูป</summary><p>ต้องแนบรูปหลังทำความสะอาดอย่างน้อย 1 รูปก่อนส่ง รออัปโหลดรูปเสร็จ (ไอคอนหมุนหายไป) แล้วกดส่งอีกครั้ง</p></details>
+  <details><summary>ปุ่มส่งหรือติ๊กไม่ทำงาน</summary><p>ผู้ดูแลระบบอาจปิดสิทธิ์บางอย่างชั่วคราว จะมีข้อความแจ้งบนหน้าจอ หากไม่แน่ใจให้ติดต่อผู้ดูแลระบบ</p></details>
+  <details><summary>ส่งแล้วต้องการแก้ไขรายงาน</summary><p>แจ้งหัวหน้าแม่บ้านให้ตีกลับ แล้วแก้ไขและส่งใหม่ผ่านหน้าพื้นที่หรือแท็บแจ้งแก้ไข</p></details>
+  <details><summary>จะออกจากระบบอย่างไร</summary><p>กดปุ่ม <b>ออก</b> มุมขวาบน ถ้าเปิดใช้ “จดจำฉัน” การกดออกจะยกเลิกการเข้าอัตโนมัติของเครื่องนั้นด้วย</p></details>
+</section>
+</main>
+
+<footer><div class="wrap">คู่มือการใช้งานระบบตรวจความสะอาด · ศูนย์กีฬาสิรินธร มหาวิทยาลัยศรีนครินทรวิโรฒ<br>ภาพประกอบเป็นหน้าจอตัวอย่างของระบบ (ข้อมูลและชื่อเป็นข้อมูลทดลอง)</div></footer>
+
+<div class="lb" id="lb" role="dialog" aria-label="ดูภาพขยาย"><img alt=""></div>
+<script>
+const lb=document.getElementById('lb'),li=lb.querySelector('img');
+document.addEventListener('click',e=>{const im=e.target.closest('.step img');if(im){li.src=im.src;li.alt=im.alt;lb.classList.add('on')}else if(lb.classList.contains('on'))lb.classList.remove('on')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
+</script>
+</body>
+</html>
