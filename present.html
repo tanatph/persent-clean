@@ -61,7 +61,12 @@ p,li{font-size:clamp(15px,1.7vw,21px);line-height:1.55}
 .fbar .ttl{flex:1;text-align:center;font-weight:700}
 .fbar a,.fbar button{color:#fff;font:inherit;font-size:12px;font-weight:700;background:#ffffff26;border:1px solid #ffffff55;border-radius:8px;padding:2px 10px;text-decoration:none;cursor:pointer}
 .fbar a:hover,.fbar button:hover{background:#ffffff40}
-.frame iframe{flex:1;border:0;width:100%;min-height:0;background:#fff}
+.frame iframe{flex:1;border:0;width:100%;min-height:0;background:#fff;transition:width .25s}
+.frame.phone{background:var(--p100)}
+.frame.phone iframe{flex:1;width:390px;max-width:calc(100% - 16px);align-self:center;margin:10px 0;border:7px solid var(--ink);border-radius:30px;box-shadow:0 8px 24px #0004}
+.fbar .vw{display:inline-flex;gap:0;border:1px solid #ffffff77;border-radius:8px;overflow:hidden}
+.fbar .vw button{border:0;border-radius:0;background:transparent;padding:2px 10px}
+.fbar .vw button.on{background:#fff;color:var(--p700)}
 .side .st{padding:3px 8px;font-size:12px;border-width:1px}.side .arrow{font-size:14px}.big{font-size:clamp(28px,3.6vw,46px);font-weight:700;color:var(--p700);line-height:1}
 .nav{position:fixed;left:0;right:0;bottom:0;height:7vh;min-height:48px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 3vw;background:var(--bg);border-top:1px solid var(--line);z-index:5}
 .nav button{font:inherit;font-weight:700;border:1px solid var(--p700);background:var(--bg);color:var(--p700);border-radius:10px;padding:8px 16px;cursor:pointer;min-height:40px}
@@ -278,10 +283,14 @@ S.forEach((s,k)=>{
   if(!s.classList.contains('cover')){const l=document.createElement('img');l.className='logo-s';l.alt='';l.src=LOGO;l.onerror=()=>l.remove();s.appendChild(l)}
   const src=s.dataset.src; if(!src)return;
   const f=document.createElement('div');f.className='frame';
-  f.innerHTML='<div class="fbar"><span class="dots"><i></i><i></i><i></i></span><span class="ttl"></span><a target="_blank" rel="noopener">เปิดเต็มจอ ↗</a></div><iframe title="" loading="lazy"></iframe>';
+  f.innerHTML='<div class="fbar"><span class="dots"><i></i><i></i><i></i></span><span class="ttl"></span><span class="vw" role="group" aria-label="มุมมอง"><button type="button" data-v="pc">คอมพิวเตอร์</button><button type="button" data-v="phone">มือถือ</button></span><a target="_blank" rel="noopener">เปิดเต็มจอ ↗</a></div><iframe title="" loading="lazy"></iframe>';
   f.querySelector('.ttl').textContent=s.dataset.title+' · ใช้งานได้จริง';f.querySelector('a').href=src.replace('embed=1&','');f.querySelector('iframe').title=s.dataset.title;
   s.querySelector('.live').appendChild(f);
 });
+let VIEW='pc';try{VIEW=(/[?&]view=phone/.test(location.search)||localStorage.getItem('presView')==='phone')?'phone':'pc'}catch(e){}
+const setView=v=>{VIEW=v;try{localStorage.setItem('presView',v)}catch(e){}document.querySelectorAll('.frame').forEach(f=>{f.classList.toggle('phone',v==='phone');f.querySelectorAll('.vw button').forEach(b=>b.classList.toggle('on',b.dataset.v===v))})};
+document.addEventListener('click',e=>{const b=e.target.closest('.vw button');if(b)setView(b.dataset.v)});
+setView(VIEW);
 const load=s=>{const fr=s&&s.querySelector('iframe');if(fr&&!fr.getAttribute('src'))fr.setAttribute('src',s.dataset.src)};
 const go=n=>{i=Math.max(0,Math.min(S.length-1,n));S.forEach((s,k)=>s.classList.toggle('on',k===i));load(S[i]);load(S[i+1]);
   document.getElementById('pg').textContent=(i+1)+' / '+S.length;document.getElementById('pbar').style.width=((i+1)/S.length*100)+'%';try{history.replaceState(null,'','#'+(i+1))}catch(e){}};
