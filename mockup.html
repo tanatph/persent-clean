@@ -61,7 +61,8 @@
   h1{font-size:17px;font-weight:700} h2{font-size:20px;font-weight:700} h3{font-size:15px;font-weight:700}
 
   /* mockup banner — DS Toast Warning tokens (yellow-50 / yellow-950 text) */
-  /* @dev:start */.devrole{position:fixed;z-index:60;right:12px;bottom:84px;width:190px;background:var(--white);border:1px solid var(--swu-purple-700);border-radius:var(--r-lg);box-shadow:0 8px 24px rgb(0 0 0/.22);font-size:13px;user-select:none;touch-action:none}.devrole .dh{cursor:grab;background:var(--swu-purple-700);color:#fff;padding:6px 10px;border-radius:calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px) 0 0;font-weight:700;display:flex;justify-content:space-between;gap:8px}.devrole.drag .dh{cursor:grabbing}.devrole .db{display:grid;gap:6px;padding:8px}.devrole .db button{padding:8px;border-radius:var(--r-md);border:1px solid var(--gray-300,#ccc);font-weight:700;text-align:left}.devrole .db button.on{background:var(--swu-purple-700);color:#fff}.devrole.min .db{display:none}/* @dev:end */
+  /* @dev:start */.emb-mode .mock-banner,.emb-mode #devRole{display:none!important}/* @dev:end */
+/* @dev:start */.devrole{position:fixed;z-index:60;right:12px;bottom:84px;width:190px;background:var(--white);border:1px solid var(--swu-purple-700);border-radius:var(--r-lg);box-shadow:0 8px 24px rgb(0 0 0/.22);font-size:13px;user-select:none;touch-action:none}.devrole .dh{cursor:grab;background:var(--swu-purple-700);color:#fff;padding:6px 10px;border-radius:calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px) 0 0;font-weight:700;display:flex;justify-content:space-between;gap:8px}.devrole.drag .dh{cursor:grabbing}.devrole .db{display:grid;gap:6px;padding:8px}.devrole .db button{padding:8px;border-radius:var(--r-md);border:1px solid var(--gray-300,#ccc);font-weight:700;text-align:left}.devrole .db button.on{background:var(--swu-purple-700);color:#fff}.devrole.min .db{display:none}/* @dev:end */
 /* @dev:start */.mock-banner{background:var(--yellow-50);color:var(--yellow-950);font-size:12px;font-weight:400;text-align:center;padding:7px 10px;border-bottom:1px solid var(--yellow-100)}/* @dev:end */
 
   /* top bar — brand surface (swu-purple-600), text-on-brand per DS-#052/#054 */
@@ -2402,7 +2403,18 @@ setInterval(() => {
 
 try { localStorage.removeItem('locsSnap'); } catch (e) {}   // สำเนาแบบเก่า (localStorage) จากเวอร์ชันก่อน
 /* @dev:start */ensureLocalAuth();
-load(true).then(() => S.auth && goRole(S.auth.role));/* @dev:end */
+/* ฝังใน present.html: mockup.html?embed=1&role=cleaner|supervisor|manager|admin|home&tab=…&open=รหัสพื้นที่ — เปิดฉากตัวอย่างโดยไม่ต้องล็อกอิน */
+const EMB = new URLSearchParams(location.search);
+if (EMB.has('embed')) document.documentElement.classList.add('emb-mode');
+async function embedScene() {
+  const role = EMB.get('role'), tab = EMB.get('tab'), open = Number(EMB.get('open')) || 0;
+  if (role === 'home') { S.auth = null; store.del('auth'); S.view = 'home'; S.locs = []; S.loaded = true; render(); return; }
+  await devSwitchRole(role);
+  if (tab) { S.adminTab = role === 'admin' ? tab : S.adminTab; if (role !== 'admin') S.tab = tab; render(); if (role === 'admin') loadAdmin(); }
+  if (open) { S.openId = open; openModal('detail'); }
+}
+if (EMB.get('role')) embedScene();
+else load(true).then(() => S.auth && goRole(S.auth.role));/* @dev:end */
 /* @prod:start
 load(true).then(() => (S.auth ? goRole(S.auth.role) : autoLogin()));
 @prod:end */

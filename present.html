@@ -13,84 +13,71 @@
 html,body{height:100%}
 body{font-family:'Noto Sans Thai',system-ui,sans-serif;font-weight:400;color:var(--ink);background:var(--p50);overflow:hidden}
 .deck{height:100vh;position:relative}
-.slide{position:absolute;inset:0;padding:5vh 6vw 9.5vh;display:none;flex-direction:column;justify-content:center;gap:2vh;background:var(--bg)}
-.slide.on{display:flex;animation:in .35s ease}
-@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.slide{position:absolute;inset:0;padding:3.5vh 4vw 8.5vh;display:none;flex-direction:column;gap:1.6vh;background:var(--bg)}
+.slide.on{display:flex;animation:in .3s ease}
+.slide.mid{justify-content:center}
+@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.slide.on{animation:none}}
 h1{font-size:clamp(30px,4.8vw,56px);font-weight:700;line-height:1.25}
-h2{font-size:clamp(24px,3.2vw,38px);font-weight:700;color:var(--p700);line-height:1.3}
+h2{font-size:clamp(22px,2.8vw,34px);font-weight:700;color:var(--p700);line-height:1.25}
 h3{font-size:clamp(16px,1.8vw,21px);font-weight:700;color:var(--p700)}
-p,li{font-size:clamp(15px,1.8vw,22px);line-height:1.6}
+p,li{font-size:clamp(15px,1.7vw,21px);line-height:1.55}
 .mute{color:var(--mute)}
 .ic{width:1.6em;height:1.6em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.ib{width:clamp(46px,5vw,64px);height:clamp(46px,5vw,64px);border-radius:16px;display:grid;place-items:center;flex:none}
+.ib{width:clamp(40px,4.4vw,56px);height:clamp(40px,4.4vw,56px);border-radius:14px;display:grid;place-items:center;flex:none}
 .ib .ic{width:58%;height:58%}
 .c-p{background:var(--p100);color:var(--p700)}.c-r{background:var(--red-t);color:var(--red)}.c-g{background:var(--green-t);color:var(--green)}.c-b{background:var(--blue-t);color:var(--blue)}.c-a{background:var(--amber-t);color:var(--amber)}.c-t{background:var(--teal-t);color:var(--teal)}.c-k{background:var(--pink-t);color:var(--pink)}
-.head{display:flex;align-items:center;gap:14px}
-.logo-s{position:absolute;top:2.2vh;right:3vw;height:clamp(36px,6vh,60px)}
-.tag{display:inline-flex;align-items:center;gap:8px;background:var(--p100);color:var(--p700);font-weight:700;border-radius:99px;padding:4px 14px;font-size:clamp(13px,1.4vw,17px);width:max-content}
-.cover{background:var(--p700);color:#fff;justify-content:center}
+.head{display:flex;align-items:center;gap:12px;padding-right:9vw}
+.tag{display:inline-flex;align-items:center;gap:8px;background:var(--p100);color:var(--p700);font-weight:700;border-radius:99px;padding:3px 12px;font-size:clamp(12px,1.3vw,16px);width:max-content}
+.logo-s{position:absolute;top:2vh;right:3vw;height:clamp(34px,6vh,56px)}
+.cover{background:var(--p700);color:#fff;justify-content:center;gap:2.2vh}
 .cover h1,.cover p{color:#fff}
 .cover .lg{background:#fff;border-radius:18px;padding:12px 22px;width:max-content;max-width:90%}
 .cover .lg img{height:clamp(60px,14vh,120px);display:block}
-.cover .chips{display:flex;flex-wrap:wrap;gap:10px}
-.cover .chips span{background:#ffffff26;border:1px solid #ffffff55;border-radius:99px;padding:6px 16px;font-weight:700;font-size:clamp(13px,1.5vw,18px);display:inline-flex;align-items:center;gap:8px}
-.grid{display:grid;gap:1.8vh 1.4vw}
-.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g5{grid-template-columns:repeat(5,1fr)}
-.card{border:1px solid var(--line);border-radius:16px;padding:2vh 1.4vw;background:var(--bg);display:flex;flex-direction:column;gap:1vh}
-.card p{font-size:clamp(13px,1.5vw,18px);line-height:1.5}
-.card.t-p{background:var(--p50);border-color:var(--p600)}.card.t-b{background:var(--blue-t);border-color:var(--blue)}.card.t-g{background:var(--green-t);border-color:var(--green)}.card.t-a{background:var(--amber-t);border-color:var(--amber)}.card.t-t{background:var(--teal-t);border-color:var(--teal)}.card.t-k{background:var(--pink-t);border-color:var(--pink)}
-.two{display:grid;grid-template-columns:1.05fr 1fr;gap:3vw;align-items:center}
-.steps{display:grid;gap:1.5vh}
-.step{display:flex;gap:12px;align-items:flex-start}
-.n{flex:none;width:2em;height:2em;border-radius:50%;background:var(--p700);color:#fff;font-weight:700;display:grid;place-items:center;font-size:clamp(13px,1.5vw,18px)}
-.step p{font-size:clamp(14px,1.65vw,20px);line-height:1.5}
-.flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
-.st{border-radius:12px;padding:10px 16px;font-weight:700;font-size:clamp(14px,1.6vw,19px);border:2px solid;display:inline-flex;align-items:center;gap:8px}
+.cover .tag{background:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips span{background:#ffffff26;border:1px solid #ffffff55;border-radius:99px;padding:6px 16px;font-weight:700;font-size:clamp(13px,1.5vw,18px);display:inline-flex;align-items:center;gap:8px}
+.grid{display:grid;gap:1.6vh 1.4vw}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.card{border:1px solid var(--line);border-radius:16px;padding:1.8vh 1.3vw;background:var(--bg);display:flex;flex-direction:column;gap:.8vh}
+.card p{font-size:clamp(13px,1.45vw,18px);line-height:1.45}
+.card.t-p{background:var(--p50);border-color:var(--p600)}.card.t-b{background:var(--blue-t);border-color:var(--blue)}.card.t-g{background:var(--green-t);border-color:var(--green)}.card.t-a{background:var(--amber-t);border-color:var(--amber)}.card.t-t{background:var(--teal-t);border-color:var(--teal)}.card.t-k{background:var(--pink-t);border-color:var(--pink)}.card.t-r{background:var(--red-t);border-color:var(--red)}
+.row{display:flex;gap:12px;align-items:center}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.st{border-radius:12px;padding:8px 14px;font-weight:700;font-size:clamp(13px,1.5vw,18px);border:2px solid;display:inline-flex;align-items:center;gap:8px}
 .s-pend{color:var(--amber);border-color:var(--amber);background:var(--amber-t)}.s-done{color:var(--blue);border-color:var(--blue);background:var(--blue-t)}.s-ok{color:var(--green);border-color:var(--green);background:var(--green-t)}.s-rej{color:var(--red);border-color:var(--red);background:var(--red-t)}
-.arrow{font-size:clamp(20px,2.4vw,30px);color:var(--mute)}
-/* mini screens (จำลองหน้าจอจริงของระบบ) */
-.scr{border:2px solid var(--p700);border-radius:18px;background:#fff;overflow:hidden;box-shadow:0 10px 30px #5b1a7a26;width:100%;max-width:520px;justify-self:center;font-size:clamp(11px,1.25vw,15px)}
-.scr .bar1{background:var(--p700);color:#fff;padding:8px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:700}
-.scr .bd{padding:12px;display:grid;gap:8px}
-.mi{border:1px solid var(--line);border-radius:12px;padding:9px 11px;display:flex;align-items:center;gap:10px;background:#fff}
-.mi b{font-weight:700}
-.mi .sp{flex:1}
-.chip{border-radius:99px;padding:2px 10px;font-weight:700;font-size:.9em;white-space:nowrap}
-.chip.r{background:var(--red-t);color:var(--red)}.chip.g{background:var(--green-t);color:var(--green)}.chip.b{background:var(--blue-t);color:var(--blue)}.chip.a{background:var(--amber-t);color:var(--amber)}.chip.p{background:var(--p100);color:var(--p700)}
-.ck{width:1.4em;height:1.4em;border-radius:6px;border:2px solid var(--p600);display:grid;place-items:center;flex:none;color:#fff}
-.ck.on{background:var(--p600)}.ck .ic{width:80%;height:80%;stroke-width:3}
-.btn{background:var(--p700);color:#fff;border-radius:10px;padding:9px;text-align:center;font-weight:700}
-.btn.o{background:#fff;color:var(--p700);border:2px solid var(--p700)}.btn.rd{background:var(--red)}.btn.gr{background:var(--green)}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.tabs{display:flex;gap:6px}.tabs span{flex:1;text-align:center;padding:7px;border-radius:10px;font-weight:700;background:var(--p50);color:var(--mute)}.tabs span.on{background:var(--p700);color:#fff}
-.areas{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.ar{border-radius:12px;padding:8px;font-weight:700;display:grid;gap:4px;justify-items:center;text-align:center;border:1px solid var(--line)}
-.ar .ic{width:1.8em;height:1.8em}
-.photo{height:54px;border-radius:10px;background:var(--p100);display:grid;place-items:center;color:var(--p600)}
-.bars{display:grid;gap:7px}
-.bar{display:grid;grid-template-columns:7.5em 1fr 2.6em;gap:8px;align-items:center}
-.bar i{display:block;height:14px;border-radius:99px;background:var(--p600)}
-.bar i.hi{background:var(--red)}.bar i.mid{background:var(--amber)}
-.bar .tr{background:var(--p100);border-radius:99px}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.kpi{border-radius:12px;padding:8px;text-align:center;font-weight:700}.kpi b{display:block;font-size:1.6em}
-.stars{color:#c98a00;letter-spacing:2px}
-.big{font-size:clamp(30px,4.2vw,52px);font-weight:700;color:var(--p700);line-height:1}
-.nav{position:fixed;left:0;right:0;bottom:0;height:7vh;min-height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 3vw;background:var(--bg);border-top:1px solid var(--line);z-index:5}
-.nav button{font:inherit;font-weight:700;border:1px solid var(--p700);background:var(--bg);color:var(--p700);border-radius:10px;padding:8px 18px;cursor:pointer;min-height:40px}
+.arrow{font-size:clamp(18px,2.2vw,28px);color:var(--mute)}
+/* ฉากใช้งานจริง: ฝัง mockup.html ทั้งหน้า — กดใช้งานได้จริง */
+.live{display:grid;grid-template-columns:minmax(210px,26%) 1fr;gap:1.6vw;flex:1;min-height:0}
+.side{display:flex;flex-direction:column;gap:1.2vh;overflow:auto;padding-right:4px}
+.side .lbl{font-weight:700;color:var(--p700);font-size:clamp(13px,1.4vw,17px)}
+.step{display:flex;gap:10px;align-items:flex-start}
+.n{flex:none;width:1.9em;height:1.9em;border-radius:50%;background:var(--p700);color:#fff;font-weight:700;display:grid;place-items:center;font-size:clamp(12px,1.35vw,16px)}
+.step p{font-size:clamp(13px,1.45vw,18px);line-height:1.45}
+.hint{background:var(--amber-t);color:var(--amber);border-radius:12px;padding:8px 12px;font-size:clamp(12px,1.3vw,16px);line-height:1.45}
+.frame{display:flex;flex-direction:column;border:2px solid var(--p700);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 8px 26px #5b1a7a26;min-height:0}
+.fbar{background:var(--p700);color:#fff;display:flex;align-items:center;gap:10px;padding:5px 12px;font-size:13px}
+.fbar .dots{display:flex;gap:5px}.fbar .dots i{width:9px;height:9px;border-radius:50%;background:#ffffff77}
+.fbar .ttl{flex:1;text-align:center;font-weight:700}
+.fbar a,.fbar button{color:#fff;font:inherit;font-size:12px;font-weight:700;background:#ffffff26;border:1px solid #ffffff55;border-radius:8px;padding:2px 10px;text-decoration:none;cursor:pointer}
+.fbar a:hover,.fbar button:hover{background:#ffffff40}
+.frame iframe{flex:1;border:0;width:100%;min-height:0;background:#fff}
+.side .st{padding:3px 8px;font-size:12px;border-width:1px}.side .arrow{font-size:14px}.big{font-size:clamp(28px,3.6vw,46px);font-weight:700;color:var(--p700);line-height:1}
+.nav{position:fixed;left:0;right:0;bottom:0;height:7vh;min-height:48px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 3vw;background:var(--bg);border-top:1px solid var(--line);z-index:5}
+.nav button{font:inherit;font-weight:700;border:1px solid var(--p700);background:var(--bg);color:var(--p700);border-radius:10px;padding:8px 16px;cursor:pointer;min-height:40px}
 .nav button:hover{background:var(--p100)}
 .nav button:focus-visible{outline:3px solid var(--p600);outline-offset:2px}
+.nav .mid3{display:flex;align-items:center;gap:14px}
 .pbar{position:fixed;top:0;left:0;height:5px;background:var(--p600);transition:width .3s;z-index:6}
 .pg{color:var(--mute);font-size:15px}
-@media (max-width:900px){.g2,.g3,.g4,.g5,.two{grid-template-columns:1fr}.slide{overflow:auto;justify-content:flex-start;padding-top:6vh}body{overflow:auto}.logo-s{position:static;margin-left:auto}}
-@media print{.nav,.pbar{display:none}.slide{position:static;display:flex!important;page-break-after:always;height:100vh}body{overflow:visible}}
+@media (max-width:900px){.g2,.g3,.g4{grid-template-columns:1fr}.live{grid-template-columns:1fr;grid-auto-rows:auto}.frame{height:70vh}.slide{overflow:auto}.logo-s{display:none}.head{padding-right:0}body{overflow:auto}}
+@media print{.nav,.pbar{display:none}.slide{position:static;display:flex!important;page-break-after:always;height:100vh}.frame iframe{display:none}body{overflow:visible}}
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
 <defs>
-<symbol id="i-broom" viewBox="0 0 24 24"><path d="M19 3l-6 8"/><path d="M11 11l-6 1-2 9h16l-2-9-6-1z" transform="translate(0 -0)"/><path d="M8 21l1-6M12 21v-6M16 21l-1-6"/></symbol>
+<symbol id="i-broom" viewBox="0 0 24 24"><path d="M19 3l-6 8"/><path d="M11 11l-6 1-2 9h16l-2-9-6-1z"/><path d="M8 21l1-6M12 21v-6M16 21l-1-6"/></symbol>
 <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
 <symbol id="i-cam" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
 <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.5 0 4.5 2 4.5 5"/></symbol>
@@ -106,21 +93,18 @@ p,li{font-size:clamp(15px,1.8vw,22px);line-height:1.6}
 <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/></symbol>
 <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
 <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></symbol>
-<symbol id="i-water" viewBox="0 0 24 24"><path d="M12 3c4 5 6 8 6 11a6 6 0 01-12 0c0-3 2-6 6-11z"/></symbol>
-<symbol id="i-field" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1"/><path d="M12 6v12"/><circle cx="12" cy="12" r="2.5"/></symbol>
-<symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
 <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 5h12l-2 4 2 4H5"/></symbol>
 </defs>
 </svg>
 <div class="pbar" id="pbar"></div>
-<div class="deck" id="deck">
+<div class="deck">
 
 <!-- 1 ปก -->
 <section class="slide cover">
   <div class="lg"><img src="https://vxfozsxudrkxrjphttxm.supabase.co/storage/v1/object/public/Photo/Thai_color01_0_0.png" alt="มหาวิทยาลัยศรีนครินทรวิโรฒ"></div>
-  <span class="tag" style="background:#fff">ศูนย์กีฬาสิรินธร มหาวิทยาลัยศรีนครินทรวิโรฒ</span>
+  <span class="tag">ศูนย์กีฬาสิรินธร มหาวิทยาลัยศรีนครินทรวิโรฒ</span>
   <h1>ระบบตรวจความสะอาด<br>ยกระดับการให้บริการสถานที่</h1>
-  <p>จากการตรวจด้วยกระดาษและการสื่อสารกระจัดกระจาย สู่ระบบเดียวที่ทุกฝ่ายเห็นตรงกัน</p>
+  <p>ทุกฝ่ายเห็นตรงกัน ตั้งแต่พนักงานทำความสะอาดจนถึงผู้ดูแลระบบ — สาธิตด้วยหน้าจอจริงที่กดใช้งานได้ในทุกหน้า</p>
   <div class="chips">
     <span><svg class="ic"><use href="#i-build"/></svg>12 พื้นที่</span>
     <span><svg class="ic"><use href="#i-users"/></svg>4 บทบาท</span>
@@ -130,249 +114,181 @@ p,li{font-size:clamp(15px,1.8vw,22px);line-height:1.6}
   <p style="font-size:15px;opacity:.85">กด → หรือ Space เพื่อเปลี่ยนหน้า · F เพื่อเต็มจอ</p>
 </section>
 
-<!-- 2 ที่มา -->
-<section class="slide">
-  <div class="head"><span class="ib c-a"><svg class="ic"><use href="#i-flag"/></svg></span><div><span class="tag">ที่มา</span><h2>ทำไมต้องมีระบบนี้</h2></div></div>
-  <div class="grid g3">
-    <div class="card t-a"><span class="ib c-a"><svg class="ic"><use href="#i-build"/></svg></span><h3>พื้นที่กว้าง หลายจุด</h3><p>12 พื้นที่ ทั้งอาคารในร่ม สนามภายนอก และอาคารกีฬาทางน้ำ แต่ละแห่งมีจุดตรวจย่อยจำนวนมาก</p></div>
-    <div class="card t-b"><span class="ib c-b"><svg class="ic"><use href="#i-clock"/></svg></span><h3>ติดตามงานยาก</h3><p>ไม่แน่ชัดว่าพื้นที่ใดทำแล้ว ใครตรวจแล้ว และมีจุดที่ต้องแก้ไขค้างอยู่หรือไม่</p></div>
-    <div class="card t-k"><span class="ib c-k"><svg class="ic"><use href="#i-doc"/></svg></span><h3>ไม่มีหลักฐานย้อนหลัง</h3><p>ข้อเสนอแนะและผลการแก้ไขไม่ถูกบันทึกเป็นระบบ วัดผลและปรับปรุงต่อเนื่องได้ยาก</p></div>
+<!-- 2 ที่มา + จุดประสงค์ -->
+<section class="slide mid">
+  <div class="head"><span class="ib c-a"><svg class="ic"><use href="#i-flag"/></svg></span><div><span class="tag">ที่มาและจุดประสงค์</span><h2>จากปัญหาหน้างาน สู่ระบบที่ตอบโจทย์</h2></div></div>
+  <div class="grid g2" style="align-items:stretch">
+    <div class="grid" style="grid-auto-rows:1fr">
+      <div class="card t-r"><div class="row"><span class="ib c-r"><svg class="ic"><use href="#i-build"/></svg></span><h3>ปัญหา: พื้นที่กว้าง หลายจุด</h3></div><p>12 พื้นที่ จุดตรวจย่อยจำนวนมาก ติดตามว่าใครทำ/ตรวจแล้วได้ยาก</p></div>
+      <div class="card t-r"><div class="row"><span class="ib c-r"><svg class="ic"><use href="#i-clock"/></svg></span><h3>ปัญหา: ไม่มีหลักฐานย้อนหลัง</h3></div><p>ข้อเสนอแนะและผลการแก้ไขไม่ถูกบันทึกเป็นระบบ วัดผลต่อเนื่องไม่ได้</p></div>
+    </div>
+    <div class="grid" style="grid-auto-rows:1fr">
+      <div class="card t-g"><div class="row"><span class="ib c-g"><svg class="ic"><use href="#i-clip"/></svg></span><h3>เป้าหมาย: ตรวจครบ มีหลักฐาน</h3></div><p>เช็คลิสต์รายพื้นที่ พร้อมรูปถ่ายและประวัติทุกขั้นตอน</p></div>
+      <div class="card t-g"><div class="row"><span class="ib c-g"><svg class="ic"><use href="#i-reply"/></svg></span><h3>เป้าหมาย: ปิดวงจรการแก้ไข</h3></div><p>แจ้ง → แก้ไข → ตอบกลับพร้อมรูป → ตรวจซ้ำ และดูภาพรวมได้ทันที</p></div>
+    </div>
   </div>
 </section>
 
-<!-- 3 จุดประสงค์ -->
-<section class="slide">
-  <div class="head"><span class="ib c-p"><svg class="ic"><use href="#i-flag"/></svg></span><div><span class="tag">จุดประสงค์</span><h2>สิ่งที่ระบบต้องทำให้ได้</h2></div></div>
-  <div class="grid g5">
-    <div class="card t-p"><span class="ib c-p"><svg class="ic"><use href="#i-clip"/></svg></span><h3>ตรวจครบทุกจุด</h3><p>เช็คลิสต์รายพื้นที่ พร้อมรูปหลักฐาน</p></div>
-    <div class="card t-b"><span class="ib c-b"><svg class="ic"><use href="#i-users"/></svg></span><h3>รู้ว่าใครทำอะไร</h3><p>4 บทบาท สิทธิ์แยกชัดเจน</p></div>
-    <div class="card t-g"><span class="ib c-g"><svg class="ic"><use href="#i-reply"/></svg></span><h3>ปิดวงจรการแก้ไข</h3><p>แจ้ง → แก้ → ตอบกลับพร้อมรูป → ตรวจซ้ำ</p></div>
-    <div class="card t-t"><span class="ib c-t"><svg class="ic"><use href="#i-chart"/></svg></span><h3>เห็นภาพรวมทันที</h3><p>แดชบอร์ดและรายงาน PDF</p></div>
-    <div class="card t-k"><span class="ib c-k"><svg class="ic"><use href="#i-phone"/></svg></span><h3>ใช้ง่ายทุกวัย</h3><p>ปุ่มใหญ่ ตัวอักษรใหญ่ ใช้บนมือถือ</p></div>
-  </div>
-</section>
-
-<!-- 4 บทบาท -->
-<section class="slide">
-  <div class="head"><span class="ib c-p"><svg class="ic"><use href="#i-users"/></svg></span><div><span class="tag">ภาพรวม</span><h2>4 บทบาท 1 กระบวนการ</h2></div></div>
+<!-- 3 บทบาท + เส้นทางงาน -->
+<section class="slide mid">
+  <div class="head"><span class="ib c-p"><svg class="ic"><use href="#i-users"/></svg></span><div><span class="tag">ภาพรวม</span><h2>4 บทบาท 1 เส้นทางงาน</h2></div></div>
   <div class="grid g4">
-    <div class="card t-t"><span class="ib c-t"><svg class="ic"><use href="#i-broom"/></svg></span><h3>1 พนักงานทำความสะอาด</h3><p>ทำเช็คลิสต์ แนบรูป ส่งรายงาน</p></div>
-    <div class="card t-b"><span class="ib c-b"><svg class="ic"><use href="#i-shield"/></svg></span><h3>2 หัวหน้าแม่บ้าน</h3><p>ตรวจผ่าน (จบงาน) หรือตีกลับให้แก้</p></div>
-    <div class="card t-k"><span class="ib c-k"><svg class="ic"><use href="#i-star"/></svg></span><h3>3 คณะกรรมการ</h3><p>แจ้งจุดควรปรับปรุง พร้อมรูปและคะแนน</p></div>
-    <div class="card t-p"><span class="ib c-p"><svg class="ic"><use href="#i-key"/></svg></span><h3>4 ผู้ดูแลระบบ</h3><p>จัดการบัญชี สิทธิ์ ดูแดชบอร์ดและรายงาน</p></div>
-  </div>
-  <p class="mute">ทุกคนลงทะเบียนแล้วผู้ดูแลระบบอนุมัติ — บทบาทมาจากบัญชี ไม่ใช่ที่ผู้ใช้เลือกเอง</p>
-</section>
-
-<!-- 5 เส้นทางงาน -->
-<section class="slide">
-  <div class="head"><span class="ib c-b"><svg class="ic"><use href="#i-reply"/></svg></span><div><span class="tag">สถานะงาน</span><h2>เส้นทางของงานหนึ่งพื้นที่ต่อวัน</h2></div></div>
-  <div class="flow">
-    <span class="st s-pend"><svg class="ic"><use href="#i-clock"/></svg>รอทำความสะอาด</span><span class="arrow">→</span>
-    <span class="st s-done"><svg class="ic"><use href="#i-cam"/></svg>แม่บ้านส่งแล้ว รอตรวจ</span><span class="arrow">→</span>
-    <span class="st s-ok"><svg class="ic"><use href="#i-check"/></svg>ตรวจผ่าน (จบงาน)</span>
+    <div class="card t-t"><span class="ib c-t"><svg class="ic"><use href="#i-broom"/></svg></span><h3>พนักงานทำความสะอาด</h3><p>ทำเช็คลิสต์ แนบรูป ส่งรายงาน</p></div>
+    <div class="card t-b"><span class="ib c-b"><svg class="ic"><use href="#i-shield"/></svg></span><h3>หัวหน้าแม่บ้าน</h3><p>ตรวจผ่าน (จบงาน) หรือตีกลับ</p></div>
+    <div class="card t-k"><span class="ib c-k"><svg class="ic"><use href="#i-star"/></svg></span><h3>คณะกรรมการ</h3><p>แจ้งจุดควรปรับปรุง พร้อมรูปและคะแนน</p></div>
+    <div class="card t-p"><span class="ib c-p"><svg class="ic"><use href="#i-key"/></svg></span><h3>ผู้ดูแลระบบ</h3><p>บัญชี สิทธิ์ แดชบอร์ด รายงาน PDF</p></div>
   </div>
   <div class="flow">
-    <span class="st s-done">รอตรวจ</span><span class="arrow">→</span>
+    <span class="st s-pend"><svg class="ic"><use href="#i-clock"/></svg>รอทำ</span><span class="arrow">→</span>
+    <span class="st s-done"><svg class="ic"><use href="#i-cam"/></svg>ส่งแล้ว รอตรวจ</span><span class="arrow">→</span>
+    <span class="st s-ok"><svg class="ic"><use href="#i-check"/></svg>ตรวจผ่าน (จบ)</span>
+    <span class="arrow" style="margin-left:2vw">|</span>
     <span class="st s-rej"><svg class="ic"><use href="#i-alert"/></svg>ตีกลับ</span><span class="arrow">→</span>
-    <span class="st s-pend"><svg class="ic"><use href="#i-broom"/></svg>แม่บ้านแก้ไข</span><span class="arrow">→</span>
-    <span class="st s-done">ส่งตรวจซ้ำ</span>
+    <span class="st s-pend">แม่บ้านแก้ไข</span><span class="arrow">→</span>
+    <span class="st s-done">ตรวจซ้ำ</span>
   </div>
+  <p class="mute">ทุกคนลงทะเบียนแล้วผู้ดูแลระบบอนุมัติ · ทุกขั้นบันทึกประวัติ ใคร เมื่อไร ทำอะไร</p>
+</section>
+
+<!-- 4 เข้าสู่ระบบ -->
+<section class="slide" data-src="mockup.html?embed=1&role=home" data-title="หน้าเข้าสู่ระบบ">
+  <div class="head"><span class="ib c-p"><svg class="ic"><use href="#i-phone"/></svg></span><div><span class="tag">หน้าใช้งานจริง 1</span><h2>เข้าสู่ระบบ / ลงทะเบียน</h2></div></div>
+  <div class="live">
+    <div class="side">
+      <div class="lbl">ลองทำเลย</div>
+      <div class="step"><span class="n">1</span><p>กด <b>ลงทะเบียน</b> — 2 ขั้น เลือกตำแหน่ง แล้วกรอกข้อมูล</p></div>
+      <div class="step"><span class="n">2</span><p>หรือกดปุ่ม <b>admin / supervisor / manager</b> ใต้ฟอร์มเพื่อกรอกบัญชีทดลอง แล้วเข้าสู่ระบบ</p></div>
+      <div class="step"><span class="n">3</span><p>มี “จดจำฉัน” 14 วัน และปุ่มดูรหัสผ่าน</p></div>
+      <div class="hint">ข้อมูลในหน้านี้เป็นข้อมูลทดลอง ไม่เชื่อมต่อระบบจริง</div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 แม่บ้าน -->
+<section class="slide" data-src="mockup.html?embed=1&role=cleaner" data-title="พนักงานทำความสะอาด">
+  <div class="head"><span class="ib c-t"><svg class="ic"><use href="#i-broom"/></svg></span><div><span class="tag">หน้าใช้งานจริง 2 · พนักงานทำความสะอาด</span><h2>เช็คลิสต์ ถ่ายรูป ส่งรายงาน</h2></div></div>
+  <div class="live">
+    <div class="side">
+      <div class="lbl">ลองทำเลย</div>
+      <div class="step"><span class="n">1</span><p>กดการ์ดพื้นที่ที่ยัง <b>รอทำ</b> (เช่น อาคารกีฬา 4–5)</p></div>
+      <div class="step"><span class="n">2</span><p>ติ๊กเช็คลิสต์ทีละจุด แล้วแนบรูปหลักฐาน</p></div>
+      <div class="step"><span class="n">3</span><p>กด <b>ส่งรายงาน</b> — มีหน้าต่างยืนยัน กันกดซ้ำ</p></div>
+      <div class="hint">เมื่อส่งแล้ว ไปดูหน้าถัดไปเพื่อเห็นงานนี้ในฝั่งหัวหน้า</div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 หัวหน้า -->
+<section class="slide" data-src="mockup.html?embed=1&role=supervisor" data-title="หัวหน้าแม่บ้าน">
+  <div class="head"><span class="ib c-b"><svg class="ic"><use href="#i-shield"/></svg></span><div><span class="tag">หน้าใช้งานจริง 3 · หัวหน้าแม่บ้าน</span><h2>ตรวจผ่าน หรือตีกลับ</h2></div></div>
+  <div class="live">
+    <div class="side">
+      <div class="lbl">ลองทำเลย</div>
+      <div class="step"><span class="n">1</span><p>แท็บ <b>รอตรวจ</b> — กดพื้นที่เพื่อดูเช็คลิสต์ รูป และหมายเหตุ</p></div>
+      <div class="step"><span class="n">2</span><p><b>ตรวจผ่าน</b> = งานสิ้นสุด ไม่ตรวจซ้ำ</p></div>
+      <div class="step"><span class="n">3</span><p><b>ตีกลับ</b> พร้อมเหตุผล งานกลับไปหาแม่บ้าน</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 กรรมการ -->
+<section class="slide" data-src="mockup.html?embed=1&role=manager" data-title="คณะกรรมการ">
+  <div class="head"><span class="ib c-k"><svg class="ic"><use href="#i-star"/></svg></span><div><span class="tag">หน้าใช้งานจริง 4 · คณะกรรมการตรวจความสะอาด</span><h2>แจ้งจุดควรปรับปรุง</h2></div></div>
+  <div class="live">
+    <div class="side">
+      <div class="lbl">ลองทำเลย</div>
+      <div class="step"><span class="n">1</span><p>กดพื้นที่ที่ต้องการ ดูสถานะและประวัติของวัน</p></div>
+      <div class="step"><span class="n">2</span><p>พิมพ์ข้อเสนอแนะ แนบรูป ให้คะแนน 1–5 (ไม่บังคับ)</p></div>
+      <div class="step"><span class="n">3</span><p>ไม่ต้องอนุมัติงาน — ข้อเสนอแนะส่งไปที่แท็บ <b>แจ้งแก้ไข</b></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 แจ้งแก้ไข -->
+<section class="slide" data-src="mockup.html?embed=1&role=cleaner&tab=fix" data-title="แท็บแจ้งแก้ไข">
+  <div class="head"><span class="ib c-r"><svg class="ic"><use href="#i-reply"/></svg></span><div><span class="tag">หน้าใช้งานจริง 5 · ปิดวงจร</span><h2>แท็บ “แจ้งแก้ไข” ตอบกลับพร้อมรูป</h2></div></div>
+  <div class="live">
+    <div class="side">
+      <div class="lbl">ลองทำเลย</div>
+      <div class="step"><span class="n">1</span><p>เห็นรายการที่หัวหน้าตีกลับ และข้อเสนอแนะของกรรมการ</p></div>
+      <div class="step"><span class="n">2</span><p>กด <b>ตอบกลับ / แนบรูป</b> พิมพ์ข้อความและแนบรูปหลังแก้ไข แล้วส่ง</p></div>
+      <div class="step"><span class="n">3</span><p>สถานะเป็น <b>รอหัวหน้าตรวจ</b> — หัวหน้าตรวจซ้ำที่หน้าถัดไป</p></div>
+      <div class="flow"><span class="st s-rej">รอแก้ไข</span><span class="arrow">→</span><span class="st s-done">รอตรวจ</span><span class="arrow">→</span><span class="st s-ok">เสร็จ</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 Admin แดชบอร์ด -->
+<section class="slide" data-src="mockup.html?embed=1&role=admin" data-title="แดชบอร์ดผู้ดูแลระบบ">
+  <div class="head"><span class="ib c-t"><svg class="ic"><use href="#i-chart"/></svg></span><div><span class="tag">หน้าใช้งานจริง 6 · ผู้ดูแลระบบ</span><h2>แดชบอร์ดและรายงาน PDF</h2></div></div>
+  <div class="live">
+    <div class="side">
+      <div class="lbl">ลองทำเลย</div>
+      <div class="step"><span class="n">1</span><p>สลับ <b>รายสัปดาห์ / รายเดือน</b> และกดลูกศรเลื่อนช่วงเวลา</p></div>
+      <div class="step"><span class="n">2</span><p>เลือกอาคาร/พื้นที่ เพื่อดูอัตราตีกลับเฉพาะจุด</p></div>
+      <div class="step"><span class="n">3</span><p>กด <b>ดาวน์โหลดรายงาน (PDF)</b> ได้ทันที</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 Admin สิทธิ์ -->
+<section class="slide" data-src="mockup.html?embed=1&role=admin&tab=perms" data-title="จัดการสิทธิ์">
+  <div class="head"><span class="ib c-a"><svg class="ic"><use href="#i-lock"/></svg></span><div><span class="tag">หน้าใช้งานจริง 7 · ผู้ดูแลระบบ</span><h2>จัดการสิทธิ์ บัญชี และประวัติเข้าใช้</h2></div></div>
+  <div class="live">
+    <div class="side">
+      <div class="lbl">ลองทำเลย</div>
+      <div class="step"><span class="n">1</span><p>เปิด–ปิดสิทธิ์ของแต่ละบทบาท (8 สวิตช์)</p></div>
+      <div class="step"><span class="n">2</span><p>อนุมัติผู้ลงทะเบียน สร้าง/ระงับบัญชี มอบหมายพื้นที่</p></div>
+      <div class="step"><span class="n">3</span><p>ดูประวัติเข้าสู่ระบบและการเปลี่ยนสิทธิ์ย้อนหลัง</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 คุณค่า + ความปลอดภัย -->
+<section class="slide mid">
+  <div class="head"><span class="ib c-k"><svg class="ic"><use href="#i-star"/></svg></span><div><span class="tag">สรุป</span><h2>ยกระดับบริการ อย่างปลอดภัยและตรวจสอบได้</h2></div></div>
   <div class="grid g3">
-    <div class="card"><h3>หัวหน้าตรวจผ่าน = จบ</h3><p>ไม่ตรวจซ้ำซ้อน</p></div>
-    <div class="card"><h3>กรรมการให้ข้อเสนอแนะ</h3><p>ไม่เปลี่ยนสถานะงาน</p></div>
-    <div class="card"><h3>ทุกขั้นมีประวัติ</h3><p>ใคร เมื่อไร ทำอะไร</p></div>
+    <div class="card t-b"><span class="ib c-b"><svg class="ic"><use href="#i-eye"/></svg></span><h3>เห็นภาพเดียวกัน</h3><p>สถานะล่าสุดทุกพื้นที่ ลดการประสานซ้ำ</p></div>
+    <div class="card t-g"><span class="ib c-g"><svg class="ic"><use href="#i-clip"/></svg></span><h3>คุณภาพสม่ำเสมอ</h3><p>เช็คลิสต์มาตรฐานเดียวกันทุกวัน</p></div>
+    <div class="card t-a"><span class="ib c-a"><svg class="ic"><use href="#i-chart"/></svg></span><h3>ปรับปรุงด้วยข้อมูล</h3><p>รู้ว่าพื้นที่ใดตีกลับบ่อย เพื่อจัดคนและอบรมตรงจุด</p></div>
+    <div class="card t-p"><span class="ib c-p"><svg class="ic"><use href="#i-lock"/></svg></span><h3>บัญชีปลอดภัย</h3><p>รหัสผ่านเข้ารหัส ล็อกอินผิด 5 ครั้งล็อก 15 นาที</p></div>
+    <div class="card t-t"><span class="ib c-t"><svg class="ic"><use href="#i-cam"/></svg></span><h3>เก็บหลักฐาน</h3><p>รูปใน Drive ของมหาวิทยาลัย ตั้งชื่อตามวัน เวลา สถานที่</p></div>
+    <div class="card t-k"><span class="ib c-k"><svg class="ic"><use href="#i-shield"/></svg></span><h3>สิทธิ์ตามบทบาท</h3><p>ตรวจสิทธิ์ฝั่งเซิร์ฟเวอร์ทุกคำสั่ง ผ่านการทดสอบโจมตีทุกบทบาท</p></div>
   </div>
 </section>
 
-<!-- 6 หน้าจอเลือกพื้นที่ -->
-<section class="slide">
-  <div class="head"><span class="ib c-p"><svg class="ic"><use href="#i-phone"/></svg></span><div><span class="tag">หน้าใช้งานจริง</span><h2>เข้าสู่ระบบ และเลือกพื้นที่ด้วยปุ่มใหญ่</h2></div></div>
-  <div class="two">
-    <div class="steps">
-      <div class="step"><span class="n">1</span><p>ลงทะเบียน 2 ขั้น (เลือกตำแหน่ง → กรอกข้อมูล) แล้วรอผู้ดูแลอนุมัติ</p></div>
-      <div class="step"><span class="n">2</span><p>เข้าสู่ระบบด้วย ID และรหัสผ่านในฟอร์มเดียว มีปุ่ม “จดจำฉัน” 14 วัน</p></div>
-      <div class="step"><span class="n">3</span><p>เห็น 12 พื้นที่เป็นการ์ดใหญ่ พร้อมสีสถานะ อ่านง่ายสำหรับทุกวัย</p></div>
-    </div>
-    <div class="scr">
-      <div class="bar1"><span>พนักงานทำความสะอาด</span><span>ออก</span></div>
-      <div class="bd">
-        <div class="tabs"><span class="on">ทุกพื้นที่</span><span>แจ้งแก้ไข (2)</span></div>
-        <div class="areas">
-          <div class="ar" style="background:var(--amber-t);color:var(--amber)"><svg class="ic"><use href="#i-build"/></svg>อาคารกีฬา 1<span class="chip a">รอทำ</span></div>
-          <div class="ar" style="background:var(--blue-t);color:var(--blue)"><svg class="ic"><use href="#i-build"/></svg>อาคารกีฬา 2<span class="chip b">รอตรวจ</span></div>
-          <div class="ar" style="background:var(--green-t);color:var(--green)"><svg class="ic"><use href="#i-water"/></svg>กีฬาทางน้ำ<span class="chip g">ผ่านแล้ว</span></div>
-          <div class="ar" style="background:var(--red-t);color:var(--red)"><svg class="ic"><use href="#i-field"/></svg>สนามฟุตซอล<span class="chip r">ตีกลับ</span></div>
-          <div class="ar" style="background:var(--green-t);color:var(--green)"><svg class="ic"><use href="#i-field"/></svg>สนามเทนนิส<span class="chip g">ผ่านแล้ว</span></div>
-          <div class="ar" style="background:var(--amber-t);color:var(--amber)"><svg class="ic"><use href="#i-build"/></svg>ศูนย์ออกกำลัง<span class="chip a">รอทำ</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 7 แม่บ้าน -->
-<section class="slide">
-  <div class="head"><span class="ib c-t"><svg class="ic"><use href="#i-broom"/></svg></span><div><span class="tag">ขั้นตอนตามบทบาท 1/4</span><h2>พนักงานทำความสะอาด</h2></div></div>
-  <div class="two">
-    <div class="steps">
-      <div class="step"><span class="n">1</span><p>เลือกพื้นที่ ติ๊กเช็คลิสต์ทีละจุดย่อย</p></div>
-      <div class="step"><span class="n">2</span><p>ถ่ายหรือแนบรูปหลักฐาน พิมพ์หมายเหตุ</p></div>
-      <div class="step"><span class="n">3</span><p>กดส่งรายงาน (มีหน้าต่างยืนยัน กันกดซ้ำ)</p></div>
-      <div class="step"><span class="n">4</span><p>ถูกตีกลับ? เปิดแท็บ <b>แจ้งแก้ไข</b> แล้วตอบกลับพร้อมรูปหลังแก้</p></div>
-    </div>
-    <div class="scr">
-      <div class="bar1"><span>สนามฟุตซอล</span><span class="chip a">รอทำ</span></div>
-      <div class="bd">
-        <div class="mi"><span class="ck on"><svg class="ic"><use href="#i-check"/></svg></span><b>ห้องน้ำ ชั้น 1</b></div>
-        <div class="mi"><span class="ck on"><svg class="ic"><use href="#i-check"/></svg></span><b>อัฒจรรย์</b></div>
-        <div class="mi"><span class="ck"></span><b>สนามแข่งขัน</b></div>
-        <div class="row2"><div class="photo"><svg class="ic"><use href="#i-cam"/></svg></div><div class="photo"><svg class="ic"><use href="#i-cam"/></svg></div></div>
-        <div class="btn">ส่งรายงาน</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 8 หัวหน้า -->
-<section class="slide">
-  <div class="head"><span class="ib c-b"><svg class="ic"><use href="#i-shield"/></svg></span><div><span class="tag">ขั้นตอนตามบทบาท 2/4</span><h2>หัวหน้าแม่บ้าน</h2></div></div>
-  <div class="two">
-    <div class="steps">
-      <div class="step"><span class="n">1</span><p>แท็บ <b>รอตรวจ</b> เห็นพื้นที่ที่แม่บ้านส่งแล้ว เปิดดูเช็คลิสต์ รูป และหมายเหตุ</p></div>
-      <div class="step"><span class="n">2</span><p><b>ตรวจผ่าน</b> → งานสิ้นสุด</p></div>
-      <div class="step"><span class="n">3</span><p><b>ตีกลับ</b> → ระบุเหตุผล งานกลับไปหาแม่บ้าน</p></div>
-      <div class="step"><span class="n">4</span><p>แท็บ <b>แจ้งแก้ไข</b> รับทราบข้อเสนอแนะกรรมการ และตรวจงานที่แม่บ้านแก้แล้ว</p></div>
-    </div>
-    <div class="scr">
-      <div class="bar1"><span>ตรวจงาน · อาคารกีฬา 2</span><span class="chip b">รอตรวจ</span></div>
-      <div class="bd">
-        <div class="mi"><span class="ib c-t" style="width:34px;height:34px"><svg class="ic"><use href="#i-broom"/></svg></span><div><b>รายงานจากแม่บ้าน</b><div class="mute">ทำครบ 7/7 จุด · แนบรูป 3</div></div></div>
-        <div class="row2"><div class="photo"><svg class="ic"><use href="#i-cam"/></svg></div><div class="photo"><svg class="ic"><use href="#i-cam"/></svg></div></div>
-        <div class="row2"><div class="btn gr">ตรวจผ่าน</div><div class="btn rd">ตีกลับ</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 9 กรรมการ -->
-<section class="slide">
-  <div class="head"><span class="ib c-k"><svg class="ic"><use href="#i-star"/></svg></span><div><span class="tag">ขั้นตอนตามบทบาท 3/4</span><h2>คณะกรรมการตรวจความสะอาด</h2></div></div>
-  <div class="two">
-    <div class="steps">
-      <div class="step"><span class="n">1</span><p>ดูสถานะทุกพื้นที่และประวัติของวัน (ไม่ต้องอนุมัติงาน)</p></div>
-      <div class="step"><span class="n">2</span><p>พบจุดควรปรับปรุง → พิมพ์ข้อเสนอแนะ แนบรูป ให้คะแนน 1–5 (ไม่บังคับ)</p></div>
-      <div class="step"><span class="n">3</span><p>ข้อเสนอแนะไปปรากฏที่แท็บแจ้งแก้ไขของแม่บ้านและหัวหน้าทันที</p></div>
-    </div>
-    <div class="scr">
-      <div class="bar1"><span>แจ้งปรับปรุง · อาคารกีฬา 1</span></div>
-      <div class="bd">
-        <div class="mi" style="background:var(--blue-t)"><svg class="ic" style="color:var(--blue)"><use href="#i-alert"/></svg><div><b>ควรเพิ่มสบู่และเช็ดกระจกห้องน้ำ</b><div class="stars">★★★★☆</div></div></div>
-        <div class="row2"><div class="photo"><svg class="ic"><use href="#i-cam"/></svg></div><div class="photo"><svg class="ic"><use href="#i-cam"/></svg></div></div>
-        <div class="btn">ส่งข้อเสนอแนะ</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 10 Admin -->
-<section class="slide">
-  <div class="head"><span class="ib c-p"><svg class="ic"><use href="#i-key"/></svg></span><div><span class="tag">ขั้นตอนตามบทบาท 4/4</span><h2>ผู้ดูแลระบบ (Super Admin)</h2></div></div>
-  <div class="two">
-    <div class="grid g2" style="gap:1.4vh 1vw">
-      <div class="card t-t"><span class="ib c-t"><svg class="ic"><use href="#i-chart"/></svg></span><h3>แดชบอร์ด</h3><p>กรองรายสัปดาห์ เดือน อาคาร พร้อมรายงาน PDF</p></div>
-      <div class="card t-b"><span class="ib c-b"><svg class="ic"><use href="#i-users"/></svg></span><h3>จัดการบัญชี</h3><p>อนุมัติ สร้าง ระงับ มอบหมายพื้นที่</p></div>
-      <div class="card t-a"><span class="ib c-a"><svg class="ic"><use href="#i-lock"/></svg></span><h3>สิทธิ์ 8 สวิตช์</h3><p>เปิด–ปิดการทำงานแต่ละบทบาท</p></div>
-      <div class="card t-k"><span class="ib c-k"><svg class="ic"><use href="#i-eye"/></svg></span><h3>ประวัติเข้าใช้</h3><p>ตรวจย้อนหลังได้ทุกครั้ง</p></div>
-    </div>
-    <div class="scr">
-      <div class="bar1"><span>แดชบอร์ด · รายเดือน</span></div>
-      <div class="bd">
-        <div class="kpis">
-          <div class="kpi" style="background:var(--p100);color:var(--p700)"><b>92%</b>ผ่าน</div>
-          <div class="kpi" style="background:var(--red-t);color:var(--red)"><b>7</b>ตีกลับ</div>
-          <div class="kpi" style="background:var(--blue-t);color:var(--blue)"><b>5</b>แจ้งปรับปรุง</div>
-          <div class="kpi" style="background:var(--green-t);color:var(--green)"><b>4.2</b>คะแนน</div>
-        </div>
-        <div class="bars">
-          <div class="bar"><span>อาคารกีฬา 1</span><span class="tr"><i class="hi" style="width:78%"></i></span><b>12%</b></div>
-          <div class="bar"><span>สนามฟุตซอล</span><span class="tr"><i class="mid" style="width:52%"></i></span><b>8%</b></div>
-          <div class="bar"><span>สนามเทนนิส</span><span class="tr"><i style="width:26%"></i></span><b>4%</b></div>
-          <div class="bar"><span>กีฬาทางน้ำ</span><span class="tr"><i style="width:14%"></i></span><b>2%</b></div>
-        </div>
-        <div class="mute" style="text-align:center">อัตราตีกลับต่อพื้นที่ (ตัวอย่างประกอบ)</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 11 แจ้งแก้ไข -->
-<section class="slide">
-  <div class="head"><span class="ib c-r"><svg class="ic"><use href="#i-reply"/></svg></span><div><span class="tag">ปิดวงจร</span><h2>แท็บ “แจ้งแก้ไข” — ไม่มีเรื่องค้างเงียบ ๆ</h2></div></div>
-  <div class="flow">
-    <span class="st s-rej"><svg class="ic"><use href="#i-alert"/></svg>รอแก้ไข</span><span class="arrow">→</span>
-    <span class="st s-done"><svg class="ic"><use href="#i-reply"/></svg>แก้ไขแล้ว · รอหัวหน้าตรวจ</span><span class="arrow">→</span>
-    <span class="st s-ok"><svg class="ic"><use href="#i-check"/></svg>เสร็จสิ้น</span>
-  </div>
-  <div class="two">
-    <div class="steps">
-      <div class="step"><span class="n">1</span><p>แม่บ้านตอบกลับพร้อมรูปหลังแก้ไข</p></div>
-      <div class="step"><span class="n">2</span><p>ระบบส่งต่อหัวหน้าอัตโนมัติเพื่อตรวจซ้ำ</p></div>
-      <div class="step"><span class="n">3</span><p>ทุกรายการมีผู้ตอบ เวลา และจำนวนรูป</p></div>
-    </div>
-    <div class="scr">
-      <div class="bar1"><span>แจ้งแก้ไข (2)</span></div>
-      <div class="bd">
-        <div class="mi" style="background:var(--red-t)"><svg class="ic" style="color:var(--red)"><use href="#i-alert"/></svg><div><b>ตีกลับ: ห้องน้ำยังสกปรก</b><div class="mute">สนามฟุตซอล</div></div><span class="sp"></span><span class="chip r">รอแก้ไข</span></div>
-        <div class="mi" style="background:var(--blue-t)"><svg class="ic" style="color:var(--blue)"><use href="#i-reply"/></svg><div><b>เช็ดพื้นแล้ว · รูป 2</b><div class="mute">อาคารกีฬา 2</div></div><span class="sp"></span><span class="chip b">รอหัวหน้าตรวจ</span></div>
-        <div class="mi" style="background:var(--green-t)"><svg class="ic" style="color:var(--green)"><use href="#i-check"/></svg><div><b>เพิ่มสบู่แล้ว</b><div class="mute">อาคารกีฬา 1</div></div><span class="sp"></span><span class="chip g">เสร็จสิ้น</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 12 ความปลอดภัย -->
-<section class="slide">
-  <div class="head"><span class="ib c-g"><svg class="ic"><use href="#i-shield"/></svg></span><div><span class="tag">ความน่าเชื่อถือ</span><h2>ปลอดภัยและตรวจสอบได้</h2></div></div>
-  <div class="grid g3">
-    <div class="card t-p"><span class="ib c-p"><svg class="ic"><use href="#i-lock"/></svg></span><h3>บัญชีและรหัสผ่าน</h3><p>รหัสผ่านเข้ารหัสแบบ salted hash ล็อกอินผิด 5 ครั้งล็อก 15 นาที</p></div>
-    <div class="card t-t"><span class="ib c-t"><svg class="ic"><use href="#i-cam"/></svg></span><h3>ข้อมูลและรูป</h3><p>เก็บใน Google Sheets และ Drive ของมหาวิทยาลัย ตรวจชนิดไฟล์รูป ตั้งชื่อไฟล์ตามวัน เวลา สถานที่</p></div>
-    <div class="card t-b"><span class="ib c-b"><svg class="ic"><use href="#i-shield"/></svg></span><h3>สิทธิ์ตามบทบาท</h3><p>ตรวจสิทธิ์ซ้ำฝั่งเซิร์ฟเวอร์ทุกคำสั่ง ทดสอบสวมบทบาทโจมตีก่อนใช้งานจริง</p></div>
-  </div>
-</section>
-
-<!-- 13 คุณค่า -->
-<section class="slide">
-  <div class="head"><span class="ib c-k"><svg class="ic"><use href="#i-star"/></svg></span><div><span class="tag">คุณค่า</span><h2>ยกระดับการให้บริการอย่างไร</h2></div></div>
-  <div class="grid g2">
-    <div class="card t-b"><div class="head"><span class="ib c-b"><svg class="ic"><use href="#i-eye"/></svg></span><h3>เห็นภาพเดียวกัน</h3></div><p>ทุกฝ่ายเห็นสถานะพื้นที่ล่าสุด ลดการสอบถามและประสานซ้ำ</p></div>
-    <div class="card t-g"><div class="head"><span class="ib c-g"><svg class="ic"><use href="#i-clip"/></svg></span><h3>คุณภาพสม่ำเสมอ</h3></div><p>เช็คลิสต์มาตรฐานเดียวกันทุกพื้นที่ ทุกวัน</p></div>
-    <div class="card t-a"><div class="head"><span class="ib c-a"><svg class="ic"><use href="#i-chart"/></svg></span><h3>ปรับปรุงด้วยข้อมูล</h3></div><p>รู้ว่าพื้นที่ใดถูกตีกลับบ่อย เพื่อจัดคน อบรม หรือปรับวิธีทำงานตรงจุด</p></div>
-    <div class="card t-k"><div class="head"><span class="ib c-k"><svg class="ic"><use href="#i-shield"/></svg></span><h3>ผู้ใช้บริการมั่นใจ</h3></div><p>สนามและอาคารพร้อมใช้ สะอาด ปลอดภัย มีหลักฐานย้อนหลัง</p></div>
-  </div>
-</section>
-
-<!-- 14 จบ -->
+<!-- 12 จบ -->
 <section class="slide cover">
   <div class="lg"><img src="https://vxfozsxudrkxrjphttxm.supabase.co/storage/v1/object/public/Photo/Thai_color01_0_0.png" alt="มหาวิทยาลัยศรีนครินทรวิโรฒ"></div>
   <h1>ขอบคุณครับ / ค่ะ</h1>
   <p>ระบบตรวจความสะอาด ศูนย์กีฬาสิรินธร มศว</p>
-  <p style="font-size:16px;opacity:.85">ทดลองใช้งาน (โหมดทดลอง): เปิดหน้า mockup แล้วใช้การ์ดสลับ Role มุมขวาล่างเพื่อสาธิตทุกบทบาทโดยไม่ต้องล็อกอิน</p>
 </section>
 
 </div>
 <div class="nav">
   <button id="prev" type="button" aria-label="ก่อนหน้า">← ก่อนหน้า</button>
-  <span class="pg" id="pg"></span>
+  <div class="mid3"><button id="reset" type="button" title="ล้างข้อมูลทดลองและเริ่มใหม่">รีเซ็ตเดโม</button><span class="pg" id="pg"></span></div>
   <button id="next" type="button" aria-label="ถัดไป">ถัดไป →</button>
 </div>
 <script>
+const LOGO='https://vxfozsxudrkxrjphttxm.supabase.co/storage/v1/object/public/Photo/Thai_color01_0_0.png';
 const S=[...document.querySelectorAll('.slide')];let i=0;
-S.forEach((s,k)=>{if(k>0&&k<S.length-1&&!s.classList.contains('cover')){const l=document.createElement('img');l.className='logo-s';l.alt='';l.src='https://vxfozsxudrkxrjphttxm.supabase.co/storage/v1/object/public/Photo/Thai_color01_0_0.png';l.onerror=()=>l.remove();s.appendChild(l)}});
-const go=n=>{i=Math.max(0,Math.min(S.length-1,n));S.forEach((s,k)=>s.classList.toggle('on',k===i));document.getElementById('pg').textContent=(i+1)+' / '+S.length;document.getElementById('pbar').style.width=((i+1)/S.length*100)+'%';try{history.replaceState(null,'','#'+(i+1))}catch(e){}};
+/* สร้างกรอบเบราว์เซอร์ + iframe ของ mockup สำหรับสไลด์ที่มี data-src (โหลดเมื่อถึงหน้านั้น) */
+S.forEach((s,k)=>{
+  if(!s.classList.contains('cover')){const l=document.createElement('img');l.className='logo-s';l.alt='';l.src=LOGO;l.onerror=()=>l.remove();s.appendChild(l)}
+  const src=s.dataset.src; if(!src)return;
+  const f=document.createElement('div');f.className='frame';
+  f.innerHTML='<div class="fbar"><span class="dots"><i></i><i></i><i></i></span><span class="ttl"></span><a target="_blank" rel="noopener">เปิดเต็มจอ ↗</a></div><iframe title="" loading="lazy"></iframe>';
+  f.querySelector('.ttl').textContent=s.dataset.title+' · ใช้งานได้จริง';f.querySelector('a').href=src.replace('embed=1&','');f.querySelector('iframe').title=s.dataset.title;
+  s.querySelector('.live').appendChild(f);
+});
+const load=s=>{const fr=s&&s.querySelector('iframe');if(fr&&!fr.getAttribute('src'))fr.setAttribute('src',s.dataset.src)};
+const go=n=>{i=Math.max(0,Math.min(S.length-1,n));S.forEach((s,k)=>s.classList.toggle('on',k===i));load(S[i]);load(S[i+1]);
+  document.getElementById('pg').textContent=(i+1)+' / '+S.length;document.getElementById('pbar').style.width=((i+1)/S.length*100)+'%';try{history.replaceState(null,'','#'+(i+1))}catch(e){}};
 document.getElementById('next').onclick=()=>go(i+1);document.getElementById('prev').onclick=()=>go(i-1);
-addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();go(i+1)}else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)){e.preventDefault();go(i-1)}else if(e.key==='Home')go(0);else if(e.key==='End')go(S.length-1);else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}});
-let x0=null;addEventListener('touchstart',e=>x0=e.touches[0].clientX);addEventListener('touchend',e=>{if(x0==null)return;const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>50)go(i+(d<0?1:-1));x0=null});
+document.getElementById('reset').onclick=()=>{try{sessionStorage.clear();localStorage.removeItem('mockSessions_v4')}catch(e){}document.querySelectorAll('iframe[src]').forEach(fr=>fr.contentWindow.location.reload())};
+addEventListener('keydown',e=>{if(['ArrowRight','PageDown'].includes(e.key)||(e.key===' '&&document.activeElement===document.body)){e.preventDefault();go(i+1)}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1)}else if(e.key==='Home')go(0);else if(e.key==='End')go(S.length-1);else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}});
+let x0=null;document.querySelector('.deck').addEventListener('touchstart',e=>{if(!e.target.closest('.frame'))x0=e.touches[0].clientX});addEventListener('touchend',e=>{if(x0==null)return;const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)go(i+(d<0?1:-1));x0=null});
 go((parseInt(location.hash.slice(1),10)||1)-1);
 </script>
 </body>
