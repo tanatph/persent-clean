@@ -62,7 +62,7 @@
 
   /* mockup banner — DS Toast Warning tokens (yellow-50 / yellow-950 text) */
   /* @dev:start */.emb-mode .mock-banner,.emb-mode #devRole{display:none!important}/* @dev:end */
-/* @dev:start */.devrole{position:fixed;z-index:60;right:12px;bottom:84px;width:190px;background:var(--white);border:1px solid var(--swu-purple-700);border-radius:var(--r-lg);box-shadow:0 8px 24px rgb(0 0 0/.22);font-size:13px;user-select:none;touch-action:none}.devrole .dh{cursor:grab;background:var(--swu-purple-700);color:#fff;padding:6px 10px;border-radius:calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px) 0 0;font-weight:700;display:flex;justify-content:space-between;gap:8px}.devrole.drag .dh{cursor:grabbing}.devrole .db{display:grid;gap:6px;padding:8px}.devrole .db button{padding:8px;border-radius:var(--r-md);border:1px solid var(--gray-300,#ccc);font-weight:700;text-align:left}.devrole .db button.on{background:var(--swu-purple-700);color:#fff}.devrole.min .db{display:none}/* @dev:end */
+/* @dev:start */.devrole{position:fixed;z-index:60;right:12px;bottom:84px;background:#fff;border:2px solid var(--swu-purple-700);border-radius:var(--r-lg);box-shadow:0 8px 24px rgb(0 0 0/.3);font-size:13px;user-select:none;touch-action:none;opacity:1}.devrole .dh{cursor:grab;background:var(--swu-purple-700);color:#fff;padding:5px 10px;border-radius:calc(var(--r-lg) - 2px) calc(var(--r-lg) - 2px) 0 0;font-weight:700;display:flex;justify-content:space-between;gap:12px}.devrole.drag .dh{cursor:grabbing}.devrole .db{display:flex;gap:6px;padding:8px;background:#fff;border-radius:0 0 var(--r-lg) var(--r-lg)}.devrole .db button{display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:var(--r-md);border:1px solid var(--swu-purple-700);background:#fff;color:var(--swu-purple-700);font-weight:700;white-space:nowrap}.devrole .db button svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.devrole .db button.on{background:var(--swu-purple-700);color:#fff}.devrole.min .db{display:none}@media(max-width:700px){.devrole .db{flex-wrap:wrap;max-width:260px}}/* @dev:end */
 /* @dev:start */.mock-banner{background:var(--yellow-50);color:var(--yellow-950);font-size:12px;font-weight:400;text-align:center;padding:7px 10px;border-bottom:1px solid var(--yellow-100)}/* @dev:end */
 
   /* top bar — brand surface (swu-purple-600), text-on-brand per DS-#052/#054 */
@@ -2023,6 +2023,12 @@ function ensureLocalAuth() {
   store.set('auth', S.auth, true);
 }
 /* การ์ดสลับ Role (mockup เท่านั้น): ลากย้ายได้ · สลับโดยไม่ต้องล็อกอิน — สร้าง session ทดลองของ Role นั้น */
+const DEV_ICONS = {
+  cleaner: '<svg viewBox="0 0 24 24"><path d="M19 3l-6 8"/><path d="M11 11l-6 1-2 9h16l-2-9-6-1z"/><path d="M8 21l1-6M12 21v-6M16 21l-1-6"/></svg>',
+  supervisor: '<svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>',
+  manager: '<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',
+  admin: '<svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/></svg>',
+};
 const DEV_ROLES = [['cleaner', 'แม่บ้าน'], ['supervisor', 'หัวหน้าแม่บ้าน'], ['manager', 'คณะกรรมการ'], ['admin', 'Super Admin']];
 const devPos = (() => { try { return JSON.parse(localStorage.getItem('devRolePos')) || {}; } catch (e) { return {}; } })();
 function devRoleCard() {
@@ -2051,7 +2057,7 @@ function devRoleCard() {
     if (devPos.min) el.classList.add('min');
   }
   const cur = S.auth ? S.auth.role : '';
-  el.innerHTML = `<div class="dh"><span>Role (ทดลอง)</span><span data-min title="ย่อ/ขยาย">▾</span></div><div class="db">${DEV_ROLES.map(([r, n]) => `<button type="button" data-devrole="${r}" class="${cur === r ? 'on' : ''}">${n}</button>`).join('')}</div>`;
+  el.innerHTML = `<div class="dh"><span>Role (ทดลอง)</span><span data-min title="ย่อ/ขยาย">▾</span></div><div class="db">${DEV_ROLES.map(([r, n]) => `<button type="button" data-devrole="${r}" class="${cur === r ? 'on' : ''}">${DEV_ICONS[r]}${n}</button>`).join('')}</div>`;
 }
 async function devSwitchRole(role) {
   if (role === 'admin') S.auth = MOCK.apiLoginAuto('admin', DEMO_PASSWORD);
