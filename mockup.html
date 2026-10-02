@@ -555,15 +555,16 @@ function markAll_(zones) { zones.forEach(z => z.completed = true); }
 function markPartial_(zones, ratio) { zones.forEach((z, k) => z.completed = k < Math.round(zones.length * ratio)); }
 
 function applyScenario_(loc, sc) {
-  const zones = loc.subZones, digit = loc.id % 6;
+  const staff = ['สมศรี ใจดี', 'มานี มีสุข', 'ประภา รักงาน', 'วันดี สะอาดใจ'];   // ชื่อตัวอย่างของผู้ส่งรายงาน (เฉพาะ mockup)
+  const zones = loc.subZones, digit = loc.id % 6, by = staff[loc.id % staff.length];
   if (sc.status === 'pending') { if (sc.partial) markPartial_(zones, 0.4); return; }
 
   markAll_(zones);
   const tReport = `07:5${digit}`;
-  loc.photos.push(photoRec_(addUpload_('report'), 'report', loc.assignedTo || ROLE_LABEL.cleaner, 'cleaner', tReport));
+  loc.photos.push(photoRec_(addUpload_('report'), 'report', by, 'cleaner', tReport));
   loc.cleanerNote = 'ทำความสะอาดครบทุกจุดแล้ว';
   loc.lastUpdated = tReport;
-  addHist_(loc.id, tReport, loc.assignedTo || ROLE_LABEL.cleaner, 'cleaner', `ส่งรายงาน (${zones.length}/${zones.length} จุด, รูป 1)`);
+  addHist_(loc.id, tReport, by, 'cleaner', `ส่งรายงาน (${zones.length}/${zones.length} จุด, รูป 1)`);
   if (sc.status === 'cleaner_done') { loc.status = 'cleaner_done'; return; }
 
   const tSup = `08:3${digit}`;
@@ -665,7 +666,7 @@ function buildHistory_() {
   if (histCache_) return histCache_;
   const rnd = mulberry32_(20260930), rows = [], base = new Date();
   const prone = MASTER.map(() => 0.03 + rnd() * 0.3);
-  for (let i = 90; i >= 1; i--) {
+  for (let i = 400; i >= 1; i--) {
     const d = new Date(base); d.setDate(d.getDate() - i);
     MASTER.forEach((m, k) => {
       let sup = 0, fb = 0;
@@ -678,12 +679,11 @@ function buildHistory_() {
   return (histCache_ = rows);
 }
 
-/* ชื่อผู้รับผิดชอบในแต่ละพื้นที่ มาจากบัญชีที่ Admin อนุมัติ: แม่บ้าน = ผู้ที่ถูกมอบหมายพื้นที่นั้น · หัวหน้า = หัวหน้าแม่บ้านคนเดียวของระบบ */
+/* หัวหน้าแม่บ้านของทุกพื้นที่ = หัวหน้าแม่บ้านคนเดียวของระบบ · แม่บ้านเวียนพื้นที่ จึงไม่ผูกชื่อแม่บ้านกับพื้นที่ (ชื่อผู้ส่งรายงานดูจากประวัติ — ดู sender) */
 function syncAssign_() {
   const sup = DB.users.find(u => u.role === 'supervisor' && u.status === 'approved');
   DB.locations.forEach(l => {
-    const c = DB.users.find(u => u.role === 'cleaner' && u.status === 'approved' && (u.areas || []).includes(l.id));
-    l.assignedTo = c ? c.displayName : ''; l.supervisor = sup ? sup.displayName : '';
+    l.assignedTo = ''; l.supervisor = sup ? sup.displayName : '';
   });
   saveDB_();
 }
@@ -783,15 +783,11 @@ const MOCK = {
     if (m.status === 'approved') throw new Error('ต้องระงับบัญชีก่อนจึงจะลบได้');
     DB.users = DB.users.filter(x => x !== m); syncAssign_(); return true;
   },
-  /* Admin แก้ชื่อ/เบอร์ และมอบหมายพื้นที่ให้พนักงานทำความสะอาด (1 พื้นที่ต่อ 1 คน) */
+  /* Admin แก้ชื่อ/เบอร์ (แม่บ้านเวียนพื้นที่ จึงไม่มีการมอบหมายพื้นที่ประจำ) */
   apiSaveUser(token, p) {
     Sessions.auth(token, ['admin']); p = p || {}; const m = findUser_(p.username);
     const name = String(p.displayName || '').trim().slice(0, 80); if (!name) throw new Error('กรุณากรอกชื่อ-นามสกุล');
     m.displayName = name; m.phone = phoneNorm_(p.phone, false);
-    if (m.role === 'cleaner') {
-      m.areas = (Array.isArray(p.areas) ? p.areas : []).map(Number).filter(id => DB.locations.some(l => l.id === id));
-      DB.users.forEach(o => { if (o !== m && o.role === 'cleaner') o.areas = (o.areas || []).filter(id => !m.areas.includes(id)); });
-    }
     syncAssign_(); return true;
   },
   apiChangePassword(token, oldPw, newPw, wantRemember) {
@@ -1032,7 +1028,9 @@ const esc = s => String(s ?? '').replace(/[&<>\x22\x27]/g, c => ({ '&': '&amp;',
 const chip = st => { const s = STATUS[st] || STATUS.pending; return `<span class="chip c-${s.c}">${s.t}</span>`; };
 const prog = l => { const d = l.subZones.filter(z => z.completed).length, t = l.subZones.length; return { d, t, p: t ? Math.round(d / t * 100) : 0 }; };
 const loc = id => S.locs.find(l => l.id === Number(id));
-const who = l => l.assignedTo || 'ยังไม่มอบหมายพนักงาน';
+/* ผู้ส่งรายงานของพื้นที่ (แม่บ้านเวียนพื้นที่ — ใช้ชื่อคนที่ส่งรายงาน/ตอบกลับแจ้งแก้ไขล่าสุดของวันนี้จากประวัติ) */
+const sender = l => { const h = (l.history || []).filter(x => x.role === 'cleaner' && /^(ส่งรายงาน|ส่งงานแก้ไข|ตอบกลับแจ้งแก้ไข)/.test(x.action)); return h.length ? h[h.length - 1].user : ''; };
+const who = l => { const n = sender(l); return n ? 'ส่งโดย ' + n : 'ยังไม่มีผู้ส่งรายงาน'; };
 const thDate = d => d ? new Date(d + 'T00:00:00').toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: '2-digit' }) : '';
 
 /* @dev:start */
@@ -1381,7 +1379,7 @@ function vReview() {
   const q = S.q.trim().toLowerCase();
   const fix = com ? null : fixLocs(false), onFix = !com && S.tab === 'fix';
   let list = onFix ? fix : S.tab === 'todo' ? todo : S.locs;
-  if (q) list = list.filter(l => (l.area + l.assignedTo).toLowerCase().includes(q));
+  if (q) list = list.filter(l => (l.area + sender(l)).toLowerCase().includes(q));
   const emptyMsg = onFix ? 'ไม่มีรายการแจ้งแก้ไขวันนี้' : S.tab === 'todo' ? (com ? 'ยังไม่มีการแจ้งจุดปรับปรุงวันนี้' : 'ไม่มีงานรอตรวจ') : 'ไม่พบข้อมูล';
   return `
   <div class="stack">
@@ -1415,25 +1413,34 @@ function vAdmin() {
 const ymd = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 const thShort = d => d.toLocaleDateString('th-TH', { day: 'numeric', month: 'short' });
 
-/* ช่วงวันที่ตามตัวกรอง: สัปดาห์ (จันทร์–อาทิตย์) หรือเดือนปฏิทิน · offset 0 = ปัจจุบัน, -1 = ก่อนหน้า */
+/* ช่วงตามตัวกรอง: สัปดาห์ (จันทร์–อาทิตย์) · เดือนปฏิทิน (แท่งรายวัน) · ปีปฏิทิน (แท่งรายเดือน) · offset 0 = ปัจจุบัน, -1 = ก่อนหน้า
+   days = คีย์ของแต่ละแท่ง (วัน yyyy-mm-dd หรือเดือน yyyy-mm) · keyOf = แปลงวันที่เป็นคีย์ · lab/short = ป้ายเต็ม/ป้ายแกน */
 function dfRange() {
   const now = new Date(); now.setHours(0, 0, 0, 0);
   let s, e;
+  if (S.dfPeriod === 'year') {
+    const y = now.getFullYear() + S.dfOffset; s = new Date(y, 0, 1); e = new Date(y, 11, 31);
+    const lastM = e > now ? now.getMonth() : 11, months = [];
+    for (let m = 0; m <= lastM; m++) months.push(`${y}-${String(m + 1).padStart(2, '0')}`);
+    const oldest = S.hist && S.hist.length ? S.hist[0].date : ymd(now), nDays = Math.round(((e > now ? now : e) - s) / 864e5) + 1;
+    const mName = k => new Date(Number(k.slice(0, 4)), Number(k.slice(5, 7)) - 1, 1).toLocaleDateString('th-TH', { month: 'long', year: 'numeric' });
+    return { label: `ปี ${y + 543}`, days: months, keyOf: d => d.slice(0, 7), lab: mName, short: k => new Date(2000, Number(k.slice(5, 7)) - 1, 1).toLocaleDateString('th-TH', { month: 'short' }), unit: 'รายเดือน', cell: 'เดือน', nDays, canPrev: ymd(s) > oldest, canNext: S.dfOffset < 0 };
+  }
   if (S.dfPeriod === 'month') { s = new Date(now.getFullYear(), now.getMonth() + S.dfOffset, 1); e = new Date(s.getFullYear(), s.getMonth() + 1, 0); }
   else { s = new Date(now); s.setDate(now.getDate() - ((now.getDay() + 6) % 7) + S.dfOffset * 7); e = new Date(s); e.setDate(s.getDate() + 6); }
   const label = S.dfPeriod === 'month' ? s.toLocaleDateString('th-TH', { month: 'long', year: 'numeric' }) : `${thShort(s)} – ${thShort(e)} ${e.getFullYear() + 543}`;
   const last = e > now ? now : e, days = [];
   for (const d = new Date(s); d <= last; d.setDate(d.getDate() + 1)) days.push(ymd(d));
   const oldest = S.hist && S.hist.length ? S.hist[0].date : ymd(now);
-  return { label, days, canPrev: ymd(s) > oldest, canNext: S.dfOffset < 0 };
+  return { label, days, keyOf: d => d, lab: thDate, short: d => d.slice(8), unit: 'รายวัน', cell: 'วัน', nDays: days.length, canPrev: ymd(s) > oldest, canNext: S.dfOffset < 0 };
 }
 const areaMatch = (area, cat) => !S.dfArea || (S.dfArea.startsWith('cat:') ? cat === S.dfArea.slice(4) : area === S.dfArea);
 
 /* แถวข้อมูล = ประวัติ + วันนี้ (จากสถานะสดของพื้นที่ที่ตัดสินแล้ว) */
-function dfRows(days) {
-  const set = new Set(days), rows = (S.hist || []).filter(r => set.has(r.date) && areaMatch(r.area, r.category));
+function dfRows(R) {
+  const set = new Set(R.days), rows = (S.hist || []).filter(r => set.has(R.keyOf(r.date)) && areaMatch(r.area, r.category));
   const today = ymd(new Date());
-  if (set.has(today)) S.locs.forEach(l => {
+  if (set.has(R.keyOf(today))) S.locs.forEach(l => {
     if (!areaMatch(l.area, l.category)) return;
     const rej = l.history.filter(h => /^ตีกลับ/.test(h.action));
     const sup = rej.filter(h => h.role === 'supervisor').length, fb = l.history.filter(h => h.role === 'manager' && /^แจ้งปรับปรุง/.test(h.action)).length;
@@ -1441,15 +1448,16 @@ function dfRows(days) {
   });
   return rows;
 }
-function dfAgg(rows, days) {
+function dfAgg(rows, R) {
+  const days = R.days;
   const byDay = Object.fromEntries(days.map(d => [d, { n: 0, ok: 0, sup: 0, fb: 0 }]));
   const byArea = {};
   S.locs.filter(l => areaMatch(l.area, l.category)).forEach(l => { byArea[l.area] = { area: l.area, n: 0, ok: 0, sup: 0, fb: 0, rs: 0, rn: 0, heat: days.map(() => 0) }; });
   rows.forEach(r => {
-    const d = byDay[r.date], a = byArea[r.area]; if (!d || !a) return;
+    const key = R.keyOf(r.date), d = byDay[key], a = byArea[r.area]; if (!d || !a) return;
     d.n++; d.ok += r.approved ? 1 : 0; d.sup += r.sup; d.fb += r.fb;
     a.n++; a.ok += r.approved ? 1 : 0; a.sup += r.sup; a.fb += r.fb; if (r.rating) { a.rs += r.rating; a.rn++; }
-    a.heat[days.indexOf(r.date)] += r.sup;
+    a.heat[days.indexOf(key)] += r.sup;
   });
   // ตีกลับ = หัวหน้าตีกลับ (ทำให้ต้องส่งซ้ำ) · แจ้งปรับปรุง = ข้อเสนอแนะจากคณะกรรมการ (ไม่ทำให้ส่งซ้ำ) แสดงต่อท้ายแท่งเดียวกัน
   const areas = Object.values(byArea).map(a => { const rejects = a.sup, submits = a.n + rejects; return Object.assign(a, { rejects, submits, rate: submits ? rejects / submits : 0, rateAll: submits ? (a.sup + a.fb) / submits : 0 }); })
@@ -1460,22 +1468,25 @@ function dfAgg(rows, days) {
 }
 
 /* กราฟแท่ง (ซ้อนชั้นได้) — cols[i] = { segs:[{v,c}], title } */
-function colChart(days, cols, max, fmt) {
+function colChart(days, cols, max, fmt, short = d => d.slice(8)) {
   const many = days.length > 16;
   return `<div class="cc${many ? ' many' : ''}">${cols.map((c, i) => {
     const tot = c.segs.reduce((s, x) => s + x.v, 0);
     return `<div title="${esc(c.title)}"><span class="cv">${tot ? fmt(tot) : ''}</span>
       <div class="cs">${c.segs.filter(x => x.v).map(x => `<i style="height:${Math.max(x.v / max * 100, 1.5)}%;background:${x.c}"></i>`).join('')}</div>
-      <span class="cl">${many && i % 5 !== 0 ? '' : days[i].slice(8)}</span></div>`;
+      <span class="cl">${many && i % 5 !== 0 ? '' : short(days[i])}</span></div>`;
   }).join('')}</div>`;
 }
 
+/* ระดับสีของช่องฮีตแมป: รายวัน 0/1/2+ ครั้ง · รายเดือน 0 / 1–14 / 15+ ครั้ง */
+const hmLevel = (R, c) => R.unit === 'รายเดือน' ? (c === 0 ? 0 : c < 15 ? 1 : 2) : Math.min(c, 2);
+const hmLegend = R => R.unit === 'รายเดือน' ? ['1–14 ครั้ง', '15 ครั้งขึ้นไป'] : ['1 ครั้ง', '2 ครั้งขึ้นไป'];
 function dfBar(R) {
   const cats = [...new Set(S.locs.map(l => l.category))];
   const btn = (p, label) => `<button class="${S.dfPeriod === p ? 'on' : ''}" data-act="dfPeriod" data-p="${p}">${label}</button>`;
   return `
   <div class="card df no-print">
-    <div class="tabs">${btn('week', 'รายสัปดาห์')}${btn('month', 'รายเดือน')}</div>
+    <div class="tabs">${btn('week', 'รายสัปดาห์')}${btn('month', 'รายเดือน')}${btn('year', 'รายปี')}</div>
     <div class="nav">
       <button class="btn sm ghost" data-act="dfPrev" ${R.canPrev ? '' : 'disabled'} aria-label="ก่อนหน้า">‹</button>
       <b>${esc(R.label)}</b>
@@ -1492,14 +1503,14 @@ function dfBar(R) {
 
 function vDash() {
   if (!S.hist) return `<div class="empty"><span class="spin"></span></div>`;
-  const R = dfRange(), rows = dfRows(R.days), A = dfAgg(rows, R.days), T = A.t;
+  const R = dfRange(), rows = dfRows(R), A = dfAgg(rows, R), T = A.t;
   const scope = S.dfArea ? (S.dfArea.startsWith('cat:') ? 'หมวด ' + S.dfArea.slice(4) : S.dfArea) : 'ทุกอาคาร / พื้นที่';
   const okPct = T.n ? Math.round(T.ok / T.n * 100) : 0;
   const avg = T.rn ? (T.rs / T.rn).toFixed(1) : '–';
   const empty = !T.n && !T.rejects && !T.fb;
 
-  const apprCols = R.days.map(d => { const x = A.byDay[d]; return { segs: x.n ? [{ v: x.ok / x.n * 100, c: 'var(--green)' }] : [], title: `${thDate(d)}: ตรวจผ่านแล้ว ${x.ok}/${x.n} พื้นที่` }; });
-  const rejCols = R.days.map(d => { const x = A.byDay[d]; return { segs: [{ v: x.sup, c: 'var(--teal-800)' }, { v: x.fb, c: 'var(--blue-600)' }], title: `${thDate(d)}: ตีกลับ ${x.sup} ครั้ง · กรรมการแจ้งปรับปรุง ${x.fb} ครั้ง` }; });
+  const apprCols = R.days.map(d => { const x = A.byDay[d]; return { segs: x.n ? [{ v: x.ok / x.n * 100, c: 'var(--green)' }] : [], title: `${R.lab(d)}: ตรวจผ่านแล้ว ${x.ok}/${x.n} พื้นที่` }; });
+  const rejCols = R.days.map(d => { const x = A.byDay[d]; return { segs: [{ v: x.sup, c: 'var(--teal-800)' }, { v: x.fb, c: 'var(--blue-600)' }], title: `${R.lab(d)}: ตีกลับ ${x.sup} ครั้ง · กรรมการแจ้งปรับปรุง ${x.fb} ครั้ง` }; });
   const rejMax = Math.max(1, ...R.days.map(d => A.byDay[d].sup + A.byDay[d].fb));
 
   const maxRate = Math.max(...A.areas.map(a => a.rateAll), 0.01);
@@ -1512,7 +1523,7 @@ function vDash() {
   }).join('');
   const cols = `grid-template-columns:repeat(${R.days.length},1fr)`;
   const heat = A.areas.map(a => `<div class="hm-row"><div class="rv-name">${esc(a.area)}</div>
-    <div class="hm-cells" style="${cols}">${a.heat.map((c, i) => `<b class="hm-c hm-${Math.min(c, 2)}" title="${esc(a.area)} · ${thDate(R.days[i])}: ตีกลับ ${c} ครั้ง"></b>`).join('')}</div></div>`).join('');
+    <div class="hm-cells" style="${cols}">${a.heat.map((c, i) => `<b class="hm-c hm-${hmLevel(R, c)}" title="${esc(a.area)} · ${esc(R.lab(R.days[i]))}: ตีกลับ ${c} ครั้ง"></b>`).join('')}</div></div>`).join('');
   const legend = `<div class="xs" style="display:flex;gap:14px;flex-wrap:wrap"><span><b style="color:var(--teal-800)">●</b> หัวหน้าแม่บ้านตีกลับ</span><span><b style="color:var(--blue-600)">●</b> คณะกรรมการแจ้งปรับปรุง</span></div>`;
 
   return `
@@ -1536,8 +1547,8 @@ function vDash() {
 
     ${empty ? `<div class="card empty">ไม่มีข้อมูลในช่วงที่เลือก</div>` : `
     <div class="grid2">
-      <div class="card"><h3>อัตราตรวจผ่านรายวัน</h3><div class="xs muted">% ของพื้นที่ที่หัวหน้าแม่บ้านตรวจผ่านแล้ว</div>${colChart(R.days, apprCols, 100, v => Math.round(v) + '%')}</div>
-      <div class="card"><div class="row" style="flex-wrap:wrap;align-items:flex-start"><div><h3>ตีกลับ / แจ้งปรับปรุงรายวัน</h3><div class="xs muted">หัวหน้าแม่บ้านตีกลับ และคณะกรรมการแจ้งปรับปรุง</div></div>${legend}</div>${colChart(R.days, rejCols, rejMax, v => v)}</div>
+      <div class="card"><h3>อัตราตรวจผ่าน${R.unit}</h3><div class="xs muted">% ของพื้นที่ที่หัวหน้าแม่บ้านตรวจผ่านแล้ว</div>${colChart(R.days, apprCols, 100, v => Math.round(v) + '%', R.short)}</div>
+      <div class="card"><div class="row" style="flex-wrap:wrap;align-items:flex-start"><div><h3>ตีกลับ / แจ้งปรับปรุง${R.unit}</h3><div class="xs muted">หัวหน้าแม่บ้านตีกลับ และคณะกรรมการแจ้งปรับปรุง</div></div>${legend}</div>${colChart(R.days, rejCols, rejMax, v => v, R.short)}</div>
     </div>
 
     <div class="card">
@@ -1548,16 +1559,16 @@ function vDash() {
     </div>
 
     <div class="card">
-      <h3>รูปแบบการตีกลับรายวัน แยกรายพื้นที่</h3>
-      <div class="xs muted" style="margin-bottom:10px">แต่ละช่อง = 1 วัน · สีเข้มขึ้น = ถูกตีกลับหลายครั้ง</div>
+      <h3>รูปแบบการตีกลับ${R.unit} แยกรายพื้นที่</h3>
+      <div class="xs muted" style="margin-bottom:10px">แต่ละช่อง = 1 ${R.cell} · สีเข้มขึ้น = ถูกตีกลับหลายครั้ง</div>
       <div class="tbl"><div class="hm">
-        <div class="hm-row"><div class="rv-name"></div><div class="hm-head" style="${cols}">${R.days.map((d, i) => `<span>${R.days.length > 16 && i % 5 ? '' : d.slice(8)}</span>`).join('')}</div></div>${heat}
+        <div class="hm-row"><div class="rv-name"></div><div class="hm-head" style="${cols}">${R.days.map((d, i) => `<span>${R.days.length > 16 && i % 5 ? '' : R.short(d)}</span>`).join('')}</div></div>${heat}
       </div></div>
-      <div class="xs muted" style="margin-top:10px;display:flex;gap:14px;align-items:center"><span class="hm-c hm-0" style="display:inline-block;width:14px;height:14px"></span> ไม่ตีกลับ <span class="hm-c hm-1" style="display:inline-block;width:14px;height:14px"></span> 1 ครั้ง <span class="hm-c hm-2" style="display:inline-block;width:14px;height:14px"></span> 2 ครั้งขึ้นไป</div>
+      <div class="xs muted" style="margin-top:10px;display:flex;gap:14px;align-items:center"><span class="hm-c hm-0" style="display:inline-block;width:14px;height:14px"></span> ไม่ตีกลับ <span class="hm-c hm-1" style="display:inline-block;width:14px;height:14px"></span> ${hmLegend(R)[0]} <span class="hm-c hm-2" style="display:inline-block;width:14px;height:14px"></span> ${hmLegend(R)[1]}</div>
     </div>`}
 
     ${todayPanel()}
-    ${staffPerf(A.areas)}
+    ${staffPerf()}
   </div>`;
 }
 
@@ -1565,14 +1576,14 @@ function vDash() {
    รายงาน PDF — ใช้ตัวกรองเดียวกับแดชบอร์ด (สัปดาห์/เดือน/อาคาร) แต่จัดเค้าโครงใหม่ให้กระชับ อ่านจบใน 1 หน้า A4
    ========================================================= */
 function reportHtml() {
-  const R = dfRange(), A = dfAgg(dfRows(R.days), R.days), T = A.t;
+  const R = dfRange(), A = dfAgg(dfRows(R), R), T = A.t;
   const scope = S.dfArea ? (S.dfArea.startsWith('cat:') ? 'หมวด ' + S.dfArea.slice(4) : S.dfArea) : 'ทุกอาคาร / พื้นที่';
   const okPct = T.n ? Math.round(T.ok / T.n * 100) : 0, avg = T.rn ? (T.rs / T.rn).toFixed(1) : '–';
   const kpi = (t, v, s) => `<div><span>${t}</span><b>${v}</b><small>${s}</small></div>`;
 
-  const cols = R.days.map(d => { const x = A.byDay[d]; return { segs: [{ v: x.sup, c: 'var(--teal-800)' }, { v: x.fb, c: 'var(--blue-600)' }], title: `${thDate(d)}: ตีกลับ ${x.sup} · แจ้งปรับปรุง ${x.fb}` }; });
+  const cols = R.days.map(d => { const x = A.byDay[d]; return { segs: [{ v: x.sup, c: 'var(--teal-800)' }, { v: x.fb, c: 'var(--blue-600)' }], title: `${R.lab(d)}: ตีกลับ ${x.sup} · แจ้งปรับปรุง ${x.fb}` }; });
   const max = Math.max(1, ...R.days.map(d => A.byDay[d].sup + A.byDay[d].fb));
-  const okCols = R.days.map(d => { const x = A.byDay[d]; return { segs: x.n ? [{ v: x.ok / x.n * 100, c: 'var(--green)' }] : [], title: `${thDate(d)}: ตรวจผ่าน ${x.ok}/${x.n}` }; });
+  const okCols = R.days.map(d => { const x = A.byDay[d]; return { segs: x.n ? [{ v: x.ok / x.n * 100, c: 'var(--green)' }] : [], title: `${R.lab(d)}: ตรวจผ่าน ${x.ok}/${x.n}` }; });
 
   const watch = A.areas.filter(a => a.sup || a.fb).slice(0, 3);
   const insights = [
@@ -1595,15 +1606,15 @@ function reportHtml() {
     <div class="rp-head">
       <span class="logo-mark" role="img" aria-label="ศูนย์กีฬาสิรินธร"></span>
       <div style="flex:1"><h1>รายงานผลการตรวจความสะอาด</h1><div class="rp-meta" style="text-align:left">ศูนย์กีฬาสิรินธร มหาวิทยาลัยศรีนครินทรวิโรฒ</div></div>
-      <div class="rp-meta"><b>${esc(R.label)}</b><br>${esc(scope)}<br>${R.days.length} วัน · จัดทำ ${new Date().toLocaleString('th-TH', { dateStyle: 'medium', timeStyle: 'short' })}</div>
+      <div class="rp-meta"><b>${esc(R.label)}</b><br>${esc(scope)}<br>${R.nDays} วัน · จัดทำ ${new Date().toLocaleString('th-TH', { dateStyle: 'medium', timeStyle: 'short' })}</div>
     </div>
     <div class="rp-kpi">
       ${kpi('รายงานที่ส่ง', T.submits, `${T.n} พื้นที่-วัน`)}${kpi('ตรวจผ่านแล้ว', okPct + '%', `${T.ok}/${T.n}`)}${kpi('ตีกลับ', T.rejects, `อัตรา ${(T.rate * 100).toFixed(0)}%`)}${kpi('แจ้งปรับปรุง', T.fb, 'จากคณะกรรมการ')}${kpi('คะแนนเฉลี่ย', avg, 'เต็ม 5')}
     </div>
     <ul class="rp-sum">${insights.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
     <div class="rp-2">
-      <div><h2>อัตราตรวจผ่านรายวัน (%)</h2>${colChart(R.days, okCols, 100, v => Math.round(v))}</div>
-      <div><h2>ตีกลับ / แจ้งปรับปรุงรายวัน (ครั้ง)</h2>${colChart(R.days, cols, max, v => v)}${leg}</div>
+      <div><h2>อัตราตรวจผ่าน${R.unit} (%)</h2>${colChart(R.days, okCols, 100, v => Math.round(v), R.short)}</div>
+      <div><h2>ตีกลับ / แจ้งปรับปรุง${R.unit} (ครั้ง)</h2>${colChart(R.days, cols, max, v => v, R.short)}${leg}</div>
     </div>
     <h2>สรุปรายพื้นที่ (เรียงจากต้องติดตามมากไปน้อย)</h2>
     <table>
@@ -1641,10 +1652,10 @@ function todayPanel() {
     <div class="card tbl">
       <h3 style="margin-bottom:6px">สถานะรายพื้นที่วันนี้</h3>
       <table>
-        <tr><th>พื้นที่</th><th>แม่บ้าน</th><th>ความคืบหน้า</th><th>สถานะ</th><th>คะแนน</th><th>ตีกลับ</th></tr>
+        <tr><th>พื้นที่</th><th>ผู้ส่งรายงาน</th><th>ความคืบหน้า</th><th>สถานะ</th><th>คะแนน</th><th>ตีกลับ</th></tr>
         ${L.map(l => { const p = prog(l); return `
           <tr data-act="open" data-id="${l.id}" style="cursor:pointer">
-            <td>${esc(l.area)}</td><td class="sm">${esc(who(l))}</td>
+            <td>${esc(l.area)}</td><td class="sm">${esc(sender(l) || '–')}</td>
             <td class="sm">${p.d}/${p.t}</td><td>${chip(l.status)}</td>
             <td>${l.rating ? '★ ' + l.rating : '–'}</td><td>${l.rejectCount || '–'}</td>
           </tr>`; }).join('')}
@@ -1652,22 +1663,22 @@ function todayPanel() {
     </div>`;
 }
 
-/* ผลงานรายพนักงาน — รวมจากพื้นที่ที่รับผิดชอบ ตามตัวกรองที่เลือก */
-function staffPerf(areas) {
-  if (!S.users) return '';
-  const st = S.users.filter(s => s.role === 'cleaner' && s.status === 'approved');
-  if (!st.length) return `<div class="card"><h3>ผลงานรายพนักงาน</h3><div class="empty sm">ยังไม่มีพนักงานทำความสะอาดที่อนุมัติแล้ว — อนุมัติผู้ลงทะเบียนได้ที่แท็บ “จัดการสิทธิ์”</div></div>`;
-  const rows = st.map(s => {
-    const names = s.areas.map(id => loc(id)?.area).filter(Boolean), as = areas.filter(a => names.includes(a.area));
-    const sum = k => as.reduce((x, a) => x + a[k], 0), rn = sum('rn');
-    return { name: s.displayName, areas: names.length, n: sum('n'), ok: sum('ok'), rejects: sum('rejects'), avg: rn ? (sum('rs') / rn).toFixed(1) : '–' };
+/* ผลงานรายพนักงานวันนี้ — แม่บ้านเวียนพื้นที่ จึงนับตามชื่อผู้ส่งรายงานของแต่ละพื้นที่ (ตามตัวกรองอาคาร) */
+function staffPerf() {
+  const m = {};
+  S.locs.filter(l => areaMatch(l.area, l.category)).forEach(l => {
+    const n = sender(l); if (!n) return;
+    const r = m[n] = m[n] || { name: n, areas: [], ok: 0, rejects: 0 };
+    r.areas.push(l.area); if (l.status === 'approved') r.ok++; r.rejects += l.rejectCount || 0;
   });
+  const rows = Object.values(m).sort((a, b) => b.areas.length - a.areas.length || a.name.localeCompare(b.name, 'th'));
+  if (!rows.length) return `<div class="card"><h3>ผลงานรายพนักงานวันนี้</h3><div class="empty sm">วันนี้ยังไม่มีพนักงานส่งรายงาน</div></div>`;
   return `
     <div class="card tbl">
-      <h3 style="margin-bottom:6px">ผลงานรายพนักงาน</h3>
+      <h3 style="margin-bottom:2px">ผลงานรายพนักงานวันนี้</h3><div class="xs muted" style="margin-bottom:6px">นับตามผู้ส่งรายงานของแต่ละพื้นที่ (แม่บ้านเวียนพื้นที่ทำงาน)</div>
       <table>
-        <tr><th>พนักงาน</th><th>พื้นที่ที่ดูแล</th><th>พื้นที่-วัน</th><th>ตรวจผ่านแล้ว</th><th>ถูกตีกลับ</th><th>คะแนนเฉลี่ย</th></tr>
-        ${rows.map(r => `<tr><td>${esc(r.name)}</td><td>${r.areas}</td><td>${r.n}</td><td>${r.ok} <span class="xs muted">(${r.n ? Math.round(r.ok / r.n * 100) : 0}%)</span></td><td>${r.rejects}</td><td>${r.avg === '–' ? '–' : '★ ' + r.avg}</td></tr>`).join('')}
+        <tr><th>พนักงาน</th><th>พื้นที่ที่ส่งวันนี้</th><th>ตรวจผ่านแล้ว</th><th>ถูกตีกลับ</th></tr>
+        ${rows.map(r => `<tr><td>${esc(r.name)}</td><td class="sm">${r.areas.length} · ${esc(r.areas.slice(0, 2).join(', '))}${r.areas.length > 2 ? ' +' + (r.areas.length - 2) : ''}</td><td>${r.ok} <span class="xs muted">(${Math.round(r.ok / r.areas.length * 100)}%)</span></td><td>${r.rejects || '–'}</td></tr>`).join('')}
       </table>
     </div>`;
 }
@@ -1683,13 +1694,13 @@ const POS = { cleaner: ['พนักงานทำความสะอาด'
 const portalOff = r => (S.perms || {})[r]?.portal === false;
 
 function peopleRows() {
-  const areaName = id => loc(id)?.area, last = u => `เข้าล่าสุด ${(u.lastLogin || '–').slice(0, 16)}`;
+  const last = u => `เข้าล่าสุด ${(u.lastLogin || '–').slice(0, 16)}`;
   const rows = (S.users || []).map(u => {
     const cl = u.role === 'cleaner';
     const status = { pending: ['รออนุมัติ', 'blue'], rejected: ['ไม่อนุมัติ', 'red'], disabled: [cl ? 'พักงาน' : 'ระงับ', 'gray'],
       approved: portalOff(u.role) ? ['พอร์ทัลถูกปิด', 'red'] : [cl ? 'ปฏิบัติงาน' : 'ใช้งานได้', 'green'] }[u.status] || ['–', 'gray'];
     let info = `ลงทะเบียน ${(u.createdAt || '').slice(0, 10)} · ${last(u)}`;
-    if (cl) { const names = (u.areas || []).map(areaName).filter(Boolean); info = `${names.length ? `ดูแล ${names.length} พื้นที่: ${names.slice(0, 2).join(', ')}${names.length > 2 ? ` +${names.length - 2}` : ''}` : 'ยังไม่ได้มอบหมายพื้นที่'} · ${last(u)}`; }
+    if (cl) info = `ทำงานเวียนทุกพื้นที่ · ${last(u)}`;
     if (u.role === 'supervisor') info = `ตรวจงานทุกพื้นที่ (${S.locs.length}) · ${last(u)}`;
     return { role: u.role, name: u.displayName, sub: `ID ${u.username}${u.phone ? ' · ' + u.phone : ''}`, status, mustChange: u.mustChange, info, user: u };
   });
@@ -1708,7 +1719,7 @@ function vPerms() {
     const off = u.role === 'cleaner' ? 'พักงาน' : 'ระงับ', k = u.username;
     return ({ pending: b('userApprove', k, 'อนุมัติ') + b('userReject', k, 'ไม่อนุมัติ', 'ghost danger'),
       rejected: b('userApprove', k, 'อนุมัติ', 'ghost') + b('userDel', k, 'ลบ', 'ghost danger'),
-      approved: b('userEdit', k, u.role === 'cleaner' ? 'มอบหมายพื้นที่' : 'แก้ไข', 'ghost') + b('userReset', k, 'รีเซ็ตรหัสผ่าน', 'ghost') + b('userDisable', k, off, 'ghost danger'),
+      approved: b('userEdit', k, 'แก้ไข', 'ghost') + b('userReset', k, 'รีเซ็ตรหัสผ่าน', 'ghost') + b('userDisable', k, off, 'ghost danger'),
       disabled: b('userEnable', k, 'เปิดใช้งาน') + b('userReset', k, 'รีเซ็ตรหัสผ่าน', 'ghost') + b('userDel', k, 'ลบ', 'ghost danger') })[u.status] || '';
   };
   const count = Object.fromEntries(['cleaner', 'supervisor', 'manager', 'admin'].map(r => [r, all.filter(x => x.role === r)]));
@@ -1776,18 +1787,16 @@ async function setPerm(role, key, value) {
   catch (e) { S.permBusy = false; render(); toast(e.message, true); }
 }
 
-/* ---------- บัญชีผู้ใช้ (Admin): แก้ไข / มอบหมายพื้นที่ ---------- */
+/* ---------- บัญชีผู้ใช้ (Admin): แก้ไขชื่อ/เบอร์โทร ---------- */
 function mUserEdit() {
-  const u = S.userEdit || {}, sel = new Set(u.areas || []), cl = u.role === 'cleaner';
+  const u = S.userEdit || {};
   return `
   <div class="ov" data-act="closeOv"><div class="sheet" style="max-width:480px">
-    <div class="row"><h2>${cl ? 'มอบหมายพื้นที่' : 'แก้ไขข้อมูลผู้ใช้'}</h2><button class="x-close" data-act="close">${ICONS.x}</button></div>
-    <p class="sm muted" style="margin-bottom:14px"><span class="chip c-${POS[u.role]?.[1] || 'gray'}">${POS[u.role]?.[0] || ''}</span> ID <b class="mono" style="color:var(--text)">${esc(u.username)}</b>${cl ? ' · พื้นที่ที่เลือกจะแสดงชื่อคนนี้เป็นผู้รับผิดชอบ (1 พื้นที่ต่อ 1 คน)' : ''}</p>
+    <div class="row"><h2>แก้ไขข้อมูลผู้ใช้</h2><button class="x-close" data-act="close">${ICONS.x}</button></div>
+    <p class="sm muted" style="margin-bottom:14px"><span class="chip c-${POS[u.role]?.[1] || 'gray'}">${POS[u.role]?.[0] || ''}</span> ID <b class="mono" style="color:var(--text)">${esc(u.username)}</b></p>
     <form id="userEditForm" class="stack" autocomplete="off">
       <div><label class="lbl">ชื่อ-นามสกุล</label><input type="text" name="n" required maxlength="80" value="${esc(u.displayName || '')}"></div>
       <div><label class="lbl">เบอร์โทร</label>${phoneField(u.phone, false)}</div>
-      ${cl ? `<div><label class="lbl">พื้นที่ที่รับผิดชอบ</label>
-        <div class="stack" style="max-height:260px;overflow:auto">${S.locs.map(l => `<label class="pick"><input type="checkbox" name="a" value="${l.id}" ${sel.has(l.id) ? 'checked' : ''}><span>${esc(l.area)}${l.assignedTo && l.assignedTo !== u.displayName ? ` <span class="xs muted">(ปัจจุบัน: ${esc(l.assignedTo)})</span>` : ''}</span></label>`).join('')}</div></div>` : ''}
       <div id="ueErr" class="alert sm" style="display:none"></div>
       <button class="btn primary block" type="submit">บันทึก</button>
     </form>
@@ -1796,7 +1805,7 @@ function mUserEdit() {
 async function submitUserEdit(form) {
   if (!phoneOk(form.ph.value, false)) { formErr('#ueErr', PHONE_MSG); return form.ph.focus(); }
   const btn = $('button[type=submit]', form); btn.disabled = true;
-  const p = { username: S.userEdit.username, displayName: form.n.value, phone: form.ph.value, areas: [...form.querySelectorAll('[name=a]:checked')].map(x => Number(x.value)) };
+  const p = { username: S.userEdit.username, displayName: form.n.value, phone: form.ph.value };
   try { await api('apiSaveUser', S.auth.token, p); closeModal(); await Promise.all([loadAdmin(), load(true)]); await askDone({ title: 'บันทึกข้อมูลแล้ว', text: p.displayName }); }
   catch (e) { btn.disabled = false; formErr('#ueErr', e.message); }
 }
@@ -1920,7 +1929,7 @@ function mDetail() {
   ).join('');
 
   const notes = [
-    ['แม่บ้าน', l.cleanerNote], ['หัวหน้าแม่บ้าน', l.supervisorNote], ['คณะกรรมการ (แจ้งปรับปรุงล่าสุด)', l.managerNote],
+    ['แม่บ้าน' + (sender(l) ? ' · ' + sender(l) : ''), l.cleanerNote], ['หัวหน้าแม่บ้าน', l.supervisorNote], ['คณะกรรมการ (แจ้งปรับปรุงล่าสุด)', l.managerNote],
   ].filter(n => n[1]).map(n => `<div class="note sm"><b class="b">${n[0]}:</b> ${esc(n[1])}</div>`).join('');
 
   const photos = l.photos.length ? `
