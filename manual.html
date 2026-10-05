@@ -52,6 +52,7 @@ h3{font-size:19px;font-weight:700;color:var(--p700);margin:0 0 6px}
 .step ul{padding-left:1.2em;font-size:16px;display:grid;gap:3px;margin-bottom:6px}
 .note{font-size:14.5px;border-radius:12px;padding:8px 12px;margin-top:6px}
 .note.tip{background:var(--green-t);color:#14562a}.note.warn{background:var(--amber-t);color:#7a4a00}
+.vid{display:grid;grid-template-columns:230px 1fr;gap:20px;align-items:center;background:#fff;border:2px solid var(--p600);border-radius:18px;padding:16px;margin-bottom:18px}.vid video{width:100%;border-radius:14px;background:#000;max-height:70vh}.vid h3{font-size:19px}.vid p{margin:4px 0 6px}.vid ul{padding-left:1.2em;font-size:15px;color:var(--mute);display:grid;gap:3px}@media (max-width:620px){.vid{grid-template-columns:1fr}.vid video{max-width:260px;margin:0 auto;display:block}}
 table.t{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:15.5px;margin-bottom:16px}
 table.t th,table.t td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
 table.t th{background:var(--p100);color:var(--p700)}
@@ -69,7 +70,7 @@ footer{padding:30px 0 50px;color:var(--mute);font-size:14px;text-align:center}
 <header class="top"><div class="wrap">
   <div class="lg"><img src="https://vxfozsxudrkxrjphttxm.supabase.co/storage/v1/object/public/Photo/Thai_color01_0_0.png" alt="ศูนย์กีฬาสิรินธร มหาวิทยาลัยศรีนครินทรวิโรฒ"></div>
   <h1>คู่มือการใช้งานระบบตรวจความสะอาด</h1>
-  <p>ศูนย์กีฬาสิรินธร มหาวิทยาลัยศรีนครินทรวิโรฒ · ทำตามทีละขั้น พร้อมภาพหน้าจอจริงของระบบ</p>
+  <p>ศูนย์กีฬาสิรินธร มหาวิทยาลัยศรีนครินทรวิโรฒ · ทำตามทีละขั้น พร้อมภาพหน้าจอจริงและวิดีโอสอนของระบบ</p>
 </div></header>
 <nav class="toc" aria-label="สารบัญ"><div class="wrap">
   <a href="#overview">1. ภาพรวมและลงทะเบียน</a>
@@ -84,6 +85,8 @@ footer{padding:30px 0 50px;color:var(--mute);font-size:14px;text-align:center}
 <!-- ===================== 1. ภาพรวม + ลงทะเบียน ===================== -->
 <section class="part" id="overview">
   <div class="ph"><span class="no">1</span><div><h2>ภาพรวมของระบบ และขั้นตอนการลงทะเบียน</h2><p>ใช้ได้ทั้งบนมือถือและคอมพิวเตอร์ ผ่านเว็บเบราว์เซอร์</p></div></div>
+  <div class="vid"><video controls preload="metadata" playsinline poster="manual-video/register.jpg" src="manual-video/register.mp4">เบราว์เซอร์นี้เล่นวิดีโอไม่ได้</video>
+    <div><h3>▶ วิดีโอสอนการใช้งาน (ประมาณ 1 นาที 30 วินาที)</h3><p>ภาพรวมของระบบและการลงทะเบียนตั้งแต่เปิดหน้าเข้าสู่ระบบจนส่งคำขอสำเร็จ</p><ul><li>ทำตามขั้นตอนบนหน้าจอจริงของระบบ ตัวเลขในคำบรรยายตรงกับข้อด้านล่าง</li><li>มีเสียงบรรยายภาษาไทยจังหวะช้าสบาย ๆ และคำบรรยายบนจอ · กดหยุด/เล่นซ้ำได้ (ไม่ได้ยินเสียง? ตรวจว่าเปิดเสียงเครื่องและวิดีโอไม่ได้ปิดเสียงอยู่)</li></ul></div></div>
 
   <div class="box info">
     <h3>ระบบนี้ใช้ทำอะไร</h3>
@@ -112,6 +115,8 @@ footer{padding:30px 0 50px;color:var(--mute);font-size:14px;text-align:center}
   </div>
   <p style="color:var(--mute);font-size:15px;margin-bottom:18px">เมื่อหัวหน้าตรวจผ่าน งานของพื้นที่นั้นสิ้นสุดทันที · งานเริ่มใหม่ทุกวัน</p>
 
+  <div class="box tip"><h3>ทราบไว้ — แม่บ้านเวียนพื้นที่ทำงาน</h3><p>ระบบไม่ผูกพื้นที่กับแม่บ้านคนใดคนหนึ่ง พนักงานทุกคนส่งรายงานได้ทุกพื้นที่ และระบบแสดงชื่อ <b>ผู้ส่งรายงาน</b> (“ส่งโดย …”) ทุกครั้ง พนักงานหลายคนส่งเพิ่มเติมในพื้นที่เดียวกันได้ก่อนหัวหน้าตรวจ</p></div>
+
   <h3 style="margin-top:8px">ขั้นตอนการลงทะเบียน</h3>
   <div class="legend"><span class="mk">1</span> วงกลมแดงในภาพ = จุดที่ต้องกดหรือกรอก เรียงตามเลขลำดับ</div>
   <div class="steps">
@@ -126,9 +131,9 @@ footer{padding:30px 0 50px;color:var(--mute);font-size:14px;text-align:center}
         <div class="note warn">ตำแหน่งที่ขึ้นว่า “เต็มแล้ว” จะกดไม่ได้ ให้ติดต่อผู้ดูแลระบบ</div></div></article>
     <article class="step"><figure><img src="manual-img/reg-form.jpg" alt="กรอกข้อมูลลงทะเบียน" loading="lazy"></figure>
       <div><div class="t"><span class="n">3</span><h3>กรอกข้อมูลให้ครบ</h3></div>
-        <ul><li><span class="mk">1</span> ชื่อ-นามสกุล</li><li><span class="mk">2</span> เบอร์โทร 10 หลัก (ระบบใส่ขีดให้เอง)</li><li><span class="mk">3</span> ID สำหรับเข้าสู่ระบบ — ตัวอักษรอังกฤษ ตัวเลข . _ - ยาว 4–30 ตัว</li><li><span class="mk">4</span> รหัสผ่าน อย่างน้อย 8 ตัว แล้วพิมพ์ซ้ำในช่องยืนยัน</li></ul>
+        <ul><li><span class="mk">1</span> ชื่อ-นามสกุล</li><li><span class="mk">2</span> เบอร์โทร 10 หลัก (ระบบใส่ขีดให้เอง)</li><li><span class="mk">3</span> ID สำหรับเข้าสู่ระบบ — ตัวอักษรอังกฤษ ตัวเลข . _ - ยาว 4–30 ตัว</li><li><span class="mk">4</span> รหัสผ่าน <b>อย่างน้อย 6 ตัว</b> (ตัวเลขหรือสัญลักษณ์ก็ได้) แล้วพิมพ์ซ้ำในช่องยืนยัน</li></ul>
         <p>จากนั้นกด <span class="mk">5</span> <b>ส่งคำขอลงทะเบียน</b></p>
-        <div class="note tip">กดรูปดวงตาเพื่อดูรหัสผ่านที่พิมพ์ · รหัสผ่านต้องไม่ใช่ตัวเลขล้วนหรือรหัสที่เดาง่าย</div></div></article>
+        <div class="note tip">กดรูปดวงตาเพื่อดูรหัสผ่านที่พิมพ์ · รหัสผ่านต้องไม่เหมือน ID ชื่อ หรือเบอร์โทรของคุณ</div></div></article>
     <article class="step"><figure><img src="manual-img/reg-done.jpg" alt="ส่งคำขอสำเร็จ" loading="lazy"></figure>
       <div><div class="t"><span class="n">4</span><h3>รอผู้ดูแลระบบอนุมัติ</h3></div>
         <p>เมื่อเห็นข้อความ <b>“ส่งคำขอลงทะเบียนแล้ว”</b> ให้กด <b>ตกลง</b> แล้วรอผู้ดูแลระบบอนุมัติบัญชี</p>
@@ -136,7 +141,7 @@ footer{padding:30px 0 50px;color:var(--mute);font-size:14px;text-align:center}
         <div class="note warn">ยังเข้าไม่ได้ = บัญชียังรออนุมัติ ติดต่อผู้ดูแลระบบ</div></div></article>
   </div>
   <div class="box" style="margin-top:16px"><h3>ทราบไว้ก่อนใช้งาน</h3>
-    <ul><li>ติ๊ก <b>“จดจำฉันไว้ในเครื่องนี้”</b> จะจำชื่อผู้ใช้และเข้าระบบอัตโนมัติ 14 วัน — เลือกเฉพาะเครื่องส่วนตัว กดปุ่ม <b>ออก</b> เพื่อยกเลิก</li>
+    <ul><li>ติ๊ก <b>“จดจำฉันไว้ในเครื่องนี้”</b> จะจำชื่อผู้ใช้และเข้าระบบอัตโนมัติ 14 วัน และเบราว์เซอร์จะถามว่าจะบันทึกรหัสผ่านหรือไม่ — กด <b>บันทึก</b> เพื่อให้ครั้งหน้าไม่ต้องพิมพ์รหัส · เลือกเฉพาะเครื่องส่วนตัว กดปุ่ม <b>ออก</b> เพื่อยกเลิก</li>
     <li>เปลี่ยนรหัสผ่านได้ที่ปุ่ม <b>เปลี่ยนรหัสผ่าน</b> มุมขวาบน · ลืมรหัสผ่านให้ติดต่อผู้ดูแลระบบ</li>
     <li>ล็อกอินผิดติดกัน 5 ครั้ง ระบบจะล็อก 15 นาที</li></ul></div>
 </section>
@@ -144,6 +149,8 @@ footer{padding:30px 0 50px;color:var(--mute);font-size:14px;text-align:center}
 <!-- ===================== 2. พนักงานทำความสะอาด ===================== -->
 <section class="part" id="cleaner">
   <div class="ph"><span class="no">2</span><div><h2>การใช้งาน — พนักงานทำความสะอาด</h2><p>ทำเช็คลิสต์ แนบรูป ส่งรายงานให้หัวหน้าตรวจ</p></div></div>
+  <div class="vid"><video controls preload="metadata" playsinline poster="manual-video/cleaner.jpg" src="manual-video/cleaner.mp4">เบราว์เซอร์นี้เล่นวิดีโอไม่ได้</video>
+    <div><h3>▶ วิดีโอสอนการใช้งาน (ประมาณ 1 นาที 45 วินาที)</h3><p>ตั้งแต่เลือกพื้นที่ ติ๊กเช็คลิสต์ แนบรูป ส่งรายงาน ไปจนถึงการเพิ่ม/แก้ไขรายงาน และตอบกลับเรื่องที่ต้องแก้ไข</p><ul><li>ทำตามขั้นตอนบนหน้าจอจริงของระบบ ตัวเลขในคำบรรยายตรงกับข้อด้านล่าง</li><li>มีเสียงบรรยายภาษาไทยจังหวะช้าสบาย ๆ และคำบรรยายบนจอ · กดหยุด/เล่นซ้ำได้ (ไม่ได้ยินเสียง? ตรวจว่าเปิดเสียงเครื่องและวิดีโอไม่ได้ปิดเสียงอยู่)</li></ul></div></div>
   <div class="steps">
     <article class="step"><figure><img src="manual-img/cl-list.jpg" alt="เลือกพื้นที่" loading="lazy"></figure>
       <div><div class="t"><span class="n">1</span><h3>เลือกพื้นที่ที่จะทำ</h3></div>
@@ -168,12 +175,17 @@ footer{padding:30px 0 50px;color:var(--mute);font-size:14px;text-align:center}
     <article class="step"><figure><img src="manual-img/cl-sent.jpg" alt="ส่งรายงานสำเร็จ" loading="lazy"></figure>
       <div><div class="t"><span class="n">6</span><h3>ส่งสำเร็จ รอหัวหน้าตรวจ</h3></div>
         <p>เมื่อขึ้น <b>“ส่งรายงานสำเร็จ”</b> กด <b>ตกลง</b> พื้นที่นั้นจะเปลี่ยนเป็น <b>รอหัวหน้าตรวจ</b> แล้วเลือกพื้นที่ถัดไปทำต่อได้เลย</p></div></article>
+    <article class="step"><figure><img src="manual-img/cl-edit.jpg" alt="เพิ่มหรือแก้ไขรายงานก่อนหัวหน้าตรวจ" loading="lazy"></figure>
+      <div><div class="t"><span class="n">7</span><h3>ส่งแล้ว ยังเพิ่ม / แก้ไขรายงานได้</h3></div>
+        <p>ตราบที่หัวหน้ายังไม่ตรวจ พื้นที่ที่ส่งแล้วจะมีปุ่ม <b>แก้ไข / เพิ่มรายงาน ›</b> — เปิดเข้าไปติ๊กจุดที่ทำเพิ่ม แนบรูปเพิ่ม <span class="mk">1</span> เขียนหมายเหตุ <span class="mk">2</span> แล้วกด <span class="mk">3</span></p>
+        <ul><li>เป็น<b>พนักงานคนอื่น</b>: ปุ่มจะเป็น <b>ส่งรายงานเพิ่มเติม</b> หมายเหตุของคุณต่อท้ายเป็น “ชื่อ: ข้อความ” ไม่ทับของคนแรก</li><li>การ์ดแสดง <b>ส่งโดย ชื่อ, ชื่อ</b> ครบทุกคนที่ส่ง</li></ul>
+        <div class="note warn">หัวหน้าตรวจผ่านแล้ว = แก้ไม่ได้ ถ้าต้องแก้ ให้แจ้งหัวหน้าเปลี่ยนผลตรวจเป็นตีกลับ</div></div></article>
     <article class="step"><figure><img src="manual-img/cl-fix.jpg" alt="แท็บแจ้งแก้ไข" loading="lazy"></figure>
-      <div><div class="t"><span class="n">7</span><h3>มีเรื่องให้แก้ไข? ดูที่แท็บ “แจ้งแก้ไข”</h3></div>
+      <div><div class="t"><span class="n">8</span><h3>มีเรื่องให้แก้ไข? ดูที่แท็บ “แจ้งแก้ไข”</h3></div>
         <p>แท็บ <span class="mk">1</span> <b>แจ้งแก้ไข (n)</b> รวมงานที่ต้องแก้ไข</p>
         <ul><li><span class="mk">2</span> กล่องสีฟ้า = ข้อเสนอแนะจากคณะกรรมการ · กล่องสีแดง = หัวหน้าตีกลับ พร้อมเหตุผล</li><li><span class="mk">3</span> กด <b>ตอบกลับ / แนบรูป</b> หลังแก้ไขเสร็จ</li></ul></div></article>
     <article class="step"><figure><img src="manual-img/cl-reply.jpg" alt="ตอบกลับพร้อมรูป" loading="lazy"></figure>
-      <div><div class="t"><span class="n">8</span><h3>ตอบกลับพร้อมรูปหลังแก้ไข</h3></div>
+      <div><div class="t"><span class="n">9</span><h3>ตอบกลับพร้อมรูปหลังแก้ไข</h3></div>
         <ul><li><span class="mk">1</span> พิมพ์ว่าแก้ไขอะไรไปแล้ว</li><li><span class="mk">2</span> แนบรูปหลังแก้ไข (อย่างน้อย 1 รูป)</li><li><span class="mk">3</span> กด <b>ส่งแจ้งการแก้ไข</b></li></ul>
         <div class="note tip">ส่งแล้วงานกลับไปที่หัวหน้าแม่บ้านเพื่อ<b>ตรวจอีกครั้ง</b> สถานะเปลี่ยนเป็น “รอหัวหน้าตรวจ”</div></div></article>
   </div>
@@ -182,6 +194,8 @@ footer{padding:30px 0 50px;color:var(--mute);font-size:14px;text-align:center}
 <!-- ===================== 3. หัวหน้าแม่บ้าน ===================== -->
 <section class="part" id="supervisor">
   <div class="ph"><span class="no">3</span><div><h2>การใช้งาน — หัวหน้าแม่บ้าน</h2><p>ตรวจงานที่พนักงานส่ง — ผ่านหรือตีกลับ</p></div></div>
+  <div class="vid"><video controls preload="metadata" playsinline poster="manual-video/supervisor.jpg" src="manual-video/supervisor.mp4">เบราว์เซอร์นี้เล่นวิดีโอไม่ได้</video>
+    <div><h3>▶ วิดีโอสอนการใช้งาน (ประมาณ 2 นาที)</h3><p>ตรวจรายงาน ตรวจผ่าน ตีกลับ การแก้ผลตรวจหลังตรวจผ่านไปแล้ว และการติดตามที่แท็บแจ้งแก้ไข</p><ul><li>ทำตามขั้นตอนบนหน้าจอจริงของระบบ ตัวเลขในคำบรรยายตรงกับข้อด้านล่าง</li><li>มีเสียงบรรยายภาษาไทยจังหวะช้าสบาย ๆ และคำบรรยายบนจอ · กดหยุด/เล่นซ้ำได้ (ไม่ได้ยินเสียง? ตรวจว่าเปิดเสียงเครื่องและวิดีโอไม่ได้ปิดเสียงอยู่)</li></ul></div></div>
   <div class="steps">
     <article class="step"><figure><img src="manual-img/sv-list.jpg" alt="รายการรอตรวจ" loading="lazy"></figure>
       <div><div class="t"><span class="n">1</span><h3>ดูรายการที่รอตรวจ</h3></div>
@@ -190,7 +204,7 @@ footer{padding:30px 0 50px;color:var(--mute);font-size:14px;text-align:center}
         <p>กดการ์ดพื้นที่ <span class="mk">2</span> เพื่อเปิดดูรายละเอียด — ใต้ชื่อพื้นที่จะแสดง <b>ส่งโดย ชื่อพนักงาน</b> ผู้ส่งรายงาน (แม่บ้านเวียนพื้นที่ทำงาน)</p></div></article>
     <article class="step"><figure><img src="manual-img/sv-open.jpg" alt="ดูรายงานของแม่บ้าน" loading="lazy"></figure>
       <div><div class="t"><span class="n">2</span><h3>ตรวจรายงานของพนักงาน</h3></div>
-        <p>หน้าต่างรายละเอียดแสดง <span class="mk">1</span> รายการที่ติ๊กครบหรือไม่ หมายเหตุของพนักงาน <span class="mk">2</span> รูปที่ถ่ายส่ง และประวัติวันนี้ — เลื่อนลงเพื่อดูให้ครบก่อนตัดสิน</p></div></article>
+        <p>หน้าต่างรายละเอียดแสดง <span class="mk">1</span> รายการที่ติ๊กครบหรือไม่ หมายเหตุของพนักงาน <span class="mk">2</span> รูปที่ถ่ายส่ง และประวัติวันนี้ — เลื่อนลงเพื่อดูให้ครบก่อนตัดสิน <b>กดที่รูปเพื่อดูขยายเป็นหน้าต่างซ้อน</b> (กด × หรือลูกศรเพื่อเลื่อนรูป)</p></div></article>
     <article class="step"><figure><img src="manual-img/sv-act.jpg" alt="ปุ่มตรวจผ่านและตีกลับ" loading="lazy"></figure>
       <div><div class="t"><span class="n">3</span><h3>เลือก “ตรวจผ่าน” หรือ “ตีกลับ”</h3></div>
         <p>ด้านล่างของหน้าต่างมีช่องบันทึกและปุ่มตัดสิน</p>
@@ -202,8 +216,13 @@ footer{padding:30px 0 50px;color:var(--mute);font-size:14px;text-align:center}
       <div><div class="t"><span class="n">5</span><h3>ตีกลับให้แก้ไข</h3></div>
         <p>พิมพ์สิ่งที่ต้องแก้ แนบรูปจุดบกพร่อง แล้วกด <b>ตีกลับให้แก้ไข</b> → ยืนยัน พนักงานจะเห็นข้อความของคุณในแท็บแจ้งแก้ไข</p>
         <div class="note warn">ควรระบุตำแหน่งและสิ่งที่ต้องแก้ให้ชัดเจน พนักงานจะได้แก้ได้ถูกจุด</div></div></article>
+    <article class="step"><figure><img src="manual-img/sv-redo.jpg" alt="แก้ผลตรวจหลังตรวจผ่านแล้ว" loading="lazy"></figure>
+      <div><div class="t"><span class="n">6</span><h3>ตรวจผ่านไปแล้ว แก้ผลตรวจได้</h3></div>
+        <p>ตรวจผ่านแล้วเปลี่ยนใจ? เปิดพื้นที่นั้นจากแท็บ <b>ทั้งหมด</b> จะมีข้อความ <span class="mk">1</span> “ตรวจผ่านไปแล้ว — แก้ไขผลตรวจได้” พร้อมช่องบันทึก <span class="mk">2</span></p>
+        <ul><li><span class="mk">3</span> <b>ตีกลับให้แก้ไข</b> — ยกเลิกผลตรวจผ่าน งานกลับไปหาพนักงาน</li><li><span class="mk">4</span> <b>บันทึกตรวจผ่านอีกครั้ง</b> — คงผลเดิมแต่เพิ่มหมายเหตุ/รูป</li></ul>
+        <div class="note tip">ประวัติจะบันทึกว่า “แก้ไขผลตรวจ — …” ตรวจสอบย้อนหลังได้</div></div></article>
     <article class="step"><figure><img src="manual-img/sv-fix.jpg" alt="แท็บแจ้งแก้ไข" loading="lazy"></figure>
-      <div><div class="t"><span class="n">6</span><h3>ติดตามและตรวจซ้ำที่แท็บ “แจ้งแก้ไข”</h3></div>
+      <div><div class="t"><span class="n">7</span><h3>ติดตามและตรวจซ้ำที่แท็บ “แจ้งแก้ไข”</h3></div>
         <p>แท็บ <span class="mk">1</span> รวมเรื่องที่ตีกลับและข้อเสนอแนะของคณะกรรมการ ในการ์ด <span class="mk">2</span></p>
         <ul><li>พนักงานตอบกลับแล้ว → ขึ้น <b>รอหัวหน้าตรวจ</b> กดเข้าไป <b>ตรวจงาน</b> ซ้ำ</li><li>ข้อเสนอแนะของกรรมการ → กด <b>ตอบกลับ / รับทราบ</b> แจ้งสิ่งที่ดำเนินการ (แนบรูปได้)</li></ul></div></article>
   </div>
@@ -212,6 +231,8 @@ footer{padding:30px 0 50px;color:var(--mute);font-size:14px;text-align:center}
 <!-- ===================== 4. คณะกรรมการ ===================== -->
 <section class="part" id="committee">
   <div class="ph"><span class="no">4</span><div><h2>การใช้งาน — คณะกรรมการตรวจความสะอาด</h2><p>แจ้งจุดที่ควรปรับปรุง ไม่ต้องอนุมัติงาน</p></div></div>
+  <div class="vid"><video controls preload="metadata" playsinline poster="manual-video/committee.jpg" src="manual-video/committee.mp4">เบราว์เซอร์นี้เล่นวิดีโอไม่ได้</video>
+    <div><h3>▶ วิดีโอสอนการใช้งาน (ประมาณ 1 นาที)</h3><p>เลือกพื้นที่ กรอกข้อเสนอแนะ แนบรูป ให้ดาว และส่งข้อเสนอแนะ</p><ul><li>ทำตามขั้นตอนบนหน้าจอจริงของระบบ ตัวเลขในคำบรรยายตรงกับข้อด้านล่าง</li><li>มีเสียงบรรยายภาษาไทยจังหวะช้าสบาย ๆ และคำบรรยายบนจอ · กดหยุด/เล่นซ้ำได้ (ไม่ได้ยินเสียง? ตรวจว่าเปิดเสียงเครื่องและวิดีโอไม่ได้ปิดเสียงอยู่)</li></ul></div></div>
   <div class="box info"><b>จุดสำคัญ:</b> คณะกรรมการ<b>ไม่อนุมัติและไม่เปลี่ยนสถานะงาน</b> — ทำหน้าที่แจ้งข้อเสนอแนะ แล้วหัวหน้าแม่บ้านและพนักงานจะเห็นในแท็บ “แจ้งแก้ไข”</div>
   <div class="steps">
     <article class="step"><figure><img src="manual-img/mg-list.jpg" alt="รายการพื้นที่" loading="lazy"></figure>
@@ -238,12 +259,13 @@ footer{padding:30px 0 50px;color:var(--mute);font-size:14px;text-align:center}
   <details><summary>ลืมรหัสผ่าน</summary><p>ติดต่อผู้ดูแลระบบเพื่อรีเซ็ต ระบบจะให้รหัสชั่วคราว และบังคับให้ตั้งรหัสใหม่ของคุณเองตอนเข้าครั้งแรก</p></details>
   <details><summary>ส่งรายงานไม่ได้ ขึ้นให้แนบรูป</summary><p>ต้องแนบรูปหลังทำความสะอาดอย่างน้อย 1 รูปก่อนส่ง รออัปโหลดรูปเสร็จ (ไอคอนหมุนหายไป) แล้วกดส่งอีกครั้ง</p></details>
   <details><summary>ปุ่มส่งหรือติ๊กไม่ทำงาน</summary><p>ผู้ดูแลระบบอาจปิดสิทธิ์บางอย่างชั่วคราว จะมีข้อความแจ้งบนหน้าจอ หากไม่แน่ใจให้ติดต่อผู้ดูแลระบบ</p></details>
-  <details><summary>ส่งแล้วต้องการแก้ไขรายงาน</summary><p>แจ้งหัวหน้าแม่บ้านให้ตีกลับ แล้วแก้ไขและส่งใหม่ผ่านหน้าพื้นที่หรือแท็บแจ้งแก้ไข</p></details>
+  <details><summary>ส่งแล้วต้องการแก้ไข / เพิ่มรายงาน</summary><p>ถ้าหัวหน้ายังไม่ตรวจ เปิดพื้นที่เดิมแล้วกด “แก้ไข / เพิ่มรายงาน” ได้เลย (พนักงานคนอื่นก็ส่งเพิ่มเติมได้) ถ้าหัวหน้าตรวจผ่านแล้ว ให้แจ้งหัวหน้าเปลี่ยนผลตรวจเป็นตีกลับ แล้วแก้ไขและส่งใหม่</p></details>
+  <details><summary>รหัสผ่านต้องตั้งอย่างไร</summary><p>ยาวอย่างน้อย 6 ตัว จะเป็นตัวเลขหรือสัญลักษณ์ก็ได้ ขอแค่ไม่เหมือน ID ชื่อ หรือเบอร์โทรของคุณ</p></details>
   <details><summary>จะออกจากระบบอย่างไร</summary><p>กดปุ่ม <b>ออก</b> มุมขวาบน ถ้าเปิดใช้ “จดจำฉัน” การกดออกจะยกเลิกการเข้าอัตโนมัติของเครื่องนั้นด้วย</p></details>
 </section>
 </main>
 
-<footer><div class="wrap">คู่มือการใช้งานระบบตรวจความสะอาด · ศูนย์กีฬาสิรินธร มหาวิทยาลัยศรีนครินทรวิโรฒ<br>ภาพประกอบเป็นหน้าจอตัวอย่างของระบบ (ข้อมูลและชื่อเป็นข้อมูลทดลอง)</div></footer>
+<footer><div class="wrap">คู่มือการใช้งานระบบตรวจความสะอาด · ศูนย์กีฬาสิรินธร มหาวิทยาลัยศรีนครินทรวิโรฒ<br>ภาพประกอบและวิดีโอเป็นหน้าจอตัวอย่างของระบบ (ข้อมูลและชื่อเป็นข้อมูลทดลอง) · ปรับปรุงล่าสุด 5 ต.ค. 2569</div></footer>
 
 <div class="lb" id="lb" role="dialog" aria-label="ดูภาพขยาย"><img alt=""></div>
 <script>

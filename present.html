@@ -129,7 +129,7 @@ p,li{font-size:clamp(15px,1.7vw,21px);line-height:1.55}
     </div>
     <div class="grid" style="grid-auto-rows:1fr">
       <div class="card t-g"><div class="row"><span class="ib c-g"><svg class="ic"><use href="#i-clip"/></svg></span><h3>เป้าหมาย: ตรวจครบ มีหลักฐาน</h3></div><p>เช็คลิสต์รายพื้นที่ พร้อมรูปถ่ายและประวัติทุกขั้นตอน</p></div>
-      <div class="card t-g"><div class="row"><span class="ib c-g"><svg class="ic"><use href="#i-reply"/></svg></span><h3>เป้าหมาย: ปิดวงจรการแก้ไข</h3></div><p>แจ้ง → แก้ไข → ตอบกลับพร้อมรูป → ตรวจซ้ำ และดูภาพรวมได้ทันที</p></div>
+      <div class="card t-g"><div class="row"><span class="ib c-g"><svg class="ic"><use href="#i-reply"/></svg></span><h3>เป้าหมาย: ปิดวงจรการแก้ไข</h3></div><p>แจ้ง → แก้ไข → ตอบกลับพร้อมรูป → ตรวจซ้ำ และดูภาพรวมได้ทันที (แดชบอร์ดรายสัปดาห์/เดือน/ปี ปรับแต่งเองได้)</p></div>
     </div>
   </div>
 </section>
@@ -161,9 +161,9 @@ p,li{font-size:clamp(15px,1.7vw,21px);line-height:1.55}
   <div class="live">
     <div class="side">
       <div class="lbl">ลองทำเลย</div>
-      <div class="step"><span class="n">1</span><p>กด <b>ลงทะเบียน</b> — 2 ขั้น เลือกตำแหน่ง แล้วกรอกข้อมูล</p></div>
+      <div class="step"><span class="n">1</span><p>กด <b>ลงทะเบียน</b> — 2 ขั้น เลือกตำแหน่ง แล้วกรอกข้อมูล รหัสผ่านอย่างน้อย <b>6 ตัว</b> (ตัวเลข/สัญลักษณ์ก็ได้)</p></div>
       <div class="step"><span class="n">2</span><p>หรือกดปุ่ม <b>admin / supervisor / manager</b> ใต้ฟอร์มเพื่อกรอกบัญชีทดลอง แล้วเข้าสู่ระบบ</p></div>
-      <div class="step"><span class="n">3</span><p>มี “จดจำฉัน” 14 วัน และปุ่มดูรหัสผ่าน</p></div>
+      <div class="step"><span class="n">3</span><p>ติ๊ก “จดจำฉัน” — เข้าอัตโนมัติ 14 วัน และให้เบราว์เซอร์จำรหัสผ่าน</p></div>
       <div class="hint">ข้อมูลในหน้านี้เป็นข้อมูลทดลอง ไม่เชื่อมต่อระบบจริง</div>
     </div>
   </div>
@@ -176,9 +176,10 @@ p,li{font-size:clamp(15px,1.7vw,21px);line-height:1.55}
     <div class="side">
       <div class="lbl">ลองทำเลย</div>
       <div class="step"><span class="n">1</span><p>กดการ์ดพื้นที่ที่ยัง <b>รอทำ</b> (เช่น อาคารกีฬา 4–5)</p></div>
-      <div class="step"><span class="n">2</span><p>ติ๊กเช็คลิสต์ทีละจุด แล้วแนบรูปหลักฐาน</p></div>
+      <div class="step"><span class="n">2</span><p>ติ๊กเช็คลิสต์ทีละจุด แล้วแนบรูปหลักฐาน (กดรูปดูขยายได้)</p></div>
       <div class="step"><span class="n">3</span><p>กด <b>ส่งรายงาน</b> — มีหน้าต่างยืนยัน กันกดซ้ำ</p></div>
-      <div class="hint">เมื่อส่งแล้ว ไปดูหน้าถัดไปเพื่อเห็นงานนี้ในฝั่งหัวหน้า</div>
+      <div class="step"><span class="n">4</span><p>ส่งแล้วยัง <b>แก้ไข / เพิ่มรายงาน</b> ได้ก่อนหัวหน้าตรวจ — แม่บ้านคนอื่นส่งเพิ่มเติมได้ การ์ดแสดง “ส่งโดย …”</p></div>
+      <div class="hint">แม่บ้านเวียนพื้นที่ทำงาน ไม่ผูกพื้นที่กับใคร · ส่งแล้วไปดูหน้าถัดไปเพื่อเห็นงานในฝั่งหัวหน้า</div>
     </div>
   </div>
 </section>
@@ -190,8 +191,9 @@ p,li{font-size:clamp(15px,1.7vw,21px);line-height:1.55}
     <div class="side">
       <div class="lbl">ลองทำเลย</div>
       <div class="step"><span class="n">1</span><p>แท็บ <b>รอตรวจ</b> — กดพื้นที่เพื่อดูเช็คลิสต์ รูป และหมายเหตุ</p></div>
-      <div class="step"><span class="n">2</span><p><b>ตรวจผ่าน</b> = งานสิ้นสุด ไม่ตรวจซ้ำ</p></div>
+      <div class="step"><span class="n">2</span><p><b>ตรวจผ่าน</b> = งานสิ้นสุด (แก้ผลตรวจภายหลังได้)</p></div>
       <div class="step"><span class="n">3</span><p><b>ตีกลับ</b> พร้อมเหตุผล งานกลับไปหาแม่บ้าน</p></div>
+      <div class="step"><span class="n">4</span><p>ตรวจผ่านไปแล้ว <b>แก้ผลตรวจได้</b> — เปิดจากแท็บ “ทั้งหมด”</p></div>
     </div>
   </div>
 </section>
@@ -229,9 +231,10 @@ p,li{font-size:clamp(15px,1.7vw,21px);line-height:1.55}
   <div class="live">
     <div class="side">
       <div class="lbl">ลองทำเลย</div>
-      <div class="step"><span class="n">1</span><p>สลับ <b>รายสัปดาห์ / รายเดือน</b> และกดลูกศรเลื่อนช่วงเวลา</p></div>
+      <div class="step"><span class="n">1</span><p>สลับ <b>รายสัปดาห์ / รายเดือน / รายปี</b> และกดลูกศรเลื่อนช่วงเวลา</p></div>
       <div class="step"><span class="n">2</span><p>เลือกอาคาร/พื้นที่ เพื่อดูอัตราตีกลับเฉพาะจุด</p></div>
-      <div class="step"><span class="n">3</span><p>กด <b>ดาวน์โหลดรายงาน (PDF)</b> ได้ทันที</p></div>
+      <div class="step"><span class="n">3</span><p>กด <b>ปรับแต่งแดชบอร์ด</b> เลือกว่าจะแสดงส่วนไหน และเรียงลำดับก่อน/หลังได้</p></div>
+      <div class="step"><span class="n">4</span><p>กด <b>ดาวน์โหลดรายงาน (PDF)</b> ได้ทันที</p></div>
     </div>
   </div>
 </section>

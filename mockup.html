@@ -155,7 +155,7 @@
   .bar i.full{background:var(--green-600)}
   /* semantic alert box — DS-#096: red-50 bg + red-700 text */
   .alert{background:var(--swu-red-50);color:var(--swu-red-700);border-radius:var(--r-md);padding:8px 12px;margin-top:10px;font-size:13px}
-  .note{background:var(--neutral-50);border-radius:var(--r-md);padding:8px 12px}
+  .note{background:var(--neutral-50);border-radius:var(--r-md);padding:8px 12px;white-space:pre-line}
 
   /* ── tabs — nav item = Regular 400 at every state (DS-#118), state via bg+color only ── */
   .tabs{display:inline-flex;background:var(--neutral-100);border-radius:var(--r-md);padding:3px}
@@ -343,6 +343,12 @@
   .acts{display:flex;gap:6px;flex-wrap:wrap}
 
   /* ── confirm card (sweet-alert style) — กันกดซ้ำ/กดพลาด ── */
+  .lb-ov{position:fixed;inset:0;background:rgba(22,23,25,.88);z-index:800;display:grid;place-items:center;padding:16px;animation:saF .15s ease-out}
+  .lb-ov figure{margin:0;max-width:min(96vw,900px);text-align:center;color:#fff}
+  .lb-ov img{max-width:100%;max-height:82vh;border-radius:var(--r-md);background:#fff;display:block;margin:0 auto}
+  .lb-ov figcaption{margin-top:8px;font-size:15px}
+  .lb-x,.lb-n{position:absolute;border:0;border-radius:var(--r-pill);background:#fff;color:var(--swu-purple-700);width:48px;height:48px;font-size:28px;font-weight:700;cursor:pointer;display:grid;place-items:center}
+  .lb-x{top:12px;right:12px}.lb-p{left:12px;top:50%}.lb-f{right:12px;top:50%}
   .sa-ov{position:fixed;inset:0;background:rgba(22,23,25,.5);z-index:700;display:grid;place-items:center;padding:16px;animation:saF .15s ease-out}
   .sa-card{background:#fff;border-radius:var(--r-2xl);box-shadow:var(--shadow-xl);width:100%;max-width:420px;padding:28px 24px 22px;text-align:center;animation:saP .18s cubic-bezier(.2,.7,.2,1)}
   .sa-icon{width:64px;height:64px;border-radius:var(--r-pill);display:grid;place-items:center;margin:0 auto 14px;font-size:32px;font-weight:700}
@@ -538,10 +544,8 @@ function phoneNorm_(v, required) {   // กฎเดียวกับเซิ�
 const COMMON_PW = 'password passw0rd password1 password123 qwertyui qwerty123 qwertyuiop asdfghjk asdfghjkl zxcvbnm1 abcd1234 abcdefgh abc12345 iloveyou letmein1 welcome1 admin123 swu12345 swucenter cleaner123 manager123 changeme 1q2w3e4r'.split(' ');
 function chkPw_(pw, u, extras) {   // กฎเดียวกับเซิร์ฟเวอร์ (gas/06_Users.js checkPassword_)
   pw = String(pw || ''); const low = pw.toLowerCase();
-  if (pw.length < 8) throw new Error('รหัสผ่านต้องยาวอย่างน้อย 8 ตัวอักษร');
+  if (pw.length < 6) throw new Error('รหัสผ่านต้องยาวอย่างน้อย 6 ตัว');
   if (low === u) throw new Error('รหัสผ่านต้องไม่เหมือน ID');
-  if (/^\d+$/.test(pw) || /^(.)\1+$/.test(pw)) throw new Error('รหัสผ่านต้องไม่ใช่ตัวเลขล้วนหรือตัวอักษรซ้ำ ๆ — ผสมตัวอักษรและตัวเลข');
-  if (COMMON_PW.includes(low)) throw new Error('รหัสผ่านนี้เดาง่ายเกินไป กรุณาตั้งใหม่');
   if ((extras || []).some(x => x && String(x).trim().toLowerCase() === low)) throw new Error('รหัสผ่านต้องไม่เหมือนชื่อหรือเบอร์โทรของคุณ');
 }
 
@@ -641,7 +645,7 @@ const Sessions = {
 };
 
 function findLoc_(id) { const l = DB.locations.find(x => x.id === Number(id)); if (!l) throw new Error('ไม่พบพื้นที่'); return l; }
-function assertCleanerEditable_(l) { if (l.status !== 'pending' && l.status !== 'rejected') throw new Error('งานนี้ส่งแล้ว อยู่ระหว่างตรวจ'); }
+function assertCleanerEditable_(l) { if (!['pending', 'rejected', 'cleaner_done'].includes(l.status)) throw new Error('งานนี้หัวหน้าแม่บ้านตรวจผ่านแล้ว แก้ไขไม่ได้'); }
 function cleanPhotos_(photos, kind, by, role) {
   const t = timeNow_();
   return (Array.isArray(photos) ? photos : []).slice(0, 10)
@@ -838,14 +842,17 @@ const MOCK = {
     assertCleanerEditable_(l);
     const added = can_('cleaner', 'photo') ? cleanPhotos_(photos, 'report', me, 'cleaner') : [];
     if (!added.length && can_('cleaner', 'photo') && !l.photos.some(p => p.kind === 'report')) throw new Error('กรุณาแนบรูปอย่างน้อย 1 รูป');
-    const wasRejected = l.status === 'rejected';
+    const wasRejected = l.status === 'rejected', wasEdit = l.status === 'cleaner_done';   // cleaner_done = แก้ไขรายงานที่ส่งแล้ว ก่อนหัวหน้าตรวจ (สถานะคงเดิม)
+    const prior = (DB.history[l.id] || []).filter(h => h.role === 'cleaner' && /^(ส่งรายงาน|ส่งงานแก้ไข|แก้ไขรายงาน)/.test(h.action)).map(h => h.user);
+    const extra = wasEdit && prior.some(n => n !== me);   // มีพนักงานคนอื่นส่งไว้แล้ว → เป็นการส่งเพิ่มเติม ไม่ทับหมายเหตุของคนอื่น
+    const nt = String(note || '').trim();
     l.status = 'cleaner_done';
-    l.cleanerNote = String(note || '').trim();
+    l.cleanerNote = extra ? (() => { const names = [...new Set(prior)], lines = String(l.cleanerNote || '').split('\n').filter(Boolean).map(x => names.some(n => x.startsWith(n + ': ')) ? x : prior[0] + ': ' + x), mine = nt.replace(/\s*\n+\s*/g, ' '); return lines.filter(x => !x.startsWith(me + ': ')).concat(mine ? [`${me}: ${mine}`] : []).join('\n').slice(0, 1500); })() : nt;
     l.photos = l.photos.concat(added);
     l.lastUpdated = timeNow_();
     const done = l.subZones.filter(s => s.completed).length;
     addHist_(l.id, timeNow_(), me, 'cleaner',
-      `${wasRejected ? 'ส่งงานแก้ไขแล้ว' : 'ส่งรายงาน'} (${done}/${l.subZones.length} จุด${added.length ? `, รูป ${added.length}` : ''})`);
+      `${extra ? 'ส่งรายงานเพิ่มเติม' : wasEdit ? 'แก้ไขรายงาน' : wasRejected ? 'ส่งงานแก้ไขแล้ว' : 'ส่งรายงาน'} (${done}/${l.subZones.length} จุด${added.length ? `, รูป ${added.length}` : ''})`);
     saveDB_();
     return withHistory_(l);
   },
@@ -856,7 +863,8 @@ const MOCK = {
     if (decision !== 'approve' && decision !== 'reject') throw new Error('คำสั่งไม่ถูกต้อง');
     if (s.role !== 'admin' && !can_(s.role, decision)) throw new Error('บทบาทนี้ถูกปิดสิทธิ์การ' + (decision === 'reject' ? 'ตีกลับ' : 'ตรวจผ่าน'));
     const l = findLoc_(locationId);
-    if (l.status !== 'cleaner_done') throw new Error('สถานะงานเปลี่ยนไปแล้ว กรุณารีเฟรช');
+    const redo = l.status === 'approved';   // แก้ไขผลตรวจที่ตรวจผ่านไปแล้ว (เปลี่ยนเป็นตีกลับ หรือแก้หมายเหตุ/แนบรูปเพิ่ม)
+    if (l.status !== 'cleaner_done' && !redo) throw new Error('สถานะงานเปลี่ยนไปแล้ว กรุณารีเฟรช');
     note = String(note || '').trim();
     const who = actor_(s);
     const added = cleanPhotos_(photos, decision === 'reject' ? 'reject' : 'approve', who, 'supervisor');
@@ -867,7 +875,7 @@ const MOCK = {
     l.supervisorNote = note;
     l.photos = l.photos.concat(added);
     l.lastUpdated = timeNow_();
-    addHist_(l.id, timeNow_(), who, 'supervisor', (decision === 'reject' ? `ตีกลับ: ${note}` : 'ตรวจผ่าน') + (added.length ? ` [รูป ${added.length}]` : ''));
+    addHist_(l.id, timeNow_(), who, 'supervisor', (redo ? 'แก้ไขผลตรวจ — ' : '') + (decision === 'reject' ? `ตีกลับ: ${note}` : 'ตรวจผ่าน' + (note ? `: ${note}` : '')) + (added.length ? ` [รูป ${added.length}]` : ''));
     saveDB_();
     return withHistory_(l);
   },
@@ -968,6 +976,7 @@ const STATUS = {
   rejected:            { t: 'ต้องแก้ไข',        c: 'red' },
 };
 // งานที่ "รอฉัน" ของแต่ละบทบาท
+const EDITABLE = ['pending', 'rejected', 'cleaner_done'];   // งานที่แม่บ้านแก้/ส่งได้ — cleaner_done = ส่งแล้วแต่หัวหน้ายังไม่ตรวจ
 const QUEUE = { cleaner: ['pending', 'rejected'], supervisor: ['cleaner_done'] };   // ตรวจผ่านโดยหัวหน้า = จบ · คณะกรรมการไม่มีคิวอนุมัติ
 const PHOTO_KIND = { report: 'รายงาน', reject: 'ตีกลับ', approve: 'ตรวจ', feedback: 'แจ้งปรับปรุง', fix: 'แก้ไขแล้ว' };
 const MAX_PENDING_PHOTOS = 6;
@@ -998,7 +1007,7 @@ function cfForm(id) {
   id = reply ? id : Number(id);
   if (!S.cleanerForms[id]) {
     const l = loc(reply ? id.slice(1) : id);
-    S.cleanerForms[id] = { note: reply ? '' : (l ? l.cleanerNote : ''), photos: [], uploading: 0, busy: false };
+    S.cleanerForms[id] = { note: reply ? '' : (l && !(l.status === 'cleaner_done' && senders(l).some(n => n !== (S.auth && S.auth.displayName))) ? l.cleanerNote : ''), photos: [], uploading: 0, busy: false };
   }
   return S.cleanerForms[id];
 }
@@ -1029,7 +1038,8 @@ const chip = st => { const s = STATUS[st] || STATUS.pending; return `<span class
 const prog = l => { const d = l.subZones.filter(z => z.completed).length, t = l.subZones.length; return { d, t, p: t ? Math.round(d / t * 100) : 0 }; };
 const loc = id => S.locs.find(l => l.id === Number(id));
 /* ผู้ส่งรายงานของพื้นที่ (แม่บ้านเวียนพื้นที่ — ใช้ชื่อคนที่ส่งรายงาน/ตอบกลับแจ้งแก้ไขล่าสุดของวันนี้จากประวัติ) */
-const sender = l => { const h = (l.history || []).filter(x => x.role === 'cleaner' && /^(ส่งรายงาน|ส่งงานแก้ไข|ตอบกลับแจ้งแก้ไข)/.test(x.action)); return h.length ? h[h.length - 1].user : ''; };
+const senders = l => [...new Set((l.history || []).filter(x => x.role === 'cleaner' && /^(ส่งรายงาน|ส่งงานแก้ไข|แก้ไขรายงาน|ตอบกลับแจ้งแก้ไข)/.test(x.action)).map(x => x.user))];
+const sender = l => senders(l).join(', ');
 const who = l => { const n = sender(l); return n ? 'ส่งโดย ' + n : 'ยังไม่มีผู้ส่งรายงาน'; };
 const thDate = d => d ? new Date(d + 'T00:00:00').toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: '2-digit' }) : '';
 
@@ -1145,7 +1155,7 @@ function vHome() {
       <form id="loginForm" class="stack">
         <div><label class="lbl">ชื่อผู้ใช้ / ID</label><input type="text" name="u" autocomplete="username" required ${ru ? '' : 'autofocus'} value="${esc(ru)}"></div>
         <div><label class="lbl">รหัสผ่าน</label>${pwField('p', 'current-password', ru ? 'required autofocus' : 'required')}</div>
-        <label class="rm"><input type="checkbox" name="rm" ${ru ? 'checked' : ''}><span><b>จดจำฉันไว้ในเครื่องนี้</b><br><span class="xs muted">จำชื่อผู้ใช้ และเข้าสู่ระบบอัตโนมัติ 14 วัน — เลือกเฉพาะเครื่องส่วนตัว (กด “ออก” เพื่อยกเลิกการเข้าอัตโนมัติ)</span></span></label>
+        <label class="rm"><input type="checkbox" name="rm" ${ru ? 'checked' : ''}><span><b>จดจำฉันไว้ในเครื่องนี้</b><br><span class="xs muted">จำชื่อผู้ใช้ และเข้าสู่ระบบอัตโนมัติ 14 วัน · เบราว์เซอร์จะเสนอบันทึกรหัสผ่านให้ (เก็บในที่เก็บรหัสผ่านของเบราว์เซอร์ ไม่ใช่ในระบบนี้) — เลือกเฉพาะเครื่องส่วนตัว</span></span></label>
         <div id="loginErr" class="alert sm" style="display:none"></div>
         <button class="btn primary block" type="submit">เข้าสู่ระบบ</button>
       </form>
@@ -1194,7 +1204,7 @@ function locCard(l) {
 /* การ์ดของแม่บ้าน — แสดงเช็คลิสต์ + แนบรูป + หมายเหตุ + ปุ่มส่งรายงาน อยู่ในการ์ดเลย ไม่ต้องเปิดโมดัล */
 function cleanerCard(l) {
   const p = prog(l);
-  const needsWork = QUEUE.cleaner.includes(l.status), canClean = needsWork && can('cleaner', 'submit');
+  const needsWork = EDITABLE.includes(l.status), canClean = needsWork && can('cleaner', 'submit'), editing = l.status === 'cleaner_done', others = editing && senders(l).some(n => n !== (S.auth && S.auth.displayName));
   const f = cfForm(l.id);
 
   const zones = l.subZones.map(z => canClean
@@ -1215,14 +1225,16 @@ function cleanerCard(l) {
       <span>${l.lastUpdated ? 'อัปเดต ' + esc(l.lastUpdated) : ''}</span>
     </div>
     ${l.status === 'rejected' && l.rejectNote ? `<div class="alert sm">ตีกลับ: ${esc(l.rejectNote)}</div>` : ''}
+    ${editing ? `<div class="note sm"><b>ส่งรายงานแล้ว${others ? ' โดย ' + esc(sender(l)) : ''}</b> — ${others ? 'พนักงานคนอื่นส่งรายงานเพิ่มเติมได้ (ติ๊กจุดที่ทำเพิ่ม แนบรูป เขียนหมายเหตุ)' : 'แก้ไขเพิ่มเติมได้ (ติ๊กจุด เพิ่มรูป แก้หมายเหตุ)'} จนกว่าหัวหน้าแม่บ้านจะตรวจ</div>` : ''}
 
     <div class="sec"><h3 style="margin-bottom:8px">รายการจุดทำความสะอาด</h3>${zones}</div>
+    ${editing && l.photos.length ? `<div class="sec"><h3 style="margin-bottom:8px">รูปที่ส่งไว้แล้ว (${l.photos.length})</h3><div class="photos">${l.photos.map(photoThumb).join('')}</div></div>` : ''}
 
     ${canClean ? `
     <div class="sec stack">
-      ${can('cleaner', 'photo') ? `<div><label class="lbl">รูปหลังทำความสะอาด (อย่างน้อย 1 รูป)</label>${photoPicker(l.id)}</div>` : ''}
+      ${can('cleaner', 'photo') ? `<div><label class="lbl">${editing ? 'เพิ่มรูปหลังทำความสะอาด (ไม่บังคับ)' : 'รูปหลังทำความสะอาด (อย่างน้อย 1 รูป)'}</label>${photoPicker(l.id)}</div>` : ''}
       <div><label class="lbl">หมายเหตุ (ถ้ามี)</label><textarea rows="2" data-act="note" data-id="${l.id}" placeholder="เช่น น้ำยาหมด, ก๊อกน้ำรั่ว">${esc(f.note)}</textarea></div>
-      <button class="btn primary block" data-act="submit" data-id="${l.id}" ${f.busy ? 'disabled' : ''}>${f.busy ? 'กำลังส่ง...' : 'ส่งรายงาน'}</button>
+      <button class="btn primary block" data-act="submit" data-id="${l.id}" ${f.busy ? 'disabled' : ''}>${f.busy ? 'กำลังส่ง...' : others ? 'ส่งรายงานเพิ่มเติม' : editing ? 'บันทึกการแก้ไขรายงาน' : 'ส่งรายงาน'}</button>
     </div>` : `
     <div class="sec sm muted">${needsWork ? 'บทบาทนี้ถูกปิดสิทธิ์การส่งรายงาน — ติดต่อผู้ดูแลระบบ' : `ส่งรายงานแล้ว รอ${l.status === 'cleaner_done' ? 'หัวหน้าแม่บ้านตรวจ' : (STATUS[l.status] ? STATUS[l.status].t : '')}`}</div>`}
   </div>`;
@@ -1251,7 +1263,7 @@ const areaImg = (l, cls) => {
 };
 
 function areaTile(l, i) {
-  const p = prog(l), todo = QUEUE.cleaner.includes(l.status);
+  const p = prog(l), todo = QUEUE.cleaner.includes(l.status), editable = l.status === 'cleaner_done';
   return `
   <button class="card tile tile--${l.status}" data-act="area" data-id="${l.id}">
     <div class="tile-img">${areaImg(l, 'tile-photo')}
@@ -1260,7 +1272,7 @@ function areaTile(l, i) {
     <div class="tile-body">
       <div class="tile-name">${esc(l.area)}</div>
       <div class="bar"><i class="${p.p === 100 ? 'full' : ''}" style="width:${p.p}%"></i></div>
-      <div class="row"><span class="muted">${p.d}/${p.t} จุด</span><span class="tile-go">${todo ? 'กดเพื่อทำงาน ›' : 'ดูรายละเอียด ›'}</span></div>
+      <div class="row"><span class="muted">${p.d}/${p.t} จุด</span><span class="tile-go">${todo ? 'กดเพื่อทำงาน ›' : editable ? 'แก้ไข / เพิ่มรายงาน ›' : 'ดูรายละเอียด ›'}</span></div>
       ${l.status === 'rejected' ? `<div class="alert">ต้องแก้ไข: ${esc(l.rejectNote)}</div>` : ''}
     </div>
   </button>`;
@@ -1301,9 +1313,9 @@ function fixItems(l) {
   const items = [], parse = a => { const m = a.match(/^ตอบกลับแจ้งแก้ไข:\s?([\s\S]*?)(?:\s?\[รูป (\d+)\])?$/); return { note: m ? m[1] : '', photos: m && m[2] ? +m[2] : 0 }; };
   (l.history || []).forEach(h => {
     const a = h.action;
-    if (h.role === 'supervisor' && /^ตีกลับ/.test(a)) {
+    if (h.role === 'supervisor' && /^(แก้ไขผลตรวจ — )?ตีกลับ/.test(a)) {
       items.forEach(x => { if (x.state === 'replied') x.state = 'open'; });
-      items.push({ kind: 'reject', state: 'open', by: h.user, time: h.time, note: a.replace(/^ตีกลับ:\s?/, '').replace(/\s?\[รูป \d+\]$/, '') });
+      items.push({ kind: 'reject', state: 'open', by: h.user, time: h.time, note: a.replace(/^(แก้ไขผลตรวจ — )?ตีกลับ:\s?/, '').replace(/\s?\[รูป \d+\]$/, '') });
     } else if (h.role === 'manager' && /^แจ้งปรับปรุง/.test(a)) {
       items.push({ kind: 'fb', state: 'open', by: h.user, time: h.time, stars: +(a.match(/\((\d) ดาว\)/) || [])[1] || 0, note: a.replace(/^แจ้งปรับปรุง:\s?/, '').replace(/\s?\[รูป \d+\]$/, '').replace(/\s?\(\d ดาว\)$/, '') });
     } else if (h.role === 'cleaner' && /^(ตอบกลับแจ้งแก้ไข|ส่งงานแก้ไขแล้ว)/.test(a)) {
@@ -1312,7 +1324,7 @@ function fixItems(l) {
     } else if (h.role === 'supervisor' && /^ตอบกลับแจ้งแก้ไข/.test(a)) {
       const r = parse(a);
       items.forEach(x => { if (x.state === 'open' && x.kind === 'fb') { x.state = 'done'; x.reply = Object.assign({ by: h.user, time: h.time }, r); } });
-    } else if (h.role === 'supervisor' && /^ตรวจผ่าน/.test(a)) {
+    } else if (h.role === 'supervisor' && /^(แก้ไขผลตรวจ — )?ตรวจผ่าน/.test(a)) {
       items.forEach(x => { if (x.state === 'replied') x.state = 'done'; });
     }
   });
@@ -1442,7 +1454,7 @@ function dfRows(R) {
   const today = ymd(new Date());
   if (set.has(R.keyOf(today))) S.locs.forEach(l => {
     if (!areaMatch(l.area, l.category)) return;
-    const rej = l.history.filter(h => /^ตีกลับ/.test(h.action));
+    const rej = l.history.filter(h => /^(แก้ไขผลตรวจ — )?ตีกลับ/.test(h.action));
     const sup = rej.filter(h => h.role === 'supervisor').length, fb = l.history.filter(h => h.role === 'manager' && /^แจ้งปรับปรุง/.test(h.action)).length;
     if (l.status === 'approved' || sup + fb) rows.push({ date: today, area: l.area, category: l.category, sup, fb, approved: l.status === 'approved', rating: fb ? (l.rating || 0) : 0 });
   });
@@ -1501,6 +1513,35 @@ function dfBar(R) {
   </div>`;
 }
 
+/* ---------- ปรับแต่งแดชบอร์ด: เลือกว่าจะแสดงส่วนไหน และจัดลำดับก่อน/หลัง (จำไว้ในเบราว์เซอร์นี้) ---------- */
+const DASH_W = [['kpi', 'ตัวเลขสรุป (KPI)'], ['trend', 'กราฟตรวจผ่าน / ตีกลับตามช่วงเวลา'], ['areas', 'อัตราตีกลับแยกรายพื้นที่'], ['heat', 'ฮีตแมปการตีกลับ'], ['today', 'สถานะวันนี้และสถานะรายพื้นที่'], ['staff', 'ผลงานรายพนักงานวันนี้']];
+function dashLayout() {
+  let o = null; try { o = JSON.parse(localStorage.getItem('dashLayout')); } catch (e) {}
+  const keys = DASH_W.map(x => x[0]), saved = (o && Array.isArray(o.order) ? o.order : []).filter(k => keys.includes(k));
+  return { order: [...saved, ...keys.filter(k => !saved.includes(k))], hidden: (o && Array.isArray(o.hidden) ? o.hidden : []).filter(k => keys.includes(k)) };
+}
+function saveDashLayout(l) { try { localStorage.setItem('dashLayout', JSON.stringify(l)); } catch (e) {} }
+function dashBody(W, empty) {
+  const lay = dashLayout(); W.today = todayPanel(); W.staff = staffPerf();
+  let emptyShown = false;
+  return lay.order.filter(k => !lay.hidden.includes(k)).map(k => {
+    if (empty && ['trend', 'areas', 'heat'].includes(k)) { if (emptyShown) return ''; emptyShown = true; return '<div class="card empty">ไม่มีข้อมูลในช่วงที่เลือก</div>'; }
+    return W[k];
+  }).join('\n');
+}
+function mDashCfg() {
+  const lay = dashLayout();
+  return `
+  <div class="ov" data-act="closeOv"><div class="sheet" style="max-width:480px">
+    <div class="row"><h2>ปรับแต่งแดชบอร์ด</h2><button class="x-close" data-act="close">${ICONS.x}</button></div>
+    <p class="sm muted" style="margin-bottom:12px">เลือกส่วนที่ต้องการแสดง และกดลูกศรเพื่อเลื่อนขึ้น/ลง — จำค่าไว้ในเบราว์เซอร์นี้ (รายงาน PDF ไม่เปลี่ยน)</p>
+    <div class="stack">${lay.order.map((k, i) => { const on = !lay.hidden.includes(k), nm = DASH_W.find(x => x[0] === k)[1]; return `
+      <div class="row" style="gap:8px"><button type="button" class="check ${on ? 'on' : ''}" style="flex:1" data-act="dashToggle" data-k="${k}"><span class="box">${on ? ICONS.check : ''}</span><span>${nm}</span></button>
+        <button type="button" class="btn sm ghost" data-act="dashMove" data-k="${k}" data-d="-1" aria-label="เลื่อนขึ้น" ${i === 0 ? 'disabled' : ''}>↑</button>
+        <button type="button" class="btn sm ghost" data-act="dashMove" data-k="${k}" data-d="1" aria-label="เลื่อนลง" ${i === lay.order.length - 1 ? 'disabled' : ''}>↓</button></div>`; }).join('')}</div>
+    <div class="row" style="margin-top:14px"><button type="button" class="btn sm ghost" data-act="dashReset">คืนค่าเริ่มต้น</button><button type="button" class="btn primary" data-act="close">เสร็จสิ้น</button></div>
+  </div></div>`;
+}
 function vDash() {
   if (!S.hist) return `<div class="empty"><span class="spin"></span></div>`;
   const R = dfRange(), rows = dfRows(R), A = dfAgg(rows, R), T = A.t;
@@ -1531,44 +1572,39 @@ function vDash() {
     <div class="row" style="flex-wrap:wrap">
       <div><h2>แดชบอร์ด</h2><div class="sm muted">${esc(scope)} · ${esc(R.label)} · ข้อมูลวันนี้อัปเดตอัตโนมัติทุก 1 นาที</div></div>
       <div class="actions no-print">
-        <button class="btn sm primary" data-act="report">ดาวน์โหลดรายงาน (PDF)</button>
+        <button class="btn sm primary" data-act="report">ดาวน์โหลดรายงาน (PDF)</button><button class="btn sm ghost" data-act="dashCfg">ปรับแต่งแดชบอร์ด</button>
         <button class="btn sm ghost" data-act="repairLocs">ซ่อมข้อมูลพื้นที่</button><button class="btn sm ghost danger" data-act="resetToday">รีเซ็ตวันนี้</button>
       </div>
     </div>
     ${dfBar(R)}
 
-    <div class="stats">
+    ${dashBody({
+      kpi: `<div class="stats">
       ${stat('รายงานที่ส่งทั้งหมด', T.submits, `${T.n} พื้นที่-วัน + ส่งซ้ำ ${T.rejects}`, 'gray')}
       ${stat('ตรวจผ่านแล้ว', okPct + '%', `${T.ok} จาก ${T.n} พื้นที่-วัน`, 'green')}
       ${stat('ตีกลับ', T.rejects + ' ครั้ง', `อัตรา ${(T.rate * 100).toFixed(0)}% (หัวหน้าแม่บ้าน)`, 'red')}
       ${stat('แจ้งปรับปรุง', T.fb + ' ครั้ง', 'จากคณะกรรมการ', 'blue')}
       ${stat('คะแนนเฉลี่ย', avg, `จากกรรมการ ${T.rn} ครั้ง`, 'amber')}
-    </div>
-
-    ${empty ? `<div class="card empty">ไม่มีข้อมูลในช่วงที่เลือก</div>` : `
-    <div class="grid2">
+    </div>`,
+      trend: `<div class="grid2">
       <div class="card"><h3>อัตราตรวจผ่าน${R.unit}</h3><div class="xs muted">% ของพื้นที่ที่หัวหน้าแม่บ้านตรวจผ่านแล้ว</div>${colChart(R.days, apprCols, 100, v => Math.round(v) + '%', R.short)}</div>
       <div class="card"><div class="row" style="flex-wrap:wrap;align-items:flex-start"><div><h3>ตีกลับ / แจ้งปรับปรุง${R.unit}</h3><div class="xs muted">หัวหน้าแม่บ้านตีกลับ และคณะกรรมการแจ้งปรับปรุง</div></div>${legend}</div>${colChart(R.days, rejCols, rejMax, v => v, R.short)}</div>
-    </div>
-
-    <div class="card">
+    </div>`,
+      areas: `<div class="card">
       <div class="row" style="flex-wrap:wrap;align-items:flex-start">
         <div><h3>อัตราการตีกลับ / แก้ไขงาน แยกรายพื้นที่</h3><div class="xs muted">อัตรา = ครั้งที่ถูกตีกลับ ÷ รายงานที่ส่งทั้งหมด · ส่วนสีน้ำเงิน = คณะกรรมการแจ้งปรับปรุง · เรียงจากมากไปน้อย</div></div>${legend}
       </div>
       <div class="rv" style="margin-top:12px">${bars}</div>
-    </div>
-
-    <div class="card">
+    </div>`,
+      heat: `<div class="card">
       <h3>รูปแบบการตีกลับ${R.unit} แยกรายพื้นที่</h3>
       <div class="xs muted" style="margin-bottom:10px">แต่ละช่อง = 1 ${R.cell} · สีเข้มขึ้น = ถูกตีกลับหลายครั้ง</div>
       <div class="tbl"><div class="hm">
         <div class="hm-row"><div class="rv-name"></div><div class="hm-head" style="${cols}">${R.days.map((d, i) => `<span>${R.days.length > 16 && i % 5 ? '' : R.short(d)}</span>`).join('')}</div></div>${heat}
       </div></div>
       <div class="xs muted" style="margin-top:10px;display:flex;gap:14px;align-items:center"><span class="hm-c hm-0" style="display:inline-block;width:14px;height:14px"></span> ไม่ตีกลับ <span class="hm-c hm-1" style="display:inline-block;width:14px;height:14px"></span> ${hmLegend(R)[0]} <span class="hm-c hm-2" style="display:inline-block;width:14px;height:14px"></span> ${hmLegend(R)[1]}</div>
-    </div>`}
-
-    ${todayPanel()}
-    ${staffPerf()}
+    </div>`,
+    }, empty)}
   </div>`;
 }
 
@@ -1667,9 +1703,10 @@ function todayPanel() {
 function staffPerf() {
   const m = {};
   S.locs.filter(l => areaMatch(l.area, l.category)).forEach(l => {
-    const n = sender(l); if (!n) return;
-    const r = m[n] = m[n] || { name: n, areas: [], ok: 0, rejects: 0 };
-    r.areas.push(l.area); if (l.status === 'approved') r.ok++; r.rejects += l.rejectCount || 0;
+    senders(l).forEach(n => {
+      const r = m[n] = m[n] || { name: n, areas: [], ok: 0, rejects: 0 };
+      r.areas.push(l.area); if (l.status === 'approved') r.ok++; r.rejects += l.rejectCount || 0;
+    });
   });
   const rows = Object.values(m).sort((a, b) => b.areas.length - a.areas.length || a.name.localeCompare(b.name, 'th'));
   if (!rows.length) return `<div class="card"><h3>ผลงานรายพนักงานวันนี้</h3><div class="empty sm">วันนี้ยังไม่มีพนักงานส่งรายงาน</div></div>`;
@@ -1695,6 +1732,9 @@ const portalOff = r => (S.perms || {})[r]?.portal === false;
 
 function peopleRows() {
   const last = u => `เข้าล่าสุด ${(u.lastLogin || '–').slice(0, 16)}`;
+  // ชื่อ-นามสกุลซ้ำกัน (ไม่นับที่ไม่อนุมัติ) — ระบบแยกคนจากชื่อในหมายเหตุ/สถิติ จึงแสดง ID ที่ซ้ำให้ Admin ตัดสินใจ
+  const nk = u => String(u.displayName || '').replace(/\s+/g, ' ').trim().toLowerCase(), byName = {};
+  (S.users || []).filter(u => u.status !== 'rejected').forEach(u => { (byName[nk(u)] = byName[nk(u)] || []).push(u.username); });
   const rows = (S.users || []).map(u => {
     const cl = u.role === 'cleaner';
     const status = { pending: ['รออนุมัติ', 'blue'], rejected: ['ไม่อนุมัติ', 'red'], disabled: [cl ? 'พักงาน' : 'ระงับ', 'gray'],
@@ -1702,6 +1742,8 @@ function peopleRows() {
     let info = `ลงทะเบียน ${(u.createdAt || '').slice(0, 10)} · ${last(u)}`;
     if (cl) info = `ทำงานเวียนทุกพื้นที่ · ${last(u)}`;
     if (u.role === 'supervisor') info = `ตรวจงานทุกพื้นที่ (${S.locs.length}) · ${last(u)}`;
+    const dup = u.status !== 'rejected' ? (byName[nk(u)] || []).filter(x => x !== u.username) : [];
+    if (dup.length) info = `⚠ ชื่อซ้ำกับ ID ${dup.join(', ')} · ` + info;
     return { role: u.role, name: u.displayName, sub: `ID ${u.username}${u.phone ? ' · ' + u.phone : ''}`, status, mustChange: u.mustChange, info, user: u };
   });
   rows.push({ role: 'admin', name: S.auth?.displayName || 'ผู้ดูแลระบบ', sub: S.auth?.user ? 'ID ' + S.auth.user : '', status: ['ใช้งานได้', 'green'], info: 'เข้าได้ทุกพอร์ทัล ไม่ถูกจำกัดสิทธิ์' });
@@ -1863,7 +1905,7 @@ function mRegister() {
       <div><label class="lbl">ชื่อ-นามสกุล</label><input type="text" name="n" required maxlength="80" value="${esc(d.n || '')}"></div>
       <div><label class="lbl">เบอร์โทร</label>${phoneField(d.ph, true)}<div class="xs muted">ตัวเลข 10 หลัก เช่น 081-234-5678</div></div>
       <div><label class="lbl">ID สำหรับเข้าสู่ระบบ</label><input type="text" name="u" required minlength="4" maxlength="30" pattern="[A-Za-z0-9._-]{4,30}" placeholder="ตั้งชื่อ ID ของคุณ" value="${esc(d.u || '')}"><div class="xs muted">ตัวอักษรอังกฤษ ตัวเลข . _ - ยาว 4–30 ตัว</div></div>
-      <div><label class="lbl">รหัสผ่าน (อย่างน้อย 8 ตัว)</label>${pwField('pw', 'new-password', 'required minlength="8" maxlength="64"')}</div>
+      <div><label class="lbl">รหัสผ่าน (อย่างน้อย 6 ตัว ตัวเลขหรือสัญลักษณ์ก็ได้)</label>${pwField('pw', 'new-password', 'required minlength="6" maxlength="64"')}</div>
       <div><label class="lbl">ยืนยันรหัสผ่าน</label>${pwField('pw2', 'new-password', 'required')}</div>
       <div id="regErr" class="alert sm" style="display:none"></div>
       <button class="btn primary block" type="submit">ส่งคำขอลงทะเบียน</button>
@@ -1876,10 +1918,10 @@ function mChpw() {
   return `
   <div class="ov" ${forced ? '' : 'data-act="closeOv"'}><div class="sheet" style="max-width:420px">
     <div class="row"><h2>เปลี่ยนรหัสผ่าน</h2>${forced ? '' : `<button class="x-close" data-act="close">${ICONS.x}</button>`}</div>
-    <p class="sm muted" style="margin-bottom:14px">${forced ? 'ก่อนเริ่มใช้งาน กรุณาตั้งรหัสผ่านใหม่ของคุณเอง' : 'ตั้งรหัสผ่านใหม่อย่างน้อย 8 ตัวอักษร'}</p>
+    <p class="sm muted" style="margin-bottom:14px">${forced ? 'ก่อนเริ่มใช้งาน กรุณาตั้งรหัสผ่านใหม่ของคุณเอง' : 'ตั้งรหัสผ่านใหม่อย่างน้อย 6 ตัว (ตัวเลขหรือสัญลักษณ์ก็ได้)'}</p>
     <form id="chpwForm" class="stack" autocomplete="off">
       <div><label class="lbl">รหัสผ่านเดิม${forced ? ' (รหัสชั่วคราวที่ได้รับ)' : ''}</label>${pwField('o', 'current-password', 'required')}</div>
-      <div><label class="lbl">รหัสผ่านใหม่</label>${pwField('pw', 'new-password', 'required minlength="8" maxlength="64"')}</div>
+      <div><label class="lbl">รหัสผ่านใหม่</label>${pwField('pw', 'new-password', 'required minlength="6" maxlength="64"')}</div>
       <div><label class="lbl">ยืนยันรหัสผ่านใหม่</label>${pwField('pw2', 'new-password', 'required')}</div>
       <div id="chErr" class="alert sm" style="display:none"></div>
       <button class="btn primary block" type="submit">บันทึกรหัสผ่านใหม่</button>
@@ -1920,7 +1962,7 @@ function mDetail() {
   const p = prog(l);
   const role = S.view;
   const canClean = role === 'cleaner' && QUEUE.cleaner.includes(l.status);
-  const canReview = role === 'supervisor' && QUEUE.supervisor.includes(l.status) && (can('supervisor', 'approve') || can('supervisor', 'reject'));
+  const reviewed = l.status === 'approved', canReview = role === 'supervisor' && (QUEUE.supervisor.includes(l.status) || reviewed) && (can('supervisor', 'approve') || can('supervisor', 'reject'));
   const canFeedback = role === 'manager' && can('manager', 'feedback');
 
   const zones = l.subZones.map(z => canClean
@@ -1930,15 +1972,11 @@ function mDetail() {
 
   const notes = [
     ['แม่บ้าน' + (sender(l) ? ' · ' + sender(l) : ''), l.cleanerNote], ['หัวหน้าแม่บ้าน', l.supervisorNote], ['คณะกรรมการ (แจ้งปรับปรุงล่าสุด)', l.managerNote],
-  ].filter(n => n[1]).map(n => `<div class="note sm"><b class="b">${n[0]}:</b> ${esc(n[1])}</div>`).join('');
+  ].filter(n => n[1]).map(n => `<div class="note sm"><b class="b">${esc(n[0])}:</b> ${esc(n[1])}</div>`).join('');
 
   const photos = l.photos.length ? `
     <div class="sec"><h3 style="margin-bottom:8px">รูปภาพ (${l.photos.length})</h3>
-      <div class="photos">${l.photos.map(ph => `
-        <a class="ph" href="${esc(ph.url)}" target="_blank" title="${esc(ph.by)} ${esc(ph.time)}">
-          <img src="${esc(ph.url)}" loading="lazy" alt="">
-          <span class="tag">${PHOTO_KIND[ph.kind] || ''} ${esc(ph.time)}</span></a>`).join('')}
-      </div></div>` : '';
+      <div class="photos">${l.photos.map(photoThumb).join('')}</div></div>` : '';
 
   const history = l.history.length ? `
     <div class="sec"><h3 style="margin-bottom:6px">ประวัติวันนี้</h3>
@@ -1955,11 +1993,12 @@ function mDetail() {
     </div>`;
   else if (canReview) action = `
     <div class="sec stack">
+      ${reviewed ? '<div class="note sm">ตรวจผ่านไปแล้ว — แก้ไขผลตรวจได้ เช่น ตีกลับให้แก้ไข หรือบันทึกหมายเหตุ/รูปเพิ่มเติม</div>' : ''}
       <div><label class="lbl">แนบรูป (จำเป็นเมื่อพบจุดบกพร่อง)</label>${photoPicker()}</div>
       <div><label class="lbl">หมายเหตุ / จุดที่ต้องแก้ไข</label><textarea rows="2" data-act="note" placeholder="ระบุตำแหน่งและสิ่งที่ต้องแก้">${esc(S.form.note)}</textarea></div>
       <div class="row">
         ${can('supervisor', 'reject') ? `<button class="btn danger block" data-act="reject" ${S.busy ? 'disabled' : ''}>ตีกลับให้แก้ไข</button>` : ''}
-        ${can('supervisor', 'approve') ? `<button class="btn primary block" data-act="approve" ${S.busy ? 'disabled' : ''}>ตรวจผ่าน (สิ้นสุดงาน)</button>` : ''}
+        ${can('supervisor', 'approve') ? `<button class="btn primary block" data-act="approve" ${S.busy ? 'disabled' : ''}>${reviewed ? 'บันทึกตรวจผ่านอีกครั้ง' : 'ตรวจผ่าน (สิ้นสุดงาน)'}</button>` : ''}
       </div>
     </div>`;
   else if (canFeedback) action = `
@@ -1989,6 +2028,35 @@ function mDetail() {
 }
 
 /* id ระบุแล้ว = การ์ดแม่บ้าน (ต่อพื้นที่) · ไม่ระบุ = ฟอร์มตรวจสอบในโมดัล (หัวหน้า/ผู้จัดการ) */
+/* รูปที่ส่งแล้ว: กดแล้วเปิดเป็น pop-up (ไม่เปิดแท็บใหม่) — ลิงก์จริงเก็บไว้ใน href เผื่อ JavaScript ใช้ไม่ได้ */
+const photoThumb = ph => `<a class="ph" data-lb href="${esc(ph.url)}" title="${esc(ph.by)} ${esc(ph.time)}"><img src="${esc(ph.url)}" loading="lazy" alt=""><span class="tag">${PHOTO_KIND[ph.kind] || ''} ${esc(ph.time)}</span></a>`;
+let LB = null;
+function lbShow(i) {
+  const a = LB.list[i]; LB.i = i; const src = a.tagName === 'IMG' ? a.getAttribute('src') : a.getAttribute('href'), cap = a.tagName === 'IMG' ? '' : a.title;
+  const d = $('#lbx') || Object.assign(document.createElement('div'), { id: 'lbx', className: 'lb-ov' });
+  d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-label', 'ดูรูปภาพ');
+  const n = LB.list.length;
+  d.innerHTML = `<button class="lb-x" data-lbx="close" aria-label="ปิด">${ICONS.x}</button>
+    ${n > 1 ? '<button class="lb-n lb-p" data-lbx="-1" aria-label="รูปก่อนหน้า">‹</button><button class="lb-n lb-f" data-lbx="1" aria-label="รูปถัดไป">›</button>' : ''}
+    <figure><img src="${esc(src)}" alt=""><figcaption>${esc(cap)}${n > 1 ? ` · ${i + 1}/${n}` : ''}</figcaption></figure>`;
+  if (!d.parentNode) document.body.appendChild(d);
+}
+function lbClose() { const d = $('#lbx'); if (d) d.remove(); LB = null; }
+document.addEventListener('click', e => {
+  const pv = e.target.closest('.photos .ph:not(.add) img');
+  if (pv && !e.target.closest('a')) { const box = pv.closest('.photos'); LB = { list: [...box.querySelectorAll('.ph:not(.add) img')], i: 0, img: true }; lbShow(LB.list.indexOf(pv)); return; }
+  const a = e.target.closest('a.ph[data-lb]');
+  if (a) { e.preventDefault(); const box = a.closest('.photos'); LB = { list: [...box.querySelectorAll('a.ph[data-lb]')], i: 0 }; lbShow(LB.list.indexOf(a)); return; }
+  if (!LB) return;
+  const b = e.target.closest('[data-lbx]');
+  if (b && b.dataset.lbx !== 'close') lbShow((LB.i + Number(b.dataset.lbx) + LB.list.length) % LB.list.length);
+  else if (b || e.target.id === 'lbx' || e.target.tagName === 'FIGURE') lbClose();
+});
+document.addEventListener('keydown', e => {
+  if (!LB) return;
+  if (e.key === 'Escape') { e.stopImmediatePropagation(); lbClose(); }
+  else if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && LB.list.length > 1) lbShow((LB.i + (e.key === 'ArrowRight' ? 1 : -1) + LB.list.length) % LB.list.length);
+}, true);
 function photoPicker(id) {
   return `<div class="photos" id="${id ? 'pending-' + id : 'pending'}">${pendingHtml(id)}</div>`;
 }
@@ -2006,7 +2074,7 @@ function starsHtml() {
 }
 
 function renderModal() {
-  $('#modal').innerHTML = ({ detail: mDetail, register: mRegister, chpw: mChpw, userCreate: mUserCreate, tempPw: mTempPw, userEdit: mUserEdit })[S.modal]?.() ?? '';
+  $('#modal').innerHTML = ({ detail: mDetail, register: mRegister, chpw: mChpw, userCreate: mUserCreate, tempPw: mTempPw, userEdit: mUserEdit, dashCfg: mDashCfg })[S.modal]?.() ?? '';
   document.body.style.overflow = S.modal ? 'hidden' : '';
   const ff = { register: '#registerForm [name=u]', chpw: '#chpwForm [name=o]', userCreate: '#userForm [name=u]', userEdit: '#userEditForm [name=n]' }[S.modal];
   if (ff) setTimeout(() => $(ff)?.focus(), 50);
@@ -2153,7 +2221,7 @@ async function userAct(fn, okMsg) {
 }const formErr = (id, m) => { const el = $(id); el.style.display = 'block'; el.textContent = m; };
 function pwCheck(form, errId) {
   if (form.pw.value !== form.pw2.value) { formErr(errId, 'รหัสผ่านทั้งสองช่องไม่ตรงกัน'); return false; }
-  if (form.pw.value.length < 8) { formErr(errId, 'รหัสผ่านต้องยาวอย่างน้อย 8 ตัวอักษร'); return false; }
+  if (form.pw.value.length < 6) { formErr(errId, 'รหัสผ่านต้องยาวอย่างน้อย 6 ตัว'); return false; }
   return true;
 }
 /* สไลด์การ์ดที่เปิดอยู่ขึ้นด้านบนแล้วรอให้จบ (ข้ามถ้าผู้ใช้ตั้งค่าลดการเคลื่อนไหว) */
@@ -2203,6 +2271,13 @@ const USER_ACTIONS = {
   userReset:   userAsk([], { tone: 'warn', title: 'ออกรหัสผ่านชั่วคราวใหม่?', text: 'รหัสเดิมจะใช้ไม่ได้ทันที', ok: 'ออกรหัสใหม่' }, 'apiResetUserPassword', ''),
   userDel:     userAsk([], { tone: 'danger', title: 'ลบบัญชีนี้ถาวร?', text: 'ลบแล้วกู้คืนไม่ได้ และที่นั่งจะว่างให้คนอื่น', ok: 'ลบ' }, 'apiDeleteUser', 'ลบแล้ว'),
 };
+/* ให้เบราว์เซอร์จำรหัสผ่านเอง (Credential Management API) — รหัสผ่านไม่ถูกเก็บในหน้าเว็บหรือ localStorage · เบราว์เซอร์ที่ไม่รองรับจะใช้ autocomplete ปกติของฟอร์ม */
+function saveBrowserLogin(id, pw, name, on) {
+  try {
+    if (!window.PasswordCredential || !navigator.credentials) return;
+    if (on) navigator.credentials.store(new PasswordCredential({ id, password: pw, name: name || id })).catch(() => {});
+  } catch (e) {}
+}
 async function doLogin(form) {
   const btn = $('button[type=submit]', form), err = $('#loginErr');
   btn.disabled = true; btn.innerHTML = '<span class="spin"></span>';
@@ -2218,6 +2293,7 @@ async function doLogin(form) {
     S.auth.remember = remember && !!S.auth.remember;
     store.del('auth'); store.set('auth', S.auth, !S.auth.remember);
     try { if (remember) localStorage.setItem('rememberUser', form.u.value.trim()); else localStorage.removeItem('rememberUser'); } catch (e) {}
+    saveBrowserLogin(form.u.value.trim(), form.p.value, S.auth.displayName, remember);
     await load(true);
     goRole(S.auth.role);
   } catch (e) {
@@ -2227,6 +2303,7 @@ async function doLogin(form) {
 }
 
 function logout(silent) {
+  try { if (navigator.credentials && navigator.credentials.preventSilentAccess) navigator.credentials.preventSilentAccess(); } catch (e) {}
   if (S.auth && !silent) api('apiLogout', S.auth.token).catch(() => {});
   S.auth = null; store.del('auth');
   // ล้างข้อมูลของผู้ใช้เดิมออกจากหน่วยความจำ/เครื่อง
@@ -2269,7 +2346,7 @@ function toggleZone(locId, zoneId) {
   // เซิร์ฟเวอร์ตอบตามลำดับที่ส่ง — ห้ามเอาคำตอบมาทับ subZones ในเครื่อง ไม่งั้นข้อที่ติ๊กต่อกันเร็ว ๆ จะหลุด
   queue(() => api('apiToggleZone', S.auth?.token, l.id, zoneId, want).then(r => { l.lastUpdated = r.lastUpdated; }).catch(e => {
     z.completed = !want; toast(e.message, true); render();
-    if (/สถานะงานเปลี่ยน|ส่งแล้ว/.test(e.message)) load(true);
+    if (/สถานะงานเปลี่ยน|ส่งแล้ว|ตรวจผ่านแล้ว/.test(e.message)) load(true);
   }));
 }
 
@@ -2279,15 +2356,16 @@ async function submitCleaner(locId) {
   if (f.uploading) return toast('รอให้อัปโหลดรูปเสร็จก่อน', true);
   if (can('cleaner', 'photo') && !f.photos.length && !l.photos.some(x => x.kind === 'report')) return toast('กรุณาแนบรูปอย่างน้อย 1 รูป', true);
   const miss = p.t - p.d;
-  if (!await askConfirm({ tone: miss ? 'warn' : 'ask', title: 'ยืนยันส่งรายงาน?', text: `${l.area}\n` + (miss ? `ยังไม่ได้ติ๊ก ${miss} จุด ต้องการส่งเลยหรือไม่?` : 'ทำครบทุกจุดแล้ว ส่งให้หัวหน้าตรวจ'), ok: 'ส่งรายงาน' })) return;
+  const edit = l.status === 'cleaner_done';
+  if (!await askConfirm({ tone: miss ? 'warn' : 'ask', title: edit ? 'ยืนยันบันทึกการแก้ไข?' : 'ยืนยันส่งรายงาน?', text: `${l.area}\n` + (miss ? `ยังไม่ได้ติ๊ก ${miss} จุด ต้องการ${edit ? 'บันทึก' : 'ส่ง'}เลยหรือไม่?` : edit ? 'บันทึกรายงานที่แก้ไขให้หัวหน้าตรวจ' : 'ทำครบทุกจุดแล้ว ส่งให้หัวหน้าตรวจ'), ok: edit ? 'บันทึก' : 'ส่งรายงาน' })) return;
   if (f.busy) return;
   f.busy = true; render();
   try {
-    const updated = await queue(() => api('apiCleanerSubmit', S.auth?.token, l.id, f.note || l.cleanerNote, f.photos.map(x => ({ id: x.id }))));
+    const updated = await queue(() => api('apiCleanerSubmit', S.auth?.token, l.id, f.note, f.photos.map(x => ({ id: x.id }))));
     upsert(updated);
     delete S.cleanerForms[Number(locId)];
     S.area = null; render(); window.scrollTo(0, 0);
-    await askDone({ title: 'ส่งรายงานสำเร็จ', text: `${l.area}\nส่งให้หัวหน้าแม่บ้านตรวจแล้ว` });
+    await askDone({ title: edit ? 'บันทึกการแก้ไขแล้ว' : 'ส่งรายงานสำเร็จ', text: edit ? `${l.area}\nรายงานที่แก้ไขรอหัวหน้าแม่บ้านตรวจ` : `${l.area}\nส่งให้หัวหน้าแม่บ้านตรวจแล้ว` });
   } catch (e) {
     f.busy = false; toast(e.message, true); render();
     if (/สถานะงานเปลี่ยน/.test(e.message)) load(true);
@@ -2300,7 +2378,7 @@ async function review(decision) {
   if (f.uploading) return toast('รอให้อัปโหลดรูปเสร็จก่อน', true);
   if (decision === 'reject' && !f.note.trim()) { toast('กรุณาระบุจุดที่ต้องแก้ไข', true); return $('textarea[data-act=note]')?.focus(); }
   const rej = decision === 'reject';
-  if (!await askConfirm({ tone: rej ? 'danger' : 'ask', title: rej ? 'ยืนยันตีกลับให้แก้ไข?' : 'ยืนยันตรวจผ่าน?',
+  if (!await askConfirm({ tone: rej ? 'danger' : 'ask', title: rej ? (l.status === 'approved' ? 'ยกเลิกผลตรวจผ่านและตีกลับ?' : 'ยืนยันตีกลับให้แก้ไข?') : (l.status === 'approved' ? 'บันทึกผลตรวจผ่านอีกครั้ง?' : 'ยืนยันตรวจผ่าน?'),
     text: `${l.area}\n` + (rej ? (f.photos.length ? 'แม่บ้านจะต้องแก้ไขและส่งใหม่' : 'ยังไม่ได้แนบรูปจุดบกพร่อง — แม่บ้านจะต้องแก้ไขและส่งใหม่') : 'ตรวจผ่านแล้วงานนี้สิ้นสุด ไม่ต้องตรวจซ้ำ'),
     ok: rej ? 'ตีกลับ' : 'ตรวจผ่าน' })) return;
   await act(() => api('apiReview', S.auth.token, l.id, decision, f.note, f.photos.map(x => ({ id: x.id }))),
@@ -2375,6 +2453,10 @@ document.addEventListener('click', e => {
     dfPrev: () => { S.dfOffset--; render(); },
     dfNext: () => { if (S.dfOffset < 0) { S.dfOffset++; render(); } },
     dfNow: () => { S.dfOffset = 0; render(); },
+  dashCfg: () => openModal('dashCfg'),
+  dashToggle: () => { const l = dashLayout(), k = t.dataset.k; l.hidden = l.hidden.includes(k) ? l.hidden.filter(x => x !== k) : [...l.hidden, k]; saveDashLayout(l); render(); renderModal(); },
+  dashMove: () => { const l = dashLayout(), k = t.dataset.k, i = l.order.indexOf(k), j = i + Number(t.dataset.d); if (j < 0 || j >= l.order.length) return; l.order.splice(i, 1); l.order.splice(j, 0, k); saveDashLayout(l); render(); renderModal(); },
+  dashReset: () => { saveDashLayout({ order: [], hidden: [] }); render(); renderModal(); },
     pplRole: () => { S.pplRole = t.dataset.r; render(); },
     fillLogin: () => { const fm = $('#loginForm'); fm.u.value = t.dataset.u; fm.p.value = t.dataset.p; fm.p.focus(); },
     userEdit: () => { S.userEdit = (S.users || []).find(x => x.username === t.dataset.u) || null; if (S.userEdit) openModal('userEdit'); },
