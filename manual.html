@@ -52,7 +52,8 @@ h3{font-size:19px;font-weight:700;color:var(--p700);margin:0 0 6px}
 .step ul{padding-left:1.2em;font-size:16px;display:grid;gap:3px;margin-bottom:6px}
 .note{font-size:14.5px;border-radius:12px;padding:8px 12px;margin-top:6px}
 .note.tip{background:var(--green-t);color:#14562a}.note.warn{background:var(--amber-t);color:#7a4a00}
-.vid{display:grid;grid-template-columns:230px 1fr;gap:20px;align-items:center;background:#fff;border:2px solid var(--p600);border-radius:18px;padding:16px;margin-bottom:18px}.vid video{width:100%;border-radius:14px;background:#000;max-height:70vh}.vid h3{font-size:19px}.vid p{margin:4px 0 6px}.vid ul{padding-left:1.2em;font-size:15px;color:var(--mute);display:grid;gap:3px}@media (max-width:620px){.vid{grid-template-columns:1fr}.vid video{max-width:260px;margin:0 auto;display:block}}
+.vid{display:grid;grid-template-columns:230px 1fr;gap:20px;align-items:center;background:#fff;border:2px solid var(--p600);border-radius:18px;padding:16px;margin-bottom:18px}.vid video{width:100%;border-radius:14px;background:#000;max-height:70vh}.vid.wide{grid-template-columns:minmax(0,1.6fr) 1fr}.vid.wide video{max-height:none}@media (max-width:760px){.vid.wide{grid-template-columns:1fr}}
+.vid h3{font-size:19px}.vid p{margin:4px 0 6px}.vid ul{padding-left:1.2em;font-size:15px;color:var(--mute);display:grid;gap:3px}@media (max-width:620px){.vid{grid-template-columns:1fr}.vid video{max-width:260px;margin:0 auto;display:block}}
 table.t{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:15.5px;margin-bottom:16px}
 table.t th,table.t td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
 table.t th{background:var(--p100);color:var(--p700)}
@@ -81,6 +82,11 @@ footer{padding:30px 0 50px;color:var(--mute);font-size:14px;text-align:center}
 </div></nav>
 
 <main class="wrap">
+
+<section class="part" id="intro-video" style="padding-bottom:0">
+  <div class="vid wide"><video controls preload="metadata" playsinline poster="manual-video/overview.jpg" src="manual-video/overview.mp4">เบราว์เซอร์นี้เล่นวิดีโอไม่ได้</video>
+    <div><h3>▶ วิดีโอนำเสนอระบบ (ประมาณ 6 นาที)</h3><p>ภาพรวมที่มาและจุดประสงค์ 4 บทบาท และสาธิตฟังก์ชันหลักบนหน้าจอจริง: ส่งรายงาน ตรวจผ่าน/ตีกลับ แจ้งปรับปรุง แจ้งแก้ไข แดชบอร์ด (รายสัปดาห์/เดือน/ปี) จัดการสิทธิ์ และความปลอดภัย</p><ul><li>มีเสียงบรรยายภาษาไทยจังหวะช้าสบาย ๆ และคำบรรยายบนจอ</li><li>ต้องการดูทีละบทบาท เลื่อนลงไปที่วิดีโอสอนของแต่ละหัวข้อ</li></ul></div></div>
+</section>
 
 <!-- ===================== 1. ภาพรวม + ลงทะเบียน ===================== -->
 <section class="part" id="overview">
