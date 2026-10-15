@@ -84,6 +84,7 @@ p,li{font-size:clamp(15px,1.7vw,21px);line-height:1.55}
 <defs>
 <symbol id="i-broom" viewBox="0 0 24 24"><path d="M19 3l-6 8"/><path d="M11 11l-6 1-2 9h16l-2-9-6-1z"/><path d="M8 21l1-6M12 21v-6M16 21l-1-6"/></symbol>
 <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+<symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></symbol>
 <symbol id="i-cam" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
 <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.5 0 4.5 2 4.5 5"/></symbol>
 <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
@@ -138,9 +139,9 @@ p,li{font-size:clamp(15px,1.7vw,21px);line-height:1.55}
 <section class="slide mid">
   <div class="head"><span class="ib c-p"><svg class="ic"><use href="#i-users"/></svg></span><div><span class="tag">ภาพรวม</span><h2>4 บทบาท 1 เส้นทางงาน</h2></div></div>
   <div class="grid g4">
-    <div class="card t-t"><span class="ib c-t"><svg class="ic"><use href="#i-broom"/></svg></span><h3>พนักงานทำความสะอาด</h3><p>ทำเช็คลิสต์ แนบรูป ส่งรายงาน</p></div>
-    <div class="card t-b"><span class="ib c-b"><svg class="ic"><use href="#i-shield"/></svg></span><h3>หัวหน้าแม่บ้าน</h3><p>ตรวจผ่าน (จบงาน) หรือตีกลับ</p></div>
-    <div class="card t-k"><span class="ib c-k"><svg class="ic"><use href="#i-star"/></svg></span><h3>คณะกรรมการ</h3><p>แจ้งจุดควรปรับปรุง พร้อมรูปและคะแนน</p></div>
+    <div class="card t-t"><span class="ib c-t"><svg class="ic"><use href="#i-broom"/></svg></span><h3>พนักงานทำความสะอาด</h3><p>ทำเช็คลิสต์ แนบรูป ส่งรายงาน · เบิกอุปกรณ์</p></div>
+    <div class="card t-b"><span class="ib c-b"><svg class="ic"><use href="#i-shield"/></svg></span><h3>หัวหน้าแม่บ้าน</h3><p>ตรวจผ่าน (จบงาน) หรือตีกลับ · เบิกอุปกรณ์</p></div>
+    <div class="card t-k"><span class="ib c-k"><svg class="ic"><use href="#i-star"/></svg></span><h3>คณะกรรมการ</h3><p>แจ้งจุดควรปรับปรุง พร้อมรูปและคะแนน · รับอุปกรณ์เข้า</p></div>
     <div class="card t-p"><span class="ib c-p"><svg class="ic"><use href="#i-key"/></svg></span><h3>ผู้ดูแลระบบ</h3><p>บัญชี สิทธิ์ แดชบอร์ด รายงาน PDF</p></div>
   </div>
   <div class="flow">
@@ -225,9 +226,23 @@ p,li{font-size:clamp(15px,1.7vw,21px);line-height:1.55}
   </div>
 </section>
 
-<!-- 9 Admin แดชบอร์ด -->
+<!-- 9 เบิกอุปกรณ์ -->
+<section class="slide" data-src="mockup.html?embed=1&role=cleaner&stock=1" data-title="เบิกอุปกรณ์">
+  <div class="head"><span class="ib c-g"><svg class="ic"><use href="#i-box"/></svg></span><div><span class="tag">หน้าใช้งานจริง 6 · เมนูใหม่</span><h2>เบิกอุปกรณ์ — รู้ว่าของไปใช้ที่ไหน เหลือเท่าไร</h2></div></div>
+  <div class="live">
+    <div class="side">
+      <div class="lbl">ลองทำเลย</div>
+      <div class="step"><span class="n">1</span><p>กดปุ่มรูป<b>กล่อง</b>ด้านบน — ใช้บัญชีเดียวกับระบบตรวจ ไม่ต้องเข้าสู่ระบบใหม่</p></div>
+      <div class="step"><span class="n">2</span><p>แท็บ <b>เบิก</b>: เลือกสนาม/อาคาร เลือกของและจำนวน ถ่ายรูป แล้วส่ง — คงเหลือถูกหักทันที เบิกเกินไม่ได้</p></div>
+      <div class="step"><span class="n">3</span><p>ป้าย <b>ใกล้หมด / หมด</b> และแดชบอร์ดการเบิกตามพื้นที่ ช่วยวางแผนสั่งซื้อ</p></div>
+      <div class="step"><span class="n">4</span><p>เบิก = แม่บ้านและหัวหน้า · <b>รับเข้า</b> = คณะกรรมการและผู้ดูแลระบบ (มีรูปใบส่งของเป็นหลักฐาน)</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 Admin แดชบอร์ด -->
 <section class="slide" data-src="mockup.html?embed=1&role=admin" data-title="แดชบอร์ดผู้ดูแลระบบ">
-  <div class="head"><span class="ib c-t"><svg class="ic"><use href="#i-chart"/></svg></span><div><span class="tag">หน้าใช้งานจริง 6 · ผู้ดูแลระบบ</span><h2>แดชบอร์ดและรายงาน PDF</h2></div></div>
+  <div class="head"><span class="ib c-t"><svg class="ic"><use href="#i-chart"/></svg></span><div><span class="tag">หน้าใช้งานจริง 7 · ผู้ดูแลระบบ</span><h2>แดชบอร์ดและรายงาน PDF</h2></div></div>
   <div class="live">
     <div class="side">
       <div class="lbl">ลองทำเลย</div>
@@ -241,7 +256,7 @@ p,li{font-size:clamp(15px,1.7vw,21px);line-height:1.55}
 
 <!-- 10 Admin สิทธิ์ -->
 <section class="slide" data-src="mockup.html?embed=1&role=admin&tab=perms" data-title="จัดการสิทธิ์">
-  <div class="head"><span class="ib c-a"><svg class="ic"><use href="#i-lock"/></svg></span><div><span class="tag">หน้าใช้งานจริง 7 · ผู้ดูแลระบบ</span><h2>จัดการสิทธิ์ บัญชี และประวัติเข้าใช้</h2></div></div>
+  <div class="head"><span class="ib c-a"><svg class="ic"><use href="#i-lock"/></svg></span><div><span class="tag">หน้าใช้งานจริง 8 · ผู้ดูแลระบบ</span><h2>จัดการสิทธิ์ บัญชี และประวัติเข้าใช้</h2></div></div>
   <div class="live">
     <div class="side">
       <div class="lbl">ลองทำเลย</div>
@@ -257,7 +272,7 @@ p,li{font-size:clamp(15px,1.7vw,21px);line-height:1.55}
   <div class="head"><span class="ib c-k"><svg class="ic"><use href="#i-star"/></svg></span><div><span class="tag">สรุป</span><h2>ยกระดับบริการ อย่างปลอดภัยและตรวจสอบได้</h2></div></div>
   <div class="grid g3">
     <div class="card t-b"><span class="ib c-b"><svg class="ic"><use href="#i-eye"/></svg></span><h3>เห็นภาพเดียวกัน</h3><p>สถานะล่าสุดทุกพื้นที่ ลดการประสานซ้ำ</p></div>
-    <div class="card t-g"><span class="ib c-g"><svg class="ic"><use href="#i-clip"/></svg></span><h3>คุณภาพสม่ำเสมอ</h3><p>เช็คลิสต์มาตรฐานเดียวกันทุกวัน</p></div>
+    <div class="card t-g"><span class="ib c-g"><svg class="ic"><use href="#i-clip"/></svg></span><h3>คุณภาพสม่ำเสมอ</h3><p>เช็คลิสต์มาตรฐานเดียวกันทุกวัน · เบิกวัสดุมีรูปและพื้นที่ปลายทางทุกครั้ง</p></div>
     <div class="card t-a"><span class="ib c-a"><svg class="ic"><use href="#i-chart"/></svg></span><h3>ปรับปรุงด้วยข้อมูล</h3><p>รู้ว่าพื้นที่ใดตีกลับบ่อย เพื่อจัดคนและอบรมตรงจุด</p></div>
     <div class="card t-p"><span class="ib c-p"><svg class="ic"><use href="#i-lock"/></svg></span><h3>บัญชีปลอดภัย</h3><p>รหัสผ่านเข้ารหัส บันทึกการเข้าสู่ระบบทุกครั้ง</p></div>
     <div class="card t-t"><span class="ib c-t"><svg class="ic"><use href="#i-cam"/></svg></span><h3>เก็บหลักฐาน</h3><p>รูปใน Drive ของมหาวิทยาลัย ตั้งชื่อตามวัน เวลา สถานที่</p></div>
