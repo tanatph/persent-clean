@@ -115,7 +115,7 @@ p,li{font-size:clamp(15px,1.7vw,21px);line-height:1.55}
     <span><svg class="ic"><use href="#i-build"/></svg>12 พื้นที่</span>
     <span><svg class="ic"><use href="#i-users"/></svg>4 บทบาท</span>
     <span><svg class="ic"><use href="#i-cam"/></svg>หลักฐานด้วยรูปถ่าย</span>
-    <span><svg class="ic"><use href="#i-chart"/></svg>แดชบอร์ด &amp; PDF</span>
+    <span><svg class="ic"><use href="#i-chart"/></svg>แดชบอร์ด · PDF · รายงานรูป</span>
   </div>
   <p style="font-size:15px;opacity:.85">กด → หรือ Space เพื่อเปลี่ยนหน้า · F เพื่อเต็มจอ</p>
 </section>
@@ -140,9 +140,9 @@ p,li{font-size:clamp(15px,1.7vw,21px);line-height:1.55}
   <div class="head"><span class="ib c-p"><svg class="ic"><use href="#i-users"/></svg></span><div><span class="tag">ภาพรวม</span><h2>4 บทบาท 1 เส้นทางงาน</h2></div></div>
   <div class="grid g4">
     <div class="card t-t"><span class="ib c-t"><svg class="ic"><use href="#i-broom"/></svg></span><h3>พนักงานทำความสะอาด</h3><p>ทำเช็คลิสต์ แนบรูป ส่งรายงาน · เบิกอุปกรณ์</p></div>
-    <div class="card t-b"><span class="ib c-b"><svg class="ic"><use href="#i-shield"/></svg></span><h3>หัวหน้าแม่บ้าน</h3><p>ตรวจผ่าน (จบงาน) หรือตีกลับ · เบิกอุปกรณ์</p></div>
+    <div class="card t-b"><span class="ib c-b"><svg class="ic"><use href="#i-shield"/></svg></span><h3>หัวหน้าแม่บ้าน</h3><p>ตรวจผ่าน (จบงาน) หรือตีกลับ · รายงานรูปรายวัน · เบิกอุปกรณ์</p></div>
     <div class="card t-k"><span class="ib c-k"><svg class="ic"><use href="#i-star"/></svg></span><h3>คณะกรรมการ</h3><p>แจ้งจุดควรปรับปรุง พร้อมรูปและคะแนน · รับอุปกรณ์เข้า</p></div>
-    <div class="card t-p"><span class="ib c-p"><svg class="ic"><use href="#i-key"/></svg></span><h3>ผู้ดูแลระบบ</h3><p>บัญชี สิทธิ์ แดชบอร์ด รายงาน PDF</p></div>
+    <div class="card t-p"><span class="ib c-p"><svg class="ic"><use href="#i-key"/></svg></span><h3>ผู้ดูแลระบบ</h3><p>บัญชี สิทธิ์ แดชบอร์ด รายงาน PDF / รูป</p></div>
   </div>
   <div class="flow">
     <span class="st s-pend"><svg class="ic"><use href="#i-clock"/></svg>รอทำ</span><span class="arrow">→</span>
@@ -195,6 +195,7 @@ p,li{font-size:clamp(15px,1.7vw,21px);line-height:1.55}
       <div class="step"><span class="n">2</span><p><b>ตรวจผ่าน</b> = งานสิ้นสุด (แก้ผลตรวจภายหลังได้)</p></div>
       <div class="step"><span class="n">3</span><p><b>ตีกลับ</b> พร้อมเหตุผล งานกลับไปหาแม่บ้าน</p></div>
       <div class="step"><span class="n">4</span><p>ตรวจผ่านไปแล้ว <b>แก้ผลตรวจได้</b> — เปิดจากแท็บ “ทั้งหมด”</p></div>
+      <div class="step"><span class="n">5</span><p><b>ดาวน์โหลดรายงาน (รูป)</b> เลือกเดือน/ช่วงวันที่ ได้รูป 9:16 แยกพื้นที่ละวัน สำหรับโทรศัพท์</p></div>
     </div>
   </div>
 </section>
@@ -242,14 +243,14 @@ p,li{font-size:clamp(15px,1.7vw,21px);line-height:1.55}
 
 <!-- 10 Admin แดชบอร์ด -->
 <section class="slide" data-src="mockup.html?embed=1&role=admin" data-title="แดชบอร์ดผู้ดูแลระบบ">
-  <div class="head"><span class="ib c-t"><svg class="ic"><use href="#i-chart"/></svg></span><div><span class="tag">หน้าใช้งานจริง 7 · ผู้ดูแลระบบ</span><h2>แดชบอร์ดและรายงาน PDF</h2></div></div>
+  <div class="head"><span class="ib c-t"><svg class="ic"><use href="#i-chart"/></svg></span><div><span class="tag">หน้าใช้งานจริง 7 · ผู้ดูแลระบบ</span><h2>แดชบอร์ดและรายงาน</h2></div></div>
   <div class="live">
     <div class="side">
       <div class="lbl">ลองทำเลย</div>
       <div class="step"><span class="n">1</span><p>สลับ <b>รายสัปดาห์ / รายเดือน / รายปี</b> และกดลูกศรเลื่อนช่วงเวลา</p></div>
       <div class="step"><span class="n">2</span><p>เลือกอาคาร/พื้นที่ เพื่อดูอัตราตีกลับเฉพาะจุด</p></div>
       <div class="step"><span class="n">3</span><p>กด <b>ปรับแต่งแดชบอร์ด</b> เลือกว่าจะแสดงส่วนไหน และเรียงลำดับก่อน/หลังได้</p></div>
-      <div class="step"><span class="n">4</span><p>กด <b>ดาวน์โหลดรายงาน (PDF)</b> ได้ทันที</p></div>
+      <div class="step"><span class="n">4</span><p>กด <b>ดาวน์โหลดรายงาน (PDF)</b> หรือ <b>รายงานรูป</b> (เดือน / ช่วงวันที่) ได้ทันที</p></div>
     </div>
   </div>
 </section>

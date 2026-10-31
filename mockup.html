@@ -91,11 +91,18 @@
   .top .actions .bt-s{display:none}
   /* มือถือ: ปุ่มบนหัวเหลือไอคอน (เบิกอุปกรณ์ = ไอคอน + ป้ายสั้นใต้ไอคอน) ให้ชื่อบทบาท/วันที่ไม่ถูกบีบ */
   @media (max-width:600px){
-    .top .actions{gap:4px}
-    .top .actions .btn.sm{padding-left:9px;padding-right:9px}
+    .top .wrap{padding-top:8px;padding-bottom:8px;gap:8px}
+    .top .actions{display:grid;grid-template-columns:repeat(2,auto);gap:4px;flex:none}
+    .top .actions .btn.sm{padding-left:9px;padding-right:9px;height:30px}
+    .top .logo{gap:6px}
+    .top .logo-mark{width:100px;height:40px;background-position:-1.1px -4.1px;background-size:103px 46.7px}
+    .top #subtitle{font-size:11px;line-height:1.3;display:block;overflow-wrap:anywhere}
+    .top #subtitle .sd{display:block}
+    .top #subtitle .sdot{display:none}
     .top .actions .bt,.top .actions .bt-l{display:none}
     .top .actions .bt-s{display:inline}
-    .top .actions .btn.sk{flex-direction:column;gap:1px;font-size:11px;line-height:1.15;padding-top:4px;padding-bottom:4px}
+    .top .actions .btn.sk{gap:3px;font-size:11px}
+    .top .actions .btn.sk svg{width:16px;height:16px}
   }
 
   /* ── buttons — fkt-button.md · base = Secondary(Outline), M 40px / S 32px, no shadow ── */
@@ -179,9 +186,16 @@
   .tabs{display:inline-flex;background:var(--neutral-100);border-radius:var(--r-md);padding:3px}
   .tabs button{padding:7px 14px;border-radius:var(--r-sm);font-size:14px;font-weight:400;color:var(--muted)}
   .tabs button.on{background:#fff;color:var(--text);font-weight:400;box-shadow:0 1px 2px rgba(38,41,44,.06)}
+  /* มือถือ: แท็บ ช่องค้นหา และปุ่มดาวน์โหลดรายงานของหัวหน้าแม่บ้าน ขยายเต็มความกว้าง */
+  @media (max-width:600px){
+    .rv-bar>.tabs{display:flex;width:100%}
+    .rv-bar>.tabs button{flex:1;padding-left:6px;padding-right:6px;white-space:nowrap}
+    .rv-bar>input{max-width:none!important}
+    .rv-bar>.btn{width:100%}
+  }
 
   /* ── inputs — fkt-input-field.md · r-md 8px, focus = border only, no glow ── */
-  input[type=text],input[type=password],input[type=tel],textarea,select{width:100%;height:40px;border:1px solid var(--neutral-100);border-radius:var(--r-md);padding:0 var(--s3);background:#fff;outline:none;font-size:14px;transition:150ms cubic-bezier(.2,.7,.2,1)}
+  input[type=text],input[type=password],input[type=tel],input[type=date],input[type=month],textarea,select{width:100%;height:40px;border:1px solid var(--neutral-100);border-radius:var(--r-md);padding:0 var(--s3);background:#fff;outline:none;font-size:14px;transition:150ms cubic-bezier(.2,.7,.2,1)}
   textarea{height:auto;min-height:80px;padding:10px var(--s3);line-height:1.6}
   input::placeholder,textarea::placeholder{color:var(--neutral-400)}
   input:focus,textarea:focus,select:focus{border:1.5px solid var(--swu-purple-600)}
@@ -366,6 +380,12 @@
   .lb-ov img{max-width:100%;max-height:82vh;border-radius:var(--r-md);background:#fff;display:block;margin:0 auto}
   .lb-ov figcaption{margin-top:8px;font-size:15px}
   .lb-x,.lb-n{position:absolute;border:0;border-radius:var(--r-pill);background:#fff;color:var(--swu-purple-700);width:48px;height:48px;font-size:28px;font-weight:700;cursor:pointer;display:grid;place-items:center}
+  .rpg-ov{position:fixed;inset:0;background:rgba(22,23,25,.6);z-index:790;display:grid;place-items:center;padding:16px;animation:saF .15s ease-out}
+  .rpg-box{background:#fff;border-radius:var(--r-lg);padding:var(--s5);width:min(960px,100%);max-height:calc(100vh - 32px);overflow:auto}
+  .rpg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
+  .rpg-day{grid-column:1/-1;font-size:15px;margin-top:6px;color:var(--swu-purple-700)}
+  .rpg-it{margin:0}.rpg-it img{width:100%;aspect-ratio:9/16;object-fit:cover;border:1px solid var(--line);border-radius:var(--r-md);display:block;background:var(--neutral-50)}
+  .rpg-it figcaption{margin-top:4px;color:var(--muted);overflow-wrap:anywhere}
   .lb-x{top:12px;right:12px}.lb-p{left:12px;top:50%}.lb-f{right:12px;top:50%}
   .sa-ov{position:fixed;inset:0;background:rgba(22,23,25,.5);z-index:700;display:grid;place-items:center;padding:16px;animation:saF .15s ease-out}
   .sa-card{background:#fff;border-radius:var(--r-2xl);box-shadow:var(--shadow-xl);width:100%;max-width:420px;padding:28px 24px 22px;text-align:center;animation:saP .18s cubic-bezier(.2,.7,.2,1)}
@@ -698,7 +718,7 @@ function mulberry32_(seed) {
 const STK_CATS = ['กระดาษชำระ', 'ถุงขยะ', 'อุปกรณ์ทำความสะอาด', 'อุปกรณ์สวมใส่', 'อื่น ๆ'];
 const stkCats_ = () => DB.stock.cats || (DB.stock.cats = STK_CATS.slice());
 const stkCatFallback_ = cats => cats.indexOf('อื่น ๆ') >= 0 ? 'อื่น ๆ' : cats[0];
-const STK_MEM = {};
+const STK_MEM = {}, RPT_MEM = {};   /* รูปจำลองของสต็อก / รายงานย้อนหลัง */
 const stkImg_ = v => { v = String(v || ''); if (v.indexOf('data:image/') !== 0) return v; const id = 'ph' + uid_(); STK_MEM[id] = v; return id; };
 const stkAt_ = (d, hm) => { const p = d.split('-'); return p[2] + '/' + p[1] + '/' + (Number(p[0]) + 543) + ' ' + hm; };
 function buildStockSeed_() {
@@ -976,6 +996,37 @@ const MOCK = {
     return withHistory_(l);
   },
 
+  /* ---------- รายงานรูป (เดือน / ช่วงวันที่) — วันที่ผ่านมาสร้างจากประวัติจำลอง (buildHistory_) · วันนี้ใช้ข้อมูลจริงของ mockup ---------- */
+  apiReportRange(token, p) {
+    Sessions.auth(token, ['supervisor']);
+    const rx = /^\d{4}-\d\d-\d\d$/, from = String((p && p.from) || ''), to = String((p && p.to) || ''), lid = Number(p && p.locationId) || 0;
+    if (!rx.test(from) || !rx.test(to) || from > to) throw new Error('ช่วงวันที่ไม่ถูกต้อง');
+    if (Math.round((new Date(to) - new Date(from)) / 864e5) + 1 > 31) throw new Error('เลือกได้ไม่เกิน 31 วันต่อครั้ง');
+    if (lid && !DB.locations.some(l => l.id === lid)) throw new Error('ไม่พบพื้นที่');
+    const td = DB.workDate, staff = ['สมศรี ใจดี', 'มานี มีสุข', 'ประภา รักงาน', 'วันดี สะอาดใจ'], out = [], p2 = n => String(n).padStart(2, '0');
+    buildHistory_().filter(h => h.date >= from && h.date <= to && h.date < td).forEach(h => {
+      const k = MASTER.findIndex(m => m[0] === h.area), id = k + 1; if (k < 0 || (lid && id !== lid)) return;
+      const rnd = mulberry32_(Number(h.date.replace(/-/g, '')) * 31 + id);
+      if (!h.approved && rnd() < 0.5) return;   // วันนั้นไม่มีการส่งรายงาน
+      const n = 1 + Math.floor(rnd() * 9), zones = MASTER[k][4].length, hh = 7 + Math.floor(rnd() * 3), mm = Math.floor(rnd() * 60);
+      const photos = Array.from({ length: n }, (_, i) => { const kind = h.approved && i === n - 1 ? 'approve' : 'report', pid = `H${h.date.replace(/-/g, '')}${p2(id)}${i}`; RPT_MEM[pid] = kind; return { id: pid, kind, url: '' }; });
+      const a = staff[Math.floor(rnd() * staff.length)], b = rnd() < 0.2 ? staff[Math.floor(rnd() * staff.length)] : a;
+      out.push({ date: h.date, id, area: h.area, category: h.category, time: `${p2(hh)}:${p2(mm)}`, cleaners: [...new Set([a, b])],
+        done: h.approved ? zones : Math.max(1, zones - 1), total: zones, status: h.approved ? 'approved' : 'rejected',
+        checkBy: h.approved ? 'หัวหน้าแม่บ้าน (ตัวอย่าง)' : '', checkTime: h.approved ? `${p2(hh + 1)}:${p2(mm)}` : '',
+        cleanerNote: rnd() < 0.3 ? 'ทำความสะอาดครบทุกจุดแล้ว' : '', supervisorNote: h.approved ? (rnd() < 0.2 ? 'เรียบร้อยดี' : '') : 'พื้นห้องน้ำยังมีคราบ ให้ทำซ้ำ', photos });
+    });
+    if (td >= from && td <= to) DB.locations.forEach(l => { if (lid && l.id !== lid) return; const r = recFromLoc(withHistory_(l), td); if (r.time || r.photos.length) out.push(r); });
+    return out.sort((x, y) => (x.date < y.date ? -1 : x.date > y.date ? 1 : x.id - y.id));
+  },
+  /* รูปของรายงานเป็น dataURL — เฉพาะรูปที่อยู่ในรายงาน (โปรดักชัน: id ที่อ้างใน Locations / Cleaner_Reports / Supervisor_Reviews) */
+  apiReportPhotos(token, p) {
+    Sessions.auth(token, ['supervisor']);
+    const out = {};
+    (Array.isArray(p && p.ids) ? p.ids : []).slice(0, 12).map(String).forEach(id => { if (DB.uploads[id]) out[id] = DB.uploads[id]; else if (RPT_MEM[id]) out[id] = placeholderPhoto_(RPT_MEM[id]); });
+    return out;
+  },
+
   /* ---------- สต็อก ---------- */
   apiStockData(token) { Sessions.auth(token, ['cleaner', 'supervisor', 'manager']); return stockView_(); },
   apiStockPhotos(token, p) { Sessions.auth(token, ['cleaner', 'supervisor', 'manager']); const out = {}; ((p && p.ids) || []).slice(0, 10).forEach(id => { out[id] = STK_MEM[id] || placeholderPhoto_('report'); }); return out; },
@@ -1193,6 +1244,13 @@ const ICONS = {
   eye:     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0"/><circle cx="12" cy="12" r="3"/></svg>',
   eyeOff:  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c4.5 0 8.3 2.8 9.94 6.65a1 1 0 0 1 0 .7 10.8 10.8 0 0 1-1.44 2.5M6.61 6.61A10.75 10.75 0 0 0 2.06 11.65a1 1 0 0 0 0 .7C3.7 16.2 7.5 19 12 19a10.4 10.4 0 0 0 5.39-1.61M14.12 14.12a3 3 0 1 1-4.24-4.24M2 2l20 20"/></svg>',
 };
+/* ไอคอนดาวน์โหลดรายงาน — ชุดเดียวกัน: PDF = เอกสาร+ลูกศรลง · รูป = กรอบรูป+ลูกศรลง */
+Object.assign(ICONS, {
+  fileDown: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 12v6M9 15l3 3 3-3"/></svg>',
+  imgDown:  '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7"/><circle cx="9" cy="9" r="2"/><path d="m21 17-5-5L5 21"/><path d="M18 2v6M15 5l3 3 3-3"/></svg>',
+  download: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg>',
+  share:    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M16 6l-4-4-4 4M12 2v13"/></svg>',
+});
 const ROLE_ICON = { cleaner: ICONS.user, supervisor: ICONS.users, manager: ICONS.shield, admin: ICONS.lock };
 
 /* =========================================================
@@ -1299,7 +1357,7 @@ function render() {
   $('#subtitle').innerHTML = S.view === 'home'
     ? '<span class="spark">★</span> ระบบบริหารจัดการและตรวจความสะอาด'
     : S.view === 'stock' ? 'เบิกอุปกรณ์'
-    : esc(`${ROLES[S.view].name}${S.workDate ? ' · ' + thDate(S.workDate) : ''}`);
+    : esc(ROLES[S.view].name) + (S.workDate ? '<span class="sd"><span class="sdot"> · </span>' + esc(thDate(S.workDate)) + '</span>' : '');
   const skBtn = S.view === 'stock' ? '<button class="btn sm ghost" data-act="stockBack" aria-label="กลับ">‹<span class="bt"> กลับ</span></button>' : (S.auth ? '<button class="btn sm ghost sk" data-act="stock" title="เบิกอุปกรณ์"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg><span class="bt-l">เบิกอุปกรณ์</span><span class="bt-s">เบิก</span></button>' : '');
   $('#topActions').innerHTML = S.view === 'home' && !S.auth ? '' : `
     ${skBtn}<button class="btn sm ghost" data-act="refresh" title="รีเฟรช">${ICONS.refresh}</button>
@@ -1606,10 +1664,11 @@ function vReview() {
   const emptyMsg = onFix ? 'ไม่มีรายการแจ้งแก้ไขวันนี้' : S.tab === 'todo' ? (com ? 'ยังไม่มีการแจ้งจุดปรับปรุงวันนี้' : 'ไม่มีงานรอตรวจ') : 'ไม่พบข้อมูล';
   return `
   <div class="stack">
-    <div class="row" style="flex-wrap:wrap">
+    <div class="row rv-bar" style="flex-wrap:wrap">
       ${tabs(todo.length, com ? 'แจ้งปรับปรุงแล้ว' : 'รอตรวจ', S.locs.length, com ? null : fixCount(false))}
       <input type="text" data-act="search" placeholder="ค้นหาพื้นที่ / ชื่อ" value="${esc(S.q)}" style="max-width:260px">
     </div>
+    ${com ? '' : '<div class="row rv-bar" style="justify-content:flex-start"><button class="btn sm" data-act="rptRange">' + ICONS.imgDown + 'ดาวน์โหลดรายงาน (รูป) — เลือกเดือน / ช่วงวันที่</button></div>'}
     ${list.length ? `<div class="grid">${list.map(l => onFix ? fixCard(l, false) : locCard(l)).join('')}</div>` : `<div class="empty">${emptyMsg}</div>`}
   </div>`;
 }
@@ -1783,7 +1842,7 @@ function vDash() {
     <div class="row" style="flex-wrap:wrap">
       <div><h2>แดชบอร์ด</h2><div class="sm muted">${esc(scope)} · ${esc(R.label)} · ข้อมูลวันนี้อัปเดตอัตโนมัติทุก 1 นาที</div></div>
       <div class="actions no-print">
-        <button class="btn sm primary" data-act="report">ดาวน์โหลดรายงาน (PDF)</button><button class="btn sm ghost" data-act="dashCfg">ปรับแต่งแดชบอร์ด</button>
+        <button class="btn sm primary" data-act="report">${ICONS.fileDown}ดาวน์โหลดรายงาน (PDF)</button><button class="btn sm" data-act="rptRange">${ICONS.imgDown}รายงานรูป (เดือน / ช่วงวันที่)</button><button class="btn sm ghost" data-act="dashCfg">ปรับแต่งแดชบอร์ด</button>
         <button class="btn sm ghost" data-act="repairLocs">ซ่อมข้อมูลพื้นที่</button><button class="btn sm ghost danger" data-act="resetToday">รีเซ็ตวันนี้</button>
       </div>
     </div>
@@ -1882,6 +1941,218 @@ function downloadReport() {
   const done = () => { box.innerHTML = ''; document.title = old; window.removeEventListener('afterprint', done); };
   window.addEventListener('afterprint', done);
   window.print();
+}
+
+/* รายงานรูปแนวตั้ง 9:16 (1080x1920) แยกพื้นที่ละวัน — หัวหน้าแม่บ้าน / Super Admin บันทึกไว้ดู/ส่งต่อในโทรศัพท์
+   1 รูปใส่รูปถ่ายได้ 6 รูป · เกิน 6 = บันทึกเป็นรูปถัดไป (หน้า 2, 3, …) · ชื่อไฟล์ วันที่_ลำดับพื้นที่_ชื่อพื้นที่ → เรียงตามวันแล้วตามพื้นที่
+   ข้อมูลหนึ่งรายการ (rec) = { date, id, area, category, time, cleaners, done, total, status, checkBy, checkTime, cleanerNote, supervisorNote, photos } */
+const REPORT_KINDS = ['report', 'fix', 'approve'];   /* รูปผลงาน / แก้ไขแล้ว / ตรวจผ่าน — ไม่รวมรูปตีกลับและรูปแจ้งปรับปรุง */
+const RPT_PER_IMG = 6, RPT_MAX_DAYS = 31, rptToday = () => S.workDate || ymd(new Date());
+const LOGO_URL = 'https:' + '/' + '/vxfozsxudrkxrjphttxm.supabase.co/storage/v1/object/public/Photo/Thai_color01_0_0.png';
+const SEND_RX = /^(ส่งรายงาน|ส่งงานแก้ไข|แก้ไขรายงาน|ตอบกลับแจ้งแก้ไข)/;
+function recFromLoc(l, date) {
+  const h = l.history || [], when = h.filter(x => x.role === 'cleaner' && SEND_RX.test(x.action))[0];
+  const chk = l.status === 'approved' ? h.filter(x => x.role === 'supervisor' && /ตรวจผ่าน/.test(x.action)).pop() : null;
+  return {
+    date, id: l.id, area: l.area, category: l.category, time: when ? when.time : '', cleaners: senders(l),
+    done: l.subZones.filter(z => z.completed).length, total: l.subZones.length, status: l.status,
+    checkBy: chk ? chk.user : '', checkTime: chk ? chk.time : '', cleanerNote: l.cleanerNote || '', supervisorNote: l.supervisorNote || '',
+    photos: (l.photos || []).filter(p => REPORT_KINDS.includes(p.kind)).map(p => ({ id: p.id, kind: p.kind, url: p.url })),
+  };
+}
+const thLong = d => d ? new Date(d + 'T00:00:00').toLocaleDateString('th-TH', { day: 'numeric', month: 'long', year: 'numeric' }) : '–';
+function loadImg(src) {
+  return new Promise(res => {
+    if (!src) return res(null);
+    const im = new Image(); im.crossOrigin = 'anonymous';
+    im.onload = () => res(im); im.onerror = () => res(null); im.src = src;
+  });
+}
+function wrapText(c, text, w) {
+  const out = []; let line = '';
+  for (const ch of String(text)) { if (c.measureText(line + ch).width > w && line) { out.push(line); line = ch; } else line += ch; }
+  if (line) out.push(line);
+  return out;
+}
+/* รูปถ่ายเป็น dataURL จากเซิร์ฟเวอร์ (เบราว์เซอร์วาดรูปจาก Drive ลง canvas ไม่ได้เพราะ CORS) — ขอทีละไม่เกิน 12 รูป */
+async function rptPhotoSrc(ids) {
+  const out = {};
+  for (let i = 0; i < ids.length; i += 12) Object.assign(out, await api('apiReportPhotos', S.auth.token, { ids: ids.slice(i, i + 12) }).catch(() => ({})));
+  return out;
+}
+let RPT_LOGO = null;
+/* วาดรายงานของ rec หนึ่งรายการ → [{ blob, name }] (1 รูปต่อรูปถ่าย 6 รูป) */
+async function recImages(rec) {
+  const W = 1080, H = 1920, M = 64, cs = getComputedStyle(document.documentElement), tk = n => cs.getPropertyValue(n).trim();
+  const ink = tk('--text'), muted = tk('--muted'), line = tk('--line'), brand = tk('--swu-purple-700'), fam = tk('--font-thai');
+  try { await Promise.all([document.fonts.load('400 30px ' + fam), document.fonts.load('700 30px ' + fam)]); } catch (e) { }
+  if (!RPT_LOGO) RPT_LOGO = loadImg(LOGO_URL);
+  const src = rec.photos.length ? await rptPhotoSrc(rec.photos.map(p => p.id)) : {};
+  const [logo, ...imgs] = await Promise.all([RPT_LOGO, ...rec.photos.map(p => loadImg(src[p.id] || p.url))]);
+  const pages = Math.max(1, Math.ceil(rec.photos.length / RPT_PER_IMG)), out = [];
+  const base = `${rec.date}_${String(rec.id).padStart(2, '0')}_${rec.area}`.replace(/[\\/:*?"<>|]/g, '-');
+  for (let pg = 0; pg < pages; pg++) {
+    const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+    const c = cv.getContext('2d');
+    const rr = (x, y, w, h, r) => { c.beginPath(); c.roundRect ? c.roundRect(x, y, w, h, r) : c.rect(x, y, w, h); };
+    c.fillStyle = 'white'; c.fillRect(0, 0, W, H); c.textBaseline = 'alphabetic'; c.textAlign = 'left';
+    /* ระยะทั้งหมดเป็นผลคูณของ 8 · ข้อความใช้ baseline กลาง เพื่อให้กึ่งกลางแถวตรงกัน */
+    c.textBaseline = 'middle';
+    const LW = 272, LH0 = 120, LY = M;
+    if (logo) { c.save(); c.beginPath(); c.rect(M, LY, LW, LH0); c.clip(); const k = LW / 130; c.drawImage(logo, M, LY - 14 * k, LW, logo.height * LW / logo.width); c.restore(); }
+    c.fillStyle = brand; c.font = '700 48px ' + fam; c.textAlign = 'right'; c.fillText('รายงานการทำความสะอาด', W - M, LY + LH0 / 2); c.textAlign = 'left';
+    c.fillStyle = line; c.fillRect(M, LY + LH0 + 32, W - 2 * M, 2);
+    let y = LY + LH0 + 32 + 2 + 40;
+    if (pg === 0) {
+      const st = (STATUS[rec.status] || { t: rec.status }).t + (rec.checkBy ? ` (${rec.checkBy} ${rec.checkTime})` : '');
+      const info = [['อาคาร/พื้นที่', `${rec.area} (${rec.category})`], ['วันที่', thLong(rec.date)], ['เวลาส่งรายงาน', rec.time || '–'],
+        ['ผู้ทำความสะอาด', rec.cleaners.join(', ') || '–'], ['จุดทำความสะอาด', `${rec.done}/${rec.total} จุด`], ['สถานะ', st]];
+      if (rec.cleanerNote) info.push(['หมายเหตุ', rec.cleanerNote]);
+      if (rec.supervisorNote) info.push(['หัวหน้าแม่บ้าน', rec.supervisorNote]);
+      const PX = 40, PY = 32, ROW = 48, WL = 40, top = y;
+      c.font = '400 27px ' + fam;
+      const lw = Math.max(...info.map(r => c.measureText(r[0]).width)) + 32, vw = W - 2 * M - 2 * PX - lw;
+      y += PY; c.fillStyle = brand; c.font = '700 34px ' + fam; c.fillText('ข้อมูลทั่วไป', M + PX, y + 24); y += 48 + 8;
+      info.forEach(r => {
+        c.font = '400 30px ' + fam;
+        let ls = wrapText(c, r[1], vw);
+        if (ls.length > 2) { ls = ls.slice(0, 2); ls[1] = ls[1].slice(0, -1) + '…'; }
+        c.fillStyle = muted; c.font = '400 27px ' + fam; c.fillText(r[0], M + PX, y + ROW / 2);
+        c.fillStyle = ink; c.font = '400 30px ' + fam; ls.forEach((t, i) => c.fillText(t, M + PX + lw, y + ROW / 2 + i * WL));
+        y += ROW + WL * (ls.length - 1);
+      });
+      y += PY; c.strokeStyle = line; c.lineWidth = 2; rr(M, top, W - 2 * M, y - top, 24); c.stroke();
+      y += 48;
+    } else {
+      c.fillStyle = ink; c.font = '700 34px ' + fam; c.fillText(rec.area, M, y + 24);
+      c.fillStyle = muted; c.font = '400 28px ' + fam; c.textAlign = 'right'; c.fillText(thLong(rec.date), W - M, y + 24); c.textAlign = 'left';
+      y += 48 + 40;
+    }
+    const ph = rec.photos.slice(pg * RPT_PER_IMG, (pg + 1) * RPT_PER_IMG), im = imgs.slice(pg * RPT_PER_IMG);
+    /* รูปขยายเต็มพื้นที่ที่เหลือ (สูงไม่เกิน 1.6 เท่าของความกว้าง; รูปเดียว 1.25) */
+    const gap = 24, HD = 48 + 24, n = ph.length, cols = n <= 1 ? 1 : n <= 4 ? 2 : 3, rows = Math.max(1, Math.ceil(n / cols)), bottom = H - 128;
+    const cw = (W - 2 * M - gap * (cols - 1)) / cols, ch = Math.min(cw * (cols === 1 ? 1.25 : 1.6), (bottom - y - HD - gap * (rows - 1)) / rows);
+    c.fillStyle = brand; c.font = '700 34px ' + fam;
+    c.fillText(`รูปภาพประกอบ (${rec.photos.length})`, M, y + 24);
+    if (pages > 1) { c.fillStyle = muted; c.font = '400 27px ' + fam; c.textAlign = 'right'; c.fillText(`หน้า ${pg + 1}/${pages}`, W - M, y + 24); c.textAlign = 'left'; }
+    y += HD;
+    if (!n) { c.fillStyle = muted; c.font = '400 30px ' + fam; c.fillText('ไม่มีรูปภาพ', M, y + 24); }
+    ph.forEach((p, i) => {
+      const x = M + (i % cols) * (cw + gap), yy = y + Math.floor(i / cols) * (ch + gap), g = im[i];
+      c.save(); rr(x, yy, cw, ch, 16); c.clip();
+      if (g) { const s = Math.max(cw / g.width, ch / g.height), w = g.width * s, h = g.height * s; c.drawImage(g, x + (cw - w) / 2, yy + (ch - h) / 2, w, h); }
+      else { c.fillStyle = line; c.fillRect(x, yy, cw, ch); c.fillStyle = muted; c.font = '400 26px ' + fam; c.textAlign = 'center'; c.fillText('โหลดรูปนี้ไม่ได้', x + cw / 2, yy + ch / 2); c.textAlign = 'left'; }
+      c.restore();
+    });
+    c.fillStyle = line; c.fillRect(M, H - 104, W - 2 * M, 2);
+    c.fillStyle = muted; c.font = '400 26px ' + fam; c.textAlign = 'center';
+    c.fillText('ศูนย์กีฬาสิรินธร คณะพลศึกษา มศว · ระบบตรวจความสะอาด', W / 2, H - 56);
+    const blob = await new Promise(res => cv.toBlob(b => res(b), 'image/jpeg', 0.88));
+    if (!blob) throw new Error('สร้างรูปไม่สำเร็จ');
+    out.push({ blob, name: base + (pages > 1 ? `_${pg + 1}` : '') + '.jpg', date: rec.date, area: rec.area });
+  }
+  return out;
+}
+
+/* หน้าต่างผลลัพธ์: แสดงความคืบหน้า → รูปทั้งหมดเรียงตามวัน · บันทึกทีละรูป / ทั้งหมด / แชร์ลงโทรศัพท์ */
+let RG = null;
+function rgOpen(title) {
+  rgClose();
+  const d = Object.assign(document.createElement('div'), { id: 'rgOv', className: 'rpg-ov' });
+  d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-label', title);
+  document.body.appendChild(d); document.body.style.overflow = 'hidden';
+  RG = { title, items: [], urls: [], stop: false, done: false, msg: '' };
+  d.addEventListener('click', rgClick); rgDraw();
+}
+function rgClose() {
+  const d = $('#rgOv'); if (d) d.remove();
+  if (RG) { RG.stop = true; const u = RG.urls; setTimeout(() => u.forEach(x => URL.revokeObjectURL(x)), 60000); }
+  RG = null; if (!S.modal) document.body.style.overflow = '';
+}
+function rgDraw() {
+  const d = $('#rgOv'); if (!d || !RG) return;
+  const n = RG.items.length, share = RG.done && n && navigator.canShare && navigator.canShare({ files: [new File([RG.items[0].blob], RG.items[0].name, { type: 'image/jpeg' })] });
+  let last = '';
+  const grid = RG.items.map((it, i) => {
+    const head = it.date !== last ? `<h3 class="rpg-day">${esc(thLong(it.date))}</h3>` : ''; last = it.date;
+    return `${head}<figure class="rpg-it"><a href="${RG.urls[i]}" download="${esc(it.name)}" title="บันทึก ${esc(it.name)}"><img src="${RG.urls[i]}" loading="lazy" alt="${esc(it.name)}"></a><figcaption class="xs">${esc(it.name.replace(/^\d{4}-\d\d-\d\d_\d\d_/, '').replace(/_(\d+)\.jpg$/, ' (หน้า $1)').replace(/\.jpg$/, ''))}</figcaption></figure>`;
+  }).join('');
+  d.innerHTML = `<div class="rpg-box">
+    <div class="row"><h2>${esc(RG.title)}</h2><button class="x-close" data-rg="close" aria-label="ปิด">${ICONS.x}</button></div>
+    <div class="sm muted" style="margin:4px 0 10px">${RG.done ? `${RG.msg || `ได้ ${n} รูป`} · กดที่รูปเพื่อบันทึกทีละรูป (หรือกดค้างที่รูปแล้วเลือกบันทึกรูป)` : `กำลังสร้างรูป… ${esc(RG.msg)}`}</div>
+    ${RG.done && n ? `<div class="row" style="justify-content:flex-start;gap:8px;flex-wrap:wrap;margin-bottom:10px"><button class="btn sm primary" data-rg="all">${ICONS.download}บันทึกทั้งหมด (${n} รูป)</button>${share ? '<button class="btn sm" data-rg="share">' + ICONS.share + 'แชร์ / บันทึกลงโทรศัพท์</button>' : ''}</div>` : ''}
+    <div class="rpg-grid">${grid}</div></div>`;
+}
+async function rgClick(e) {
+  const b = e.target.closest('[data-rg]');
+  if (e.target.id === 'rgOv' || (b && b.dataset.rg === 'close')) return rgClose();
+  if (!b || !RG) return;
+  if (b.dataset.rg === 'all') {
+    b.disabled = true;
+    for (let i = 0; RG && i < RG.items.length; i++) {
+      const a = Object.assign(document.createElement('a'), { href: RG.urls[i], download: RG.items[i].name });
+      document.body.appendChild(a); a.click(); a.remove(); await new Promise(z => setTimeout(z, 350));
+    }
+    if (RG) b.disabled = false;
+  }
+  if (b.dataset.rg === 'share') {
+    try { await navigator.share({ files: RG.items.map(it => new File([it.blob], it.name, { type: 'image/jpeg' })), title: RG.title }); }
+    catch (err) { if (err.name !== 'AbortError') toast('แชร์ไม่สำเร็จ — ใช้ปุ่มบันทึกทั้งหมดแทน', true); }
+  }
+}
+async function rgRun(title, recs) {
+  rgOpen(title);
+  const R = RG;
+  for (let i = 0; i < recs.length && !R.stop; i++) {
+    R.msg = `${i + 1}/${recs.length} · ${thDate(recs[i].date)} ${recs[i].area}`; rgDraw();
+    try { (await recImages(recs[i])).forEach(it => { R.items.push(it); R.urls.push(URL.createObjectURL(it.blob)); }); }
+    catch (e) { toast(`สร้างรูป ${recs[i].area} ไม่สำเร็จ: ${e.message || e}`, true); }
+  }
+  if (R.stop) return;
+  R.done = true; R.msg = `ได้ ${R.items.length} รูป จาก ${recs.length} รายการ (พื้นที่-วัน)`; rgDraw();
+}
+function downloadAreaImage(id) {
+  const l = loc(id); if (!l) return;
+  rgRun(`รายงาน ${l.area}`, [recFromLoc(l, S.workDate)]);
+}
+
+/* เลือกเดือน / ช่วงวันที่ → รายงานพื้นที่ละวัน (เฉพาะพื้นที่ที่มีการส่งรายงานในวันนั้น) */
+const rptState = () => S.rpt || (S.rpt = { mode: 'month', month: rptToday().slice(0, 7), from: rptToday().slice(0, 8) + '01', to: rptToday(), area: '' });
+function rptDates() {
+  const r = rptState(), td = rptToday();
+  let from = r.from, to = r.to;
+  if (r.mode === 'month') { const [y, m] = r.month.split('-').map(Number); from = r.month + '-01'; to = ymd(new Date(y, m, 0)); }
+  if (to > td) to = td;
+  return { from, to };
+}
+function mRptRange() {
+  const r = rptState(), d = rptDates(), days = d.from && d.to ? Math.round((new Date(d.to) - new Date(d.from)) / 864e5) + 1 : 0;
+  const bad = !d.from || !d.to || days < 1 ? 'เลือกวันที่ให้ถูกต้อง (วันเริ่มต้องไม่เกินวันสิ้นสุด)' : days > RPT_MAX_DAYS ? `เลือกได้ไม่เกิน ${RPT_MAX_DAYS} วันต่อครั้ง` : '';
+  const tab = (k, label) => `<button type="button" class="${r.mode === k ? 'on' : ''}" data-act="rptMode" data-m="${k}">${label}</button>`;
+  return `
+  <div class="ov" data-act="closeOv"><div class="sheet" style="max-width:440px">
+    <div class="row"><h2>ดาวน์โหลดรายงาน (รูป)</h2><button class="x-close" data-act="close">${ICONS.x}</button></div>
+    <p class="sm muted" style="margin:4px 0 12px">ได้รูปแนวตั้งสำหรับโทรศัพท์ แยกพื้นที่ละวัน เรียงตามวันที่แล้วตามพื้นที่ · รูปถ่ายเกิน ${RPT_PER_IMG} รูปจะแยกเป็นรูปถัดไป</p>
+    <div class="tabs" style="margin-bottom:12px">${tab('month', 'รายเดือน')}${tab('range', 'ช่วงวันที่')}</div>
+    <div class="stack">
+      ${r.mode === 'month' ? `<div><label class="lbl">เดือน</label><input type="month" data-act="rptIn" data-k="month" value="${esc(r.month)}" max="${esc(rptToday().slice(0, 7))}"></div>`
+        : `<div class="row" style="gap:10px"><div style="flex:1"><label class="lbl">ตั้งแต่วันที่</label><input type="date" data-act="rptIn" data-k="from" value="${esc(r.from)}" max="${esc(rptToday())}"></div>
+           <div style="flex:1"><label class="lbl">ถึงวันที่</label><input type="date" data-act="rptIn" data-k="to" value="${esc(r.to)}" max="${esc(rptToday())}"></div></div>`}
+      <div><label class="lbl">อาคาร / พื้นที่</label><select data-act="rptIn" data-k="area"><option value="">ทุกพื้นที่ (${S.locs.length})</option>${S.locs.map(l => `<option value="${l.id}" ${String(l.id) === r.area ? 'selected' : ''}>${esc(l.area)}</option>`).join('')}</select></div>
+      <div class="note sm" id="rptSum">${bad ? `<span style="color:var(--red)">${bad}</span>` : `${thLong(d.from)} – ${thLong(d.to)} (${days} วัน)`}</div>
+      <button class="btn primary block" data-act="rptGo" ${bad || S.busy ? 'disabled' : ''}>${S.busy ? 'กำลังโหลดข้อมูล…' : ICONS.imgDown + 'สร้างรูปรายงาน'}</button>
+    </div>
+  </div></div>`;
+}
+async function rptGo() {
+  const d = rptDates(), r = rptState(); if (S.busy) return;
+  S.busy = true; renderModal();
+  try {
+    const recs = await api('apiReportRange', S.auth.token, { from: d.from, to: d.to, locationId: r.area ? Number(r.area) : 0 });
+    S.busy = false; closeModal();
+    if (!recs.length) return toast('ไม่มีการส่งรายงานในช่วงวันที่เลือก', true);
+    rgRun(`รายงาน ${thDate(d.from)} – ${thDate(d.to)}`, recs);
+  } catch (e) { S.busy = false; renderModal(); toast(e.message, true); }
 }
 
 /* สถานะสดของวันนี้ (ตามตัวกรองอาคาร) */
@@ -2229,6 +2500,7 @@ function mDetail() {
       <button class="x-close" data-act="close">${ICONS.x}</button>
     </div>
     <div class="row" style="margin-top:10px">${chip(l.status)}<span class="sm muted">${p.d}/${p.t} จุด (${p.p}%)${l.rating ? ' · ★ ' + l.rating : ''}</span></div>
+    ${role === 'supervisor' || role === 'admin' ? `<button class="btn sm block" style="margin-top:10px" data-act="areaImg" data-id="${l.id}">${ICONS.imgDown}ดาวน์โหลดรายงานพื้นที่นี้ วันนี้ (รูปสำหรับโทรศัพท์)</button>` : ''}
     ${l.status === 'rejected' && !canClean && l.rejectNote ? `<div class="alert sm">ตีกลับ: ${esc(l.rejectNote)}</div>` : ''}
     <div class="sec"><h3 style="margin-bottom:8px">รายการจุดทำความสะอาด</h3>${zones}</div>
     ${notes ? `<div class="sec stack">${notes}</div>` : ''}
@@ -2285,7 +2557,7 @@ function starsHtml() {
 }
 
 function renderModal() {
-  $('#modal').innerHTML = ({ detail: mDetail, register: mRegister, chpw: mChpw, userCreate: mUserCreate, tempPw: mTempPw, userEdit: mUserEdit, dashCfg: mDashCfg })[S.modal]?.() ?? '';
+  $('#modal').innerHTML = ({ detail: mDetail, register: mRegister, chpw: mChpw, userCreate: mUserCreate, tempPw: mTempPw, userEdit: mUserEdit, dashCfg: mDashCfg, rptRange: mRptRange })[S.modal]?.() ?? '';
   document.body.style.overflow = S.modal ? 'hidden' : '';
   const ff = { register: '#registerForm [name=u]', chpw: '#chpwForm [name=o]', userCreate: '#userForm [name=u]', userEdit: '#userEditForm [name=n]' }[S.modal];
   if (ff) setTimeout(() => $(ff)?.focus(), 50);
@@ -2645,6 +2917,10 @@ document.addEventListener('click', e => {
     replyToggle: () => { S.replyOpen[t.dataset.id] = !S.replyOpen[t.dataset.id]; render(); },
     replySend: () => submitReply(t.dataset.id),
     report: () => downloadReport(),
+    areaImg: () => downloadAreaImage(t.dataset.id),
+    rptRange: () => { if (S.modal) closeModal(); openModal('rptRange'); },
+    rptMode: () => { rptState().mode = t.dataset.m; renderModal(); },
+    rptGo: () => rptGo(),
     submit: () => submitCleaner(t.dataset.id),
     approve: () => review('approve'),
     reject: () => review('reject'),
@@ -2699,6 +2975,7 @@ document.addEventListener('input', e => {
 });
 document.addEventListener('change', e => {
   const a = e.target.dataset.act;
+  if (a === 'rptIn') { rptState()[e.target.dataset.k] = e.target.value; renderModal(); }
   if (a === 'pick' && e.target.files.length) { addPhotos(e.target.dataset.id, e.target.files); e.target.value = ''; }
 });
 document.addEventListener('submit', e => {
