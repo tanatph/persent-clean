@@ -1943,7 +1943,7 @@ function downloadReport() {
   window.print();
 }
 
-/* รายงานรูปแนวตั้ง 9:16 (1080x1920) แยกพื้นที่ละวัน — หัวหน้าแม่บ้าน / Super Admin บันทึกไว้ดู/ส่งต่อในโทรศัพท์
+/* รายงานรูปขนาด A4 แนวตั้ง (1654x2339 = 200 dpi) แยกพื้นที่ละวัน — หัวหน้าแม่บ้าน / Super Admin พิมพ์ได้พอดีกระดาษ หรือดู/ส่งต่อในโทรศัพท์
    1 รูปใส่รูปถ่ายได้ 6 รูป · เกิน 6 = บันทึกเป็นรูปถัดไป (หน้า 2, 3, …) · ชื่อไฟล์ วันที่_ลำดับพื้นที่_ชื่อพื้นที่ → เรียงตามวันแล้วตามพื้นที่
    ข้อมูลหนึ่งรายการ (rec) = { date, id, area, category, time, cleaners, done, total, status, checkBy, checkTime, cleanerNote, supervisorNote, photos } */
 const REPORT_KINDS = ['report', 'fix', 'approve'];   /* รูปผลงาน / แก้ไขแล้ว / ตรวจผ่าน — ไม่รวมรูปตีกลับและรูปแจ้งปรับปรุง */
@@ -1981,9 +1981,22 @@ async function rptPhotoSrc(ids) {
   return out;
 }
 let RPT_LOGO = null;
+const RPT_A4 = { w: 1654, h: 2339, dpi: 200 };
+/* ใส่ความละเอียด 200 dpi ในหัวไฟล์ JPEG (JFIF) → โปรแกรมพิมพ์ "ขนาดจริง" ได้ A4 พอดี */
+function rptDpi(blob) {
+  if (!blob) return blob;
+  return blob.arrayBuffer().then(buf => {
+    const u = new Uint8Array(buf);
+    if (u[2] === 0xFF && u[3] === 0xE0 && String.fromCharCode(u[6], u[7], u[8], u[9]) === 'JFIF') {
+      u[13] = 1; u[14] = RPT_A4.dpi >> 8; u[15] = RPT_A4.dpi & 255; u[16] = RPT_A4.dpi >> 8; u[17] = RPT_A4.dpi & 255;
+    }
+    return new Blob([u], { type: 'image/jpeg' });
+  });
+}
 /* วาดรายงานของ rec หนึ่งรายการ → [{ blob, name }] (1 รูปต่อรูปถ่าย 6 รูป) */
 async function recImages(rec) {
-  const W = 1080, H = 1920, M = 64, cs = getComputedStyle(document.documentElement), tk = n => cs.getPropertyValue(n).trim();
+  /* กระดาษ A4 แนวตั้ง (210×297 มม.) ที่ 200 dpi = 1654×2339 px · วาดบนพิกัดกว้าง 1080 แล้วขยายด้วย scale */
+  const PW = RPT_A4.w, PH = RPT_A4.h, W = 1080, H = W * PH / PW, M = 64, cs = getComputedStyle(document.documentElement), tk = n => cs.getPropertyValue(n).trim();
   const ink = tk('--text'), muted = tk('--muted'), line = tk('--line'), brand = tk('--swu-purple-700'), fam = tk('--font-thai');
   try { await Promise.all([document.fonts.load('400 30px ' + fam), document.fonts.load('700 30px ' + fam)]); } catch (e) { }
   if (!RPT_LOGO) RPT_LOGO = loadImg(LOGO_URL);
@@ -1991,9 +2004,10 @@ async function recImages(rec) {
   const [logo, ...imgs] = await Promise.all([RPT_LOGO, ...rec.photos.map(p => loadImg(src[p.id] || p.url))]);
   const pages = Math.max(1, Math.ceil(rec.photos.length / RPT_PER_IMG)), out = [];
   const base = `${rec.date}_${String(rec.id).padStart(2, '0')}_${rec.area}`.replace(/[\\/:*?"<>|]/g, '-');
+  const place = String(rec.area).replace(/\s*\([^)]*\)/g, '').trim() || rec.area;   /* ชื่อสถานที่อย่างเดียว ตัดวงเล็บท้ายชื่อ/หมวดออก */
   for (let pg = 0; pg < pages; pg++) {
-    const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
-    const c = cv.getContext('2d');
+    const cv = document.createElement('canvas'); cv.width = PW; cv.height = PH;
+    const c = cv.getContext('2d'); c.scale(PW / W, PH / H);
     const rr = (x, y, w, h, r) => { c.beginPath(); c.roundRect ? c.roundRect(x, y, w, h, r) : c.rect(x, y, w, h); };
     c.fillStyle = 'white'; c.fillRect(0, 0, W, H); c.textBaseline = 'alphabetic'; c.textAlign = 'left';
     /* ระยะทั้งหมดเป็นผลคูณของ 8 · ข้อความใช้ baseline กลาง เพื่อให้กึ่งกลางแถวตรงกัน */
@@ -2005,7 +2019,7 @@ async function recImages(rec) {
     let y = LY + LH0 + 32 + 2 + 40;
     if (pg === 0) {
       const st = (STATUS[rec.status] || { t: rec.status }).t + (rec.checkBy ? ` (${rec.checkBy} ${rec.checkTime})` : '');
-      const info = [['อาคาร/พื้นที่', `${rec.area} (${rec.category})`], ['วันที่', thLong(rec.date)], ['เวลาส่งรายงาน', rec.time || '–'],
+      const info = [['อาคาร/พื้นที่', place], ['วันที่', thLong(rec.date)], ['เวลาส่งรายงาน', rec.time || '–'],
         ['ผู้ทำความสะอาด', rec.cleaners.join(', ') || '–'], ['จุดทำความสะอาด', `${rec.done}/${rec.total} จุด`], ['สถานะ', st]];
       if (rec.cleanerNote) info.push(['หมายเหตุ', rec.cleanerNote]);
       if (rec.supervisorNote) info.push(['หัวหน้าแม่บ้าน', rec.supervisorNote]);
@@ -2024,7 +2038,7 @@ async function recImages(rec) {
       y += PY; c.strokeStyle = line; c.lineWidth = 2; rr(M, top, W - 2 * M, y - top, 24); c.stroke();
       y += 48;
     } else {
-      c.fillStyle = ink; c.font = '700 34px ' + fam; c.fillText(rec.area, M, y + 24);
+      c.fillStyle = ink; c.font = '700 34px ' + fam; c.fillText(place, M, y + 24);
       c.fillStyle = muted; c.font = '400 28px ' + fam; c.textAlign = 'right'; c.fillText(thLong(rec.date), W - M, y + 24); c.textAlign = 'left';
       y += 48 + 40;
     }
@@ -2045,9 +2059,13 @@ async function recImages(rec) {
       c.restore();
     });
     c.fillStyle = line; c.fillRect(M, H - 104, W - 2 * M, 2);
-    c.fillStyle = muted; c.font = '400 26px ' + fam; c.textAlign = 'center';
-    c.fillText('ศูนย์กีฬาสิรินธร คณะพลศึกษา มศว · ระบบตรวจความสะอาด', W / 2, H - 56);
-    const blob = await new Promise(res => cv.toBlob(b => res(b), 'image/jpeg', 0.88));
+    /* ท้ายรูป: บรรทัดเดียวกึ่งกลาง — ผู้จัดทำ (ตัวหนา) · หน่วยงาน (สีรอง) */
+    const fA = '700 24px ' + fam, fB = '400 24px ' + fam, tA = 'จัดทำโดย งานบริหารศูนย์กีฬาสิรินธร', tB = '  ·  ศูนย์กีฬาสิรินธร คณะพลศึกษา มศว';
+    c.font = fA; const wA = c.measureText(tA).width; c.font = fB; const wB = c.measureText(tB).width, fx = (W - wA - wB) / 2;
+    c.textAlign = 'left';
+    c.fillStyle = ink; c.font = fA; c.fillText(tA, fx, H - 52);
+    c.fillStyle = muted; c.font = fB; c.fillText(tB, fx + wA, H - 52);
+    const blob = await rptDpi(await new Promise(res => cv.toBlob(b => res(b), 'image/jpeg', 0.88)));
     if (!blob) throw new Error('สร้างรูปไม่สำเร็จ');
     out.push({ blob, name: base + (pages > 1 ? `_${pg + 1}` : '') + '.jpg', date: rec.date, area: rec.area });
   }
@@ -2132,7 +2150,7 @@ function mRptRange() {
   return `
   <div class="ov" data-act="closeOv"><div class="sheet" style="max-width:440px">
     <div class="row"><h2>ดาวน์โหลดรายงาน (รูป)</h2><button class="x-close" data-act="close">${ICONS.x}</button></div>
-    <p class="sm muted" style="margin:4px 0 12px">ได้รูปแนวตั้งสำหรับโทรศัพท์ แยกพื้นที่ละวัน เรียงตามวันที่แล้วตามพื้นที่ · รูปถ่ายเกิน ${RPT_PER_IMG} รูปจะแยกเป็นรูปถัดไป</p>
+    <p class="sm muted" style="margin:4px 0 12px">ได้รูปขนาด A4 แนวตั้ง (พิมพ์ได้พอดีกระดาษ) แยกพื้นที่ละวัน เรียงตามวันที่แล้วตามพื้นที่ · รูปถ่ายเกิน ${RPT_PER_IMG} รูปจะแยกเป็นรูปถัดไป</p>
     <div class="tabs" style="margin-bottom:12px">${tab('month', 'รายเดือน')}${tab('range', 'ช่วงวันที่')}</div>
     <div class="stack">
       ${r.mode === 'month' ? `<div><label class="lbl">เดือน</label><input type="month" data-act="rptIn" data-k="month" value="${esc(r.month)}" max="${esc(rptToday().slice(0, 7))}"></div>`
