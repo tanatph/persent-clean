@@ -367,6 +367,23 @@
   .hm-head span{font-size:10px;color:var(--muted);text-align:center}
   .hm-c{display:block;height:20px;border-radius:3px}
   .hm-0{background:var(--neutral-100)} .hm-1{background:var(--swu-red-600);opacity:.55} .hm-2{background:var(--swu-red-800)}
+  /* แดชบอร์ดอินเทอร์แอคทีฟ: ส่วนที่คลิกได้ (data-act="drill") เปิดหน้าต่างรายละเอียด */
+  [data-act="drill"]{cursor:pointer;transition:150ms cubic-bezier(.2,.7,.2,1)}
+  [data-act="drill"]:focus-visible{outline:none;box-shadow:0 0 0 4px var(--focus-ring)}
+  .stat[data-act="drill"]{text-align:left;width:100%}
+  .stat[data-act="drill"]:hover{border-color:var(--swu-purple-600)}
+  .stat .go{float:right;color:var(--muted)}
+  .cc>div[data-act="drill"]{border-radius:var(--r-sm)}
+  .cc>div[data-act="drill"]:hover{background:var(--swu-purple-50)}
+  .rv-row[data-act="drill"]{border-radius:var(--r-sm);padding-left:6px;padding-right:6px}
+  .rv-row[data-act="drill"]:hover,tr[data-act="drill"]:hover{background:var(--neutral-50)}
+  .hm-c[data-act="drill"]:hover{box-shadow:0 0 0 2px var(--swu-purple-600)}
+  .stack-bar i[data-act="drill"]:hover{opacity:.8}
+  .lg-btn{display:inline-flex;align-items:center;gap:4px;border-radius:var(--r-sm);padding:2px 6px}
+  .lg-btn:hover{background:var(--neutral-50)}
+  .stats.dd{grid-template-columns:repeat(auto-fit,minmax(112px,1fr))}
+  .dd-kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:14px}
+  .dd-kv span{color:var(--muted)}
   @media(max-width:560px){.rv-row{grid-template-columns:1fr 60px}.rv-name{grid-column:1/-1}.rv-val{grid-column:2;grid-row:2}.rv-track{grid-row:2;grid-column:1}}
 
   /* account tables / temp password */
@@ -1662,10 +1679,12 @@ function vReview() {
   let list = onFix ? fix : S.tab === 'todo' ? todo : S.locs;
   if (q) list = list.filter(l => (l.area + sender(l)).toLowerCase().includes(q));
   const emptyMsg = onFix ? 'ไม่มีรายการแจ้งแก้ไขวันนี้' : S.tab === 'todo' ? (com ? 'ยังไม่มีการแจ้งจุดปรับปรุงวันนี้' : 'ไม่มีงานรอตรวจ') : 'ไม่พบข้อมูล';
+  const tb = tabs(todo.length, com ? 'แจ้งปรับปรุงแล้ว' : 'รอตรวจ', S.locs.length, com ? null : fixCount(false), com);
+  if (com && S.tab === 'dash') return `<div class="stack"><div class="row rv-bar no-print" style="flex-wrap:wrap">${tb}</div>${vDash()}</div>`;   /* คณะกรรมการดูแดชบอร์ดได้ (อ่านอย่างเดียว) */
   return `
   <div class="stack">
     <div class="row rv-bar" style="flex-wrap:wrap">
-      ${tabs(todo.length, com ? 'แจ้งปรับปรุงแล้ว' : 'รอตรวจ', S.locs.length, com ? null : fixCount(false))}
+      ${tb}
       <input type="text" data-act="search" placeholder="ค้นหาพื้นที่ / ชื่อ" value="${esc(S.q)}" style="max-width:260px">
     </div>
     ${com ? '' : '<div class="row rv-bar" style="justify-content:flex-start"><button class="btn sm" data-act="rptRange">' + ICONS.imgDown + 'ดาวน์โหลดรายงาน (รูป) — เลือกเดือน / ช่วงวันที่</button></div>'}
@@ -1673,11 +1692,12 @@ function vReview() {
   </div>`;
 }
 
-function tabs(n, label, total, fixN) {   // fixN ระบุ = แสดงแท็บ "แจ้งแก้ไข" (หัวหน้าแม่บ้าน)
+function tabs(n, label, total, fixN, dash) {   // fixN ระบุ = แสดงแท็บ "แจ้งแก้ไข" (หัวหน้าแม่บ้าน) · dash = แท็บ "แดชบอร์ด" (คณะกรรมการ)
   return `<div class="tabs">
     <button class="${S.tab === 'todo' ? 'on' : ''}" data-act="tab" data-tab="todo">${label} (${n})</button>
     <button class="${S.tab === 'all' ? 'on' : ''}" data-act="tab" data-tab="all">ทั้งหมด (${total})</button>
     ${fixN == null ? '' : `<button class="${S.tab === 'fix' ? 'on' : ''}" data-act="tab" data-tab="fix">แจ้งแก้ไข (${fixN})</button>`}
+    ${dash ? `<button class="${S.tab === 'dash' ? 'on' : ''}" data-act="tab" data-tab="dash">แดชบอร์ด</button>` : ''}
   </div>`;
 }
 
@@ -1750,11 +1770,11 @@ function dfAgg(rows, R) {
 }
 
 /* กราฟแท่ง (ซ้อนชั้นได้) — cols[i] = { segs:[{v,c}], title } */
-function colChart(days, cols, max, fmt, short = d => d.slice(8)) {
+function colChart(days, cols, max, fmt, short = d => d.slice(8), attr = null) {   /* attr(i) = แอตทริบิวต์เพิ่มของแท่ง (คลิกดูรายละเอียด) */
   const many = days.length > 16;
   return `<div class="cc${many ? ' many' : ''}">${cols.map((c, i) => {
     const tot = c.segs.reduce((s, x) => s + x.v, 0);
-    return `<div title="${esc(c.title)}"><span class="cv">${tot ? fmt(tot) : ''}</span>
+    return `<div title="${esc(c.title)}" ${attr ? attr(i) : ''}><span class="cv">${tot ? fmt(tot) : ''}</span>
       <div class="cs">${c.segs.filter(x => x.v).map(x => `<i style="height:${Math.max(x.v / max * 100, 1.5)}%;background:${x.c}"></i>`).join('')}</div>
       <span class="cl">${many && i % 5 !== 0 ? '' : short(days[i])}</span></div>`;
   }).join('')}</div>`;
@@ -1812,6 +1832,8 @@ function mDashCfg() {
     <div class="row" style="margin-top:14px"><button type="button" class="btn sm ghost" data-act="dashReset">คืนค่าเริ่มต้น</button><button type="button" class="btn primary" data-act="close">เสร็จสิ้น</button></div>
   </div></div>`;
 }
+/* ปุ่มของผู้ดูแล (รายงานรูป ซ่อมข้อมูล รีเซ็ต) แสดงเฉพาะหน้า Admin — คณะกรรมการดูแดชบอร์ด/พิมพ์ PDF ได้ แต่รายงานรูปเป็นสิทธิ์หัวหน้าแม่บ้าน/Admin */
+const dashAdmin = () => S.view === 'admin';
 function vDash() {
   if (!S.hist) return `<div class="empty"><span class="spin"></span></div>`;
   const R = dfRange(), rows = dfRows(R), A = dfAgg(rows, R), T = A.t;
@@ -1827,38 +1849,39 @@ function vDash() {
   const maxRate = Math.max(...A.areas.map(a => a.rateAll), 0.01);
   const bars = A.areas.map(a => {
     const sp = (a.sup + a.fb) ? a.sup / (a.sup + a.fb) * 100 : 0;
-    return `<div class="rv-row" title="${esc(a.area)}: ตีกลับ ${a.rejects} จาก ${a.submits} ครั้ง · กรรมการแจ้งปรับปรุง ${a.fb} ครั้ง">
+    return `<div class="rv-row" ${drillAttr({ a: a.area })} title="${esc(a.area)}: ตีกลับ ${a.rejects} จาก ${a.submits} ครั้ง · กรรมการแจ้งปรับปรุง ${a.fb} ครั้ง — คลิกดูรายละเอียด">
       <div class="rv-name">${esc(a.area)}</div>
       <div class="rv-track"><div class="rv-fill" style="width:${a.rateAll / maxRate * 100}%">${a.sup ? `<i style="width:${sp}%;background:var(--teal-800)"></i>` : ''}${a.fb ? `<i style="width:${100 - sp}%;background:var(--blue-600)"></i>` : ''}</div></div>
       <div class="rv-val">${(a.rate * 100).toFixed(0)}% <span class="xs muted">${a.rejects}/${a.submits}${a.fb ? ` · แจ้ง ${a.fb}` : ''}</span></div></div>`;
   }).join('');
   const cols = `grid-template-columns:repeat(${R.days.length},1fr)`;
   const heat = A.areas.map(a => `<div class="hm-row"><div class="rv-name">${esc(a.area)}</div>
-    <div class="hm-cells" style="${cols}">${a.heat.map((c, i) => `<b class="hm-c hm-${hmLevel(R, c)}" title="${esc(a.area)} · ${esc(R.lab(R.days[i]))}: ตีกลับ ${c} ครั้ง"></b>`).join('')}</div></div>`).join('');
+    <div class="hm-cells" style="${cols}">${a.heat.map((c, i) => `<b class="hm-c hm-${hmLevel(R, c)}" data-act="drill" data-a="${esc(a.area)}" data-k="${R.days[i]}" title="${esc(a.area)} · ${esc(R.lab(R.days[i]))}: ตีกลับ ${c} ครั้ง"></b>`).join('')}</div></div>`).join('');
   const legend = `<div class="xs" style="display:flex;gap:14px;flex-wrap:wrap"><span><b style="color:var(--teal-800)">●</b> หัวหน้าแม่บ้านตีกลับ</span><span><b style="color:var(--blue-600)">●</b> คณะกรรมการแจ้งปรับปรุง</span></div>`;
 
   return `
   <div class="stack">
     <div class="row" style="flex-wrap:wrap">
-      <div><h2>แดชบอร์ด</h2><div class="sm muted">${esc(scope)} · ${esc(R.label)} · ข้อมูลวันนี้อัปเดตอัตโนมัติทุก 1 นาที</div></div>
+      <div><h2>แดชบอร์ด</h2><div class="sm muted">${esc(scope)} · ${esc(R.label)} · ข้อมูลวันนี้อัปเดตอัตโนมัติทุก 1 นาที</div>
+        <div class="xs muted no-print">คลิกตัวเลขสรุป แท่งกราฟ แถวพื้นที่ ช่องฮีตแมป หรือแถวในตาราง เพื่อดูรายละเอียดของส่วนนั้น</div></div>
       <div class="actions no-print">
-        <button class="btn sm primary" data-act="report">${ICONS.fileDown}ดาวน์โหลดรายงาน (PDF)</button><button class="btn sm" data-act="rptRange">${ICONS.imgDown}รายงานรูป (เดือน / ช่วงวันที่)</button><button class="btn sm ghost" data-act="dashCfg">ปรับแต่งแดชบอร์ด</button>
-        <button class="btn sm ghost" data-act="repairLocs">ซ่อมข้อมูลพื้นที่</button><button class="btn sm ghost danger" data-act="resetToday">รีเซ็ตวันนี้</button>
+        <button class="btn sm primary" data-act="report">${ICONS.fileDown}ดาวน์โหลดรายงาน (PDF)</button>${dashAdmin() ? `<button class="btn sm" data-act="rptRange">${ICONS.imgDown}รายงานรูป (เดือน / ช่วงวันที่)</button>` : ''}<button class="btn sm ghost" data-act="dashCfg">ปรับแต่งแดชบอร์ด</button>
+        ${dashAdmin() ? `<button class="btn sm ghost" data-act="repairLocs">ซ่อมข้อมูลพื้นที่</button><button class="btn sm ghost danger" data-act="resetToday">รีเซ็ตวันนี้</button>` : ''}
       </div>
     </div>
     ${dfBar(R)}
 
     ${dashBody({
       kpi: `<div class="stats">
-      ${stat('รายงานที่ส่งทั้งหมด', T.submits, `${T.n} พื้นที่-วัน + ส่งซ้ำ ${T.rejects}`, 'gray')}
-      ${stat('ตรวจผ่านแล้ว', okPct + '%', `${T.ok} จาก ${T.n} พื้นที่-วัน`, 'green')}
-      ${stat('ตีกลับ', T.rejects + ' ครั้ง', `อัตรา ${(T.rate * 100).toFixed(0)}% (หัวหน้าแม่บ้าน)`, 'red')}
-      ${stat('แจ้งปรับปรุง', T.fb + ' ครั้ง', 'จากคณะกรรมการ', 'blue')}
-      ${stat('คะแนนเฉลี่ย', avg, `จากกรรมการ ${T.rn} ครั้ง`, 'amber')}
+      ${stat('รายงานที่ส่งทั้งหมด', T.submits, `${T.n} พื้นที่-วัน + ส่งซ้ำ ${T.rejects}`, 'gray', 'submits')}
+      ${stat('ตรวจผ่านแล้ว', okPct + '%', `${T.ok} จาก ${T.n} พื้นที่-วัน`, 'green', 'ok')}
+      ${stat('ตีกลับ', T.rejects + ' ครั้ง', `อัตรา ${(T.rate * 100).toFixed(0)}% (หัวหน้าแม่บ้าน)`, 'red', 'rej')}
+      ${stat('แจ้งปรับปรุง', T.fb + ' ครั้ง', 'จากคณะกรรมการ', 'blue', 'fb')}
+      ${stat('คะแนนเฉลี่ย', avg, `จากกรรมการ ${T.rn} ครั้ง`, 'amber', 'rating')}
     </div>`,
       trend: `<div class="grid2">
-      <div class="card"><h3>อัตราตรวจผ่าน${R.unit}</h3><div class="xs muted">% ของพื้นที่ที่หัวหน้าแม่บ้านตรวจผ่านแล้ว</div>${colChart(R.days, apprCols, 100, v => Math.round(v) + '%', R.short)}</div>
-      <div class="card"><div class="row" style="flex-wrap:wrap;align-items:flex-start"><div><h3>ตีกลับ / แจ้งปรับปรุง${R.unit}</h3><div class="xs muted">หัวหน้าแม่บ้านตีกลับ และคณะกรรมการแจ้งปรับปรุง</div></div>${legend}</div>${colChart(R.days, rejCols, rejMax, v => v, R.short)}</div>
+      <div class="card"><h3>อัตราตรวจผ่าน${R.unit}</h3><div class="xs muted">% ของพื้นที่ที่หัวหน้าแม่บ้านตรวจผ่านแล้ว</div>${colChart(R.days, apprCols, 100, v => Math.round(v) + '%', R.short, i => drillAttr({ k: R.days[i] }))}</div>
+      <div class="card"><div class="row" style="flex-wrap:wrap;align-items:flex-start"><div><h3>ตีกลับ / แจ้งปรับปรุง${R.unit}</h3><div class="xs muted">หัวหน้าแม่บ้านตีกลับ และคณะกรรมการแจ้งปรับปรุง</div></div>${legend}</div>${colChart(R.days, rejCols, rejMax, v => v, R.short, i => drillAttr({ k: R.days[i] }))}</div>
     </div>`,
       areas: `<div class="card">
       <div class="row" style="flex-wrap:wrap;align-items:flex-start">
@@ -2178,12 +2201,13 @@ function todayPanel() {
   const L = S.locs.filter(l => areaMatch(l.area, l.category)), n = L.length || 1;
   const cnt = st => L.filter(l => l.status === st).length;
   const approved = cnt('approved'), rejected = cnt('rejected'), inReview = cnt('cleaner_done'), pending = cnt('pending');
-  const seg = (v, c) => v ? `<i style="width:${v / n * 100}%;background:${c}"></i>` : '';
+  const seg = (v, c, st) => v ? `<i data-act="drill" data-st="${st}" title="${esc(TODAY_ST[st])} ${v} พื้นที่ — คลิกดูรายชื่อ" style="width:${v / n * 100}%;background:${c}"></i>` : '';
+  const lg = (v, c, st) => `<button type="button" class="lg-btn" ${drillAttr({ st })}><b style="color:${c}">●</b> ${esc(TODAY_ST[st])} ${v}</button>`;
   return `
     <div class="card">
       <div class="row" style="flex-wrap:wrap"><h3>สถานะวันนี้ (${thDate(S.workDate)})</h3>
-        <div class="xs muted" style="display:flex;gap:14px;flex-wrap:wrap"><span><b style="color:var(--green)">●</b> ตรวจผ่านแล้ว ${approved}</span><span><b style="color:var(--violet)">●</b> รอหัวหน้าตรวจ ${inReview}</span><span><b style="color:var(--neutral-200)">●</b> ยังไม่ส่ง ${pending}</span><span><b style="color:var(--red)">●</b> ต้องแก้ไข ${rejected}</span></div></div>
-      <div class="stack-bar" style="margin-top:10px">${seg(approved, 'var(--green)')}${seg(inReview, 'var(--violet)')}${seg(pending, 'var(--neutral-200)')}${seg(rejected, 'var(--red)')}</div>
+        <div class="xs muted" style="display:flex;gap:6px;flex-wrap:wrap">${lg(approved, 'var(--green)', 'approved')}${lg(inReview, 'var(--violet)', 'cleaner_done')}${lg(pending, 'var(--neutral-200)', 'pending')}${lg(rejected, 'var(--red)', 'rejected')}</div></div>
+      <div class="stack-bar" style="margin-top:10px">${seg(approved, 'var(--green)', 'approved')}${seg(inReview, 'var(--violet)', 'cleaner_done')}${seg(pending, 'var(--neutral-200)', 'pending')}${seg(rejected, 'var(--red)', 'rejected')}</div>
     </div>
     <div class="card tbl">
       <h3 style="margin-bottom:6px">สถานะรายพื้นที่วันนี้</h3>
@@ -2215,9 +2239,117 @@ function staffPerf() {
       <h3 style="margin-bottom:2px">ผลงานรายพนักงานวันนี้</h3><div class="xs muted" style="margin-bottom:6px">นับตามผู้ส่งรายงานของแต่ละพื้นที่ (แม่บ้านเวียนพื้นที่ทำงาน)</div>
       <table>
         <tr><th>พนักงาน</th><th>พื้นที่ที่ส่งวันนี้</th><th>ตรวจผ่านแล้ว</th><th>ถูกตีกลับ</th></tr>
-        ${rows.map(r => `<tr><td>${esc(r.name)}</td><td class="sm">${r.areas.length} · ${esc(r.areas.slice(0, 2).join(', '))}${r.areas.length > 2 ? ' +' + (r.areas.length - 2) : ''}</td><td>${r.ok} <span class="xs muted">(${Math.round(r.ok / r.areas.length * 100)}%)</span></td><td>${r.rejects || '–'}</td></tr>`).join('')}
+        ${rows.map(r => `<tr ${drillAttr({ staff: r.name })}><td>${esc(r.name)}</td><td class="sm">${r.areas.length} · ${esc(r.areas.slice(0, 2).join(', '))}${r.areas.length > 2 ? ' +' + (r.areas.length - 2) : ''}</td><td>${r.ok} <span class="xs muted">(${Math.round(r.ok / r.areas.length * 100)}%)</span></td><td>${r.rejects || '–'}</td></tr>`).join('')}
       </table>
     </div>`;
+}
+
+/* =========================================================
+   แดชบอร์ดอินเทอร์แอคทีฟ — คลิกส่วนใดก็ได้ → หน้าต่าง "drill" แสดงรายละเอียดของส่วนนั้น (ตามตัวกรองช่วงเวลา/อาคารเดิม)
+     S.drill = { m } ตัวชี้วัด KPI · { k } วัน/เดือน · { a } พื้นที่ · { a, k } พื้นที่ในวัน/เดือนนั้น · { st } สถานะวันนี้ · { staff } พนักงานวันนี้
+     คลิกต่อในหน้าต่างได้หลายชั้น (S.drillStack = ปุ่มย้อนกลับ) · ข้อมูลมาจากที่โหลดไว้แล้ว ไม่เรียกเซิร์ฟเวอร์ ยกเว้นปุ่มรายงานรูป
+   ========================================================= */
+const TODAY_ST = { approved: 'ตรวจผ่านแล้ว', cleaner_done: 'รอหัวหน้าตรวจ', pending: 'ยังไม่ส่ง', rejected: 'ต้องแก้ไข' };
+const drillAttr = d => `data-act="drill" role="button" tabindex="0" ${Object.entries(d).map(([k, v]) => `data-${k}="${esc(v)}"`).join(' ')}`;
+const KPI_DRILL = { submits: ['รายงานที่ส่ง แยกรายพื้นที่', a => a.submits], ok: ['ตรวจผ่าน แยกรายพื้นที่ (น้อยสุดก่อน)', a => a.n ? -a.ok / a.n : 1],
+  rej: ['ตีกลับ แยกรายพื้นที่', a => a.sup], fb: ['คณะกรรมการแจ้งปรับปรุง แยกรายพื้นที่', a => a.fb], rating: ['คะแนนเฉลี่ยจากกรรมการ แยกรายพื้นที่', a => a.rn ? a.rs / a.rn : -1] };
+const drillLab = (R, k) => k.length === 10 ? thLong(k) : R.unit === 'รายเดือน' ? R.lab(k) : k;
+function drillOpen(d) {
+  if (S.modal === 'drill') S.drillStack.push(S.drill); else S.drillStack = [];
+  S.drill = d; if (S.modal === 'drill') { renderModal(); $('#modal .sheet')?.scrollTo(0, 0); } else openModal('drill');
+}
+function drillStats(T) {
+  const ok = T.n ? Math.round(T.ok / T.n * 100) + '%' : '–';
+  return `<div class="stats dd" style="margin-bottom:12px">${stat('รายงานที่ส่ง', T.submits, `${T.n} พื้นที่-วัน`, 'gray')}${stat('ตรวจผ่าน', ok, `${T.ok}/${T.n}`, 'green')}
+    ${stat('ตีกลับ', T.sup, 'ครั้ง', 'red')}${stat('แจ้งปรับปรุง', T.fb, 'ครั้ง', 'blue')}${stat('คะแนนเฉลี่ย', T.rn ? (T.rs / T.rn).toFixed(1) : '–', `${T.rn} ครั้ง`, 'amber')}</div>`;
+}
+/* ตารางรายพื้นที่ (เรียงตาม key) — คลิกแถว = ดูพื้นที่นั้น (ในวัน/เดือน k ถ้ามี) */
+function drillAreaTable(areas, by, k) {
+  const L = [...areas].sort((x, y) => by(y) - by(x) || x.area.localeCompare(y.area, 'th'));
+  if (!L.length) return '<div class="empty sm">ไม่มีข้อมูล</div>';
+  return `<div class="tbl"><table><tr><th>พื้นที่</th><th>รายงาน</th><th>ตรวจผ่าน</th><th>ตีกลับ</th><th>แจ้งปรับปรุง</th><th>คะแนน</th><th></th></tr>
+    ${L.map(a => `<tr ${drillAttr(k ? { a: a.area, k } : { a: a.area })}><td>${esc(a.area)}</td><td>${a.submits}</td><td>${a.n ? `${a.ok}/${a.n}` : '–'}</td>
+      <td>${a.sup || '–'}</td><td>${a.fb || '–'}</td><td>${a.rn ? '★ ' + (a.rs / a.rn).toFixed(1) : '–'}</td><td class="tile-go">›</td></tr>`).join('')}</table></div>`;
+}
+/* ตารางรายวัน/รายเดือน ของพื้นที่หนึ่ง — คลิกแถว = เจาะลงวัน/เดือนนั้น */
+function drillPeriodTable(list, a, unit = 'วันที่') {
+  if (!list.length) return '<div class="empty sm">ไม่มีข้อมูลในช่วงที่เลือก</div>';
+  return `<div class="tbl"><table><tr><th>${unit}</th><th>ตรวจผ่าน</th><th>ตีกลับ</th><th>แจ้งปรับปรุง</th><th>คะแนน</th><th></th></tr>
+    ${list.map(p => `<tr ${drillAttr({ a, k: p.k })}><td>${esc(p.lab)}</td><td>${p.n > 1 ? `${p.ok}/${p.n}` : p.ok ? '<span class="chip c-green">ผ่าน</span>' : '<span class="chip c-gray">ยังไม่ผ่าน</span>'}</td>
+      <td>${p.sup || '–'}</td><td>${p.fb || '–'}</td><td>${p.rn ? '★ ' + (p.rs / p.rn).toFixed(1) : '–'}</td><td class="tile-go">›</td></tr>`).join('')}</table></div>`;
+}
+function drillGroup(rows, keyOf, labOf) {
+  const g = {};
+  rows.forEach(r => { const k = keyOf(r.date), x = g[k] = g[k] || { k, lab: labOf(k), n: 0, ok: 0, sup: 0, fb: 0, rs: 0, rn: 0 }; x.n++; x.ok += r.approved ? 1 : 0; x.sup += r.sup; x.fb += r.fb; if (r.rating) { x.rs += r.rating; x.rn++; } });
+  return Object.values(g).sort((x, y) => x.k < y.k ? -1 : 1);
+}
+function mDrill() {
+  const R = dfRange(), rows = dfRows(R), D = S.drill || {}, today = ymd(new Date());
+  const scope = S.dfArea ? (S.dfArea.startsWith('cat:') ? 'หมวด ' + S.dfArea.slice(4) : S.dfArea) : 'ทุกอาคาร / พื้นที่';
+  const inK = (r, k) => k.length === 10 ? r.date === k : r.date.slice(0, 7) === k;
+  const locOf = a => S.locs.find(l => l.area === a);
+  const rptBtn = (a, from, to, label) => { if (!dashAdmin()) return ''; const l = a ? locOf(a) : null; return `<button class="btn sm" data-act="drillRpt" data-id="${l ? l.id : 0}" data-from="${from}" data-to="${to}">${ICONS.imgDown}${label}</button>`; };
+  let title = '', sub = `${R.label} · ${scope}`, body = '';
+  if (D.m && KPI_DRILL[D.m]) {
+    const A = dfAgg(rows, R);
+    title = KPI_DRILL[D.m][0];
+    body = drillStats(A.t) + drillAreaTable(A.areas, KPI_DRILL[D.m][1]);
+  } else if (D.st) {
+    const L = S.locs.filter(l => areaMatch(l.area, l.category) && l.status === D.st);
+    title = `${TODAY_ST[D.st] || D.st} (${L.length} พื้นที่)`; sub = `วันนี้ ${thDate(S.workDate)} · ${scope}`;
+    body = L.length ? `<div class="tbl"><table><tr><th>พื้นที่</th><th>ผู้ส่งรายงาน</th><th>ความคืบหน้า</th><th>สถานะ</th><th></th></tr>${L.map(l => { const p = prog(l); return `<tr data-act="open" data-id="${l.id}"><td>${esc(l.area)}</td><td class="sm">${esc(sender(l) || '–')}</td><td class="sm">${p.d}/${p.t}</td><td>${chip(l.status)}</td><td class="tile-go">›</td></tr>`; }).join('')}</table></div>`
+      : '<div class="empty sm">ไม่มีพื้นที่ในสถานะนี้</div>';
+  } else if (D.staff) {
+    const L = S.locs.filter(l => areaMatch(l.area, l.category) && senders(l).includes(D.staff));
+    title = D.staff; sub = `พื้นที่ที่ส่งรายงานวันนี้ ${thDate(S.workDate)} · ${L.length} พื้นที่`;
+    body = `<div class="tbl"><table><tr><th>พื้นที่</th><th>ความคืบหน้า</th><th>สถานะ</th><th>ตีกลับ</th><th></th></tr>${L.map(l => { const p = prog(l); return `<tr data-act="open" data-id="${l.id}"><td>${esc(l.area)}</td><td class="sm">${p.d}/${p.t}</td><td>${chip(l.status)}</td><td>${l.rejectCount || '–'}</td><td class="tile-go">›</td></tr>`; }).join('')}</table></div>`;
+  } else if (D.a && D.k && D.k.length === 10) {
+    const r = rows.find(x => x.area === D.a && x.date === D.k), l = locOf(D.a);
+    title = D.a; sub = thLong(D.k);
+    body = r ? `<div class="dd-kv"><span>ผลการตรวจ</span><b>${r.approved ? '<span class="chip c-green">ตรวจผ่านแล้ว</span>' : '<span class="chip c-gray">ยังไม่ผ่านการตรวจ</span>'}</b>
+        <span>หัวหน้าแม่บ้านตีกลับ</span><b>${r.sup} ครั้ง</b><span>คณะกรรมการแจ้งปรับปรุง</span><b>${r.fb} ครั้ง</b><span>คะแนนจากกรรมการ</span><b>${r.rating ? '★ ' + r.rating : '–'}</b></div>`
+      : '<div class="empty sm">ไม่มีข้อมูลการตรวจของพื้นที่นี้ในวันนั้น</div>';
+    body += `<div class="row" style="justify-content:flex-start;gap:8px;flex-wrap:wrap;margin-top:14px">
+      ${D.k === today && l ? `<button class="btn sm primary" data-act="open" data-id="${l.id}">เปิดรายละเอียดวันนี้ ›</button>` : ''}
+      ${rptBtn(D.a, D.k, D.k, 'ดูรายงานรูปของวันนั้น (รูปถ่าย เวลา ผู้ส่ง หมายเหตุ)')}</div>`;
+  } else if (D.a) {
+    const ar = rows.filter(r => r.area === D.a && (!D.k || inK(r, D.k)));
+    const month = D.k && D.k.length === 7;
+    const A = dfAgg(ar, R).areas.find(x => x.area === D.a) || { n: 0, ok: 0, sup: 0, fb: 0, rs: 0, rn: 0, submits: 0 };
+    title = D.a; sub = month ? `${R.lab(D.k)} · รายวัน` : `${R.label} · ${R.unit}`;
+    const per = month ? drillGroup(ar, d => d, thLong) : drillGroup(ar, R.keyOf, k => drillLab(R, k));
+    const days = month ? per.map(p => p.k) : R.days, pm = Object.fromEntries(per.map(p => [p.k, p]));
+    const cols = days.map(k => { const p = pm[k] || { sup: 0, fb: 0 }; return { segs: [{ v: p.sup, c: 'var(--teal-800)' }, { v: p.fb, c: 'var(--blue-600)' }], title: `${drillLab(R, k)}: ตีกลับ ${p.sup} · แจ้งปรับปรุง ${p.fb}` }; });
+    const max = Math.max(1, ...cols.map(c => c.segs[0].v + c.segs[1].v));
+    const l = locOf(D.a), from = month ? D.k + '-01' : R.days[0], to = month ? per.length ? per[per.length - 1].k : from : R.days[R.days.length - 1];
+    const canRpt = R.unit === 'รายวัน' || month;
+    body = drillStats(A) + `<div class="card" style="margin-bottom:12px"><h3>ตีกลับ / แจ้งปรับปรุง${month ? 'รายวัน' : R.unit}</h3><div class="xs muted">คลิกแท่งเพื่อดู${month || R.unit === 'รายวัน' ? 'วันนั้น' : 'เดือนนั้น'}</div>
+      ${colChart(days, cols, max, v => v, month ? d => d.slice(8) : R.short, i => drillAttr({ a: D.a, k: days[i] }))}</div>`
+      + `<h3 style="margin-bottom:6px">${month ? 'รายวันในเดือนนี้' : R.unit === 'รายเดือน' ? 'รายเดือน' : 'รายวัน'}</h3>` + drillPeriodTable(per.slice().reverse(), D.a, !month && R.unit === 'รายเดือน' ? 'เดือน' : 'วันที่')
+      + `<div class="row" style="justify-content:flex-start;gap:8px;flex-wrap:wrap;margin-top:14px">
+        ${l && R.days.includes(R.keyOf(today)) ? `<button class="btn sm" data-act="open" data-id="${l.id}">สถานะวันนี้ ›</button>` : ''}
+        ${canRpt && per.length ? rptBtn(D.a, from, to, 'รายงานรูปของช่วงนี้') : ''}</div>`;
+  } else if (D.k) {
+    const kr = rows.filter(r => inK(r, D.k)), A = dfAgg(kr, { days: [R.keyOf(D.k.length === 10 ? D.k : D.k + '-01')], keyOf: R.keyOf });
+    title = drillLab(R, D.k); sub = `${scope} · คลิกพื้นที่เพื่อดูรายละเอียด`;
+    body = drillStats(A.t) + drillAreaTable(A.areas, a => a.sup + a.fb + (a.n && !a.ok ? 0.5 : 0), D.k)
+      + (D.k.length === 10 ? `<div class="row" style="justify-content:flex-start;margin-top:14px">${rptBtn('', D.k, D.k, 'รายงานรูปทุกพื้นที่ของวันนั้น')}</div>` : '');
+  }
+  return `
+  <div class="ov" data-act="closeOv"><div class="sheet" style="max-width:720px">
+    <div class="row"><div class="row" style="gap:8px;justify-content:flex-start;min-width:0">${S.drillStack.length ? `<button class="btn sm ghost" data-act="drillBack" aria-label="ย้อนกลับ">‹ ย้อนกลับ</button>` : ''}<h2>${esc(title)}</h2></div><button class="x-close" data-act="close" aria-label="ปิด">${ICONS.x}</button></div>
+    <div class="sm muted" style="margin:4px 0 12px">${esc(sub)}</div>
+    ${body}
+  </div></div>`;
+}
+async function drillRpt(t) {
+  const id = Number(t.dataset.id) || 0, from = t.dataset.from, to = t.dataset.to;
+  t.disabled = true;
+  try {
+    const recs = await api('apiReportRange', S.auth.token, { from, to, locationId: id });
+    if (!recs.length) { t.disabled = false; return toast('ไม่มีการส่งรายงานในช่วงนี้', true); }
+    closeModal(); rgRun(`รายงาน ${from === to ? thDate(from) : thDate(from) + ' – ' + thDate(to)}`, recs);
+  } catch (e) { t.disabled = false; toast(e.message, true); }
 }
 
 /* =========================================================
@@ -2362,7 +2494,16 @@ async function loadAdmin() {
   } catch (e) { toast(e.message, true); }
 }
 
-const stat = (t, v, sub, c) => `<div class="card stat"><div class="sm muted">${t}</div><div class="v" style="color:var(--${c === 'gray' ? 'text' : c})">${v}</div><div class="xs muted">${sub}</div></div>`;
+/* แดชบอร์ดของคณะกรรมการ: โหลดเฉพาะสถิติย้อนหลัง (apiGetDashboard อนุญาต manager อยู่แล้ว) */
+async function loadDash() {
+  if (S.view !== 'manager' || !['manager', 'admin'].includes(S.auth?.role)) return;
+  try { const d = await api('apiGetDashboard', S.auth.token); S.hist = d.hist; if (S.view === 'manager' && S.tab === 'dash') render(); }
+  catch (e) { toast(e.message, true); }
+}
+
+const stat = (t, v, sub, c, m) => m   /* m = ตัวชี้วัดที่เจาะดูได้ (คลิกแล้วเปิดตารางรายพื้นที่) */
+  ? `<button type="button" class="card stat" data-act="drill" data-m="${m}" title="คลิกดูแยกรายพื้นที่"><div class="sm muted">${t}<span class="go">›</span></div><div class="v" style="color:var(--${c === 'gray' ? 'text' : c})">${v}</div><div class="xs muted">${sub}</div></button>`
+  : `<div class="card stat"><div class="sm muted">${t}</div><div class="v" style="color:var(--${c === 'gray' ? 'text' : c})">${v}</div><div class="xs muted">${sub}</div></div>`;
 
 /* ---------- Modal: ลงทะเบียน / เปลี่ยนรหัสผ่าน / สร้าง ID / รหัสชั่วคราว ---------- */
 /* ช่องเบอร์โทร: ตัวเลขล้วน 10 หลัก จัดรูปแบบ 000-000-0000 ให้อัตโนมัติ (data-act="phone") */
@@ -2575,7 +2716,7 @@ function starsHtml() {
 }
 
 function renderModal() {
-  $('#modal').innerHTML = ({ detail: mDetail, register: mRegister, chpw: mChpw, userCreate: mUserCreate, tempPw: mTempPw, userEdit: mUserEdit, dashCfg: mDashCfg, rptRange: mRptRange })[S.modal]?.() ?? '';
+  $('#modal').innerHTML = ({ detail: mDetail, register: mRegister, chpw: mChpw, userCreate: mUserCreate, tempPw: mTempPw, userEdit: mUserEdit, dashCfg: mDashCfg, rptRange: mRptRange, drill: mDrill })[S.modal]?.() ?? '';
   document.body.style.overflow = S.modal ? 'hidden' : '';
   const ff = { register: '#registerForm [name=u]', chpw: '#chpwForm [name=o]', userCreate: '#userForm [name=u]', userEdit: '#userEditForm [name=n]' }[S.modal];
   if (ff) setTimeout(() => $(ff)?.focus(), 50);
@@ -2682,7 +2823,8 @@ async function goRole(role) {
   S.view = role; S.tab = role === 'manager' ? 'all' : 'todo'; S.q = ''; S.area = null;
   render();
   if (S.auth?.mustChange && S.auth.role !== 'admin') openModal('chpw');
-  if (role === 'admin' || role === 'manager') loadAdmin();
+  if (role === 'admin') loadAdmin();
+  if (role === 'manager') loadDash();
 }
 
 /* ---------- บัญชีผู้จัดการสนาม (Admin) ---------- */
@@ -2921,7 +3063,7 @@ document.addEventListener('click', e => {
   ({
     home: () => { if (S.auth && S.auth.role !== 'admin') goRole(S.auth.role); else { S.view = 'home'; render(); } },
     role: () => goRole(t.dataset.role),
-    refresh: () => { load(); if (S.view === 'admin') loadAdmin(); },
+    refresh: () => { load(); if (S.view === 'admin') loadAdmin(); if (S.view === 'manager') loadDash(); },
     logout: () => logout(),
     tab: () => { S.tab = t.dataset.tab; render(); },
     area: () => { S.area = Number(t.dataset.id); render(); window.scrollTo(0, 0); },
@@ -2962,6 +3104,9 @@ document.addEventListener('click', e => {
     stock: () => openStock(),
     stockBack: () => { S.view = (S.stockFrom && S.stockFrom !== 'stock') ? S.stockFrom : (S.auth ? S.auth.role : 'home'); render(); },
   dashCfg: () => openModal('dashCfg'),
+  drill: () => { const d = Object.assign({}, t.dataset); delete d.act; drillOpen(d); },
+  drillBack: () => { S.drill = S.drillStack.pop(); renderModal(); },
+  drillRpt: () => drillRpt(t),
   dashToggle: () => { const l = dashLayout(), k = t.dataset.k; l.hidden = l.hidden.includes(k) ? l.hidden.filter(x => x !== k) : [...l.hidden, k]; saveDashLayout(l); render(); renderModal(); },
   dashMove: () => { const l = dashLayout(), k = t.dataset.k, i = l.order.indexOf(k), j = i + Number(t.dataset.d); if (j < 0 || j >= l.order.length) return; l.order.splice(i, 1); l.order.splice(j, 0, k); saveDashLayout(l); render(); renderModal(); },
   dashReset: () => { saveDashLayout({ order: [], hidden: [] }); render(); renderModal(); },
@@ -3001,10 +3146,15 @@ document.addEventListener('submit', e => {
   if (h) { e.preventDefault(); h(e.target); }
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && S.modal) closeModal(); });
+/* ส่วนของแดชบอร์ดที่คลิกได้ (role=button บน div/tr) กด Enter / Space ได้เหมือนปุ่ม */
+document.addEventListener('keydown', e => {
+  const t = (e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('[role="button"][data-act]');
+  if (t && t.tagName !== 'BUTTON') { e.preventDefault(); t.click(); }
+});
 
 // รีเฟรชอัตโนมัติทุก 60 วินาที (เมื่อไม่ได้เปิดหน้าต่างรายละเอียดอยู่)
 setInterval(() => {
-  if (S.auth && S.view !== 'home' && !S.modal && !document.hidden) { load(true); if (S.view === 'admin') loadAdmin(); }
+  if (S.auth && S.view !== 'home' && !S.modal && !document.hidden) { load(true); if (S.view === 'admin') loadAdmin(); if (S.view === 'manager' && S.tab === 'dash') loadDash(); }
 }, 60000);
 
 try { localStorage.removeItem('locsSnap'); } catch (e) {}   // สำเนาแบบเก่า (localStorage) จากเวอร์ชันก่อน
